@@ -26,6 +26,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.tabBar.backgroundImage = [UIImage imageNamed:@"tab_bg.png"];
 }
 
 
@@ -51,17 +53,17 @@
         
         UINavigationController *nav=[array objectAtIndex:i];
         //创建图片
-        UIImageView *itemImgV=[[UIImageView alloc]initWithFrame:CGRectMake(i*K_Screen_Width/4 + POINT_X(65), POINT_Y(5), K_Screen_Width/4 - POINT_X(130), 49 - POINT_Y(5) - POINT_Y(35))];
+        UIImageView *itemImgV=[[UIImageView alloc]initWithFrame:CGRectMake(i*K_Screen_Width/4 + POINT_X(65), POINT_Y(8), 25, 25)];
         itemImgV.image=nav.tabBarItem.image;
         //将图片添加到标签栏
         [self.tabBar addSubview:itemImgV];
         
         //创建按钮上的文字
-        UILabel *lb=[[UILabel alloc]initWithFrame:CGRectMake(0, 49 - POINT_Y(35), K_Screen_Width/4 - POINT_X(130), POINT_Y(30))];
+        UILabel *lb=[[UILabel alloc]initWithFrame:CGRectMake(0, 49 - POINT_Y(40) , 50, POINT_Y(30))];
         [lb setTextColor:[UIColor orangeColor]];
         lb.text=nav.tabBarItem.title;
-        lb.textAlignment=NSTextAlignmentCenter;
-        lb.font=[UIFont systemFontOfSize:FONT_SIZE_OF_PX(26)];
+      //  lb.textAlignment=NSTextAlignmentCenter;
+        lb.font=[UIFont systemFontOfSize:13];
         [itemImgV addSubview:lb];
         
         

@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -25,10 +26,11 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1B6-ha-PR8">
                             <rect key="frame" x="17" y="23" width="25" height="25"/>
                             <constraints>
+                                <constraint firstAttribute="width" secondItem="1B6-ha-PR8" secondAttribute="height" multiplier="1:1" id="1Zg-v5-JFI"/>
                                 <constraint firstAttribute="height" constant="25" id="Ocq-E9-8W0"/>
                                 <constraint firstAttribute="width" constant="25" id="m6A-Yr-mjZ"/>
                             </constraints>
-                            <state key="normal" title="Button" image="nav_btn_message.png"/>
+                            <state key="normal" image="nav_btn_message.png"/>
                             <connections>
                                 <action selector="XiaoXibtnClick:" destination="-1" eventType="touchUpInside" id="jjT-pg-4pB"/>
                             </connections>
@@ -36,10 +38,11 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xAK-jk-aEs">
                             <rect key="frame" x="330" y="23" width="25" height="25"/>
                             <constraints>
+                                <constraint firstAttribute="width" secondItem="xAK-jk-aEs" secondAttribute="height" multiplier="1:1" id="80z-Yp-Csm"/>
                                 <constraint firstAttribute="height" constant="25" id="KFg-w6-tJh"/>
                                 <constraint firstAttribute="width" constant="25" id="o9d-ap-AYo"/>
                             </constraints>
-                            <state key="normal" title="Button" image="nav_btn_search.png"/>
+                            <state key="normal" image="nav_btn_search.png"/>
                             <connections>
                                 <action selector="SearchBtnClick:" destination="-1" eventType="touchUpInside" id="9Y3-rW-ggM"/>
                             </connections>
@@ -106,7 +109,7 @@
     <resources>
         <image name="nav_background_normal.png" width="172" height="56"/>
         <image name="nav_background_selected.png" width="172" height="56"/>
-        <image name="nav_btn_message.png" width="42" height="42"/>
-        <image name="nav_btn_search.png" width="42" height="42"/>
+        <image name="nav_btn_message.png" width="21" height="21"/>
+        <image name="nav_btn_search.png" width="21" height="21"/>
     </resources>
 </document>

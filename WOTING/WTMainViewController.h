@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface WTMainViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UITableView *JQMainTV;
 
 @end

@@ -1,23 +1,27 @@
 //
-//  WTDownLoadViewController.m
+//  WTLoginViewController.m
 //  WOTING
 //
-//  Created by jq on 2016/11/21.
+//  Created by jq on 2016/11/24.
 //  Copyright © 2016年 jq. All rights reserved.
 //
 
-#import "WTDownLoadViewController.h"
+#import "WTLoginViewController.h"
 
-@interface WTDownLoadViewController ()
+@interface WTLoginViewController ()
 
 @end
 
-@implementation WTDownLoadViewController
+@implementation WTLoginViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.navigationController.navigationBar.hidden = YES;
+    
+    UILabel *a = [[UILabel alloc] initWithFrame:CGRectMake(200, 200, 200, 40)];
+    a.text = @"这是登录页";
+    a.font = [UIFont boldSystemFontOfSize:FONT_SIZE_OF_PX(50)];
+    [self.view addSubview:a];
 }
 
 - (void)didReceiveMemoryWarning {
