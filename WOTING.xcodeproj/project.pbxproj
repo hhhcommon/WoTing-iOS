@@ -39,6 +39,16 @@
 		0B1DF2D31DE6AD5D00EE5FF2 /* mine_icon_yingjian@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B1DF2D21DE6AD5D00EE5FF2 /* mine_icon_yingjian@2x.png */; };
 		0B1DF2D81DE6E52C00EE5FF2 /* WTLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B1DF2D61DE6E52C00EE5FF2 /* WTLoginViewController.m */; };
 		0B1DF2D91DE6E52C00EE5FF2 /* WTLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B1DF2D71DE6E52C00EE5FF2 /* WTLoginViewController.xib */; };
+		0B7583F71DE938ED00E3D117 /* login_icon_microblog@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7583F01DE938ED00E3D117 /* login_icon_microblog@2x.png */; };
+		0B7583F81DE938ED00E3D117 /* login_icon_name@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7583F11DE938ED00E3D117 /* login_icon_name@2x.png */; };
+		0B7583F91DE938ED00E3D117 /* login_icon_password@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7583F21DE938ED00E3D117 /* login_icon_password@2x.png */; };
+		0B7583FA1DE938ED00E3D117 /* login_icon_phone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7583F31DE938ED00E3D117 /* login_icon_phone@2x.png */; };
+		0B7583FB1DE938ED00E3D117 /* login_icon_QQ@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7583F41DE938ED00E3D117 /* login_icon_QQ@2x.png */; };
+		0B7583FC1DE938ED00E3D117 /* login_icon_verification code@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7583F51DE938ED00E3D117 /* login_icon_verification code@2x.png */; };
+		0B7583FD1DE938ED00E3D117 /* login_icon_wechat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7583F61DE938ED00E3D117 /* login_icon_wechat@2x.png */; };
+		0B7584011DE942FB00E3D117 /* WTRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7583FF1DE942FB00E3D117 /* WTRegisterViewController.m */; };
+		0B7584021DE942FB00E3D117 /* WTRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B7584001DE942FB00E3D117 /* WTRegisterViewController.xib */; };
+		0B7584041DE98DF200E3D117 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7584031DE98DF200E3D117 /* back@2x.png */; };
 		0B81179C1DE80905007DE05D /* mine_set_icon_about@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B8117921DE80905007DE05D /* mine_set_icon_about@2x.png */; };
 		0B81179D1DE80905007DE05D /* mine_set_icon_delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B8117931DE80905007DE05D /* mine_set_icon_delete@2x.png */; };
 		0B81179E1DE80905007DE05D /* mine_set_icon_download@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B8117941DE80905007DE05D /* mine_set_icon_download@2x.png */; };
@@ -184,6 +194,17 @@
 		0B1DF2D51DE6E52C00EE5FF2 /* WTLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLoginViewController.h; sourceTree = "<group>"; };
 		0B1DF2D61DE6E52C00EE5FF2 /* WTLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLoginViewController.m; sourceTree = "<group>"; };
 		0B1DF2D71DE6E52C00EE5FF2 /* WTLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTLoginViewController.xib; sourceTree = "<group>"; };
+		0B7583F01DE938ED00E3D117 /* login_icon_microblog@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_icon_microblog@2x.png"; sourceTree = "<group>"; };
+		0B7583F11DE938ED00E3D117 /* login_icon_name@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_icon_name@2x.png"; sourceTree = "<group>"; };
+		0B7583F21DE938ED00E3D117 /* login_icon_password@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_icon_password@2x.png"; sourceTree = "<group>"; };
+		0B7583F31DE938ED00E3D117 /* login_icon_phone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_icon_phone@2x.png"; sourceTree = "<group>"; };
+		0B7583F41DE938ED00E3D117 /* login_icon_QQ@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_icon_QQ@2x.png"; sourceTree = "<group>"; };
+		0B7583F51DE938ED00E3D117 /* login_icon_verification code@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_icon_verification code@2x.png"; sourceTree = "<group>"; };
+		0B7583F61DE938ED00E3D117 /* login_icon_wechat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_icon_wechat@2x.png"; sourceTree = "<group>"; };
+		0B7583FE1DE942FB00E3D117 /* WTRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTRegisterViewController.h; sourceTree = "<group>"; };
+		0B7583FF1DE942FB00E3D117 /* WTRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTRegisterViewController.m; sourceTree = "<group>"; };
+		0B7584001DE942FB00E3D117 /* WTRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTRegisterViewController.xib; sourceTree = "<group>"; };
+		0B7584031DE98DF200E3D117 /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
 		0B8117921DE80905007DE05D /* mine_set_icon_about@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mine_set_icon_about@2x.png"; sourceTree = "<group>"; };
 		0B8117931DE80905007DE05D /* mine_set_icon_delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mine_set_icon_delete@2x.png"; sourceTree = "<group>"; };
 		0B8117941DE80905007DE05D /* mine_set_icon_download@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mine_set_icon_download@2x.png"; sourceTree = "<group>"; };
@@ -347,6 +368,7 @@
 		0B1DF29C1DE6942C00EE5FF2 /* icon_Main */ = {
 			isa = PBXGroup;
 			children = (
+				0B7583EF1DE938ED00E3D117 /* icon_Login&&regist */,
 				0B8117911DE80905007DE05D /* icon_QiTa */,
 				0B1DF2BE1DE6AD2D00EE5FF2 /* mine_icon_234G@2x.png */,
 				0B1DF2BF1DE6AD2D00EE5FF2 /* mine_icon_app share@2x.png */,
@@ -366,14 +388,32 @@
 			path = icon_Main;
 			sourceTree = "<group>";
 		};
-		0B1DF2D41DE6E50B00EE5FF2 /* WTLogin */ = {
+		0B1DF2D41DE6E50B00EE5FF2 /* WTLogin&&register */ = {
 			isa = PBXGroup;
 			children = (
 				0B1DF2D51DE6E52C00EE5FF2 /* WTLoginViewController.h */,
 				0B1DF2D61DE6E52C00EE5FF2 /* WTLoginViewController.m */,
 				0B1DF2D71DE6E52C00EE5FF2 /* WTLoginViewController.xib */,
+				0B7583FE1DE942FB00E3D117 /* WTRegisterViewController.h */,
+				0B7583FF1DE942FB00E3D117 /* WTRegisterViewController.m */,
+				0B7584001DE942FB00E3D117 /* WTRegisterViewController.xib */,
 			);
-			name = WTLogin;
+			name = "WTLogin&&register";
+			sourceTree = "<group>";
+		};
+		0B7583EF1DE938ED00E3D117 /* icon_Login&&regist */ = {
+			isa = PBXGroup;
+			children = (
+				0B7583F01DE938ED00E3D117 /* login_icon_microblog@2x.png */,
+				0B7583F11DE938ED00E3D117 /* login_icon_name@2x.png */,
+				0B7583F21DE938ED00E3D117 /* login_icon_password@2x.png */,
+				0B7583F31DE938ED00E3D117 /* login_icon_phone@2x.png */,
+				0B7583F41DE938ED00E3D117 /* login_icon_QQ@2x.png */,
+				0B7583F51DE938ED00E3D117 /* login_icon_verification code@2x.png */,
+				0B7583F61DE938ED00E3D117 /* login_icon_wechat@2x.png */,
+				0B7584031DE98DF200E3D117 /* back@2x.png */,
+			);
+			path = "icon_Login&&regist";
 			sourceTree = "<group>";
 		};
 		0B8117911DE80905007DE05D /* icon_QiTa */ = {
@@ -477,7 +517,7 @@
 		0BF2C5221DE2AC7A00A42B3D /* WTClass */ = {
 			isa = PBXGroup;
 			children = (
-				0B1DF2D41DE6E50B00EE5FF2 /* WTLogin */,
+				0B1DF2D41DE6E50B00EE5FF2 /* WTLogin&&register */,
 				0BF2C5621DE2CDC700A42B3D /* WTXiangJiang */,
 				0BF2C5631DE2CE3A00A42B3D /* WTXiangTing */,
 				0BF2C5641DE2CE4F00A42B3D /* WTXiaZai */,
@@ -896,13 +936,17 @@
 				0B1DF2CE1DE6AD2D00EE5FF2 /* mine_icon_my upload@2x.png in Resources */,
 				0BF2C4FE1DE2A36200A42B3D /* LaunchScreen.storyboard in Resources */,
 				0B1DF2A91DE6942C00EE5FF2 /* mine_avatar bg.png in Resources */,
+				0B7583FA1DE938ED00E3D117 /* login_icon_phone@2x.png in Resources */,
 				0B8117A11DE80905007DE05D /* mine_set_icon_password@2x.png in Resources */,
+				0B7584041DE98DF200E3D117 /* back@2x.png in Resources */,
 				0BFEFDA61DE44346001FFD82 /* home_btn_last.png in Resources */,
+				0B7583FB1DE938ED00E3D117 /* login_icon_QQ@2x.png in Resources */,
 				0BF2C5A71DE3019B00A42B3D /* WTXiangTing_der@2x.png in Resources */,
 				0BF2C5A31DE3019B00A42B3D /* WTXiangJiang_der@2x.png in Resources */,
 				0B1DF2D01DE6AD2D00EE5FF2 /* mine_icon_set@2x.png in Resources */,
 				0B81179E1DE80905007DE05D /* mine_set_icon_download@2x.png in Resources */,
 				0BF2C5991DE3019B00A42B3D /* WTDownLoad@2x.png in Resources */,
+				0B7583FC1DE938ED00E3D117 /* login_icon_verification code@2x.png in Resources */,
 				0BF2C59A1DE3019B00A42B3D /* WTDownLoad@3x.png in Resources */,
 				0B8117A41DE80905007DE05D /* mine_set_icon_update@2x.png in Resources */,
 				0BFEFDAA1DE44346001FFD82 /* home_btn_voice search.png in Resources */,
@@ -920,16 +964,21 @@
 				0BF2C59C1DE3019B00A42B3D /* WTDownLoad_der@3x.png in Resources */,
 				0BFEFDA71DE44346001FFD82 /* home_btn_next.png in Resources */,
 				0B1DF2991DE68DF800EE5FF2 /* mine_bg.png in Resources */,
+				0B7583FD1DE938ED00E3D117 /* login_icon_wechat@2x.png in Resources */,
+				0B7583F71DE938ED00E3D117 /* login_icon_microblog@2x.png in Resources */,
 				0B1DF2D91DE6E52C00EE5FF2 /* WTLoginViewController.xib in Resources */,
 				0B1DF2D11DE6AD2D00EE5FF2 /* mine_icon_subscribe@2x.png in Resources */,
+				0B7583F91DE938ED00E3D117 /* login_icon_password@2x.png in Resources */,
 				0B1DF29B1DE68E0600EE5FF2 /* tab_bg.png in Resources */,
 				0BF2C5A21DE3019B00A42B3D /* WTXiangJiang@3x.png in Resources */,
 				0BF2C4FB1DE2A36200A42B3D /* Assets.xcassets in Resources */,
+				0B7583F81DE938ED00E3D117 /* login_icon_name@2x.png in Resources */,
 				0BF2C5A11DE3019B00A42B3D /* WTXiangJiang@2x.png in Resources */,
 				0BF2C5A51DE3019B00A42B3D /* WTXiangTing@2x.png in Resources */,
 				0B1DF2CC1DE6AD2D00EE5FF2 /* mine_icon_follow@2x.png in Resources */,
 				0B8117A51DE80905007DE05D /* mine_set_icon_user name@2x.png in Resources */,
 				0BFEFDAE1DE44346001FFD82 /* nav_btn_search@2x.png in Resources */,
+				0B7584021DE942FB00E3D117 /* WTRegisterViewController.xib in Resources */,
 				0BF2C5551DE2B19100A42B3D /* LICENSE in Resources */,
 				0BFEFDAD1DE44346001FFD82 /* nav_btn_message@2x.png in Resources */,
 				0B1DF2BD1DE6A5C300EE5FF2 /* WTSheZhiViewController.xib in Resources */,
@@ -997,6 +1046,7 @@
 				0BFEFD921DE420E8001FFD82 /* MASViewConstraint.m in Sources */,
 				0BF2C5271DE2AE4400A42B3D /* ZCBNetworking.m in Sources */,
 				0BF2C55B1DE2B19100A42B3D /* UIButton+AFNetworking.m in Sources */,
+				0B7584011DE942FB00E3D117 /* WTRegisterViewController.m in Sources */,
 				0BF2C55A1DE2B19100A42B3D /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				0B1DF2BC1DE6A5C300EE5FF2 /* WTSheZhiViewController.m in Sources */,
 				0BF2C54F1DE2B19100A42B3D /* AFHTTPSessionManager.m in Sources */,

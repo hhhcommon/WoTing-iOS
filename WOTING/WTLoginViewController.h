@@ -10,4 +10,29 @@
 
 @interface WTLoginViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UITextField *NameTextfield;
+@property (weak, nonatomic) IBOutlet UITextField *PWDTextfield;
+@property (weak, nonatomic) IBOutlet UIView *LoginView;
+@property (weak, nonatomic) IBOutlet UIButton *LoginBtn;
+//三方登录按钮
+
+@property (weak, nonatomic) IBOutlet UIButton *WeChetBtn;
+@property (weak, nonatomic) IBOutlet UIButton *QQBtn;
+@property (weak, nonatomic) IBOutlet UIButton *WeiBoBtn;
+
+
+
+- (IBAction)blackBtnClick:(id)sender;
+
+- (IBAction)RegistBtnClick:(id)sender;
+
+- (IBAction)LoginBtnClick:(id)sender;
+
+//三方登录按钮点击事件
+- (IBAction)WeiChatBtnClick:(id)sender;
+- (IBAction)QQBtnClick:(id)sender;
+- (IBAction)WeiBoBtnClick:(id)sender;
+
+
+
 @end

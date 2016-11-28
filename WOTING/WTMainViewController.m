@@ -36,13 +36,15 @@
     self.JQMainTV.delegate = self;
     self.JQMainTV.dataSource = self;
     
-    self.view.backgroundColor = [UIColor grayColor];
+    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [self initContents];
+   // self.JQMainTV.tableFooterView = [[UIView alloc] init];
 }
 
 - (void)initContents{
     
     UIImageView *headerView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, K_Screen_Width, POINT_Y(375))];
+    headerView.userInteractionEnabled = YES;
     headerView.image = [UIImage imageNamed:@"mine_bg.png"];
     self.JQMainTV.tableHeaderView = headerView;
     
@@ -98,7 +100,7 @@
         
         make.centerX.equalTo(headerView.mas_centerX);
         make.top.equalTo(LogID.mas_bottom).with.offset(POINT_Y(20));
-        make.width.mas_equalTo(POINT_Y(350));
+        make.width.mas_equalTo(POINT_Y(450));
         make.height.mas_equalTo(POINT_Y(30));
     }];
     
@@ -109,6 +111,7 @@
     
     return 4;
 }
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
@@ -189,10 +192,11 @@
 //跳转到登录页
 - (void)LoginBtnClick:(UIButton *)btn{
     
+    self.hidesBottomBarWhenPushed=YES;
     WTLoginViewController *loginVC = [[WTLoginViewController alloc] init];
     
     [self.navigationController pushViewController:loginVC animated:YES];
-    
+    self.hidesBottomBarWhenPushed=NO;
 }
 
 - (void)didReceiveMemoryWarning {

@@ -27,6 +27,14 @@
     self.JQSZtableView.delegate = self;
     self.JQSZtableView.dataSource = self;
     
+    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    
+    self.JQSZtableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    
+    self.JQSZtableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+    
+    
+    
     iconsArray = [[NSArray alloc] initWithObjects:[NSArray arrayWithObjects:@"mine_set_icon_download.png", @"mine_set_icon_delete.png",  nil], [NSArray arrayWithObjects:@"mine_set_icon_preference.png", nil],[NSArray arrayWithObjects:@"mine_set_icon_help.png",@"mine_set_icon_feedback.png",@"mine_set_icon_about.png", nil], nil];
     
     titlesArray = [[NSArray alloc] initWithObjects:[NSArray arrayWithObjects:@"下载路径", @"清除缓存", nil], [NSArray arrayWithObjects:@"偏好设置",  nil],[NSArray arrayWithObjects:@"使用帮助",@"反馈建议",@"关于我听" , nil], nil];
