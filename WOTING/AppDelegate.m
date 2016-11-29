@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 
+#import <CoreLocation/CoreLocation.h>
+
 #import "WTXiangJiangViewController.h"
 #import "WTXiangTingViewController.h"
 #import "WTDownLoadViewController.h"
@@ -16,7 +18,7 @@
 #import "TabBarController.h"
 
 
-@interface AppDelegate ()
+@interface AppDelegate ()<CLLocationManagerDelegate>
 @property (nonatomic, strong) UINavigationController *XJNavC;
 @property (nonatomic, strong) UINavigationController *XTNavC;
 @property (nonatomic, strong) UINavigationController *DLNavC;
@@ -28,6 +30,8 @@
 @property (nonatomic, strong) WTMainViewController *MainViewC;
 @property (nonatomic, strong) TabBarController *TabViewC;
 
+@property (nonatomic, strong) CLLocationManager *locationManager;
+
 @end
 
 @implementation AppDelegate
@@ -35,6 +39,30 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+//    NSString *userPhoneNameStr = [[UIDevice currentDevice] name];//手机名称
+    NSString *phoneUDIDStr =  [[[UIDevice currentDevice] identifierForVendor] UUIDString];  //设备唯一标示码
+    NSString *PhoneMobileClass = [WKProgressHUD deviceVersion]; //手机型号
+    
+    
+    CGRect rx = [ UIScreen mainScreen ].bounds;
+    NSString *ScreenSize = [NSString stringWithFormat:@"%f*%f",rx.size.width,rx.size.height];
+    [AutomatePlist writePlistForkey:@"ScreenSize" value:ScreenSize];
+
+    [AutomatePlist writePlistForkey:@"IMEI" value:phoneUDIDStr];
+    [AutomatePlist writePlistForkey:@"MobileClass" value:PhoneMobileClass];
+    
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    self.locationManager.distanceFilter = 1.0;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    
+    if([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)])
+    {
+        [self.locationManager requestAlwaysAuthorization]; // 永久授权
+        [self.locationManager requestWhenInUseAuthorization]; //使用中授权
+    }
+    [self.locationManager startUpdatingLocation]; //开始定位
     
     _window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
@@ -48,6 +76,24 @@
     [self.window makeKeyAndVisible];
     
     return YES;
+}
+
+#pragma mark -- 定位服务成功并回调代理
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+
+    [AutomatePlist writePlistForkey:@"GPS-longitude" value:[NSString  stringWithFormat:@"%f",newLocation.coordinate.longitude]];
+    [AutomatePlist writePlistForkey:@"GPS-latitude" value:[NSString  stringWithFormat:@"%f",newLocation.coordinate.latitude]];
+//    CLGeocoder * geocoder = [[CLGeocoder alloc] init];
+//    [geocoder reverseGeocodeLocation:newLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+//        
+//        NSDictionary *locationInfo = [[NSDictionary alloc]init];
+//        for (CLPlacemark * placemark in placemarks) {
+//            locationInfo = [placemark addressDictionary];
+//        }
+//        NSLog(@"%@",locationInfo);
+//        
+//    }];
 }
 
 #pragma mark -- 创建分栏控制器
@@ -114,6 +160,8 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+    [self.locationManager stopUpdatingLocation]; //停止定位
 }
 
 

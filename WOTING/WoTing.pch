@@ -24,11 +24,28 @@
 #import "UIView+SKFrame.h"
 #import "UIColor+SKHexColor.h"
 #import "NSString+NullOfString.h"
+#import "WKProgressHUD.h"
+#import "E_HUDView.h"
+#import "AutomatePlist.h"
 
 #import "AFNetworking.h"
 #import "Masonry.h"
 
 #import "ZCBNetworking.h"
+
+
+#pragma mark - 数据请求接口
+
+/** 外网接口地址 */
+#define SKInterFaceServer @"http://123.56.254.75:808/wt/"
+
+#pragma mark 各个接口
+
+/** 登录 */
+#define WoTing_Login      (SKInterFaceServer@"passport/user/mlogin.do")
+
+/** 注册 */
+#define WoTing_register      (SKInterFaceServer@"passport/user/register.do")
 
 
 // Include any system framework and library headers here that should be included in all compilation units.

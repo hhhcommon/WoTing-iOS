@@ -17,6 +17,15 @@
     NSArray         *iconsArray;
     /** 设置Title */
     NSArray         *titlesArray;
+    
+    /** 昵称*/
+    NSString        *userName;
+    
+    /** 地址*/
+    NSString        *Region;
+    
+    /** 标记登录状态值 */
+    NSInteger   Login; //0为未登录
 }
 
 @end
@@ -28,17 +37,38 @@
     // Do any additional setup after loading the view from its nib.
     
     self.navigationController.navigationBar.hidden = YES;
+    Login = 0;
     
-    iconsArray = [[NSArray alloc] initWithObjects:[NSArray arrayWithObjects:@"mine_icon_play history.png", nil], [NSArray arrayWithObjects:@"mine_icon_234G.png", nil],[NSArray arrayWithObjects:@"mine_icon_yingjian.png",@"mine_icon_app share.png", nil],[NSArray arrayWithObjects:@"mine_icon_set.png", nil], nil];
+    //监听登陆状态的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LoginNotification:) name:@"LoginChangeNotification" object:nil];
     
-    titlesArray = [[NSArray alloc] initWithObjects:[NSArray arrayWithObjects:@"播放历史", nil], [NSArray arrayWithObjects:@"2/3/4G网络播放和下载提醒",  nil],[NSArray arrayWithObjects:@"智能硬件",@"应用分享",  nil], [NSArray arrayWithObjects:@"其它设置",  nil] ,nil];
+    [self creterNSArray];
+    
     
     self.JQMainTV.delegate = self;
     self.JQMainTV.dataSource = self;
     
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [self initContents];
-   // self.JQMainTV.tableFooterView = [[UIView alloc] init];
+   
+}
+
+- (void)creterNSArray {
+    
+    if (Login == 0) {
+        
+        iconsArray = [[NSArray alloc] initWithObjects:[NSArray arrayWithObjects:@"mine_icon_play history.png", nil], [NSArray arrayWithObjects:@"mine_icon_234G.png", nil],[NSArray arrayWithObjects:@"mine_icon_yingjian.png",@"mine_icon_app share.png", nil],[NSArray arrayWithObjects:@"mine_icon_set.png", nil], nil];
+        
+        titlesArray = [[NSArray alloc] initWithObjects:[NSArray arrayWithObjects:@"播放历史", nil], [NSArray arrayWithObjects:@"2/3/4G网络播放和下载提醒",  nil],[NSArray arrayWithObjects:@"智能硬件",@"应用分享",  nil], [NSArray arrayWithObjects:@"其它设置",  nil] ,nil];
+    }else{
+        
+        iconsArray = [[NSArray alloc] initWithObjects:[NSArray arrayWithObjects:@"mine_icon_play history.png",@"mine_icon_like.png",@"mine_icon_follow.png",@"mine_icon_subscribe.png",@"mine_icon_my upload.png", nil], [NSArray arrayWithObjects:@"mine_icon_234G.png", nil],[NSArray arrayWithObjects:@"mine_icon_yingjian.png",@"mine_icon_app share.png", nil],[NSArray arrayWithObjects:@"mine_icon_set.png", nil], nil];
+        
+        titlesArray = [[NSArray alloc] initWithObjects:[NSArray arrayWithObjects:@"播放历史",@"我的喜欢",@"我的关注",@"我的订阅",@"我的上传", nil], [NSArray arrayWithObjects:@"2/3/4G网络播放和下载提醒",  nil],[NSArray arrayWithObjects:@"智能硬件",@"应用分享",  nil], [NSArray arrayWithObjects:@"其它设置",  nil] ,nil];
+        
+    }
+    
+    
 }
 
 - (void)initContents{
@@ -50,7 +80,13 @@
     
     //姓名
     UILabel *NameLb = [[UILabel alloc] init];
-    NameLb.text = @"我的";
+    
+    if (Login == 0) {
+        NameLb.text = @"我的";
+    }else{
+        NameLb.text = userName;
+    }
+    
     NameLb.textAlignment = NSTextAlignmentCenter;
     NameLb.font = [UIFont boldSystemFontOfSize:FONT_SIZE_OF_PX(34)];
     NameLb.textColor = [UIColor whiteColor];
@@ -89,10 +125,29 @@
         make.width.mas_equalTo(POINT_X(220));
         make.height.mas_equalTo(POINT_Y(25));
     }];
+    if (Login == 0) {
+        
+        LogID.hidden = NO;
+    }else{
+        
+        LogID.hidden = YES;
+    }
     
     //一句话介绍自己
     UILabel *MainID = [[UILabel alloc] init];
-    MainID.text = @"用我听,听我想听,说我想说！";
+    if (Login == 0) {
+        
+        MainID.text = @"用我听,听我想听,说我想说！";
+    }else{
+        
+        if (Region) {
+            
+            MainID.text = Region;
+        }else{
+            MainID.text = @"您还没有添写地址";
+        }
+    }
+    
     MainID.textAlignment = NSTextAlignmentCenter;
     MainID.font = [UIFont systemFontOfSize:FONT_SIZE_OF_PX(28)];
     [headerView addSubview:MainID];
@@ -126,7 +181,12 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if (section == 0) {
-        return 1;
+        if (Login == 0) {
+            
+            return 1;
+        }else{
+            return 5;
+        }
     }else if (section == 1) {
         return 1;
     }else if (section == 2){
@@ -187,6 +247,18 @@
         [self.navigationController pushViewController:WTszVC animated:YES];
         self.hidesBottomBarWhenPushed=NO;
     }
+}
+
+//登录状态改变触发
+- (void)LoginNotification:(NSNotification *)nt{
+    
+    Login = 1;
+    userName = [nt.userInfo objectForKey:@"UserName"];
+    Region = [nt.userInfo objectForKey:@"Region"];
+    [self creterNSArray];
+    [self initContents];
+    [_JQMainTV reloadData];
+    
 }
 
 //跳转到登录页

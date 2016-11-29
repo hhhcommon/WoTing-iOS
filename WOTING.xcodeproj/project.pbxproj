@@ -49,6 +49,11 @@
 		0B7584011DE942FB00E3D117 /* WTRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7583FF1DE942FB00E3D117 /* WTRegisterViewController.m */; };
 		0B7584021DE942FB00E3D117 /* WTRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B7584001DE942FB00E3D117 /* WTRegisterViewController.xib */; };
 		0B7584041DE98DF200E3D117 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7584031DE98DF200E3D117 /* back@2x.png */; };
+		0B75840C1DEBDA6500E3D117 /* WKMessageProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7584071DEBDA6500E3D117 /* WKMessageProgressHUD.m */; };
+		0B75840D1DEBDA6500E3D117 /* WKProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7584091DEBDA6500E3D117 /* WKProgressHUD.m */; };
+		0B75840E1DEBDA6500E3D117 /* WKWaitingProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B75840B1DEBDA6500E3D117 /* WKWaitingProgressHUD.m */; };
+		0B7584111DEBFB1600E3D117 /* AutomatePlist.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7584101DEBFB1600E3D117 /* AutomatePlist.m */; };
+		0B7584141DEC7BDD00E3D117 /* E_HUDView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7584131DEC7BDD00E3D117 /* E_HUDView.m */; };
 		0B81179C1DE80905007DE05D /* mine_set_icon_about@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B8117921DE80905007DE05D /* mine_set_icon_about@2x.png */; };
 		0B81179D1DE80905007DE05D /* mine_set_icon_delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B8117931DE80905007DE05D /* mine_set_icon_delete@2x.png */; };
 		0B81179E1DE80905007DE05D /* mine_set_icon_download@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B8117941DE80905007DE05D /* mine_set_icon_download@2x.png */; };
@@ -205,6 +210,16 @@
 		0B7583FF1DE942FB00E3D117 /* WTRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTRegisterViewController.m; sourceTree = "<group>"; };
 		0B7584001DE942FB00E3D117 /* WTRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTRegisterViewController.xib; sourceTree = "<group>"; };
 		0B7584031DE98DF200E3D117 /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
+		0B7584061DEBDA6500E3D117 /* WKMessageProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKMessageProgressHUD.h; sourceTree = "<group>"; };
+		0B7584071DEBDA6500E3D117 /* WKMessageProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKMessageProgressHUD.m; sourceTree = "<group>"; };
+		0B7584081DEBDA6500E3D117 /* WKProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKProgressHUD.h; sourceTree = "<group>"; };
+		0B7584091DEBDA6500E3D117 /* WKProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKProgressHUD.m; sourceTree = "<group>"; };
+		0B75840A1DEBDA6500E3D117 /* WKWaitingProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKWaitingProgressHUD.h; sourceTree = "<group>"; };
+		0B75840B1DEBDA6500E3D117 /* WKWaitingProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKWaitingProgressHUD.m; sourceTree = "<group>"; };
+		0B75840F1DEBFB1600E3D117 /* AutomatePlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutomatePlist.h; sourceTree = "<group>"; };
+		0B7584101DEBFB1600E3D117 /* AutomatePlist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutomatePlist.m; sourceTree = "<group>"; };
+		0B7584121DEC7BDD00E3D117 /* E_HUDView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = E_HUDView.h; sourceTree = "<group>"; };
+		0B7584131DEC7BDD00E3D117 /* E_HUDView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = E_HUDView.m; sourceTree = "<group>"; };
 		0B8117921DE80905007DE05D /* mine_set_icon_about@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mine_set_icon_about@2x.png"; sourceTree = "<group>"; };
 		0B8117931DE80905007DE05D /* mine_set_icon_delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mine_set_icon_delete@2x.png"; sourceTree = "<group>"; };
 		0B8117941DE80905007DE05D /* mine_set_icon_download@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mine_set_icon_download@2x.png"; sourceTree = "<group>"; };
@@ -416,6 +431,19 @@
 			path = "icon_Login&&regist";
 			sourceTree = "<group>";
 		};
+		0B7584051DEBDA6500E3D117 /* WKProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				0B7584061DEBDA6500E3D117 /* WKMessageProgressHUD.h */,
+				0B7584071DEBDA6500E3D117 /* WKMessageProgressHUD.m */,
+				0B7584081DEBDA6500E3D117 /* WKProgressHUD.h */,
+				0B7584091DEBDA6500E3D117 /* WKProgressHUD.m */,
+				0B75840A1DEBDA6500E3D117 /* WKWaitingProgressHUD.h */,
+				0B75840B1DEBDA6500E3D117 /* WKWaitingProgressHUD.m */,
+			);
+			path = WKProgressHUD;
+			sourceTree = "<group>";
+		};
 		0B8117911DE80905007DE05D /* icon_QiTa */ = {
 			isa = PBXGroup;
 			children = (
@@ -529,8 +557,13 @@
 		0BF2C5231DE2ACC700A42B3D /* WTUtil */ = {
 			isa = PBXGroup;
 			children = (
+				0B7584051DEBDA6500E3D117 /* WKProgressHUD */,
 				0BF2C5691DE2EEEA00A42B3D /* Factory.h */,
 				0BF2C56A1DE2EEEA00A42B3D /* Factory.m */,
+				0B75840F1DEBFB1600E3D117 /* AutomatePlist.h */,
+				0B7584101DEBFB1600E3D117 /* AutomatePlist.m */,
+				0B7584121DEC7BDD00E3D117 /* E_HUDView.h */,
+				0B7584131DEC7BDD00E3D117 /* E_HUDView.m */,
 				0B1DF2821DE5708800EE5FF2 /* SKMainScrollView.h */,
 				0B1DF2831DE5708800EE5FF2 /* SKMainScrollView.m */,
 				0BF2C5611DE2C6F400A42B3D /* WoTing.pch */,
@@ -888,6 +921,7 @@
 				TargetAttributes = {
 					0BF2C4EA1DE2A36200A42B3D = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 9DRWD6QTFZ;
 						ProvisioningStyle = Automatic;
 					};
 					0BF2C5031DE2A36200A42B3D = {
@@ -1040,6 +1074,7 @@
 				0BFEFD951DE420E8001FFD82 /* View+MASAdditions.m in Sources */,
 				0BF2C5581DE2B19100A42B3D /* AFImageDownloader.m in Sources */,
 				0BF2C5571DE2B19100A42B3D /* AFAutoPurgingImageCache.m in Sources */,
+				0B75840E1DEBDA6500E3D117 /* WKWaitingProgressHUD.m in Sources */,
 				0BF2C56B1DE2EEEA00A42B3D /* Factory.m in Sources */,
 				0BFEFD8F1DE420E8001FFD82 /* MASConstraintMaker.m in Sources */,
 				0BFEFD931DE420E8001FFD82 /* NSArray+MASAdditions.m in Sources */,
@@ -1053,12 +1088,15 @@
 				0BF2C55E1DE2B19100A42B3D /* UIRefreshControl+AFNetworking.m in Sources */,
 				0BFEFD961DE420E8001FFD82 /* ViewController+MASAdditions.m in Sources */,
 				0BF2C55F1DE2B19100A42B3D /* UIWebView+AFNetworking.m in Sources */,
+				0B75840C1DEBDA6500E3D117 /* WKMessageProgressHUD.m in Sources */,
 				0BF2C5861DE2F69400A42B3D /* WTMainViewController.m in Sources */,
 				0B1DF2801DE56C1000EE5FF2 /* WTJieMuViewController.m in Sources */,
 				0BF2C5541DE2B19100A42B3D /* AFURLSessionManager.m in Sources */,
 				0BF2C4F31DE2A36200A42B3D /* AppDelegate.m in Sources */,
 				0BFEFD941DE420E8001FFD82 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
+				0B7584111DEBFB1600E3D117 /* AutomatePlist.m in Sources */,
 				0BFEFD901DE420E8001FFD82 /* MASLayoutConstraint.m in Sources */,
+				0B75840D1DEBDA6500E3D117 /* WKProgressHUD.m in Sources */,
 				0BF2C5781DE2F5F500A42B3D /* WTXiangTingViewController.m in Sources */,
 				0BF2C5501DE2B19100A42B3D /* AFNetworkReachabilityManager.m in Sources */,
 				0B1DF2951DE58C0C00EE5FF2 /* NSString+NullOfString.m in Sources */,
@@ -1068,6 +1106,7 @@
 				0BF2C5711DE2F5B700A42B3D /* WTXiangJiangViewController.m in Sources */,
 				0B1DF2841DE5708800EE5FF2 /* SKMainScrollView.m in Sources */,
 				0B1DF28D1DE5721100EE5FF2 /* WTFenLeiViewController.m in Sources */,
+				0B7584141DEC7BDD00E3D117 /* E_HUDView.m in Sources */,
 				0BFEFD8D1DE420E8001FFD82 /* MASCompositeConstraint.m in Sources */,
 				0BF2C5561DE2B19100A42B3D /* README.md in Sources */,
 				0BFEFD911DE420E8001FFD82 /* MASViewAttribute.m in Sources */,
@@ -1212,6 +1251,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 9DRWD6QTFZ;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/WOTING/WoTing.pch";
 				INFOPLIST_FILE = WOTING/Info.plist;
@@ -1225,6 +1265,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 9DRWD6QTFZ;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/WOTING/WoTing.pch";
 				INFOPLIST_FILE = WOTING/Info.plist;

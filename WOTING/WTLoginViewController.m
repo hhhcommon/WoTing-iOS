@@ -77,11 +77,44 @@
 //此处应该有网络请求
 - (IBAction)LoginBtnClick:(id)sender {
     
+    NSString *IMEI = [AutomatePlist readPlistForKey:@"IMEI"];
+    NSString *ScreenSize = [AutomatePlist readPlistForKey:@"ScreenSize"];
+    NSString *MobileClass = [AutomatePlist readPlistForKey:@"MobileClass"];
+    NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
+    NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
     
-    [ZCBNetworking getWithUrl:@"" refreshCache:YES success:^(id response) {
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", _NameTextfield.text, @"UserName", _PWDTextfield.text, @"Password", nil];
+    
+    NSString *login_Str = WoTing_Login;
+    
+
+    [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
         
+        
+        NSDictionary *resultDict = (NSDictionary *)response;
+        
+        NSString  *ReturnType = [resultDict objectForKey:@"ReturnType"];
+        if ([ReturnType isEqualToString:@"1001"]) {
+            
+            NSDictionary *UserId = resultDict[@"UserInfo"];
+            NSDictionary *heheDict = [[NSDictionary alloc] initWithDictionary:UserId];
+
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginChangeNotification" object:nil userInfo:heheDict];
+            
+            [self.navigationController popViewControllerAnimated:YES];
+            NSLog(@"%@", resultDict);
+        }else if ([ReturnType isEqualToString:@"1002"]){
+            
+            [E_HUDView showMsg:@"用户不存在" inView:nil];
+        }else if ([ReturnType isEqualToString:@"1003"]){
+            
+            [E_HUDView showMsg:@"密码输入错误" inView:nil];
+        }
         
     } fail:^(NSError *error) {
+        
+        
+        NSLog(@"%@", error);
         
     }];
     
@@ -89,11 +122,14 @@
 
 //三方登录
 - (IBAction)WeiChatBtnClick:(id)sender {
+    
 }
 
 - (IBAction)QQBtnClick:(id)sender {
+    
 }
 
 - (IBAction)WeiBoBtnClick:(id)sender {
+    
 }
 @end
