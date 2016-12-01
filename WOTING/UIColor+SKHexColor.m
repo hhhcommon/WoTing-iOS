@@ -52,6 +52,11 @@
     return [self colorWithHexString:@"#f3f3f3"];
 }
 
+#pragma mark - 橙红背景通用色
++ (UIColor *)JQTColor {
+    
+    return [self colorWithHexString:@"#F66320"];
+}
 
 #pragma mark - 透明无颜色
 + (UIColor *)skClearColor {

@@ -284,5 +284,21 @@ static NSMutableArray *HUDs;
     return deviceString;
 }
 
++ (NSString *)timeForBeiJingTimeStamp:(NSString *)timeStamp andsetDateFormat:(NSString *)dateFormat{
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    
+    [formatter setDateFormat:dateFormat];
+    //转格式
+    
+    // 北京时间戳1500000000（可以把北京时间戳转成北京时间、格林尼治时间）
+    NSDate *date1 = [NSDate dateWithTimeIntervalSince1970:[timeStamp intValue]];
+    
+    
+    return [formatter stringFromDate:date1];
+    
+    
+}
+
 
 @end

@@ -126,5 +126,8 @@
 /** 颜色代码 - cccccc **/
 + (UIColor *)skLineImageHighColor;
 
+#pragma mark - 橙红背景通用色
++ (UIColor *)JQTColor;
+
 
 @end

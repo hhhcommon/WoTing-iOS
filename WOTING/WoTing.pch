@@ -29,6 +29,7 @@
 #import "AutomatePlist.h"
 
 #import "AFNetworking.h"
+#import "UIImageView+WebCache.h"
 #import "Masonry.h"
 
 #import "ZCBNetworking.h"
@@ -46,6 +47,10 @@
 
 /** 注册 */
 #define WoTing_register      (SKInterFaceServer@"passport/user/register.do")
+
+/** 享听 */
+#define WoTing_MainPage     (SKInterFaceServer@"mainPage.do")
+
 
 
 // Include any system framework and library headers here that should be included in all compilation units.

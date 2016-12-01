@@ -36,6 +36,9 @@ typedef void(^MyBlock)(void);
 //判断手机型号
 + (NSString*)deviceVersion;
 
+//时间戳
++ (NSString *)timeForBeiJingTimeStamp:(NSString *)timeStamp andsetDateFormat:(NSString *)dateFormat;
+
 
 + (void)PushAlertWithView:(UINavigationController *)selfViewControllerH andPushViewController:(UIViewController *)NextViewControllerH andMessage:(NSString *)message andHeader:(NSString *)HeaderMessage;
 
