@@ -12,6 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WTXiangJiangViewController">
             <connections>
+                <outlet property="BoFangBtn" destination="bGb-43-nCF" id="YCP-Ar-EXR"/>
+                <outlet property="JieMuBtn" destination="bhl-oU-nlI" id="3l5-Zx-oMX"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -57,6 +59,9 @@
                             <state key="normal" title="节目" backgroundImage="nav_background_normal.png">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="JieMuBtnClick:" destination="-1" eventType="touchUpInside" id="BKR-ix-Hc8"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGb-43-nCF">
                             <rect key="frame" x="91" y="21" width="90" height="30"/>
@@ -68,6 +73,9 @@
                             <state key="normal" title="播放" backgroundImage="nav_background_selected.png">
                                 <color key="titleColor" red="0.93144633509999997" green="0.32092752769999999" blue="0.128681868" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="BoFangBtnClick:" destination="-1" eventType="touchUpInside" id="lSL-P2-hi5"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kwv-4c-2b6">
                             <rect key="frame" x="189" y="25" width="1" height="21"/>
@@ -107,8 +115,8 @@
         </view>
     </objects>
     <resources>
-        <image name="nav_background_normal.png" width="172" height="56"/>
-        <image name="nav_background_selected.png" width="172" height="56"/>
+        <image name="nav_background_normal.png" width="86" height="28"/>
+        <image name="nav_background_selected.png" width="86" height="28"/>
         <image name="nav_btn_message.png" width="21" height="21"/>
         <image name="nav_btn_search.png" width="21" height="21"/>
     </resources>

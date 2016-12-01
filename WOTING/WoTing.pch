@@ -48,9 +48,11 @@
 /** 注册 */
 #define WoTing_register      (SKInterFaceServer@"passport/user/register.do")
 
-/** 享听 */
+/** 享听 - 播放*/
 #define WoTing_MainPage     (SKInterFaceServer@"mainPage.do")
 
+/** 享听 - 推荐 - 电台*/
+#define WoTing_GetContents      (SKInterFaceServer@"content/getContents.do")
 
 
 // Include any system framework and library headers here that should be included in all compilation units.

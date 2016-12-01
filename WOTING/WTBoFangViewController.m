@@ -347,7 +347,7 @@
     }];
     
     UIButton *disPlayBtn = [[UIButton alloc] init];
-    [disPlayBtn setImage:[UIImage imageNamed:@"home_btn_background.png"] forState:UIControlStateNormal];
+    [disPlayBtn setBackgroundImage:[UIImage imageNamed:@"home_btn_background.png"] forState:UIControlStateNormal];
     [disPlayBtn setTitle:@"显示" forState:UIControlStateNormal];
     [headerView addSubview:disPlayBtn];
     [disPlayBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -417,7 +417,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 40;
+    return 35;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{

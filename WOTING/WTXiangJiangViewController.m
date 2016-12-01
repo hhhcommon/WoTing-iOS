@@ -10,8 +10,7 @@
 
 #import "WTBoFangViewController.h"
 #import "WTJieMuViewController.h"
-#import "WTDianTaiViewController.h"
-#import "WTFenLeiViewController.h"
+
 
 #import "SKMainScrollView.h"
 
@@ -53,13 +52,13 @@
     [self.view addSubview:contentScrollView];
     
     // 防止scroll上下拖动
-    contentScrollView.contentSize = CGSizeMake(K_Screen_Width * 4, 0);
+    contentScrollView.contentSize = CGSizeMake(K_Screen_Width * 2, 0);
     contentScrollView.pagingEnabled = YES;
     contentScrollView.bounces = NO;
     contentScrollView.contentOffset = CGPointMake(0, 0);
     contentScrollView.delegate = self;
     
-    for (int i = 0; i < 4; i ++) {
+    for (int i = 0; i < 2; i ++) {
         
         if (i == 0) {
             
@@ -75,7 +74,7 @@
                 make.centerY.equalTo(contentScrollView);
             }];
             
-        }else if (i == 1) {
+        }else {
             
             WTJieMuViewController *wtJieMuVC = [[WTJieMuViewController alloc] init];
            // skFaXianVC.taskArr = sktaskArr;
@@ -88,34 +87,6 @@
                 make.left.mas_equalTo(K_Screen_Width * i);
                 make.centerY.equalTo(contentScrollView);
             }];
-            
-        }else if (i == 2){
-            
-            WTDianTaiViewController *wtDianTaiVC = [[WTDianTaiViewController alloc] init];
-           // skXiaoZuVC.groupArr = skgroupArr;
-            [self addChildViewController:wtDianTaiVC];
-            [contentScrollView addSubview:wtDianTaiVC.view];
-            [wtDianTaiVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
-                
-                make.width.equalTo(contentScrollView);
-                make.height.equalTo(contentScrollView);
-                make.left.mas_equalTo(K_Screen_Width * i);
-                make.centerY.equalTo(contentScrollView);
-            }];
-        }else{
-            
-            WTFenLeiViewController *wtFenLeiVC = [[WTFenLeiViewController alloc] init];
-          //  skXiaoZuVC.userArr = skuserArr;
-            [self addChildViewController:wtFenLeiVC];
-            [contentScrollView addSubview:wtFenLeiVC.view];
-            [wtFenLeiVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
-                
-                make.width.equalTo(contentScrollView);
-                make.height.equalTo(contentScrollView);
-                make.left.mas_equalTo(K_Screen_Width * i);
-                make.centerY.equalTo(contentScrollView);
-            }];
-            
             
         }
     }
@@ -145,5 +116,10 @@
 }
 
 - (IBAction)SearchBtnClick:(id)sender {
+}
+- (IBAction)BoFangBtnClick:(id)sender {
+}
+
+- (IBAction)JieMuBtnClick:(id)sender {
 }
 @end
