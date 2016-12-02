@@ -10,13 +10,18 @@
 
 #import "WTDianTaiTableViewCell.h"
 
+#import "WTXJHeaderView.h"
+
 @interface WTDianTaiViewController ()<UITableViewDelegate, UITableViewDataSource>{
     
     UITableView        *jqTableView;
     
     /** 数据数组 */
     NSMutableArray          *dataDianTArray;
+    NSMutableArray          *dataListArr;
     
+    //sectio视图
+    WTXJHeaderView      *XJsectionHView;
 }
 
 @end
@@ -28,6 +33,7 @@
     // Do any additional setup after loading the view from its nib.
     
     dataDianTArray = [NSMutableArray arrayWithCapacity:0];
+    dataListArr = [NSMutableArray arrayWithCapacity:0];
     
     jqTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, K_Screen_Width, K_Screen_Height) style:UITableViewStyleGrouped];
     jqTableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -52,10 +58,78 @@
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, K_Screen_Width, POINT_Y(260))];
     headerView.backgroundColor = [UIColor whiteColor];
     jqTableView.tableHeaderView = headerView;
-   
-    UIButton *DFTaiBtn = [[UIButton alloc] init];
-//    DFTaiBtn
     
+    //国家台
+    UIButton *GJTaiBtn = [[UIButton alloc] init];
+    [GJTaiBtn setImage:[UIImage imageNamed:@"icon_central_station.png"] forState:UIControlStateNormal];
+    [headerView addSubview:GJTaiBtn];
+    [GJTaiBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.mas_equalTo(POINT_X(40));
+        make.top.mas_equalTo(POINT_Y(30));
+        make.width.mas_equalTo(POINT_X(140));
+        make.height.mas_equalTo(POINT_X(140));
+    }];
+    UILabel *GJLab = [[UILabel alloc] init];
+    GJLab.text = @"国家台";
+    GJLab.font = [UIFont boldSystemFontOfSize:14];
+    GJLab.textAlignment = NSTextAlignmentCenter;
+    [headerView addSubview:GJLab];
+    [GJLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.mas_equalTo(POINT_X(40));
+        make.top.equalTo(GJTaiBtn.mas_bottom).with.offset(POINT_Y(30));
+        make.width.mas_equalTo(POINT_X(140));
+        make.height.mas_equalTo(POINT_X(30));
+    }];
+    
+    //地方台
+    UIButton *DFTaiBtn = [[UIButton alloc] init];
+    [DFTaiBtn setBackgroundImage:[UIImage imageNamed:@"icon_network_station.png"] forState:UIControlStateNormal];
+    [headerView addSubview:DFTaiBtn];
+    [DFTaiBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+
+        make.centerX.equalTo(headerView.mas_centerX);
+        make.top.mas_equalTo(POINT_Y(30));
+        make.width.mas_equalTo(POINT_X(140));
+        make.height.mas_equalTo(POINT_X(140));
+    }];
+    UILabel *DFLab = [[UILabel alloc] init];
+    DFLab.text = @"地方台";
+    DFLab.font = [UIFont boldSystemFontOfSize:14];
+    DFLab.textAlignment = NSTextAlignmentCenter;
+    [headerView addSubview:DFLab];
+    [DFLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerX.equalTo(headerView.mas_centerX);
+        make.top.equalTo(DFTaiBtn.mas_bottom).with.offset(POINT_Y(30));
+        make.width.mas_equalTo(POINT_X(140));
+        make.height.mas_equalTo(POINT_X(30));
+    }];
+    
+    //网络台
+    UIButton *WLTaiBtn = [[UIButton alloc] init];
+    [WLTaiBtn setImage:[UIImage imageNamed:@"icon_local_station.png"] forState:UIControlStateNormal];
+    [headerView addSubview:WLTaiBtn];
+    [WLTaiBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.right.mas_equalTo(-POINT_X(40));
+        make.top.mas_equalTo(POINT_Y(30));
+        make.width.mas_equalTo(POINT_X(140));
+        make.height.mas_equalTo(POINT_X(140));
+    }];
+    UILabel *WLLab = [[UILabel alloc] init];
+    WLLab.text = @"网络台";
+    WLLab.font = [UIFont boldSystemFontOfSize:14];
+    WLLab.textAlignment = NSTextAlignmentCenter;
+    [headerView addSubview:WLLab];
+    [WLLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.right.mas_equalTo(-POINT_X(40));
+        make.top.equalTo(WLTaiBtn.mas_bottom).with.offset(POINT_Y(30));
+        make.width.mas_equalTo(POINT_X(140));
+        make.height.mas_equalTo(POINT_X(30));
+    }];
 }
 
 //注册
@@ -77,7 +151,7 @@
     NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
     
     //"MediaType":"",//全部
-    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", @"RADIO",@"MediaType", nil];
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", @"RADIO",@"MediaType", @"1",@"CatalogType",@"1",@"ResultType",@"3",@"PerSize",nil];
     
     NSString *login_Str = WoTing_GetContents;
     
@@ -91,10 +165,20 @@
         if ([ReturnType isEqualToString:@"1001"]) {
             
             NSDictionary *ResultList = resultDict[@"ResultList"];
-            dataDianTArray = ResultList[@"List"];
+            dataListArr = ResultList[@"List"];
+            
+//            for (NSDictionary *dict in dataListArr) {
+//                
+//                NSArray *listArr = dict[@"List"];
+//                
+//                if (listArr && listArr.count != 0 ) {
+//                    
+//                    [dataDianTArray addObjectsFromArray:listArr];
+//                }
+//                
+//            }
             
             [jqTableView reloadData];
-            NSLog(@"%@", dataDianTArray);
             
         }else if ([ReturnType isEqualToString:@"T"]){
             
@@ -111,9 +195,15 @@
     
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    
+    return dataListArr.count;
+}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return dataDianTArray.count;
+    NSArray *arrayD = dataListArr[section][@"List"];
+    return arrayD.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -127,7 +217,8 @@
         cell = [[WTDianTaiTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     }
     
-    NSDictionary *dict = dataDianTArray[indexPath.row];
+    NSDictionary *dict = dataListArr[indexPath.section][@"List"][indexPath.row];
+    
     [cell setCellWithDict:dict];
     
     
@@ -139,27 +230,19 @@
     return 35;
 }
 
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-//    
-//    UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
-//    view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-//    
-//    UILabel *labeltitle = [[UILabel alloc] init];
-//    labeltitle.text = @"猜你喜欢";
-//    labeltitle.font = [UIFont boldSystemFontOfSize:15];
-//    labeltitle.textColor = [UIColor skTitleCenterBlackColor];
-//    [view addSubview:labeltitle];
-//    
-//    [labeltitle mas_makeConstraints:^(MASConstraintMaker *make) {
-//        
-//        make.left.mas_equalTo(20);
-//        make.top.mas_equalTo(10);
-//        make.width.mas_equalTo(120);
-//        make.height.mas_equalTo(20);
-//    }];
-//    
-//    return view;
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    
+    
+    return 0.000000000000001;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    
+    XJsectionHView = [[WTXJHeaderView alloc] init];
+    XJsectionHView.NameLab.text = dataListArr[section][@"CatalogName"];
+    
+    return XJsectionHView;
+}
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

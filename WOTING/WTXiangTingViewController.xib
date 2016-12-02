@@ -40,12 +40,13 @@
                             </constraints>
                             <state key="normal" image="nav_btn_message.png"/>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y2h-kc-n4m">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y2h-kc-n4m">
                             <rect key="frame" x="330" y="23" width="25" height="25"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="25" id="CnA-cY-sjE"/>
                                 <constraint firstAttribute="height" constant="25" id="d5t-Cu-0Ig"/>
                             </constraints>
+                            <state key="normal" image="menu.png"/>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l3O-T2-XtU">
                             <rect key="frame" x="91" y="21" width="90" height="30"/>
@@ -93,10 +94,11 @@
                 <constraint firstItem="mf3-en-pbM" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="pAb-Vf-ElS"/>
                 <constraint firstItem="mf3-en-pbM" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="yhW-oX-rmh"/>
             </constraints>
-            <point key="canvasLocation" x="33.5" y="80.5"/>
+            <point key="canvasLocation" x="-20" y="72"/>
         </view>
     </objects>
     <resources>
+        <image name="menu.png" width="48" height="48"/>
         <image name="nav_background_normal.png" width="86" height="28"/>
         <image name="nav_background_selected.png" width="86" height="28"/>
         <image name="nav_btn_message.png" width="21" height="21"/>

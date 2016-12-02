@@ -33,16 +33,10 @@
     
     self.navigationController.navigationBar.hidden = YES;
     
-    [self loadData];
 
     [self initScrollerView];
 }
 
-- (void)loadData{
-    
-    
-    
-}
 
 - (void)initScrollerView{
     
@@ -56,6 +50,7 @@
     contentScrollView.pagingEnabled = YES;
     contentScrollView.bounces = NO;
     contentScrollView.contentOffset = CGPointMake(0, 0);
+    _BoFangBtn.selected = YES;
     contentScrollView.delegate = self;
     
     for (int i = 0; i < 2; i ++) {
@@ -101,6 +96,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - 视图左右切换
+/** scrollView左右滑动 */
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    /** 如果滑动的ScrollView是contentScrollView，则通过判断偏移量，设置当前菜单选中状态 */
+    if (scrollView == contentScrollView) {
+        
+        
+    }
+}
+
 /*
 #pragma mark - Navigation
 
@@ -118,8 +123,30 @@
 - (IBAction)SearchBtnClick:(id)sender {
 }
 - (IBAction)BoFangBtnClick:(id)sender {
+    
+    if (_BoFangBtn.selected == YES) {
+        
+        
+    }else{
+        
+        _BoFangBtn.selected = YES;
+        _JieMuBtn.selected = NO;
+        contentScrollView.contentOffset = CGPointMake(self.view.bounds.size.width * 0, 0);
+    }
 }
 
 - (IBAction)JieMuBtnClick:(id)sender {
+    
+    if (_JieMuBtn.selected == YES) {
+        
+        
+    }else{
+        
+        _BoFangBtn.selected = NO;
+        _JieMuBtn.selected = YES;
+        contentScrollView.contentOffset = CGPointMake(self.view.bounds.size.width * 1, 0);
+    }
+    
+    
 }
 @end

@@ -59,6 +59,10 @@
                             <state key="normal" title="节目" backgroundImage="nav_background_normal.png">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </state>
+                            <state key="selected" title="节目" backgroundImage="nav_background_selected.png">
+                                <color key="titleColor" red="1" green="0.25076781660000003" blue="0.019189018320000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <state key="highlighted" title="节目" backgroundImage="nav_background_normal.png"/>
                             <connections>
                                 <action selector="JieMuBtnClick:" destination="-1" eventType="touchUpInside" id="BKR-ix-Hc8"/>
                             </connections>
@@ -70,9 +74,13 @@
                                 <constraint firstAttribute="height" constant="30" id="sfT-cj-H3O"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                            <state key="normal" title="播放" backgroundImage="nav_background_selected.png">
-                                <color key="titleColor" red="0.93144633509999997" green="0.32092752769999999" blue="0.128681868" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="播放" backgroundImage="nav_background_normal.png">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </state>
+                            <state key="selected" title="播放" backgroundImage="nav_background_selected.png">
+                                <color key="titleColor" red="1" green="0.25076781660000003" blue="0.019189018320000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <state key="highlighted" title="播放" backgroundImage="nav_background_normal.png"/>
                             <connections>
                                 <action selector="BoFangBtnClick:" destination="-1" eventType="touchUpInside" id="lSL-P2-hi5"/>
                             </connections>

@@ -112,7 +112,7 @@
     [leftBtn setTitle:@"推荐" forState:UIControlStateNormal];
     [leftBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [leftBtn setTitleColor:[UIColor JQTColor] forState:UIControlStateSelected];
-    leftBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+    leftBtn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
     [titleView addSubview:leftBtn];
     [leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -128,7 +128,7 @@
     [centerBtn setTitle:@"电台" forState:UIControlStateNormal];
     [centerBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [centerBtn setTitleColor:[UIColor JQTColor] forState:UIControlStateSelected];
-    centerBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+    centerBtn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
     [titleView addSubview:centerBtn];
     [centerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -144,7 +144,7 @@
     [rightBtn setTitle:@"分类" forState:UIControlStateNormal];
     [rightBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [rightBtn setTitleColor:[UIColor JQTColor] forState:UIControlStateSelected];
-    rightBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+    rightBtn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
     [titleView addSubview:rightBtn];
     [rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         

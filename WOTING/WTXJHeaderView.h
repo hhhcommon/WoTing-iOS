@@ -10,4 +10,6 @@
 
 @interface WTXJHeaderView : UIView
 
+@property (nonatomic, strong) UILabel *NameLab;
+
 @end
