@@ -79,7 +79,6 @@
     
     NSString *login_Str = WoTing_MainPage;
     
-    
     [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
         
         
@@ -165,7 +164,7 @@
     }
     
     
-    NSURL *url = [NSURL URLWithString:@""];
+    NSURL *url = [NSURL URLWithString:@"http://audio.xmcdn.com/group9/M05/9A/45/wKgDZldqF4OyhEmRABokhROZU3k474.m4a"];
     //http://audio.xmcdn.com/group9/M05/9A/45/wKgDZldqF4OyhEmRABokhROZU3k474.m4a
     AVPlayerItem *songItem = [[AVPlayerItem alloc] initWithURL:url];
     player = [[AVPlayer alloc] initWithPlayerItem:songItem];
