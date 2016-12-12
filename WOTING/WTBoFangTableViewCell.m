@@ -39,10 +39,8 @@
     NSString *timeStr = dict[@"ContentTimes"];
     NSTimeInterval time=[timeStr doubleValue];
     NSDate *detaildate=[NSDate dateWithTimeIntervalSince1970:time/1000.0];
-
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"mm:ss"];
-    
     NSString *currentDateStr = [dateFormatter stringFromDate: detaildate];
 //    NSString *currentDateStr = [WKProgressHUD timeForBeiJingTimeStamp:timeStr andsetDateFormat:@"mm:ss"];
     

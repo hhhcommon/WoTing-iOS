@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface WTBoFangViewController : UIViewController
+
 @property (weak, nonatomic) IBOutlet UITableView *JQtableView;
+
 
 @end

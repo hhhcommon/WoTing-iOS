@@ -22,7 +22,7 @@
     
     /** 轮播图 */
     SDCycleScrollView        *scrollView;
-    NSMutableArray           *imageNameArray;
+    NSArray           *imageNameArray;
 }
 
 @end
@@ -33,6 +33,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     dataTuiJArray = [NSMutableArray arrayWithCapacity:0];
+    
+    imageNameArray = [[NSArray alloc] initWithObjects:@"WTceshi1.jpg",@"WTceshi2.jpg",@"WTceshi3.jpg",@"WTceshi4.jpg", nil];
     
     skTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, K_Screen_Width, K_Screen_Height) style:UITableViewStyleGrouped];
     skTableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -47,7 +49,7 @@
     skTableView.tableFooterView = [[UIView alloc] init];
     
     scrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, POINT_Y(320)) delegate:self placeholderImage:[UIImage imageNamed:@"liangYan.png"]];
-    scrollView.backgroundColor = [UIColor skLineImageColor];
+    scrollView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     skTableView.tableHeaderView = scrollView;
     
     scrollView.imageURLStringsGroup = imageNameArray;//图片

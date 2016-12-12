@@ -187,6 +187,28 @@
             make.left.mas_equalTo((scrollView.contentOffset.x/3));
             make.bottom.equalTo(titleView.mas_bottom);
         }];
+        
+        UIButton *leftBtn = (UIButton *)[titleView viewWithTag:1221];
+        UIButton *centerBtn = (UIButton *)[titleView viewWithTag:1222];
+        UIButton *rightBtn = (UIButton *)[titleView viewWithTag:1223];
+        
+        if (scrollView.contentOffset.x == K_Screen_Width) {
+            
+            leftBtn.selected = NO;
+            centerBtn.selected = YES;
+            rightBtn.selected = NO;
+
+        }else if (scrollView.contentOffset.x == 0){
+            
+            leftBtn.selected = YES;
+            centerBtn.selected = NO;
+            rightBtn.selected = NO;
+        }else if (scrollView.contentOffset.x == K_Screen_Width*2){
+            
+            leftBtn.selected = NO;
+            centerBtn.selected = NO;
+            rightBtn.selected = YES;
+        }
     }
 }
 

@@ -99,13 +99,18 @@
             NSDictionary *UserId = resultDict[@"UserInfo"];
             NSDictionary *heheDict = [[NSDictionary alloc] initWithDictionary:UserId];
 
+            [AutomatePlist writePlistForkey:@"Uid" value:heheDict[@"UserId"]];
+            [AutomatePlist writePlistForkey:@"UName" value:heheDict[@"UserName"]];
+            [AutomatePlist writePlistForkey:@"Region" value:heheDict[@"Region"]];
+            
             [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginChangeNotification" object:nil userInfo:heheDict];
             
             [self.navigationController popViewControllerAnimated:YES];
-            NSLog(@"%@", resultDict);
+            
         }else if ([ReturnType isEqualToString:@"1002"]){
             
             [E_HUDView showMsg:@"用户不存在" inView:nil];
+            
         }else if ([ReturnType isEqualToString:@"1003"]){
             
             [E_HUDView showMsg:@"密码输入错误" inView:nil];

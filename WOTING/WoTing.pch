@@ -27,6 +27,7 @@
 #import "WKProgressHUD.h"
 #import "E_HUDView.h"
 #import "AutomatePlist.h"
+#import "MediaManager.h"
 
 #import "AFNetworking.h"
 #import "UIImageView+WebCache.h"
@@ -53,6 +54,9 @@
 
 /** 享听 - 推荐 - 电台*/
 #define WoTing_GetContents      (SKInterFaceServer@"content/getContents.do")
+
+/** 享听 - 分类 */
+#define WoTing_CatalogInfo      (SKInterFaceServer@"getPreferenceCatalog.do")
 
 
 // Include any system framework and library headers here that should be included in all compilation units.

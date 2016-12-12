@@ -37,8 +37,17 @@
     // Do any additional setup after loading the view from its nib.
     
     self.navigationController.navigationBar.hidden = YES;
-    Login = 0;
     
+    NSString *Uid = [AutomatePlist readPlistForKey:@"Uid"];
+    
+    if (Uid && ![Uid  isEqual: @"0"]) {
+        
+        Login = 1;
+        Region = [AutomatePlist readPlistForKey:@"Region"];
+        userName = [AutomatePlist readPlistForKey:@"UName"];
+    }else{
+        Login = 0;
+    }
     //监听登陆状态的通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LoginNotification:) name:@"LoginChangeNotification" object:nil];
     
@@ -88,7 +97,7 @@
     }
     
     NameLb.textAlignment = NSTextAlignmentCenter;
-    NameLb.font = [UIFont boldSystemFontOfSize:FONT_SIZE_OF_PX(34)];
+    NameLb.font = [UIFont boldSystemFontOfSize:15];
     NameLb.textColor = [UIColor whiteColor];
     [headerView addSubview:NameLb];
     [NameLb mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -116,7 +125,7 @@
     UILabel *LogID = [[UILabel alloc] init];
     LogID.text = @"点击登陆";
     LogID.textAlignment = NSTextAlignmentCenter;
-    LogID.font = [UIFont systemFontOfSize:FONT_SIZE_OF_PX(26)];
+    LogID.font = [UIFont systemFontOfSize:13];
     [headerView addSubview:LogID];
     [LogID mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -128,9 +137,11 @@
     if (Login == 0) {
         
         LogID.hidden = NO;
+        LoginBtn.hidden = NO;
     }else{
         
         LogID.hidden = YES;
+        LoginBtn.hidden = YES;
     }
     
     //一句话介绍自己
@@ -149,7 +160,7 @@
     }
     
     MainID.textAlignment = NSTextAlignmentCenter;
-    MainID.font = [UIFont systemFontOfSize:FONT_SIZE_OF_PX(28)];
+    MainID.font = [UIFont systemFontOfSize:13];
     [headerView addSubview:MainID];
     [MainID mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -209,7 +220,7 @@
     
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
-        cell.textLabel.font = [UIFont systemFontOfSize:FONT_SIZE_OF_PX(30)];
+        cell.textLabel.font = [UIFont systemFontOfSize:13];
         cell.textLabel.textColor = [UIColor skTitleHighBlackColor];
     }
     
@@ -227,16 +238,12 @@
     
     if (indexPath.section == 0 && indexPath.row == 1) {
         
-//        SKYHXYViewController *yonghuVC = [[SKYHXYViewController alloc] init];
-//        yonghuVC.navigationItem.title = [[titlesArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-//        [self.navigationController pushViewController:yonghuVC animated:YES];
+
     }
     
     if (indexPath.section == 1 && indexPath.row == 0) {
+
         
-//        SKGYNDViewController *guanyunowdoVC = [[SKGYNDViewController alloc] init];
-//        guanyunowdoVC.navigationItem.title = [[titlesArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-//        [self.navigationController pushViewController:guanyunowdoVC animated:YES];
     }
     
     if (indexPath.section == 3 && indexPath.row == 0) {
@@ -285,5 +292,10 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void)dealloc{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 @end

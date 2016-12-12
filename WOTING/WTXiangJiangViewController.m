@@ -102,7 +102,15 @@
     /** 如果滑动的ScrollView是contentScrollView，则通过判断偏移量，设置当前菜单选中状态 */
     if (scrollView == contentScrollView) {
         
-        
+        if (scrollView.contentOffset.x == K_Screen_Width) {
+            
+            _BoFangBtn.selected = NO;
+            _JieMuBtn.selected = YES;
+        }else if (scrollView.contentOffset.x == 0){
+            
+            _BoFangBtn.selected = YES;
+            _JieMuBtn.selected = NO;
+        }
     }
 }
 
