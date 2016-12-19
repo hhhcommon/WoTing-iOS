@@ -39,6 +39,8 @@ typedef void(^MyBlock)(void);
 //时间戳
 + (NSString *)timeForBeiJingTimeStamp:(NSString *)timeStamp andsetDateFormat:(NSString *)dateFormat;
 
+//汉子转拼音首字母
++ (NSString *)firstCharactor:(NSString *)aString;
 
 + (void)PushAlertWithView:(UINavigationController *)selfViewControllerH andPushViewController:(UIViewController *)NextViewControllerH andMessage:(NSString *)message andHeader:(NSString *)HeaderMessage;
 

@@ -60,6 +60,7 @@
         
         //创建按钮上的文字
         UILabel *lb=[[UILabel alloc]initWithFrame:CGRectMake(0, 49 - POINT_Y(40) , 50, POINT_Y(30))];
+        lb.userInteractionEnabled = YES;
         [lb setTextColor:[UIColor orangeColor]];
         lb.text=nav.tabBarItem.title;
       //  lb.textAlignment=NSTextAlignmentCenter;
@@ -83,11 +84,13 @@
         
         //创建点击手势
         UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapClick:)];
+        UITapGestureRecognizer *tapL=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapClick:)];
         itemImgV.userInteractionEnabled=YES;
         //为每张图片添加tag
         itemImgV.tag=i+100;
+        lb.tag = i+100;
         [itemImgV addGestureRecognizer:tap];
-        
+        [lb addGestureRecognizer:tapL];
         
     }
     

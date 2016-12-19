@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WTBaseViewController.h"
 
-@interface WTRegisterViewController : UIViewController
+@interface WTRegisterViewController : WTBaseViewController
 @property (weak, nonatomic) IBOutlet UIView *RegisterView;
 @property (weak, nonatomic) IBOutlet UIView *YanZView;
 

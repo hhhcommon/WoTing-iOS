@@ -10,11 +10,13 @@
 
 @interface WTBoFangModel : JSONModel
 
-@property (nonatomic, copy)NSString<Optional> *ContentImg;
-@property (nonatomic, copy)NSString<Optional> *ContentName;
-@property (nonatomic, copy)NSString<Optional> *ContentPlay;
-@property (nonatomic, copy)NSString<Optional> *ContentTimes;
-
+@property (nonatomic, copy)NSString<Optional> *ContentImg;      //内容图片
+@property (nonatomic, copy)NSString<Optional> *ContentName;     //内容名
+@property (nonatomic, copy)NSString<Optional> *ContentPlay;     //内容url
+@property (nonatomic, copy)NSString<Optional> *ContentTimes;    //内容时长
+@property (nonatomic, copy)NSString<Optional> *ContentId;       //内容ID
+@property (nonatomic, copy)NSString<Optional> *ContentFavorite;  //是否喜欢
+@property (nonatomic, copy)NSString<Optional> *MediaType;       //电台类型
 //@property (nonatomic, copy)NSString<Optional> *albumId;
 //@property (nonatomic, copy)NSString<Optional> *coverSmall;
 //@property (nonatomic, copy)NSString<Optional> *coverLarge;

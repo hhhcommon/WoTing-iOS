@@ -21,7 +21,7 @@ singleton_implementation(JQMusicTool)
 
 -(void)prepareToPlayWithMusic:(WTBoFangModel *)music{
     //创建播放器
-    
+    //[12]	(null)	@"ContentPlay" : @"http://ngcdn001.cnr.cn/live/zgzs/index.m3u8"
     NSURL *musicURL = [NSURL URLWithString:music.ContentPlay];
     
     AVPlayerItem *songItem = [[AVPlayerItem alloc] initWithURL:musicURL];

@@ -89,10 +89,7 @@
 
             
         }
-//        else if ([ReturnType isEqualToString:@"T"]){
-//            
-//            [E_HUDView showMsg:@"服务器异常" inView:nil];
-//        }
+
         
     } fail:^(NSError *error) {
         
@@ -108,12 +105,6 @@
     return dataFenJArray.count;
 }
 
-//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-//    
-//    WTFenLeiTableViewCell *jqCell = (WTFenLeiTableViewCell *)cell;
-//    
-//    
-//}
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -127,6 +118,8 @@
     
     cell.nameLab.text = dataFenJArray[indexPath.row][@"name"];
     cell.titles = dataFenJArray[indexPath.row][@"children"];
+    
+    cell.delegate = self;
     
     return cell;
 }
@@ -143,6 +136,11 @@
     }
     
     
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

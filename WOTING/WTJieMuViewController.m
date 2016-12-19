@@ -49,7 +49,7 @@
     contentScrollView.contentOffset = CGPointMake(0, 0);
     contentScrollView.delegate = self;
     
-    for (int i = 0; i < 4; i ++) {
+    for (int i = 0; i < 3; i ++) {
         
         if (i == 0) {
             

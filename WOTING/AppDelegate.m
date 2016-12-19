@@ -40,6 +40,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    //设置音乐后台播放的会话类型
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    [session setCategory:AVAudioSessionCategoryPlayback error:nil];
+    [session setActive:YES error:nil];
+    
 //    NSString *userPhoneNameStr = [[UIDevice currentDevice] name];//手机名称
     NSString *phoneUDIDStr =  [[[UIDevice currentDevice] identifierForVendor] UUIDString];  //设备唯一标示码
     NSString *PhoneMobileClass = [WKProgressHUD deviceVersion]; //手机型号
@@ -145,6 +150,10 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    //开启后台任务
+    [application beginBackgroundTaskWithExpirationHandler:nil];
+
 }
 
 

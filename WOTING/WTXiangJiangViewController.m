@@ -8,6 +8,9 @@
 
 #import "WTXiangJiangViewController.h"
 
+#import "WTNewsViewController.h"
+#import "WTSearchViewController.h"
+
 #import "WTBoFangViewController.h"
 #import "WTJieMuViewController.h"
 
@@ -33,7 +36,8 @@
     
     self.navigationController.navigationBar.hidden = YES;
     
-
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ScrollerViewChange) name:@"TABLEVIEWCLICK" object:nil];
+    
     [self initScrollerView];
 }
 
@@ -58,7 +62,7 @@
         if (i == 0) {
             
             WTBoFangViewController *wtBoFangVC = [[WTBoFangViewController alloc] init];
-          //  skDongTaiVC.tagArr = sktagArr;
+          
             [self addChildViewController:wtBoFangVC];
             [contentScrollView addSubview:wtBoFangVC.view];
             [wtBoFangVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -72,7 +76,7 @@
         }else {
             
             WTJieMuViewController *wtJieMuVC = [[WTJieMuViewController alloc] init];
-           // skFaXianVC.taskArr = sktaskArr;
+           
             [self addChildViewController:wtJieMuVC];
             [contentScrollView addSubview:wtJieMuVC.view];
             [wtJieMuVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -114,6 +118,13 @@
     }
 }
 
+//点击事件, 切换到播放页
+- (void)ScrollerViewChange {
+    
+    contentScrollView.contentOffset = CGPointMake(self.view.bounds.size.width * 0, 0);
+    
+    
+}
 /*
 #pragma mark - Navigation
 
@@ -126,9 +137,21 @@
 
 
 - (IBAction)XiaoXibtnClick:(id)sender {
+    
+    self.hidesBottomBarWhenPushed=YES;
+    WTNewsViewController *wtnewVC = [[WTNewsViewController alloc] init];
+    
+    [self.navigationController pushViewController:wtnewVC animated:YES];
+    self.hidesBottomBarWhenPushed=NO;
 }
 
 - (IBAction)SearchBtnClick:(id)sender {
+    
+    self.hidesBottomBarWhenPushed=YES;
+    WTSearchViewController *wtSearVC = [[WTSearchViewController alloc] init];
+    
+    [self.navigationController pushViewController:wtSearVC animated:YES];
+    self.hidesBottomBarWhenPushed=NO;
 }
 - (IBAction)BoFangBtnClick:(id)sender {
     
@@ -157,4 +180,10 @@
     
     
 }
+
+- (void)dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 @end

@@ -32,6 +32,7 @@
 #import "AFNetworking.h"
 #import "UIImageView+WebCache.h"
 #import "Masonry.h"
+#import "MJRefresh.h"
 
 #import "ZCBNetworking.h"
 
@@ -52,11 +53,30 @@
 /** 享听 - 播放*/
 #define WoTing_MainPage     (SKInterFaceServer@"mainPage.do")
 
+/** 跳转后播放界面数据刷新 */
+#define WoTing_searchBy           (SKInterFaceServer@"searchByText.do")
+
 /** 享听 - 推荐 - 电台*/
 #define WoTing_GetContents      (SKInterFaceServer@"content/getContents.do")
 
+/** 享听 - 电台 - 城市列表 */
+#define WoTing_getCatalogInfo    (SKInterFaceServer@"getCatalogInfo.do")
+
 /** 享听 - 分类 */
 #define WoTing_CatalogInfo      (SKInterFaceServer@"getPreferenceCatalog.do")
+
+/** 点击喜欢 */
+#define WoTing_like         (SKInterFaceServer@"content/clickFavorite.do")
+
+/** 喜欢列表 */
+#define WoTing_likeList         (SKInterFaceServer@"content/getFavoriteList.do")
+
+/** 获取评论列表 */
+#define WoTing_PLgetList        (SKInterFaceServer@"discuss/article/getList.do")
+
+/** 添加评论 */
+#define WoTing_PLget        (SKInterFaceServer@"discuss/add.do")
+
 
 
 // Include any system framework and library headers here that should be included in all compilation units.

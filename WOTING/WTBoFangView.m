@@ -33,6 +33,9 @@
     //歌曲名
     self.nameLab.text = playingMusic.ContentName;
     
+    //歌曲图片
+    [self.ContentImgV sd_setImageWithURL:[NSURL URLWithString:[NSString NULLToString:playingMusic.ContentImg]]];
+    
     //设置总时间
     NSTimeInterval time=[playingMusic.ContentTimes doubleValue];
     NSDate *detaildate=[NSDate dateWithTimeIntervalSince1970:time/1000.0];
@@ -56,11 +59,6 @@
     
     //每隔 30/30在主线程 调用一次block
     //参数一：表示时间的结构体，（30，30） 代表1s ,(60,30) 2s
-    //参数二：队列 dispatch_get_main_queue主队列
-    //参数三：block
-    //block是一个对象
-    //self->player
-    //player的block->self强引用
     //强强引用造成了 循环引用，内存泄露
     [[JQMusicTool sharedJQMusicTool].player addPeriodicTimeObserverForInterval:CMTimeMake(30, 30) queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
         
@@ -200,5 +198,29 @@
 }
 
 
-
+//喜欢
+- (IBAction)likeBtnClick:(id)sender {
+    
+    [self notifyDelegateWithBtnType:BtnTypeLike];
+}
+//下载
+- (IBAction)downLoadBtn:(id)sender {
+    
+    [self notifyDelegateWithBtnType:BtnTypeDownLoad];
+}
+//分享
+- (IBAction)shareBtnClick:(id)sender {
+    
+    [self notifyDelegateWithBtnType:BtnTypeShare];
+}
+//评论
+- (IBAction)commitBtnClick:(id)sender {
+    
+    [self notifyDelegateWithBtnType:BtnTypeCommit];
+}
+//更多
+- (IBAction)moreBtnClick:(id)sender {
+    
+    [self notifyDelegateWithBtnType:BtnTypeMore];
+}
 @end

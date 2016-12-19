@@ -12,4 +12,5 @@
 
 @property (nonatomic, strong) UILabel *NameLab;
 
+@property (nonatomic, weak)UIViewController *delegate;
 @end

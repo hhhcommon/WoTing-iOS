@@ -8,6 +8,8 @@
 
 #import "WTXJHeaderView.h"
 
+#import "WTDTDetailViewController.h"
+
 @implementation WTXJHeaderView
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -50,6 +52,7 @@
     
     UIButton *JianTBtn = [[UIButton alloc] init];
     [JianTBtn setImage:[UIImage imageNamed:@"more.png"] forState:UIControlStateNormal];
+    [JianTBtn addTarget:self action:@selector(MoveClick:) forControlEvents:UIControlEventTouchUpInside];
     [MoreView addSubview:JianTBtn];
     [JianTBtn mas_makeConstraints:^(MASConstraintMaker *make) {
        
@@ -59,6 +62,9 @@
         make.height.mas_equalTo(20);
     }];
     UILabel *MoreLab = [[UILabel alloc] init];
+    MoreLab.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(MoveClick:)];
+    [MoreLab addGestureRecognizer:tap];
     MoreLab.text = @"更多";
     MoreLab.textColor = [UIColor skTitleLowBlackColor];
     MoreLab.textAlignment = NSTextAlignmentCenter;
@@ -72,6 +78,15 @@
         make.height.mas_equalTo(POINT_Y(20));
     }];
     
+}
+
+- (void)MoveClick:(id)sened{
+    
+    WTDTDetailViewController *wtDDVC = [[WTDTDetailViewController alloc] init];
+    
+    wtDDVC.NameLab.text = _NameLab.text;
+    
+    [self.delegate.navigationController pushViewController:wtDDVC animated:YES];
 }
 
 @end

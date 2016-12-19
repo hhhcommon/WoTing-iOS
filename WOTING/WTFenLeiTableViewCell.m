@@ -9,6 +9,8 @@
 
 #import "WTFenLeiTableViewCell.h"
 
+#import "WTFLDetaliController.h"
+
 @implementation WTFenLeiTableViewCell{
     
     UIView      *whView;
@@ -58,57 +60,49 @@
 
 - (void)setTitles:(NSArray *)titles {
     
+    NSInteger XX = 0;
+    NSInteger YY = 10;
+    NSInteger width = K_Screen_Width/4.00000;
+    NSInteger height = 10;
+    
     for (int i = 0; i < titles.count; i++) {
         
         NSString *title = [[titles objectAtIndex:i] objectForKey:@"name"];
-        if (titles.count <= 4) {
+        
+        if (!(i%4)) {
             
-            //菱形
-            UIImageView *imageK = [[UIImageView alloc] initWithFrame:CGRectMake(POINT_X(60)+ (i*K_Screen_Width/4 - POINT_X(40)) , POINT_Y(110), POINT_X(20), POINT_Y(20))];
-            imageK.image = [UIImage imageNamed:@"WTKou.png"];
-            [whView addSubview:imageK];
-            
-            //节目单
-            _JMLab = [[UILabel alloc] initWithFrame:CGRectMake(POINT_X(90) + (i*K_Screen_Width/4 - POINT_X(40)), POINT_Y(110), K_Screen_Width/4 - POINT_X(40), POINT_Y(20))];
-            _JMLab.font = [UIFont boldSystemFontOfSize:14];
-            _JMLab.text = title;
-            [whView addSubview:_JMLab];
-        }else if (titles.count > 4) {
-            
-            if (i <= 4) {
-               
-                //菱形
-                UIImageView *imageK = [[UIImageView alloc] initWithFrame:CGRectMake(POINT_X(60)+ (i*K_Screen_Width/4 - POINT_X(40)) , POINT_Y(90), POINT_X(20), POINT_Y(20))];
-                imageK.image = [UIImage imageNamed:@"WTKou.png"];
-                [whView addSubview:imageK];
-                
-                //节目单
-                _JMLab = [[UILabel alloc] initWithFrame:CGRectMake(POINT_X(90) + (i*K_Screen_Width/4 - POINT_X(40)), POINT_Y(90), K_Screen_Width/4 - POINT_X(40), POINT_Y(20))];
-                _JMLab.font = [UIFont boldSystemFontOfSize:14];
-                _JMLab.text = title;
-                [whView addSubview:_JMLab];
-                
-            }else{
-                
-                static int j = 0;
-                //菱形
-                UIImageView *imageK = [[UIImageView alloc] initWithFrame:CGRectMake(POINT_X(60)+ (j*K_Screen_Width/4 - POINT_X(40)) , POINT_Y(150), POINT_X(20), POINT_Y(20))];
-                imageK.image = [UIImage imageNamed:@"WTKou.png"];
-                [whView addSubview:imageK];
-                
-                //节目单
-                _JMLab = [[UILabel alloc] initWithFrame:CGRectMake(POINT_X(90) + (j*K_Screen_Width/4 - POINT_X(40)), POINT_Y(150), K_Screen_Width/4 - POINT_X(40), POINT_Y(20))];
-                _JMLab.font = [UIFont boldSystemFontOfSize:14];
-                _JMLab.text = title;
-                [whView addSubview:_JMLab];
-
-                j++;
-            }
+            YY += 30;
+            XX = 0;
             
         }
+        
+        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(XX, YY, width - 3, height)];
+        btn.tag = 1000 + i;
+        [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [btn setTitle:title forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        
+        [btn setImage:[UIImage imageNamed:@"WTKou.png"] forState:UIControlStateNormal];
+        btn.titleLabel.font = [UIFont systemFontOfSize:12];
+        
+        btn.imageEdgeInsets = UIEdgeInsetsMake(-4,0, 0, 0);
+        [whView addSubview:btn];
+        
+        XX += width;
+
     }
     
     
+    
+}
+
+- (void)btnClick:(UIButton *)btn {
+    
+    WTFLDetaliController *wtflVC = [[WTFLDetaliController alloc] init];
+    
+    wtflVC.nameLab.text = btn.titleLabel.text;
+    
+    [self.delegate.navigationController pushViewController:wtflVC animated:YES];
     
 }
 

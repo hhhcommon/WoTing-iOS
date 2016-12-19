@@ -67,11 +67,11 @@
 //跳转注册
 - (IBAction)RegistBtnClick:(id)sender {
     
-    self.hidesBottomBarWhenPushed=YES;
+  //  self.hidesBottomBarWhenPushed=YES;
     WTRegisterViewController *wtRVC = [[WTRegisterViewController alloc] init];
     
     [self.navigationController pushViewController:wtRVC animated:YES];
-    self.hidesBottomBarWhenPushed=NO;
+ //   self.hidesBottomBarWhenPushed=NO;
 }
 
 //此处应该有网络请求
@@ -108,12 +108,12 @@
             [self.navigationController popViewControllerAnimated:YES];
             
         }else if ([ReturnType isEqualToString:@"1002"]){
-            
-            [E_HUDView showMsg:@"用户不存在" inView:nil];
+
+            [WKProgressHUD popMessage:@"用户不存在" inView:nil duration:0.5 animated:YES];
             
         }else if ([ReturnType isEqualToString:@"1003"]){
-            
-            [E_HUDView showMsg:@"密码输入错误" inView:nil];
+
+            [WKProgressHUD popMessage:@"密码输入错误" inView:nil duration:0.5 animated:YES];
         }
         
     } fail:^(NSError *error) {

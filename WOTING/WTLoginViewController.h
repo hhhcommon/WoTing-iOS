@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WTBaseViewController.h"
 
-@interface WTLoginViewController : UIViewController
+@interface WTLoginViewController : WTBaseViewController
 
 @property (weak, nonatomic) IBOutlet UITextField *NameTextfield;
 @property (weak, nonatomic) IBOutlet UITextField *PWDTextfield;

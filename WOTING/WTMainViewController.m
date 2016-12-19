@@ -8,6 +8,7 @@
 
 #import "WTMainViewController.h"
 
+#import "WTLikeListViewController.h"
 #import "WTSheZhiViewController.h"
 #import "WTLoginViewController.h"
 
@@ -235,22 +236,24 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    
-    if (indexPath.section == 0 && indexPath.row == 1) {
+    if (Login == 1) {
         
+        if (indexPath.section == 0 && indexPath.row == 1) {
+            
+            self.hidesBottomBarWhenPushed=YES;
+            WTLikeListViewController *WTlikeVC = [[WTLikeListViewController alloc] init];
 
+            [self.navigationController pushViewController:WTlikeVC animated:YES];
+            self.hidesBottomBarWhenPushed=NO;
+        }
+        
     }
     
-    if (indexPath.section == 1 && indexPath.row == 0) {
-
-        
-    }
     
     if (indexPath.section == 3 && indexPath.row == 0) {
         
         self.hidesBottomBarWhenPushed=YES;
         WTSheZhiViewController *WTszVC = [[WTSheZhiViewController alloc] init];
-        WTszVC.navigationItem.title = @"设置";
         [self.navigationController pushViewController:WTszVC animated:YES];
         self.hidesBottomBarWhenPushed=NO;
     }

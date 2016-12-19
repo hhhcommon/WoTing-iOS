@@ -15,4 +15,6 @@
 
 @property (nonatomic, strong) NSArray        *titles;
 
+@property (nonatomic, weak)UIViewController *delegate;
+
 @end

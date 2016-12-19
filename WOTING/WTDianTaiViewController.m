@@ -7,6 +7,7 @@
 //
 
 #import "WTDianTaiViewController.h"
+#import "WTDTController.h"      //国家, 地方, 网络台
 
 #import "WTDianTaiTableViewCell.h"
 
@@ -52,6 +53,16 @@
     [self loadData];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    /** 增加下拉刷新事件 */
+    jqTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadData)];
+    /** 上拉加载更多 */
+    jqTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoveData)];
+}
+
 //创建头视图
 - (void)initHeaderView{
 
@@ -62,6 +73,7 @@
     //国家台
     UIButton *GJTaiBtn = [[UIButton alloc] init];
     [GJTaiBtn setImage:[UIImage imageNamed:@"icon_central_station.png"] forState:UIControlStateNormal];
+    [GJTaiBtn addTarget:self action:@selector(DTBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [headerView addSubview:GJTaiBtn];
     [GJTaiBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -86,6 +98,7 @@
     //地方台
     UIButton *DFTaiBtn = [[UIButton alloc] init];
     [DFTaiBtn setBackgroundImage:[UIImage imageNamed:@"icon_network_station.png"] forState:UIControlStateNormal];
+    [DFTaiBtn addTarget:self action:@selector(DTBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [headerView addSubview:DFTaiBtn];
     [DFTaiBtn mas_makeConstraints:^(MASConstraintMaker *make) {
 
@@ -110,6 +123,7 @@
     //网络台
     UIButton *WLTaiBtn = [[UIButton alloc] init];
     [WLTaiBtn setImage:[UIImage imageNamed:@"icon_local_station.png"] forState:UIControlStateNormal];
+    [WLTaiBtn addTarget:self action:@selector(DTBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [headerView addSubview:WLTaiBtn];
     [WLTaiBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -130,6 +144,14 @@
         make.width.mas_equalTo(POINT_X(140));
         make.height.mas_equalTo(POINT_X(30));
     }];
+}
+
+//国家, 地方, 网络按钮点击事件
+- (void)DTBtnClick:(UIButton *)btn {
+    
+    WTDTController *wtDC = [[WTDTController alloc] init];
+    
+    [self.navigationController pushViewController:wtDC animated:YES];
 }
 
 //注册
@@ -158,6 +180,7 @@
     
     [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
         
+        [jqTableView.mj_header endRefreshing];
         
         NSDictionary *resultDict = (NSDictionary *)response;
         
@@ -165,35 +188,75 @@
         if ([ReturnType isEqualToString:@"1001"]) {
             
             NSDictionary *ResultList = resultDict[@"ResultList"];
-            dataListArr = ResultList[@"List"];
+            [dataListArr removeAllObjects];
+            [dataListArr addObjectsFromArray: ResultList[@"List"]];
             
-//            for (NSDictionary *dict in dataListArr) {
-//                
-//                NSArray *listArr = dict[@"List"];
-//                
-//                if (listArr && listArr.count != 0 ) {
-//                    
-//                    [dataDianTArray addObjectsFromArray:listArr];
-//                }
-//                
-//            }
             
             [jqTableView reloadData];
             
         }else if ([ReturnType isEqualToString:@"T"]){
             
-            [E_HUDView showMsg:@"服务器异常" inView:nil];
+            [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
         }
         
     } fail:^(NSError *error) {
         
-        
-        NSLog(@"%@", error);
+        [jqTableView.mj_header endRefreshing];
         
     }];
     
     
 }
+
+- (void)loadMoveData {
+    
+    static NSInteger page = 2;
+    NSString *pageStr = [NSString stringWithFormat:@"%ld",page];
+    
+    NSString *IMEI = [AutomatePlist readPlistForKey:@"IMEI"];
+    NSString *ScreenSize = [AutomatePlist readPlistForKey:@"ScreenSize"];
+    NSString *MobileClass = [AutomatePlist readPlistForKey:@"MobileClass"];
+    NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
+    NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
+    
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",pageStr,@"Page",@"RADIO",@"MediaType", @"1",@"CatalogType",@"1",@"ResultType",@"3",@"PerSize", nil];
+    
+    NSString *login_Str = WoTing_GetContents;
+    
+    [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
+        
+        [jqTableView.mj_footer endRefreshing];
+        
+        NSDictionary *resultDict = (NSDictionary *)response;
+        
+        NSString  *ReturnType = [resultDict objectForKey:@"ReturnType"];
+        if ([ReturnType isEqualToString:@"1001"]) {
+            
+            NSDictionary *ResultList = resultDict[@"ResultList"];
+            
+            [dataListArr addObjectsFromArray: ResultList[@"List"]];
+            
+            
+            
+            [jqTableView reloadData];
+            
+            
+        }else if ([ReturnType isEqualToString:@"T"]){
+            
+            [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
+        }
+        
+    } fail:^(NSError *error) {
+        
+        [jqTableView.mj_footer endRefreshing];
+
+        
+    }];
+    
+    page++;
+    
+}
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
@@ -239,6 +302,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
     XJsectionHView = [[WTXJHeaderView alloc] init];
+    XJsectionHView.delegate = self;
     XJsectionHView.NameLab.text = dataListArr[section][@"CatalogName"];
     
     return XJsectionHView;
@@ -252,6 +316,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NSDictionary *dict = dataListArr[indexPath.section][@"List"][indexPath.row];
+    NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
 }
 
 

@@ -61,6 +61,16 @@
     [self loadData];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    /** 增加下拉刷新事件 */
+    skTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadData)];
+    /** 上拉加载更多 */
+    skTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoveData)];
+}
+
 //注册
 - (void)registerTabViewCell{
     
@@ -73,19 +83,22 @@
 
 - (void)loadData {
     
+    NSString *uid = [AutomatePlist readPlistForKey:@"Uid"];
+    
     NSString *IMEI = [AutomatePlist readPlistForKey:@"IMEI"];
     NSString *ScreenSize = [AutomatePlist readPlistForKey:@"ScreenSize"];
     NSString *MobileClass = [AutomatePlist readPlistForKey:@"MobileClass"];
     NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
     NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
     
-    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",  nil];
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",uid,@"UserId", nil];
     
     NSString *login_Str = WoTing_GetContents;
     
     
     [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
         
+        [skTableView.mj_header endRefreshing];
         
         NSDictionary *resultDict = (NSDictionary *)response;
         
@@ -93,14 +106,15 @@
         if ([ReturnType isEqualToString:@"1001"]) {
             
             NSDictionary *ResultList = resultDict[@"ResultList"];
-            dataTuiJArray = ResultList[@"List"];
+            [dataTuiJArray removeAllObjects];
+            [dataTuiJArray addObjectsFromArray: ResultList[@"List"]];
             
             [skTableView reloadData];
-            NSLog(@"%@", dataTuiJArray);
+   
             
         }else if ([ReturnType isEqualToString:@"T"]){
             
-            [E_HUDView showMsg:@"服务器异常" inView:nil];
+            [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
         }
         
     } fail:^(NSError *error) {
@@ -110,6 +124,53 @@
         
     }];
     
+    
+}
+
+- (void)loadMoveData {
+    
+    static NSInteger page = 2;
+    NSString *pageStr = [NSString stringWithFormat:@"%ld",page];
+    
+    NSString *IMEI = [AutomatePlist readPlistForKey:@"IMEI"];
+    NSString *ScreenSize = [AutomatePlist readPlistForKey:@"ScreenSize"];
+    NSString *MobileClass = [AutomatePlist readPlistForKey:@"MobileClass"];
+    NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
+    NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
+    
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",pageStr,@"Page",  nil];
+    
+    NSString *login_Str = WoTing_GetContents;
+    
+    [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
+        
+        [skTableView.mj_footer endRefreshing];
+        
+        NSDictionary *resultDict = (NSDictionary *)response;
+        
+        NSString  *ReturnType = [resultDict objectForKey:@"ReturnType"];
+        if ([ReturnType isEqualToString:@"1001"]) {
+            
+            NSDictionary *ResultList = resultDict[@"ResultList"];
+            
+            [dataTuiJArray addObjectsFromArray: ResultList[@"List"]];
+          
+            [skTableView reloadData];
+   
+            
+        }else if ([ReturnType isEqualToString:@"T"]){
+            
+            [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
+        }
+        
+    } fail:^(NSError *error) {
+        
+        [skTableView.mj_header endRefreshing];
+        NSLog(@"%@", error);
+        
+    }];
+    
+    page++;
     
 }
 
@@ -171,6 +232,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NSDictionary *dict = dataTuiJArray[indexPath.row];
+    NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
 }
 
 

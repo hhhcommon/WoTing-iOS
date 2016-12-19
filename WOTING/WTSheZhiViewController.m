@@ -8,6 +8,14 @@
 
 #import "WTSheZhiViewController.h"
 
+#import "WTGuanYuViewController.h"
+#import "WTHelpViewController.h"
+#import "WTFanKuiViewController.h"
+
+#import "WTUserNubController.h"
+#import "WTBoundPhoneController.h"
+#import "WTRePsdController.h"
+
 @interface WTSheZhiViewController ()<UITableViewDataSource, UITableViewDelegate>{
     
     /** 设置ICON */
@@ -129,7 +137,7 @@
     if (!cell) {
         
         
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
         
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
@@ -165,6 +173,24 @@
     
     if (Login == 0) {
         
+        if (indexPath.section == 0 && indexPath.row == 0) {
+            
+            BOOL remove = [[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"%@/Library/Caches/default",NSHomeDirectory()] error:nil];
+            
+            if (remove == YES) {
+                
+                [tableView reloadData];
+                [WKProgressHUD popMessage:@"清理缓存成功" inView:nil duration:0.5 animated:YES];
+            }else{
+                NSLog(@"删除失败");
+            }
+        }
+        
+        if (indexPath.section == 2 && indexPath.row == 0) {
+            
+            WTHelpViewController *helpVC = [[WTHelpViewController alloc] init];
+            [self.navigationController pushViewController:helpVC animated:YES];
+        }
         
     }else{
         

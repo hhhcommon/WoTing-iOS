@@ -13,7 +13,12 @@ typedef enum {
     BtnTypePlay,//播放
     BtnTypePause,//暂停
     BtnTypePrevious,//上一首
-    BtnTypeNext//下一首
+    BtnTypeNext,//下一首
+    BtnTypeLike,//喜欢
+    BtnTypeDownLoad,//下载
+    BtnTypeShare,//分享
+    BtnTypeCommit,//评论
+    BtnTypeMore
 }BtnType;
 
 @class WTBoFangModel,WTBoFangView;
@@ -41,6 +46,15 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet UILabel *timeLab1;     //当前时间
 @property (weak, nonatomic) IBOutlet UILabel *timeLab2;     //总时间
 - (IBAction)beginBtnClick:(id)sender;      // 播放/暂停
+
+//喜欢, 下载, 分享, 评论, 更多
+- (IBAction)likeBtnClick:(id)sender;
+- (IBAction)downLoadBtn:(id)sender;
+- (IBAction)shareBtnClick:(id)sender;
+- (IBAction)commitBtnClick:(id)sender;
+- (IBAction)moreBtnClick:(id)sender;
+
+
 
 @property(nonatomic,strong)WTBoFangModel *playingMusic;//当前播放的音乐
 

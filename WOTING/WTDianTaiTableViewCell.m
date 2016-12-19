@@ -26,13 +26,13 @@
     if (![dict isKindOfClass:[NSNull class]]) {
         
         //图片
-        [_ContentImg sd_setImageWithURL:[NSURL URLWithString:dict[@"ContentImg"]] placeholderImage:[UIImage imageNamed:@"img_radio_default"]];
+        [_ContentImg sd_setImageWithURL:[NSURL URLWithString:[NSString NULLToString:dict[@"ContentImg"]]] placeholderImage:[UIImage imageNamed:@"img_radio_default"]];
         
         //标题
         _ContentName.text = dict[@"ContentName"];
         
         //我听
-        _WTLab.text = @"我听科技";
+        _WTLab.text = dict[@"ContentPub"];
         
         //听众
         _PlayCount.text = dict[@"PlayCount"];
