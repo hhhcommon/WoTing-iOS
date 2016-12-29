@@ -16,7 +16,6 @@
 
 @interface WTJieMuViewController ()<UIScrollViewDelegate>{
     
-    NSMutableArray      *_DataArray;
     SKMainScrollView    *contentScrollView;
     UIView              *titleView;//标识栏
     UIImageView         *barLineImageView;//标识条

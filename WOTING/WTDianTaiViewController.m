@@ -23,6 +23,8 @@
     
     //sectio视图
     WTXJHeaderView      *XJsectionHView;
+    
+    NSString           *BeginCatalogId;
 }
 
 @end
@@ -190,7 +192,7 @@
             NSDictionary *ResultList = resultDict[@"ResultList"];
             [dataListArr removeAllObjects];
             [dataListArr addObjectsFromArray: ResultList[@"List"]];
-            
+            BeginCatalogId = ResultList[@"BeginCatalogId"];
             
             [jqTableView reloadData];
             
@@ -219,7 +221,7 @@
     NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
     NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
     
-    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",pageStr,@"Page",@"RADIO",@"MediaType", @"1",@"CatalogType",@"1",@"ResultType",@"3",@"PerSize", nil];
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",pageStr,@"Page",@"RADIO",@"MediaType", @"1",@"CatalogType",@"1",@"ResultType",@"3",@"PerSize",BeginCatalogId,@"BeginCatalogId", nil];
     
     NSString *login_Str = WoTing_GetContents;
     
@@ -236,7 +238,7 @@
             
             [dataListArr addObjectsFromArray: ResultList[@"List"]];
             
-            
+            BeginCatalogId = ResultList[@"BeginCatalogId"];
             
             [jqTableView reloadData];
             
@@ -304,6 +306,7 @@
     XJsectionHView = [[WTXJHeaderView alloc] init];
     XJsectionHView.delegate = self;
     XJsectionHView.NameLab.text = dataListArr[section][@"CatalogName"];
+    XJsectionHView.NameStr = dataListArr[section][@"CatalogName"];
     
     return XJsectionHView;
 }

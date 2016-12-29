@@ -67,11 +67,10 @@
 //跳转注册
 - (IBAction)RegistBtnClick:(id)sender {
     
-  //  self.hidesBottomBarWhenPushed=YES;
     WTRegisterViewController *wtRVC = [[WTRegisterViewController alloc] init];
-    
+    wtRVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:wtRVC animated:YES];
- //   self.hidesBottomBarWhenPushed=NO;
+
 }
 
 //此处应该有网络请求

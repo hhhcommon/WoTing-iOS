@@ -8,7 +8,7 @@
 
 #import "TTSViewController.h"
 
-@interface TTSViewController ()
+@interface TTSViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @end
 
@@ -17,6 +17,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    
+    _TTSTableView.delegate = self;
+    _TTSTableView.dataSource = self;
 }
 
 - (void)didReceiveMemoryWarning {

@@ -17,6 +17,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    _textFView.layer.cornerRadius = 5;
+    _textFView.layer.masksToBounds = YES;
+    
+    _sureBtn.layer.cornerRadius = 5;
+    _sureBtn.layer.masksToBounds = YES;
+    
+    [_numTextF addTarget:self action:@selector(Changed:) forControlEvents:UIControlEventEditingChanged];
+}
+
+- (void)Changed:(UITextField *)textf {
+    
+    if (textf.text.length > 6 && textf.text.length < 20) {
+        
+        _sureBtn.selected = YES;
+    }else {
+        
+        _sureBtn.selected = NO;
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,4 +54,16 @@
 }
 */
 
+- (IBAction)blackBtnClick:(id)sender {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)sureBtnClick:(id)sender {
+    
+    if (_sureBtn.selected == YES) {
+        
+        
+    }
+}
 @end

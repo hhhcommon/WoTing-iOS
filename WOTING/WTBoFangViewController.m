@@ -9,13 +9,18 @@
 #import "WTBoFangViewController.h"
 #import <AVFoundation/AVFoundation.h>
 
-#import "WTPingLunViewController.h"
+#import "WTPingLunViewController.h"     //评论页
+#import "WTZhuanJiViewController.h"     //专辑页
+#import "WTGengDuoController.h"         //更多页
 
 #import "WTBoFangTableViewCell.h"   //节目, 电台格式cell
 #import "WTLikeCell.h"      //专辑格式cell
 #import "WTBoFangView.h"
 #import "WTBoFangModel.h"
 #import "JQMusicTool.h"
+
+
+#import <UShareUI/UShareUI.h>   //分享
 
 @interface WTBoFangViewController ()<UITableViewDelegate, UITableViewDataSource, WTBoFangViewDelegate, AVAudioPlayerDelegate>{
     
@@ -143,7 +148,10 @@
     UINib *cellNib = [UINib nibWithNibName:@"WTBoFangTableViewCell" bundle:nil];
     
     [_JQtableView registerNib:cellNib forCellReuseIdentifier:@"cellID"];
+
+    UINib *LikecellNib = [UINib nibWithNibName:@"WTLikeCell" bundle:nil];
     
+    [_JQtableView registerNib:LikecellNib forCellReuseIdentifier:@"cellIDL"];
 }
 
 //网络请求
@@ -155,7 +163,7 @@
     NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
     NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
     
-    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",  nil];
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",@"0",@"PageType",@"10",@"PageSize",  nil];
     
     NSString *login_Str = WoTing_MainPage;
     
@@ -206,7 +214,7 @@
         NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
         NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
         
-        NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",pageStr,@"Page",  nil];
+        NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",pageStr,@"Page",@"0",@"PageType",@"10",@"PageSize",  nil];
         
         NSString *login_Str = WoTing_MainPage;
         
@@ -335,11 +343,12 @@
             break;
         case BtnTypeDownLoad://点击下载
             
-            [WKProgressHUD popMessage:@"点击下载" inView:nil duration:0.5 animated:YES];
+            [WKProgressHUD popMessage:@"节目进入下载任务列表" inView:nil duration:0.5 animated:YES];
+            [self DownLoad];
             break;
         case BtnTypeShare://点击分享
             
-            [WKProgressHUD popMessage:@"点击分享" inView:nil duration:0.5 animated:YES];
+            [self ShareWT];
             break;
         case BtnTypeCommit://点击评论
             
@@ -351,6 +360,12 @@
             break;
             
     }
+}
+#pragma mark 点击下载
+- (void)DownLoad {
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"XIAZAIDICT" object:nil userInfo:dataBFArray[_musicIndex]];
+    
 }
 
 #pragma mark 点击喜欢
@@ -415,14 +430,41 @@
     
     WTBoFangModel *model = _musics[_musicIndex];
     
-    self.hidesBottomBarWhenPushed=YES;
+
     WTPingLunViewController *wtPLVC = [[WTPingLunViewController alloc] init];
+    
+    wtPLVC.hidesBottomBarWhenPushed = YES;
     
     wtPLVC.ContentID = model.ContentId;
     wtPLVC.Metype = model.MediaType;
     
     [self.navigationController pushViewController:wtPLVC animated:YES];
-    self.hidesBottomBarWhenPushed=NO;
+
+}
+- (void)getUserInfoForPlatform:(UMSocialPlatformType)platformType
+{
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:platformType currentViewController:self completion:^(id result, NSError *error) {
+        UMSocialUserInfoResponse *userinfo =result;
+        NSString *message = [NSString stringWithFormat:@"name: %@\n icon: %@\n gender: %@\n",userinfo.name,userinfo.iconurl,userinfo.gender];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"UserInfo"
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"确定", nil)
+                                              otherButtonTitles:nil];
+        [alert show];
+    }];
+}
+
+#pragma mark 点击分享
+- (void)ShareWT {
+    
+    [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_Sina),@(UMSocialPlatformType_QQ),@(UMSocialPlatformType_Qzone),@(UMSocialPlatformType_WechatTimeLine),@(UMSocialPlatformType_WechatSession)]];
+    
+    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+        // 根据获取的platformType确定所选平台进行下一步操作
+        [self getUserInfoForPlatform:platformType];
+    }];
+
 }
 
 
@@ -464,13 +506,10 @@
         
         [[JQMusicTool sharedJQMusicTool] play];
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(next) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
 }
 
-#pragma mark 播放器的代表
--(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
-    //自动播放下一首
-    [self next];
-}
 
 
 - (void)didReceiveMemoryWarning {
@@ -487,10 +526,10 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //[12]	(null)	@"MediaType" : @"SEQU"
+
     if ([dataBFArray[indexPath.row][@"MediaType"] isEqualToString:@"SEQU"]) {
         
-        static NSString *cellID = @"cellID";
+        static NSString *cellID = @"cellIDL";
         
         WTLikeCell *cell = (WTLikeCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
         
@@ -559,6 +598,11 @@
     
     if ([dataBFArray[indexPath.row][@"MediaType"] isEqualToString:@"SEQU"]) {
         
+        WTZhuanJiViewController *wtZJVC = [[WTZhuanJiViewController alloc] init];
+
+        wtZJVC.hidesBottomBarWhenPushed = YES;
+        wtZJVC.contentID = [NSString NULLToString:dataBFArray[indexPath.row][@"ContentId"]] ;
+        [self.navigationController pushViewController:wtZJVC animated:YES];
         
     }else{
     
@@ -568,7 +612,10 @@
     }
 }
 
-
+- (void)dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 /*
 #pragma mark - Navigation

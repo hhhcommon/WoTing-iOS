@@ -11,6 +11,6 @@
 @interface WTXJHeaderView : UIView
 
 @property (nonatomic, strong) UILabel *NameLab;
-
+@property (nonatomic, copy) NSString *NameStr;
 @property (nonatomic, weak)UIViewController *delegate;
 @end

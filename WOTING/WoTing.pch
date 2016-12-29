@@ -33,6 +33,7 @@
 #import "UIImageView+WebCache.h"
 #import "Masonry.h"
 #import "MJRefresh.h"
+#import <UMSocialCore/UMSocialCore.h>
 
 #import "ZCBNetworking.h"
 
@@ -46,6 +47,9 @@
 
 /** 登录 */
 #define WoTing_Login      (SKInterFaceServer@"passport/user/mlogin.do")
+
+/** 注销 */
+#define WoTing_mlogout      (SKInterFaceServer@"passport/user/mlogout.do")
 
 /** 注册 */
 #define WoTing_register      (SKInterFaceServer@"passport/user/register.do")
@@ -64,6 +68,9 @@
 
 /** 享听 - 分类 */
 #define WoTing_CatalogInfo      (SKInterFaceServer@"getPreferenceCatalog.do")
+
+/** 享听 - 专辑 */
+#define WoTing_GetContentInfo       (SKInterFaceServer@"content/getContentInfo.do")
 
 /** 点击喜欢 */
 #define WoTing_like         (SKInterFaceServer@"content/clickFavorite.do")

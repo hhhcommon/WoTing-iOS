@@ -13,5 +13,9 @@
 
 - (IBAction)balckBtnClick:(id)sender;
 @property (weak, nonatomic) IBOutlet UILabel *nameLab;
+@property (weak, nonatomic) IBOutlet UITableView *FLDTableView;
+
+@property (nonatomic, copy) NSString *contentID;
+@property (nonatomic, copy) NSString *nameL;
 
 @end

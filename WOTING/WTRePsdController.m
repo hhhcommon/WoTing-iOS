@@ -17,6 +17,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    _contentView.layer.cornerRadius = 5;
+    _contentView.layer.masksToBounds = YES;
+    
+    _sureBtn.layer.cornerRadius = 5;
+    _sureBtn.layer.masksToBounds = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,4 +40,8 @@
 }
 */
 
+- (IBAction)blackClick:(id)sender {
+}
+- (IBAction)sureBtnClick:(id)sender {
+}
 @end

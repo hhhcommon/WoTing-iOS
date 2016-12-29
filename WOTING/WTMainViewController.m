@@ -240,11 +240,13 @@
         
         if (indexPath.section == 0 && indexPath.row == 1) {
             
-            self.hidesBottomBarWhenPushed=YES;
+            
             WTLikeListViewController *WTlikeVC = [[WTLikeListViewController alloc] init];
 
+            WTlikeVC.hidesBottomBarWhenPushed = YES;
+            
             [self.navigationController pushViewController:WTlikeVC animated:YES];
-            self.hidesBottomBarWhenPushed=NO;
+            
         }
         
     }
@@ -252,10 +254,10 @@
     
     if (indexPath.section == 3 && indexPath.row == 0) {
         
-        self.hidesBottomBarWhenPushed=YES;
         WTSheZhiViewController *WTszVC = [[WTSheZhiViewController alloc] init];
+        WTszVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:WTszVC animated:YES];
-        self.hidesBottomBarWhenPushed=NO;
+
     }
 }
 
@@ -274,11 +276,11 @@
 //跳转到登录页
 - (void)LoginBtnClick:(UIButton *)btn{
     
-    self.hidesBottomBarWhenPushed=YES;
     WTLoginViewController *loginVC = [[WTLoginViewController alloc] init];
     
+    loginVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:loginVC animated:YES];
-    self.hidesBottomBarWhenPushed=NO;
+
 }
 
 - (void)didReceiveMemoryWarning {

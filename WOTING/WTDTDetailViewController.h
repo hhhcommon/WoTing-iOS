@@ -13,4 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *NameLab;
 @property (weak, nonatomic) IBOutlet UITableView *jqTabView;
 
+@property (nonatomic, copy) NSString *nameStr;
+
 @end

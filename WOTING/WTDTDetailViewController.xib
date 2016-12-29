@@ -35,9 +35,12 @@
                                 <action selector="blackBtnClick:" destination="-1" eventType="touchUpInside" id="Wnz-ce-jVh"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QfK-Z1-hN5">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QfK-Z1-hN5">
                             <rect key="frame" x="153" y="30" width="69" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="Piw-6q-MtN"/>
+                                <constraint firstAttribute="width" constant="69" id="UX8-Fp-OEq"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -46,8 +49,10 @@
                     <color key="backgroundColor" red="1" green="0.38915392440000002" blue="0.1089368786" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="LZn-TK-YuG" firstAttribute="top" secondItem="8gZ-PF-9dv" secondAttribute="top" constant="26" id="1fs-1A-ZnB"/>
+                        <constraint firstItem="QfK-Z1-hN5" firstAttribute="centerX" secondItem="8gZ-PF-9dv" secondAttribute="centerX" id="7N2-Tv-AiO"/>
                         <constraint firstAttribute="height" constant="64" id="HcV-KF-dhC"/>
                         <constraint firstItem="LZn-TK-YuG" firstAttribute="leading" secondItem="8gZ-PF-9dv" secondAttribute="leading" constant="6" id="beA-O5-OIi"/>
+                        <constraint firstItem="QfK-Z1-hN5" firstAttribute="top" secondItem="8gZ-PF-9dv" secondAttribute="top" constant="30" id="jBX-kM-igU"/>
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DzB-eu-4HP">

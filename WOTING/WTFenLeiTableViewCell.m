@@ -13,6 +13,8 @@
 
 @implementation WTFenLeiTableViewCell{
     
+    NSArray  *titlesArr;
+    
     UIView      *whView;
 }
 
@@ -60,6 +62,8 @@
 
 - (void)setTitles:(NSArray *)titles {
     
+    titlesArr = titles;
+    
     NSInteger XX = 0;
     NSInteger YY = 10;
     NSInteger width = K_Screen_Width/4.00000;
@@ -68,7 +72,7 @@
     for (int i = 0; i < titles.count; i++) {
         
         NSString *title = [[titles objectAtIndex:i] objectForKey:@"name"];
-        
+
         if (!(i%4)) {
             
             YY += 30;
@@ -100,7 +104,17 @@
     
     WTFLDetaliController *wtflVC = [[WTFLDetaliController alloc] init];
     
-    wtflVC.nameLab.text = btn.titleLabel.text;
+    wtflVC.hidesBottomBarWhenPushed = YES;
+    wtflVC.nameL = btn.titleLabel.text;
+    
+    for (NSDictionary *dict in titlesArr) {
+        
+        if ([dict[@"name"] isEqualToString:btn.titleLabel.text]) {
+            
+            NSString *contentID = [dict objectForKey:@"id"];
+            wtflVC.contentID = contentID;
+        }
+    }
     
     [self.delegate.navigationController pushViewController:wtflVC animated:YES];
     

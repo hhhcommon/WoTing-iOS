@@ -25,6 +25,8 @@
     
     /** 标记登录状态值 */
     NSInteger   Login; //0为未登录
+    
+    UIButton    *logBtn;
 }
 
 @end
@@ -47,6 +49,9 @@
     //监听登陆状态的通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LoginNotification:) name:@"LoginChangeNotification" object:nil];
     
+    //监听用户号是否修改过的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UserNotification:) name:@"UserNumberNotification" object:nil];
+    
     NSString *Uid = [AutomatePlist readPlistForKey:@"Uid"];
     
     if (Uid && ![Uid  isEqual: @"0"]) {
@@ -57,8 +62,80 @@
     }
     
     [self createNSArray];
+    [self blockLogin];
    
     NSLog(@"缓存文件大小为%@",[NSString stringWithFormat:@"%0.2fM",[self folderSizeAtPath:[NSString stringWithFormat:@"%@/Library/Caches/default",NSHomeDirectory()]]]);
+}
+
+- (void)blockLogin {
+    
+    if (Login == 0) {
+        
+        logBtn.hidden = YES;
+    }else {
+        
+        logBtn = [[UIButton alloc] init];
+        logBtn.backgroundColor = [UIColor JQTColor];
+        [logBtn setTitle:@"注销登录" forState:UIControlStateNormal];
+        logBtn.titleLabel.font = [UIFont boldSystemFontOfSize:13];
+        logBtn.layer.cornerRadius = 5;
+        logBtn.layer.masksToBounds = YES;
+        [logBtn addTarget:self action:@selector(blockBtnClick) forControlEvents:UIControlEventTouchUpInside];
+        [logBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.view addSubview:logBtn];
+        
+        [logBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+           
+            make.left.mas_equalTo(15);
+            make.right.mas_equalTo(-15);
+            make.bottom.mas_equalTo(-30);
+            make.height.mas_equalTo(30);
+        }];
+    }
+}
+
+- (void)blockBtnClick {
+    NSString *uid = [AutomatePlist readPlistForKey:@"Uid"];
+    
+    NSString *IMEI = [AutomatePlist readPlistForKey:@"IMEI"];
+    NSString *ScreenSize = [AutomatePlist readPlistForKey:@"ScreenSize"];
+    NSString *MobileClass = [AutomatePlist readPlistForKey:@"MobileClass"];
+    NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
+    NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
+    
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",uid ,@"UserId",nil];
+    
+    NSString *login_Str = WoTing_mlogout;
+    
+    
+    [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
+        
+        
+        NSDictionary *resultDict = (NSDictionary *)response;
+        
+        NSString  *ReturnType = [resultDict objectForKey:@"ReturnType"];
+        if ([ReturnType isEqualToString:@"1001"]) {
+            
+            [WKProgressHUD popMessage:@"注销成功" inView:nil duration:0.5 animated:YES];
+            [AutomatePlist writePlistForkey:@"Uid" value:@""];
+            Login = 0;
+            [self blockLogin];
+            [self createNSArray];
+            [_JQSZtableView reloadData];
+            
+        }else if ([ReturnType isEqualToString:@"T"]){
+            
+            [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
+            
+        }
+        
+    } fail:^(NSError *error) {
+        
+        
+        NSLog(@"%@", error);
+        
+    }];
+
 }
 
 - (void)createNSArray {
@@ -189,10 +266,32 @@
         if (indexPath.section == 2 && indexPath.row == 0) {
             
             WTHelpViewController *helpVC = [[WTHelpViewController alloc] init];
+            helpVC.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:helpVC animated:YES];
         }
         
     }else{
+        
+        if (indexPath.section == 0 && indexPath.row == 0) {
+            
+            WTUserNubController *userVC = [[WTUserNubController alloc] init];
+            userVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:userVC animated:YES];
+        }
+        
+        if (indexPath.section == 0 && indexPath.row == 1) {
+            
+            WTBoundPhoneController *BPhoneVC = [[WTBoundPhoneController alloc] init];
+            BPhoneVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:BPhoneVC animated:YES];
+        }
+        
+        if (indexPath.section == 0 && indexPath.row == 2) {
+            
+            WTRePsdController *RePsdVC = [[WTRePsdController alloc] init];
+            RePsdVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:RePsdVC animated:YES];
+        }
         
         if (indexPath.section == 1 && indexPath.row == 0) {
             
@@ -221,7 +320,7 @@
     
     Login = 1;
     [self createNSArray];
-
+    [self blockLogin];
     [_JQSZtableView reloadData];
     
 }

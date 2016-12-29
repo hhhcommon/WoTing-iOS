@@ -9,5 +9,8 @@
 #import "WTBaseViewController.h"
 
 @interface ShengYinViewController : WTBaseViewController
+@property (weak, nonatomic) IBOutlet UITableView *SYTableView;
+
+@property (nonatomic, strong) NSMutableArray *dataSYArr;
 
 @end

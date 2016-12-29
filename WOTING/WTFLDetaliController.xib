@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WTFLDetaliController">
             <connections>
+                <outlet property="FLDTableView" destination="GEf-GL-2X6" id="YWg-lo-Hb8"/>
                 <outlet property="nameLab" destination="wYn-RE-bUk" id="3XG-MC-wfX"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -54,12 +55,20 @@
                         <constraint firstItem="KiX-iR-ztG" firstAttribute="leading" secondItem="zse-nB-gJz" secondAttribute="leading" constant="7" id="ptz-es-qUi"/>
                     </constraints>
                 </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GEf-GL-2X6">
+                    <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="zse-nB-gJz" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="1oL-1g-KQ3"/>
+                <constraint firstItem="GEf-GL-2X6" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="AlL-Dt-8O8"/>
+                <constraint firstAttribute="bottom" secondItem="GEf-GL-2X6" secondAttribute="bottom" id="Ix7-LY-PUm"/>
                 <constraint firstAttribute="trailing" secondItem="zse-nB-gJz" secondAttribute="trailing" id="fRF-gZ-FZ2"/>
                 <constraint firstItem="zse-nB-gJz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="nyI-oU-KA6"/>
+                <constraint firstAttribute="trailing" secondItem="GEf-GL-2X6" secondAttribute="trailing" id="rpe-Ds-I82"/>
+                <constraint firstItem="GEf-GL-2X6" firstAttribute="top" secondItem="zse-nB-gJz" secondAttribute="bottom" id="xo1-MP-9RN"/>
             </constraints>
             <point key="canvasLocation" x="33.5" y="53.5"/>
         </view>

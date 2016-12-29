@@ -9,5 +9,8 @@
 #import "WTBaseViewController.h"
 
 @interface ZhuanJiViewController : WTBaseViewController
+@property (weak, nonatomic) IBOutlet UITableView *ZJTableView;
+
+@property (nonatomic, strong) NSMutableArray *dataZJArr;
 
 @end

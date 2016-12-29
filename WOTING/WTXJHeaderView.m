@@ -84,7 +84,7 @@
     
     WTDTDetailViewController *wtDDVC = [[WTDTDetailViewController alloc] init];
     
-    wtDDVC.NameLab.text = _NameLab.text;
+    wtDDVC.nameStr = _NameStr;
     
     [self.delegate.navigationController pushViewController:wtDDVC animated:YES];
 }

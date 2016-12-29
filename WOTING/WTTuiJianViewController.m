@@ -8,7 +8,10 @@
 
 #import "WTTuiJianViewController.h"
 
+#import "WTZhuanJiViewController.h"
+
 #import "WTBoFangTableViewCell.h"
+#import "WTLikeCell.h"
 
 /** 轮播图片 */
 #import "SDCycleScrollView.h"
@@ -78,6 +81,9 @@
     
     [skTableView registerNib:cellNib forCellReuseIdentifier:@"cellID"];
     
+    UINib *LikecellNib = [UINib nibWithNibName:@"WTLikeCell" bundle:nil];
+    
+    [skTableView registerNib:LikecellNib forCellReuseIdentifier:@"cellIDL"];
 }
 
 
@@ -182,19 +188,37 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    static NSString *cellID = @"cellID";
-    
-    WTBoFangTableViewCell *cell = (WTBoFangTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
-    
-    if (!cell) {
-        cell = [[WTBoFangTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+    if ([dataTuiJArray[indexPath.row][@"MediaType"] isEqualToString:@"SEQU"]) {
+        
+        static NSString *cellID = @"cellIDL";
+        
+        WTLikeCell *cell = (WTLikeCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+        
+        if (!cell) {
+            cell = [[WTLikeCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+        }
+        
+        NSDictionary *dict = dataTuiJArray[indexPath.row];
+        [cell setCellWithDict:dict];
+        
+        
+        return cell;
+    }else {
+        
+        static NSString *cellID = @"cellID";
+        
+        WTBoFangTableViewCell *cell = (WTBoFangTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+        
+        if (!cell) {
+            cell = [[WTBoFangTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+        }
+        
+        NSDictionary *dict = dataTuiJArray[indexPath.row];
+        [cell setCellWithDict:dict];
+        
+        
+        return cell;
     }
-    
-    NSDictionary *dict = dataTuiJArray[indexPath.row];
-    [cell setCellWithDict:dict];
-    
-    
-    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -233,10 +257,22 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    NSDictionary *dict = dataTuiJArray[indexPath.row];
-    NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
+    if ([dataTuiJArray[indexPath.row][@"MediaType"] isEqualToString:@"SEQU"]) {
+        
+        WTZhuanJiViewController *wtZJVC = [[WTZhuanJiViewController alloc] init];
+        wtZJVC.hidesBottomBarWhenPushed = YES;
+        wtZJVC.contentID = [NSString NULLToString:dataTuiJArray[indexPath.row][@"ContentId"]] ;
+        [self.navigationController pushViewController:wtZJVC animated:YES];
+        
+    }else{
+        
+        NSDictionary *dict = dataTuiJArray[indexPath.row];
+        NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
+    }
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
+    
 }
 
 

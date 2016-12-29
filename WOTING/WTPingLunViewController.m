@@ -161,6 +161,10 @@
     
 }
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+    [_textFiled resignFirstResponder];
+}
 /*
 #pragma mark - Navigation
 

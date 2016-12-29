@@ -9,5 +9,8 @@
 #import "WTBaseViewController.h"
 
 @interface TTSViewController : WTBaseViewController
+@property (weak, nonatomic) IBOutlet UITableView *TTSTableView;
+
+@property (nonatomic, strong) NSMutableArray *dataTTSArr;
 
 @end

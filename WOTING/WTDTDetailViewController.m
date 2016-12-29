@@ -8,6 +8,8 @@
 
 #import "WTDTDetailViewController.h"
 
+#import "WTZhuanJiViewController.h"
+
 #import "WTDianTaiTableViewCell.h"
 
 @interface WTDTDetailViewController ()<UITableViewDelegate, UITableViewDataSource>{
@@ -24,6 +26,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    _NameLab.text = _nameStr;
     dataCellArr = [NSMutableArray arrayWithCapacity:0];
     
     _jqTabView.delegate = self;
@@ -121,6 +124,21 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if ([dataCellArr[indexPath.row][@"MediaType"] isEqualToString:@"SEQU"]) {
+        
+        WTZhuanJiViewController *wtZJVC = [[WTZhuanJiViewController alloc] init];
+        wtZJVC.hidesBottomBarWhenPushed = YES;
+        wtZJVC.contentID = [NSString NULLToString:dataCellArr[indexPath.row][@"ContentId"]] ;
+        [self.navigationController pushViewController:wtZJVC animated:YES];
+        
+    }else{
+        
+        NSDictionary *dict = dataCellArr[indexPath.row];
+        NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
+    }
 }
 
 

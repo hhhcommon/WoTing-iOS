@@ -17,6 +17,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    _phoneView.layer.cornerRadius = 5;
+    _phoneView.layer.masksToBounds = YES;
+    
+    _sureBtn.layer.cornerRadius = 5;
+    _sureBtn.layer.masksToBounds = YES;
+    
+    _YZMView.layer.cornerRadius = 5;
+    _YZMView.layer.masksToBounds = YES;
+    
+    _YZMBtn.layer.cornerRadius = 5;
+    _YZMBtn.layer.masksToBounds = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,4 +45,10 @@
 }
 */
 
+- (IBAction)blackBtnClick:(id)sender {
+}
+- (IBAction)YZMBtnClick:(id)sender {
+}
+- (IBAction)sureBtnClick:(id)sender {
+}
 @end

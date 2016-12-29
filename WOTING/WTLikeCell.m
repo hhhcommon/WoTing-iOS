@@ -37,7 +37,7 @@
     
     
     //专辑数
-    _contentZJ.text = @"";
+    _contentZJ.text = [NSString stringWithFormat:@"%@集",[NSString NULLToString:dict[@"ContentSubCount"]]];
     
 }
 

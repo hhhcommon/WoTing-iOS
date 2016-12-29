@@ -138,20 +138,18 @@
 
 - (IBAction)XiaoXibtnClick:(id)sender {
     
-    self.hidesBottomBarWhenPushed=YES;
     WTNewsViewController *wtnewVC = [[WTNewsViewController alloc] init];
-    
+    wtnewVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:wtnewVC animated:YES];
-    self.hidesBottomBarWhenPushed=NO;
+
 }
 
 - (IBAction)SearchBtnClick:(id)sender {
     
-    self.hidesBottomBarWhenPushed=YES;
     WTSearchViewController *wtSearVC = [[WTSearchViewController alloc] init];
-    
+    wtSearVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:wtSearVC animated:YES];
-    self.hidesBottomBarWhenPushed=NO;
+
 }
 - (IBAction)BoFangBtnClick:(id)sender {
     

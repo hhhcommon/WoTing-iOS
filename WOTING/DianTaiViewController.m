@@ -8,7 +8,7 @@
 
 #import "DianTaiViewController.h"
 
-@interface DianTaiViewController ()
+@interface DianTaiViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @end
 
@@ -17,7 +17,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    
+    _DTTableView.delegate = self;
+    _DTTableView.dataSource = self;
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

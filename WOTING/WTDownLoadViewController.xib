@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2659" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -11,6 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WTDownLoadViewController">
             <connections>
+                <outlet property="XZZBtn" destination="LKR-k5-BfC" id="NzB-p9-34p"/>
+                <outlet property="YXZBtn" destination="wbp-kW-JxH" id="nPP-XI-etA"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -39,6 +41,9 @@
                                 <constraint firstAttribute="height" constant="25" id="oko-nC-Iap"/>
                             </constraints>
                             <state key="normal" image="nav_btn_message.png"/>
+                            <connections>
+                                <action selector="XiaoXiBtnClick:" destination="-1" eventType="touchUpInside" id="Ntq-SS-sB0"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dNO-I7-4Bp">
                             <rect key="frame" x="330" y="23" width="25" height="25"/>
@@ -47,6 +52,9 @@
                                 <constraint firstAttribute="width" constant="25" id="UzT-fg-C1f"/>
                             </constraints>
                             <state key="normal" image="nav_btn_search.png"/>
+                            <connections>
+                                <action selector="SearchBtnClick:" destination="-1" eventType="touchUpInside" id="diO-pD-rWl"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wbp-kW-JxH">
                             <rect key="frame" x="91" y="21" width="90" height="30"/>
@@ -55,9 +63,15 @@
                                 <constraint firstAttribute="height" constant="30" id="M7b-FV-YY7"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                            <state key="normal" title="已下载" backgroundImage="nav_background_selected.png">
-                                <color key="titleColor" red="1" green="0.25076781660000003" blue="0.019189018320000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="已下载" backgroundImage="nav_background_normal.png">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <state key="selected" backgroundImage="nav_background_selected.png">
+                                <color key="titleColor" red="1" green="0.38915392440000002" blue="0.1089368786" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="YXZBtnClick:" destination="-1" eventType="touchUpInside" id="kEa-zE-Kzj"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LKR-k5-BfC">
                             <rect key="frame" x="198" y="21" width="90" height="30"/>
@@ -69,6 +83,12 @@
                             <state key="normal" title="下载中" backgroundImage="nav_background_normal.png">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </state>
+                            <state key="selected" backgroundImage="nav_background_selected.png">
+                                <color key="titleColor" red="1" green="0.38915392440000002" blue="0.1089368786" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="XZZBtnClick:" destination="-1" eventType="touchUpInside" id="UeM-Vf-Z3y"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="1" green="0.25076781660000003" blue="0.019189018320000001" alpha="1" colorSpace="calibratedRGB"/>

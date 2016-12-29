@@ -10,4 +10,16 @@
 
 @interface WTZhuanJiViewController : UIViewController
 
+- (IBAction)backClick:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UILabel *NameLab;
+@property (weak, nonatomic) IBOutlet UIImageView *contentImg;
+- (IBAction)likeBtnClick:(id)sender;
+- (IBAction)commitBtnClick:(id)sender;
+- (IBAction)shareBtnClick:(id)sender;
+@property (weak, nonatomic) IBOutlet UIView *titleView;
+
+@property (nonatomic, copy) NSString *contentID;
+
+
 @end

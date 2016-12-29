@@ -8,7 +8,10 @@
 
 #import "AllViewController.h"
 
-#import "WTBoFangTableViewCell.H"
+#import "WTZhuanJiViewController.h"
+
+#import "WTBoFangTableViewCell.h"
+#import "WTLikeCell.h"
 
 @interface AllViewController ()<UITableViewDelegate, UITableViewDataSource>{
     
@@ -26,10 +29,24 @@
     
     dataLikeArr = [NSMutableArray arrayWithCapacity:0];
     
+    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     _likeTabV.delegate = self;
     _likeTabV.dataSource = self;
     
+    [self registerTabViewCell];
     [self loadDAtaLike];
+}
+
+//注册
+- (void)registerTabViewCell{
+    
+    UINib *cellNib = [UINib nibWithNibName:@"WTBoFangTableViewCell" bundle:nil];
+    
+    [_likeTabV registerNib:cellNib forCellReuseIdentifier:@"cellID"];
+    
+    UINib *LikecellNib = [UINib nibWithNibName:@"WTLikeCell" bundle:nil];
+    
+    [_likeTabV registerNib:LikecellNib forCellReuseIdentifier:@"cellIDL"];
 }
 
 - (void)loadDAtaLike {
@@ -84,19 +101,37 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    static NSString *cellID = @"cellID";
-    
-    WTBoFangTableViewCell *cell = (WTBoFangTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
-    
-    if (!cell) {
-        cell = [[WTBoFangTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+    if ([dataLikeArr[indexPath.row][@"MediaType"] isEqualToString:@"SEQU"]) {
+        
+        static NSString *cellID = @"cellIDL";
+        
+        WTLikeCell *cell = (WTLikeCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+        
+        if (!cell) {
+            cell = [[WTLikeCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+        }
+        
+        NSDictionary *dict = dataLikeArr[indexPath.row];
+        [cell setCellWithDict:dict];
+        
+        
+        return cell;
+    }else {
+        
+        static NSString *cellID = @"cellID";
+        
+        WTBoFangTableViewCell *cell = (WTBoFangTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+        
+        if (!cell) {
+            cell = [[WTBoFangTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+        }
+        
+        NSDictionary *dict = dataLikeArr[indexPath.row];
+        [cell setCellWithDict:dict];
+        
+        
+        return cell;
     }
-    
-    NSDictionary *dict = dataLikeArr[indexPath.row];
-    [cell setCellWithDict:dict];
-    
-    
-    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -135,7 +170,20 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    
+    if ([dataLikeArr[indexPath.row][@"MediaType"] isEqualToString:@"SEQU"]) {
+        
+        WTZhuanJiViewController *wtZJVC = [[WTZhuanJiViewController alloc] init];
+        
+        wtZJVC.contentID = [NSString NULLToString:dataLikeArr[indexPath.row][@"ContentId"]] ;
+        [self.navigationController pushViewController:wtZJVC animated:YES];
+        
+    }else{
+        
+        NSDictionary *dict = dataLikeArr[indexPath.row];
+        NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
+    }
 }
 
 

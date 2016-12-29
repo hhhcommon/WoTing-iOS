@@ -9,5 +9,8 @@
 #import "WTBaseViewController.h"
 
 @interface DianTaiViewController : WTBaseViewController
+@property (weak, nonatomic) IBOutlet UITableView *DTTableView;
+
+@property (nonatomic, strong) NSMutableArray *dataDTArr;
 
 @end
