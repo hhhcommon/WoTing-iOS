@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface WTYiXiaZaiController : UIViewController
+@property (weak, nonatomic) IBOutlet UITableView *YXZTableView;
 
 @end

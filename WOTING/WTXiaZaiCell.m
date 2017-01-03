@@ -7,13 +7,13 @@
 //
 
 #import "WTXiaZaiCell.h"
-#import "JSDownloadView.h"
+#import "ProgressCircleView.h"
 #import "JSDownLoadManager.h"
 
-@interface WTXiaZaiCell()<JSDownloadAnimationDelegate>
+@interface WTXiaZaiCell()
 {
     NSDictionary *dataDict;
-    JSDownloadView *downloadView;
+    ProgressCircleView *circleView;
 }
 
 @property (nonatomic, strong) JSDownLoadManager *manager;
@@ -26,20 +26,12 @@
     [super awakeFromNib];
     // Initialization code
     
-    downloadView = [[JSDownloadView alloc] init];
-    downloadView.progressWidth = 4;
-    downloadView.delegate = self;
-    [_DownloadView addSubview:downloadView];
     
-    [downloadView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.equalTo(_DownloadView);
-        make.bottom.equalTo(_DownloadView);
-        make.left.equalTo(_DownloadView);
-        make.right.equalTo(_DownloadView);
-    }];
-    
+    circleView = [[ProgressCircleView alloc] initWithFrame:CGRectMake(0, 0, _DownloadView.width, _DownloadView.height)];
+    circleView.backgroundColor = [UIColor whiteColor];
+    [_DownloadView addSubview:circleView];
 }
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
@@ -72,11 +64,7 @@
     //听众
     _numberLab.text = [NSString NULLToString:dict[@"PlayCount"]];
     
-}
-
-- (void)setUrl:(NSString *)url {
-    _url = url;
-    
+    _url = [NSString NULLToString:dict[@"ContentPlay"]];
 }
 
 //开始下载
@@ -87,7 +75,7 @@
                              
                              dispatch_async(dispatch_get_main_queue(), ^{
                                  NSString *progressString  = [NSString stringWithFormat:@"%.2f",1.0 * downloadProgress.completedUnitCount / downloadProgress.totalUnitCount];
-                                 downloadView.progress = progressString.floatValue;
+                                 circleView.progress = progressString.floatValue;
                              });
                              
                          }
@@ -99,32 +87,15 @@
                              }
                        completion:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
                            //此时已在主线程
-                           downloadView.isSuccess = YES;
+                       //    downloadView.isSuccess = YES;
                            NSString *path = [filePath path];
                            NSLog(@"************文件路径:%@",path);
                            
                            //通知代理
-                           if ([self.delegate respondsToSelector:@selector(cell:)]) {
-                               [self.delegate cell:[[WTXiaZaiCell alloc] init]];
+                           if ([self.delegate respondsToSelector:@selector(DownLoadWithPlist:)]) {
+                               [self.delegate DownLoadWithPlist:_url];
                            }
                        }];
-    
-    
-}
-
-#pragma mark -  animation delegate
-
-- (void)animationStart{
-    
-    [self changeBeginAndStop];
-}
-
-- (void)animationSuspend{
-    
-    [self.manager suspend];
-}
-
-- (void)animationEnd{
     
     
 }

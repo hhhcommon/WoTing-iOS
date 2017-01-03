@@ -45,6 +45,8 @@
 - (void)JiaZaiArray:(NSNotification *)not {
     
     NSDictionary *dict = not.userInfo;
+    
+    
     [dataDownArr addObject:dict];
     
     [self initScrollerView];

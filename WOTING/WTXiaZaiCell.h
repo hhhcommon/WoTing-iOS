@@ -11,7 +11,7 @@
 @class WTXiaZaiCell;
 @protocol WTXiaZaiCellDelegate <NSObject>
 
-- (void)cell:(WTXiaZaiCell *)cell;
+- (void)DownLoadWithPlist:(NSString *)str;
 
 @end
 
@@ -28,5 +28,5 @@
 @property (nonatomic,copy)NSString *url;
 
 - (void)Content:(NSDictionary *)dict;
-
+- (void)changeBeginAndStop;
 @end

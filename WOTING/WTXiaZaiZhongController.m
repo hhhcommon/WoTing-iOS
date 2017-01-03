@@ -40,7 +40,7 @@
     
     UINib *cellNib = [UINib nibWithNibName:@"WTXiaZaiCell" bundle:nil];
     
-    [_XZZTableView registerNib:cellNib forCellReuseIdentifier:@"cellID"];
+    [_XZZTableView registerNib:cellNib forCellReuseIdentifier:@"cellIDL"];
     
 }
 
@@ -59,9 +59,16 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    WTXiaZaiCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellID" forIndexPath:indexPath];
+    static NSString *cellID = @"cellIDL";
+    
+    WTXiaZaiCell *cell = (WTXiaZaiCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+    
+    if (!cell) {
+        cell = [[WTXiaZaiCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+    }
+
     [cell Content:_urls[indexPath.row]];
-    cell.url = _urls[indexPath.row][@"ContentPlay"];
+    [cell changeBeginAndStop];
     cell.delegate = self;
     
     return cell;
@@ -78,17 +85,23 @@
 }
 
 //下载完成 ， 移除下载任务
-- (void)cell:(WTXiaZaiCell *)cell {
+- (void)DownLoadWithPlist:(NSString *)str {
+    
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"DownLoad" ofType:@"plist"];
+    NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
     
     for (NSDictionary *dict in _urls) {
         
-        if ([cell.url isEqualToString:dict[@"ContentPlay"]]) {
+        if ([str isEqualToString:dict[@"ContentPlay"]]) {
             
+            [data setDictionary:dict];
             [_urls removeObject:dict];
             [_XZZTableView reloadData];
         }
     }
+    NSLog(@"%@", data);
     
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"YIXIAZAI" object:nil];
 }
 
 - (void)dealloc {

@@ -8,7 +8,12 @@
 
 #import "WTYiXiaZaiController.h"
 
-@interface WTYiXiaZaiController ()
+#import "WTXiaZaiCell.h"
+
+@interface WTYiXiaZaiController ()<UITableViewDelegate, UITableViewDataSource>{
+ 
+    NSMutableArray *dataYXZArray;
+}
 
 @end
 
@@ -17,7 +22,62 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    dataYXZArray = [NSMutableArray arrayWithCapacity:0];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTabVliew:) name:@"YIXIAZAI" object:nil];
+    
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"DownLoad" ofType:@"plist"];
+    NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+    
+    [dataYXZArray addObject:data];
+    
+    _YXZTableView.dataSource = self;
+    _YXZTableView.delegate = self;
 }
+
+//新增下载任务完成后的通知
+- (void)reloadTabVliew:(NSNotification *)not {
+    
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"DownLoad" ofType:@"plist"];
+    NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+    
+    [dataYXZArray addObject:data];
+    
+    [_YXZTableView reloadData];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return dataYXZArray.count;
+    
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    static NSString *cellID = @"cellIDL";
+    
+    WTXiaZaiCell *cell = (WTXiaZaiCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+    
+    if (!cell) {
+        cell = [[WTXiaZaiCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+    }
+    
+    
+    return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    
+    return 0.000000000001;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 70;
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
