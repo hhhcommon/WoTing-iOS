@@ -26,7 +26,7 @@
     /** 标记登录状态值 */
     NSInteger   Login; //0为未登录
     
-    UIButton    *logBtn;
+    //UIButton    *logBtn;
 }
 
 @end
@@ -71,16 +71,17 @@
     
     if (Login == 0) {
         
-        logBtn.hidden = YES;
+       // logBtn.hidden = YES;
     }else {
         
-        logBtn = [[UIButton alloc] init];
+        UIButton  *logBtn = [[UIButton alloc] init];
+       // logBtn.hidden = NO;
         logBtn.backgroundColor = [UIColor JQTColor];
         [logBtn setTitle:@"注销登录" forState:UIControlStateNormal];
         logBtn.titleLabel.font = [UIFont boldSystemFontOfSize:13];
         logBtn.layer.cornerRadius = 5;
         logBtn.layer.masksToBounds = YES;
-        [logBtn addTarget:self action:@selector(blockBtnClick) forControlEvents:UIControlEventTouchUpInside];
+        [logBtn addTarget:self action:@selector(blockBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [logBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.view addSubview:logBtn];
         
@@ -89,12 +90,12 @@
             make.left.mas_equalTo(15);
             make.right.mas_equalTo(-15);
             make.bottom.mas_equalTo(-30);
-            make.height.mas_equalTo(30);
+            make.height.mas_equalTo(44);
         }];
     }
 }
 //注销事件
-- (void)blockBtnClick {
+- (void)blockBtnClick:(UIButton *)senter {
     NSString *uid = [AutomatePlist readPlistForKey:@"Uid"];
     
     NSString *IMEI = [AutomatePlist readPlistForKey:@"IMEI"];
@@ -116,14 +117,16 @@
         NSString  *ReturnType = [resultDict objectForKey:@"ReturnType"];
         if ([ReturnType isEqualToString:@"1001"]) {
             
+            [senter removeFromSuperview];
+            
             NSDictionary *dict = @{@"User":@"jq"};
             [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginChangeNotification" object:nil userInfo:dict];
             
             [WKProgressHUD popMessage:@"注销成功" inView:nil duration:0.5 animated:YES];
             [AutomatePlist writePlistForkey:@"Uid" value:@""];
             Login = 0;
-            [self blockLogin];
             [self createNSArray];
+            
             [_JQSZtableView reloadData];
             
             
