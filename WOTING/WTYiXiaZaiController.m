@@ -8,7 +8,7 @@
 
 #import "WTYiXiaZaiController.h"
 
-#import "WTXiaZaiCell.h"
+#import "WTXiaZaiDoneCell.h"
 
 @interface WTYiXiaZaiController ()<UITableViewDelegate, UITableViewDataSource>{
  
@@ -57,12 +57,13 @@
     
     static NSString *cellID = @"cellIDL";
     
-    WTXiaZaiCell *cell = (WTXiaZaiCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+    WTXiaZaiDoneCell *cell = (WTXiaZaiDoneCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
     
     if (!cell) {
-        cell = [[WTXiaZaiCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+        cell = [[WTXiaZaiDoneCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     }
     
+    [cell setCellWithDict:dataYXZArray[indexPath.row]];
     
     return cell;
 }
@@ -84,6 +85,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 /*
 #pragma mark - Navigation
 

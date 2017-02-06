@@ -12,6 +12,8 @@
 #import "WTSheZhiViewController.h"
 #import "WTLoginViewController.h"
 
+#import "SGGenerateQRCodeVC.h"  //二维码生成器
+
 @interface WTMainViewController ()<UITableViewDelegate, UITableViewDataSource>{
     
     /** 设置ICON */
@@ -27,6 +29,8 @@
     
     /** 标记登录状态值 */
     NSInteger   Login; //0为未登录
+    
+    NSDictionary     *loginDict;
 }
 
 @end
@@ -36,12 +40,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+   // loginDict = [[NSDictionary alloc] init];
+    loginDict = [AutomatePlist readPlistForDict:@"LoginDict"];
     self.navigationController.navigationBar.hidden = YES;
     
     NSString *Uid = [AutomatePlist readPlistForKey:@"Uid"];
     
-    if (Uid && ![Uid  isEqual: @"0"]) {
+    if (Uid && ![Uid  isEqual: @"0"] && ![Uid isEqual:@""]) {
         
         Login = 1;
         Region = [AutomatePlist readPlistForKey:@"Region"];
@@ -87,6 +92,32 @@
     headerView.userInteractionEnabled = YES;
     headerView.image = [UIImage imageNamed:@"mine_bg.png"];
     self.JQMainTV.tableHeaderView = headerView;
+    
+    //二维码
+    UIButton *erwBtn = [[UIButton alloc] init];
+    [erwBtn setImage:[UIImage imageNamed:@"mine_icon_codes.png"] forState:UIControlStateNormal];
+    [erwBtn addTarget:self action:@selector(erweimaBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [headerView addSubview:erwBtn];
+    [erwBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.mas_equalTo(POINT_Y(80));
+        make.left.mas_equalTo(40);
+        make.width.mas_equalTo(25);
+        make.height.mas_equalTo(25);
+    }];
+    
+    //编辑资料
+    UIButton *ZLBtn = [[UIButton alloc] init];
+    [ZLBtn setImage:[UIImage imageNamed:@"mine_icon_edit profile.png"] forState:UIControlStateNormal];
+    [ZLBtn addTarget:self action:@selector(ziliaoBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [headerView addSubview:ZLBtn];
+    [ZLBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.mas_equalTo(POINT_Y(80));
+        make.right.mas_equalTo(-40);
+        make.width.mas_equalTo(25);
+        make.height.mas_equalTo(25);
+    }];
     
     //姓名
     UILabel *NameLb = [[UILabel alloc] init];
@@ -139,10 +170,14 @@
         
         LogID.hidden = NO;
         LoginBtn.hidden = NO;
+        erwBtn.hidden = YES;
+        ZLBtn.hidden = YES;
     }else{
         
         LogID.hidden = YES;
         LoginBtn.hidden = YES;
+        erwBtn.hidden = NO;
+        ZLBtn.hidden = NO;
     }
     
     //一句话介绍自己
@@ -264,13 +299,21 @@
 //登录状态改变触发
 - (void)LoginNotification:(NSNotification *)nt{
     
-    Login = 1;
-    userName = [nt.userInfo objectForKey:@"UserName"];
-    Region = [nt.userInfo objectForKey:@"Region"];
-    [self creterNSArray];
-    [self initContents];
-    [_JQMainTV reloadData];
+    if ([[nt.userInfo objectForKey:@"User"] isEqualToString:@"jq"]) {
+        
+        Login = 0;
+        [self creterNSArray];
+        [self initContents];
+        [_JQMainTV reloadData];
+    }else {
     
+        Login = 1;
+        userName = [nt.userInfo objectForKey:@"UserName"];
+        Region = [nt.userInfo objectForKey:@"Region"];
+        [self creterNSArray];
+        [self initContents];
+        [_JQMainTV reloadData];
+    }
 }
 
 //跳转到登录页
@@ -281,6 +324,23 @@
     loginVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:loginVC animated:YES];
 
+}
+
+//查看二维码
+- (void)erweimaBtnClick:(UIButton *)btn {
+    
+    SGGenerateQRCodeVC *VC = [[SGGenerateQRCodeVC alloc] init];
+    VC.dict = loginDict;
+    
+    VC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:VC animated:YES];
+}
+
+//编辑资料
+- (void)ziliaoBtnClick:(UIButton *)btn {
+    
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {

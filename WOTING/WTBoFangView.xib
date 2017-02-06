@@ -307,7 +307,7 @@
                 <outlet property="timeLab2" destination="qBk-Sq-5if" id="Dru-fQ-Epc"/>
                 <outlet property="wtSlider" destination="Gli-1f-hyY" id="nQv-HT-8gG"/>
             </connections>
-            <point key="canvasLocation" x="-60" y="543.5"/>
+            <point key="canvasLocation" x="-167" y="542"/>
         </view>
     </objects>
     <resources>

@@ -10,4 +10,12 @@
 
 @interface WTXiaZaiDoneCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *contentImg;
+@property (weak, nonatomic) IBOutlet UILabel *nameLab;
+@property (weak, nonatomic) IBOutlet UILabel *playConLab;
+@property (weak, nonatomic) IBOutlet UILabel *numberLab;
+@property (weak, nonatomic) IBOutlet UILabel *sizeLab;
+
+- (void)setCellWithDict:(NSDictionary *)dict;
+
 @end

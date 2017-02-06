@@ -66,7 +66,6 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(MoveClick:)];
     [MoreLab addGestureRecognizer:tap];
     MoreLab.text = @"更多";
-    MoreLab.textColor = [UIColor skTitleLowBlackColor];
     MoreLab.textAlignment = NSTextAlignmentCenter;
     MoreLab.font = [UIFont boldSystemFontOfSize:14];
     [MoreView addSubview:MoreLab];
@@ -83,9 +82,10 @@
 - (void)MoveClick:(id)sened{
     
     WTDTDetailViewController *wtDDVC = [[WTDTDetailViewController alloc] init];
-    
+    wtDDVC.hidesBottomBarWhenPushed = YES;
     wtDDVC.nameStr = _NameStr;
-    
+    wtDDVC.contentID = _contentId;
+    wtDDVC.type = 0;
     [self.delegate.navigationController pushViewController:wtDDVC animated:YES];
 }
 

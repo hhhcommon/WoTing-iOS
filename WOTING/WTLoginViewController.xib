@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2659" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -156,13 +156,6 @@
                                 <action selector="LoginBtnClick:" destination="-1" eventType="touchUpInside" id="jEK-GO-pjc"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="忘记密码？" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C7f-gk-A3a">
-                            <rect key="frame" x="140" y="192" width="95" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hYE-va-mjq">
                             <rect key="frame" x="17" y="530" width="100" height="40"/>
                             <color key="backgroundColor" red="1" green="0.25076781660000003" blue="0.019189018320000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -212,6 +205,16 @@
                                 <action selector="WeiBoBtnClick:" destination="-1" eventType="touchUpInside" id="d9P-9f-hgA"/>
                             </connections>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="忘记密码？" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C7f-gk-A3a">
+                            <rect key="frame" x="140" y="197" width="95" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="MVB-FV-e0n"/>
+                                <constraint firstAttribute="width" constant="95" id="moO-yI-RUO"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <constraints>
@@ -226,6 +229,7 @@
                         <constraint firstItem="zj2-B0-UuN" firstAttribute="leading" secondItem="hYE-va-mjq" secondAttribute="trailing" constant="21" id="YhW-nT-meS"/>
                         <constraint firstAttribute="bottom" secondItem="hYE-va-mjq" secondAttribute="bottom" constant="33" id="cb4-qJ-FAD"/>
                         <constraint firstAttribute="bottom" secondItem="G12-AZ-JF2" secondAttribute="bottom" constant="33" id="fWg-Gh-VFs"/>
+                        <constraint firstItem="C7f-gk-A3a" firstAttribute="centerX" secondItem="LR3-B3-hRf" secondAttribute="centerX" id="hmq-mX-pY4"/>
                         <constraint firstAttribute="trailing" secondItem="G12-AZ-JF2" secondAttribute="trailing" constant="17" id="k5D-WL-fIE"/>
                         <constraint firstItem="Y0g-5Y-RKf" firstAttribute="top" secondItem="LR3-B3-hRf" secondAttribute="top" constant="21" id="kI4-oE-I8R"/>
                         <constraint firstItem="hYE-va-mjq" firstAttribute="leading" secondItem="LR3-B3-hRf" secondAttribute="leading" constant="17" id="lCI-VE-bYx"/>
@@ -233,6 +237,7 @@
                         <constraint firstAttribute="bottom" secondItem="zj2-B0-UuN" secondAttribute="bottom" constant="33" id="m51-SE-9v8"/>
                         <constraint firstItem="Y0g-5Y-RKf" firstAttribute="leading" secondItem="LR3-B3-hRf" secondAttribute="leading" constant="17" id="pww-0s-e0U"/>
                         <constraint firstAttribute="trailing" secondItem="z5i-ka-5as" secondAttribute="trailing" constant="17" id="sYX-kV-ZLa"/>
+                        <constraint firstItem="C7f-gk-A3a" firstAttribute="top" secondItem="z5i-ka-5as" secondAttribute="bottom" constant="49" id="tf6-kC-YPP"/>
                         <constraint firstItem="zj2-B0-UuN" firstAttribute="centerX" secondItem="LR3-B3-hRf" secondAttribute="centerX" id="w2T-03-4mH"/>
                     </constraints>
                 </view>

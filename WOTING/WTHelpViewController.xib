@@ -1,7 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2659" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,7 +18,52 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r3z-am-aYR">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0QP-ta-fC7">
+                            <rect key="frame" x="8" y="26" width="26" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="RYr-VO-ZvN"/>
+                                <constraint firstAttribute="width" constant="26" id="pcg-x5-8z6"/>
+                            </constraints>
+                            <state key="normal" image="back.png"/>
+                            <connections>
+                                <action selector="backBtnClick:" destination="-1" eventType="touchUpInside" id="iD2-0r-s9C"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="使用帮助" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HNY-da-Xzg">
+                            <rect key="frame" x="136" y="32" width="103" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="103" id="ROr-UN-kt1"/>
+                                <constraint firstAttribute="height" constant="21" id="oX6-VH-qe9"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="0.38915392440000002" blue="0.1089368786" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="64" id="80L-9S-QIa"/>
+                        <constraint firstItem="HNY-da-Xzg" firstAttribute="top" secondItem="r3z-am-aYR" secondAttribute="top" constant="32" id="Naf-a5-ayr"/>
+                        <constraint firstItem="HNY-da-Xzg" firstAttribute="centerX" secondItem="r3z-am-aYR" secondAttribute="centerX" id="Zy6-RT-6Rn"/>
+                        <constraint firstItem="0QP-ta-fC7" firstAttribute="top" secondItem="r3z-am-aYR" secondAttribute="top" constant="26" id="cxP-hc-yoV"/>
+                        <constraint firstItem="0QP-ta-fC7" firstAttribute="leading" secondItem="r3z-am-aYR" secondAttribute="leading" constant="8" id="vPn-6b-51q"/>
+                    </constraints>
+                </view>
+            </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="r3z-am-aYR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="YP4-nc-dlK"/>
+                <constraint firstItem="r3z-am-aYR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="cTQ-0b-FoD"/>
+                <constraint firstAttribute="trailing" secondItem="r3z-am-aYR" secondAttribute="trailing" id="rzn-bX-6Mt"/>
+            </constraints>
+            <point key="canvasLocation" x="33.5" y="54.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="back.png" width="24" height="24"/>
+    </resources>
 </document>

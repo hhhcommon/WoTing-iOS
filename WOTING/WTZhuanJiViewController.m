@@ -75,6 +75,9 @@
         }else if ([ReturnType isEqualToString:@"T"]){
             
             [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
+        }else if ([ReturnType isEqualToString:@"1011"]){
+            
+            [WKProgressHUD popMessage:@"没有查到任何专辑" inView:nil duration:0.5 animated:YES];
         }
         
     } fail:^(NSError *error) {

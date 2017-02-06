@@ -56,6 +56,7 @@
                                 <constraint firstAttribute="height" constant="30" id="RTr-Sb-4xY"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <state key="normal" title="节目" backgroundImage="nav_background_normal.png">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </state>

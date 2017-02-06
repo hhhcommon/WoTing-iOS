@@ -14,5 +14,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *jqTabView;
 
 @property (nonatomic, copy) NSString *nameStr;
+@property (nonatomic, copy) NSString *contentID;
+@property (nonatomic, assign) NSInteger type;
 
 @end

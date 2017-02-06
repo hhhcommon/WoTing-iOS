@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface WTFanKuiViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UITextView *textView;
+@property (weak, nonatomic) IBOutlet UIButton *TiJiaoBtn;
+- (IBAction)TiJiaoBtnClick:(id)sender;
+- (IBAction)backBtnClick:(id)sender;
+- (IBAction)hotBtnClick:(id)sender;
 
 @end

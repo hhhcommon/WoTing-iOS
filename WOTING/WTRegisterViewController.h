@@ -12,6 +12,11 @@
 @interface WTRegisterViewController : WTBaseViewController
 @property (weak, nonatomic) IBOutlet UIView *RegisterView;
 @property (weak, nonatomic) IBOutlet UIView *YanZView;
+@property (weak, nonatomic) IBOutlet UITextField *phoneTF;
+@property (weak, nonatomic) IBOutlet UITextField *userNameTF;
+@property (weak, nonatomic) IBOutlet UITextField *psdTF;
+@property (weak, nonatomic) IBOutlet UITextField *YanZMTF;
+@property (weak, nonatomic) IBOutlet UIButton *YanZMBtn;
 
 @property (weak, nonatomic) IBOutlet UIButton *QueDBtn;
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2659" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -18,6 +18,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="321" height="69.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dsn-gG-4uK">
+                        <rect key="frame" x="0.0" y="0.0" width="321" height="70"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="van-sP-yKC">
                         <rect key="frame" x="13" y="5" width="60" height="60"/>
                         <constraints>
@@ -101,6 +105,8 @@
                     <constraint firstItem="eea-5y-XOU" firstAttribute="top" secondItem="AD5-Eu-2ks" secondAttribute="bottom" constant="8" id="4tl-1T-Kco"/>
                     <constraint firstAttribute="trailing" secondItem="NHf-xl-bOD" secondAttribute="trailing" constant="56" id="996-qT-YHr"/>
                     <constraint firstItem="1nC-jl-FIV" firstAttribute="top" secondItem="NHf-xl-bOD" secondAttribute="bottom" constant="5" id="9Mf-vq-fvV"/>
+                    <constraint firstAttribute="trailing" secondItem="dsn-gG-4uK" secondAttribute="trailing" id="ACf-G5-Lxo"/>
+                    <constraint firstItem="dsn-gG-4uK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="FpH-Sq-Vgw"/>
                     <constraint firstItem="NRH-fq-icL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="M8F-td-ekc"/>
                     <constraint firstItem="Qq0-3t-799" firstAttribute="top" secondItem="1nC-jl-FIV" secondAttribute="bottom" constant="6" id="OhR-ri-Vkb"/>
                     <constraint firstItem="Qq0-3t-799" firstAttribute="leading" secondItem="eea-5y-XOU" secondAttribute="trailing" constant="6" id="Vqa-M0-pMl"/>
@@ -110,9 +116,11 @@
                     <constraint firstItem="NHf-xl-bOD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="diV-GQ-8E0"/>
                     <constraint firstItem="van-sP-yKC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="fDx-jA-A3R"/>
                     <constraint firstItem="van-sP-yKC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="lM7-rV-h6k"/>
+                    <constraint firstItem="dsn-gG-4uK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="pCh-ue-iP2"/>
                     <constraint firstItem="AD5-Eu-2ks" firstAttribute="leading" secondItem="NRH-fq-icL" secondAttribute="trailing" constant="17" id="peJ-9Q-OlN"/>
                     <constraint firstItem="AD5-Eu-2ks" firstAttribute="top" secondItem="NHf-xl-bOD" secondAttribute="bottom" constant="5" id="qSg-Ac-iUw"/>
                     <constraint firstItem="NHf-xl-bOD" firstAttribute="leading" secondItem="NRH-fq-icL" secondAttribute="trailing" constant="17" id="rWU-Ak-eAw"/>
+                    <constraint firstAttribute="bottom" secondItem="dsn-gG-4uK" secondAttribute="bottom" constant="-0.5" id="ziq-ve-FAS"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

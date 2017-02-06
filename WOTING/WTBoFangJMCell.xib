@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2659" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="KGk-i7-Jjw" customClass="WTBoFangJMCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_btn_program details.png" translatesAutoresizingMaskIntoConstraints="NO" id="G10-Ai-HCh">
+                        <rect key="frame" x="8" y="11" width="28" height="27"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="27" id="Wur-Nz-Ljy"/>
+                            <constraint firstAttribute="width" constant="28" id="u4f-bc-9PJ"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="节目详情" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f8H-KT-fez">
+                        <rect key="frame" x="39" y="14" width="60" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="Q2d-Zb-hsR"/>
+                            <constraint firstAttribute="width" constant="60" id="h6Y-Nf-aEl"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="1" green="0.38915392440000002" blue="0.1089368786" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zvM-Hc-Cz3">
+                        <rect key="frame" x="264" y="14" width="41" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="41" id="LFe-q8-bie"/>
+                            <constraint firstAttribute="height" constant="21" id="ZCH-78-UBe"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <state key="normal" title="显示" backgroundImage="home_btn_background.png">
+                            <color key="titleColor" red="1" green="0.38915392440000002" blue="0.1089368786" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                        <state key="selected" title="隐藏"/>
+                        <connections>
+                            <action selector="XianSBtnClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="VaL-NH-VBF"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="G10-Ai-HCh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="3" id="2a8-D0-ycX"/>
+                    <constraint firstItem="f8H-KT-fez" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="6" id="MDd-ms-Fyc"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="zvM-Hc-Cz3" secondAttribute="trailing" constant="7" id="igR-Hc-9Yd"/>
+                    <constraint firstItem="G10-Ai-HCh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="mbX-MI-51s"/>
+                    <constraint firstItem="f8H-KT-fez" firstAttribute="leading" secondItem="G10-Ai-HCh" secondAttribute="trailing" constant="3" id="o6b-6s-bgG"/>
+                    <constraint firstItem="zvM-Hc-Cz3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="6" id="oox-oc-sCc"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="XianSBtn" destination="zvM-Hc-Cz3" id="Kan-AC-e7a"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="home_btn_background.png" width="38" height="21"/>
+        <image name="home_btn_program details.png" width="48" height="48"/>
+    </resources>
+</document>

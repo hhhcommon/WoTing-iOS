@@ -208,6 +208,13 @@
             }else if ([ReturnType isEqualToString:@"T"]){
                 
                 [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
+            }else if ([ReturnType isEqualToString:@"1003"]){
+                
+                [WKProgressHUD popMessage:@"无法评论的内容" inView:nil duration:0.5 animated:YES];
+            }else if ([ReturnType isEqualToString:@"200"]){
+                
+                [AutomatePlist writePlistForkey:@"Uid" value:@""];
+                [WKProgressHUD popMessage:@"需要登录" inView:nil duration:0.5 animated:YES];
             }
             
         } fail:^(NSError *error) {

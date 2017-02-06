@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface WTHelpViewController : UIViewController
+- (IBAction)backBtnClick:(id)sender;
 
 @end

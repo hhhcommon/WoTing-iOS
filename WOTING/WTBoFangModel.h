@@ -17,8 +17,10 @@
 @property (nonatomic, copy)NSString<Optional> *ContentId;       //内容ID
 @property (nonatomic, copy)NSString<Optional> *ContentFavorite;  //是否喜欢
 @property (nonatomic, copy)NSString<Optional> *MediaType;       //电台类型
-//@property (nonatomic, copy)NSString<Optional> *albumId;
-//@property (nonatomic, copy)NSString<Optional> *coverSmall;
+@property (nonatomic, copy)NSString<Optional> *ContentPub;      //来源
+@property (nonatomic, copy)NSString<Optional> *ContentDescn;    //简介
+@property (nonatomic, copy)NSString<Optional> *ContentShareURL; //分享网址
+
 //@property (nonatomic, copy)NSString<Optional> *coverLarge;
 //@property (nonatomic, copy)NSString<Optional> *smallLogo;
 //@property (nonatomic, copy)NSString<Optional> *title;

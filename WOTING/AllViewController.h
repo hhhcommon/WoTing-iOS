@@ -11,4 +11,5 @@
 @interface AllViewController : WTBaseViewController
 @property (weak, nonatomic) IBOutlet UITableView *likeTabV;
 
+@property (nonatomic, copy) NSString *SearchStr;
 @end

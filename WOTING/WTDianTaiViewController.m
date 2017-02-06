@@ -9,6 +9,8 @@
 #import "WTDianTaiViewController.h"
 #import "WTDTController.h"      //国家, 地方, 网络台
 
+#import "WTDTDetailViewController.h"
+
 #import "WTDianTaiTableViewCell.h"
 
 #import "WTXJHeaderView.h"
@@ -75,7 +77,7 @@
     //国家台
     UIButton *GJTaiBtn = [[UIButton alloc] init];
     [GJTaiBtn setImage:[UIImage imageNamed:@"icon_central_station.png"] forState:UIControlStateNormal];
-    [GJTaiBtn addTarget:self action:@selector(DTBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [GJTaiBtn addTarget:self action:@selector(DTGJBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [headerView addSubview:GJTaiBtn];
     [GJTaiBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -125,7 +127,7 @@
     //网络台
     UIButton *WLTaiBtn = [[UIButton alloc] init];
     [WLTaiBtn setImage:[UIImage imageNamed:@"icon_local_station.png"] forState:UIControlStateNormal];
-    [WLTaiBtn addTarget:self action:@selector(DTBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [WLTaiBtn addTarget:self action:@selector(DTWLBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [headerView addSubview:WLTaiBtn];
     [WLTaiBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -148,12 +150,32 @@
     }];
 }
 
-//国家, 地方, 网络按钮点击事件
+//地方按钮点击事件
 - (void)DTBtnClick:(UIButton *)btn {
     
     WTDTController *wtDC = [[WTDTController alloc] init];
-    
+    wtDC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:wtDC animated:YES];
+}
+
+//国家台
+- (void)DTGJBtnClick:(UIButton *)btn {
+    
+    WTDTDetailViewController *wtDtDVC = [[WTDTDetailViewController alloc] init];
+    wtDtDVC.hidesBottomBarWhenPushed = YES;
+    wtDtDVC.type = 3;
+    wtDtDVC.nameStr = @"国家台";
+    [self.navigationController pushViewController:wtDtDVC animated:YES];
+}
+
+//网络台
+- (void)DTWLBtnClick:(UIButton *)btn {
+    
+    WTDTDetailViewController *wtDtDVC = [[WTDTDetailViewController alloc] init];
+    wtDtDVC.hidesBottomBarWhenPushed = YES;
+    wtDtDVC.type = 1;
+    wtDtDVC.nameStr = @"网络台";
+    [self.navigationController pushViewController:wtDtDVC animated:YES];
 }
 
 //注册
@@ -307,6 +329,7 @@
     XJsectionHView.delegate = self;
     XJsectionHView.NameLab.text = dataListArr[section][@"CatalogName"];
     XJsectionHView.NameStr = dataListArr[section][@"CatalogName"];
+    XJsectionHView.contentId = dataListArr[section][@"CatalogId"];
     
     return XJsectionHView;
 }
@@ -326,6 +349,10 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
 }
 
+- (void)dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

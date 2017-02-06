@@ -15,14 +15,19 @@
 
 #import "WTBoFangTableViewCell.h"   //节目, 电台格式cell
 #import "WTLikeCell.h"      //专辑格式cell
-#import "WTBoFangView.h"
+#import "WTBoFangCell.h"
+#import "WTBoFangJMCell.h"
+#import "WTBoFangXQCell.h"
+//#import "WTBoFangView.h"
+#import "WTMoveView.h"      //更多view
+#import "WTSearchView.h"    //语音搜索
 #import "WTBoFangModel.h"
 #import "JQMusicTool.h"
 
 
 #import <UShareUI/UShareUI.h>   //分享
 
-@interface WTBoFangViewController ()<UITableViewDelegate, UITableViewDataSource, WTBoFangViewDelegate, AVAudioPlayerDelegate>{
+@interface WTBoFangViewController ()<UITableViewDelegate, UITableViewDataSource,WTBoFangViewDelegate,WTBoFangJMCellDelegate, WTBoFangXQCellDelegate,WTMoveViewDelegate, AVAudioPlayerDelegate>{
     
     NSMutableArray  *dataBFArray;
     
@@ -31,11 +36,17 @@
     NSInteger       changPag;   //判断是否从别的页面传过的值
     NSString        *SearchStr; //接受传过来的值
     
-  //  NSInteger       page; //刷新page
+    UIView          *blackView; //蒙板
+    WTMoveView      *MoveView;  //更多view
+    WTSearchView    *YuyinView; //语音view
+    
+    NSInteger       BoFangXQ;   //详情cell的高度
+    NSInteger       BFXQdelegate; //传过来的值
 }
 
 @property (nonatomic ,strong) AVPlayer   *player;
-@property (nonatomic, strong) WTBoFangView   *headerV;
+//@property (nonatomic, strong) WTBoFangView   *headerV;
+@property (nonatomic, strong) WTBoFangCell   *headerV;
 @property(assign, nonatomic)NSInteger musicIndex;//当前播放音乐索引
 @property(strong,nonatomic) NSMutableArray *musics;//音乐数据
 
@@ -48,11 +59,9 @@
     // Do any additional setup after loading the view from its nib.
     
     changPag = 0;
-    
-    //设置音乐后台播放的会话类型
-    AVAudioSession *session = [AVAudioSession sharedInstance];
-    [session setCategory:AVAudioSessionCategoryPlayback error:nil];
-    [session setActive:YES error:nil];
+    _musicIndex = 0;
+    BoFangXQ = 0;
+   
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableViewAndData:) name:@"TABLEVIEWCLICK" object:nil];
     
@@ -63,13 +72,6 @@
     _JQtableView.dataSource = self;
     
     _JQtableView.tableFooterView = [[UIView alloc] init];
-    
-    _headerV = [WTBoFangView creatXib];
-    _headerV.userInteractionEnabled = YES;
-   // _JQtableView.tableHeaderView.frame = CGRectMake(0,0,K_Screen_Width, 400);
-    _headerV.bounds = CGRectMake(0, 0, K_Screen_Width, 480);
-    _headerV.delegate = self;
-    _JQtableView.tableHeaderView = _headerV;
     
     [self loadData];
     [self registerTabViewCell];
@@ -131,6 +133,17 @@
         }else if ([ReturnType isEqualToString:@"T"]){
             
             [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
+        }else if ([ReturnType isEqualToString:@"1011"]) {
+            
+            [_musics removeAllObjects];
+            
+            for (NSDictionary *dict in dataBFArray) {
+                
+                WTBoFangModel *model = [[WTBoFangModel alloc] initWithDictionary:dict error:nil];
+                [_musics addObject:model];
+            }
+            [_JQtableView reloadData];
+            [self playMusic];
         }
         
     } fail:^(NSError *error) {
@@ -152,6 +165,18 @@
     UINib *LikecellNib = [UINib nibWithNibName:@"WTLikeCell" bundle:nil];
     
     [_JQtableView registerNib:LikecellNib forCellReuseIdentifier:@"cellIDL"];
+    
+    UINib *BoFangNib = [UINib nibWithNibName:@"WTBoFangCell" bundle:nil];
+    
+    [_JQtableView registerNib:BoFangNib forCellReuseIdentifier:@"cellIDB"];
+    
+    UINib *BoFangJMNib = [UINib nibWithNibName:@"WTBoFangJMCell" bundle:nil];
+    
+    [_JQtableView registerNib:BoFangJMNib forCellReuseIdentifier:@"cellIDJM"];
+    
+    UINib *BoFangXQNib = [UINib nibWithNibName:@"WTBoFangXQCell" bundle:nil];
+    
+    [_JQtableView registerNib:BoFangXQNib forCellReuseIdentifier:@"cellIDXQ"];
 }
 
 //网络请求
@@ -182,8 +207,7 @@
                 WTBoFangModel *model = [[WTBoFangModel alloc] initWithDictionary:dict error:nil];
                 [_musics addObject:model];
             }
-            
-            
+           
             [_JQtableView reloadData];
             [self playMusic];
             
@@ -317,7 +341,7 @@
 }
 
 #pragma mark 播放工具条的代理
--(void)playerToolBar:(WTBoFangView *)toolbar btnClickWithType:(BtnType)btnType{
+-(void)playerToolBar:(WTBoFangCell *)toolbar btnClickWithType:(BtnType)btnType{
     //实现这个播放，把播放的操作放在一个工具类
     switch (btnType) {
         case BtnTypePlay://播放
@@ -356,11 +380,105 @@
             break;
         case BtnTypeMore://点击更多
             
-            [WKProgressHUD popMessage:@"点击更多" inView:nil duration:0.5 animated:YES];
+            [self MoveBtn];
+            break;
+        case BtnTypeYuYin://点击语音搜索
+            
+            [self YuYin];
             break;
             
     }
 }
+
+#pragma mark 点击语音搜索
+- (void)YuYin {
+    
+    //蒙板
+    if (!blackView) {
+        
+        blackView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, K_Screen_Width, K_Screen_Height + 300)];
+        [self.view addSubview:blackView];
+    }
+    blackView.hidden = NO;
+    blackView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+    blackView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(blackViewtap:)];
+    [blackView addGestureRecognizer:tap];
+    
+    //更多View
+    if (!YuyinView) {
+        
+        YuyinView = [[WTSearchView alloc] initWithFrame:CGRectMake(0, K_Screen_Height, K_Screen_Width, 250)];
+        YuyinView.userInteractionEnabled = YES;
+        YuyinView.delegate = self;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(Viewtap)];
+        [YuyinView addGestureRecognizer:tap];
+        [blackView addSubview:YuyinView];
+    }
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        YuyinView.frame = CGRectMake(0, K_Screen_Height - 250, K_Screen_Width, 250);
+    }];
+    
+}
+
+#pragma mark 点击更多
+- (void)MoveBtn {
+    //蒙板
+    if (!blackView) {
+        
+        blackView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, K_Screen_Width, K_Screen_Height + 300)];
+        [self.view addSubview:blackView];
+    }
+    blackView.hidden = NO;
+    blackView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+    blackView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(blackViewtap:)];
+    [blackView addGestureRecognizer:tap];
+    
+    //更多View
+    if (!MoveView) {
+        
+        MoveView = [[WTMoveView alloc] initWithFrame:CGRectMake(0, K_Screen_Height, K_Screen_Width, 350)];
+        MoveView.userInteractionEnabled = YES;
+        MoveView.delegate = self;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(Viewtap)];
+        [MoveView addGestureRecognizer:tap];
+        [blackView addSubview:MoveView];
+    }
+
+    [UIView animateWithDuration:0.5 animations:^{
+        MoveView.frame = CGRectMake(0, K_Screen_Height - 390, K_Screen_Width, 390);
+    }];
+}
+- (void)Viewtap {
+}
+//MoveViewDelegate
+- (void)WTMoveViewTap:(UITapGestureRecognizer *)tap{
+    
+    UIView *view = tap.view;
+    if (view.tag == 0) {
+
+        WTBoFangModel *model = _musics[_musicIndex];
+        NSString *ContentId = model.ContentId;
+        
+        WTZhuanJiViewController *wtzhuJVC = [[WTZhuanJiViewController alloc] init];
+        wtzhuJVC.contentID = ContentId;
+        wtzhuJVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:wtzhuJVC animated:YES];
+    }else if (view.tag == 1){
+        
+        [WKProgressHUD popMessage:@"查看主播" inView:nil duration:0.5 animated:YES];
+    }else if (view.tag == 2){
+        
+        [WKProgressHUD popMessage:@"播放历史" inView:nil duration:0.5 animated:YES];
+    }else {
+        
+        [WKProgressHUD popMessage:@"定时关闭" inView:nil duration:0.5 animated:YES];
+    }
+}
+
+
 #pragma mark 点击下载
 - (void)DownLoad {
     
@@ -406,7 +524,7 @@
         NSString  *ReturnType = [resultDict objectForKey:@"ReturnType"];
         if ([ReturnType isEqualToString:@"1001"]) {
             
-            [WKProgressHUD popMessage:@"加入喜欢成功" inView:nil duration:0.5 animated:YES];
+            [WKProgressHUD popMessage:@"添加成功" inView:nil duration:0.5 animated:YES];
             
             
         }else if ([ReturnType isEqualToString:@"T"]){
@@ -414,6 +532,7 @@
             [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
         }else if ([ReturnType isEqualToString:@"200"]){
             
+            [AutomatePlist writePlistForkey:@"Uid" value:@""];
             [WKProgressHUD popMessage:@"请先登录后再试" inView:nil duration:0.5 animated:YES];
         }
         
@@ -441,20 +560,51 @@
     [self.navigationController pushViewController:wtPLVC animated:YES];
 
 }
-- (void)getUserInfoForPlatform:(UMSocialPlatformType)platformType
+//- (void)getUserInfoForPlatform:(UMSocialPlatformType)platformType
+//{
+//    [[UMSocialManager defaultManager] getUserInfoWithPlatform:platformType currentViewController:self completion:^(id result, NSError *error) {
+//        UMSocialUserInfoResponse *userinfo =result;
+//        NSString *message = [NSString stringWithFormat:@"name: %@\n icon: %@\n gender: %@\n",userinfo.name,userinfo.iconurl,userinfo.gender];
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"UserInfo"
+//                                                        message:message
+//                                                       delegate:nil
+//                                              cancelButtonTitle:NSLocalizedString(@"确定", nil)
+//                                              otherButtonTitles:nil];
+//        [alert show];
+//    }];
+//}
+- (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType
 {
-    [[UMSocialManager defaultManager] getUserInfoWithPlatform:platformType currentViewController:self completion:^(id result, NSError *error) {
-        UMSocialUserInfoResponse *userinfo =result;
-        NSString *message = [NSString stringWithFormat:@"name: %@\n icon: %@\n gender: %@\n",userinfo.name,userinfo.iconurl,userinfo.gender];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"UserInfo"
-                                                        message:message
-                                                       delegate:nil
-                                              cancelButtonTitle:NSLocalizedString(@"确定", nil)
-                                              otherButtonTitles:nil];
-        [alert show];
-    }];
+    WTBoFangModel *model = _musics[_musicIndex];
+    
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    
+    //创建网页内容对象 、 为显示图片 在加载block里进行分享
+    UIImageView *imageV = [[UIImageView alloc] init];
+    [imageV sd_setImageWithURL:[NSURL URLWithString:[NSString NULLToString:model.ContentImg]] placeholderImage:[UIImage imageNamed:@"img_radio_default"]  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        
+        UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:model.ContentName descr:model.ContentDescn thumImage:image];
+        
+        //设置网页地址
+        shareObject.webpageUrl =model.ContentShareURL;
+        
+        //分享消息对象设置分享内容对象
+        messageObject.shareObject = shareObject;
+        
+        //调用分享接口
+        [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+            if (error) {
+                NSLog(@"************Share fail with error %@*********",error);
+            }else{
+                NSLog(@"response data is %@",data);
+            }
+        }];
+        
+    } ];
+    
+    
 }
-
 #pragma mark 点击分享
 - (void)ShareWT {
     
@@ -462,7 +612,7 @@
     
     [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
         // 根据获取的platformType确定所选平台进行下一步操作
-        [self getUserInfoForPlatform:platformType];
+        [self shareWebPageToPlatformType:platformType];
     }];
 
 }
@@ -510,105 +660,237 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(next) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
 }
 
-
+#pragma mark - 点击蒙板
+- (void)blackViewtap:(UITapGestureRecognizer *)tap {
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        MoveView.frame = CGRectMake(0, K_Screen_Height , K_Screen_Width, 300);
+        YuyinView.frame = CGRectMake(0, K_Screen_Height, K_Screen_Width, 250);
+    }];
+    
+    blackView.hidden = YES;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+#pragma mark - WTBoFangXQCell delegate
+- (void)ChangeHeight:(NSInteger)integer {
+    
+    BFXQdelegate = integer - 21;
+}
 
+#pragma mark - WTBoFangJMCell delegeta
+-(void)XianShiBtnClick:(UIButton *)btn {
+    
+    if (BoFangXQ == 0) {
+        
+        BoFangXQ = 160 + BFXQdelegate;
+    }else {
+        
+        BoFangXQ = 0;
+    }
+    
+    [self.JQtableView reloadData];
+}
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    
+    return 2;
+}
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return dataBFArray.count;
+    if (section == 0) {
+        
+        return 3;
+    }else {
+        
+        return dataBFArray.count;
+    }
+
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-    if ([dataBFArray[indexPath.row][@"MediaType"] isEqualToString:@"SEQU"]) {
-        
-        static NSString *cellID = @"cellIDL";
-        
-        WTLikeCell *cell = (WTLikeCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
-        
-        if (!cell) {
-            cell = [[WTLikeCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
-        }
-        
-        NSDictionary *dict = dataBFArray[indexPath.row];
-        [cell setCellWithDict:dict];
-        
-        
-        return cell;
-    }else {
     
-        static NSString *cellID = @"cellID";
+    if (indexPath.section == 0) {
         
-        WTBoFangTableViewCell *cell = (WTBoFangTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
-        
-        if (!cell) {
-            cell = [[WTBoFangTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+        if (indexPath.row == 0) {
+            static NSString *cellID = @"cellIDB";
+            
+            WTBoFangCell *cell = (WTBoFangCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+            _headerV = cell;
+            cell.delegate = self;
+            
+            return cell;
+            
+        }else if (indexPath.row == 1){
+            
+            static NSString *cellID = @"cellIDJM";
+            
+            WTBoFangJMCell *cell = (WTBoFangJMCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+            
+            cell.delegate = self;
+            
+            return cell;
+            
+            
+        }else {
+            
+            static NSString *cellID = @"cellIDXQ";
+            
+            WTBoFangXQCell *cell = (WTBoFangXQCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+            
+            cell.delegate = self;
+            
+            if (_musics && _musics.count != 0) {
+                
+                WTBoFangModel *model = _musics[_musicIndex];
+                
+                [cell setDictWithCell:model];
+            }
+            if (BoFangXQ == 0) {
+                
+                cell.hidden = YES;
+            }
+            
+            return cell;
+            
         }
-        
-        NSDictionary *dict = dataBFArray[indexPath.row];
-        [cell setCellWithDict:dict];
 
         
-        return cell;
+    }else {
+        
+        if ([dataBFArray[indexPath.row][@"MediaType"] isEqualToString:@"SEQU"]) {
+            
+            static NSString *cellID = @"cellIDL";
+            
+            WTLikeCell *cell = (WTLikeCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+            
+            
+            NSDictionary *dict = dataBFArray[indexPath.row];
+            [cell setCellWithDict:dict];
+            
+            
+            return cell;
+        }else {
+        
+            static NSString *cellID = @"cellID";
+            
+            WTBoFangTableViewCell *cell = (WTBoFangTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+          
+            NSDictionary *dict = dataBFArray[indexPath.row];
+            [cell setCellWithDict:dict];
+
+            
+            return cell;
+        }
     }
+    
+    return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 35;
+    if (section == 0) {
+        
+        return 0.00000000000001;
+    }else {
+        
+        return 40;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    
+    return 0.00000000000000000001;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
-    UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
-    view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    
-    UILabel *labeltitle = [[UILabel alloc] init];
-    labeltitle.text = @"相关推荐";
-    labeltitle.font = [UIFont boldSystemFontOfSize:15];
-    labeltitle.textColor = [UIColor skTitleCenterBlackColor];
-    [view addSubview:labeltitle];
-    
-    [labeltitle mas_makeConstraints:^(MASConstraintMaker *make) {
+    if (section == 0) {
         
-        make.left.mas_equalTo(20);
-        make.top.mas_equalTo(10);
-        make.width.mas_equalTo(120);
-        make.height.mas_equalTo(20);
-    }];
+        return 0;
+    }else {
     
-    return view;
+        UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
+        view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        
+        UILabel *labeltitle = [[UILabel alloc] init];
+        labeltitle.text = @"相关推荐";
+        labeltitle.font = [UIFont boldSystemFontOfSize:15];
+        labeltitle.textColor = [UIColor skTitleCenterBlackColor];
+        [view addSubview:labeltitle];
+        
+        [labeltitle mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.mas_equalTo(10);
+            make.top.mas_equalTo(10);
+            make.width.mas_equalTo(120);
+            make.height.mas_equalTo(20);
+        }];
+        
+        return view;
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 70;
+    if (indexPath.section == 0) {
+        
+        if (indexPath.row == 0) {
+            
+            return 280;
+        }else if (indexPath.row == 1){
+            
+            return 44;
+        }else{
+            
+            return BoFangXQ;
+        }
+        
+    }else {
+    
+        return 70;
+    }
+
+    return 0;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if ([dataBFArray[indexPath.row][@"MediaType"] isEqualToString:@"SEQU"]) {
-        
-        WTZhuanJiViewController *wtZJVC = [[WTZhuanJiViewController alloc] init];
-
-        wtZJVC.hidesBottomBarWhenPushed = YES;
-        wtZJVC.contentID = [NSString NULLToString:dataBFArray[indexPath.row][@"ContentId"]] ;
-        [self.navigationController pushViewController:wtZJVC animated:YES];
-        
-    }else{
     
-        self.musicIndex = indexPath.row;
-        //播放音乐
-        [self playMusic];
+    if (indexPath.section == 0) {
+        
+        
+        
+    }else {
+    
+        if ([dataBFArray[indexPath.row][@"MediaType"] isEqualToString:@"SEQU"]) {
+            
+            WTZhuanJiViewController *wtZJVC = [[WTZhuanJiViewController alloc] init];
+
+            wtZJVC.hidesBottomBarWhenPushed = YES;
+            wtZJVC.contentID = [NSString NULLToString:dataBFArray[indexPath.row][@"ContentId"]] ;
+            [self.navigationController pushViewController:wtZJVC animated:YES];
+            
+        }else{
+        
+            //如果cell处于显示状态， 使其隐藏
+            if (BoFangXQ != 0) {
+                
+               [self XianShiBtnClick:nil];
+            }
+            
+            self.musicIndex = indexPath.row;
+            //播放音乐
+            [self playMusic];
+        }
+        
     }
 }
 

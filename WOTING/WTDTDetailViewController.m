@@ -52,7 +52,29 @@
     NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
     
     //"MediaType":"",//全部
-    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", @"RADIO",@"MediaType", @"1",@"CatalogType",@"3",@"ResultType",@"10",@"PerSize",nil];
+    
+    NSDictionary *parameters;
+    
+    if (_type == 0) {
+        //电台详情
+       parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", @"RADIO",@"MediaType", @"1",@"CatalogType",@"3",@"ResultType",@"10",@"PerSize",_contentID,@"CatalogId",nil];
+    }else if (_type == 1){
+        
+        //网络台
+        parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", @"RADIO",@"MediaType", @"9",@"CatalogType",@"3",@"ResultType",@"10",@"PerSize",@"dtfl2002",@"CatalogId",nil];
+        
+        
+    }else if (_type == 3){
+        
+        //国家台
+        parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", @"RADIO",@"MediaType", @"9",@"CatalogType",@"3",@"ResultType",@"20",@"PerSize",@"dtfl2001",@"CatalogId",nil];
+        
+        
+    }else {
+        //地域选择
+        parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", @"RADIO",@"MediaType", @"2",@"CatalogType",@"3",@"ResultType",@"10",@"PerSize",_contentID,@"CatalogId",nil];
+    }
+    
     
     NSString *login_Str = WoTing_GetContents;
     
@@ -136,11 +158,16 @@
         
         NSDictionary *dict = dataCellArr[indexPath.row];
         NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
-        
+        [self.navigationController popViewControllerAnimated:YES];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
     }
 }
 
+
+- (void)dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

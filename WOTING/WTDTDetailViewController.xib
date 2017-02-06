@@ -36,10 +36,10 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QfK-Z1-hN5">
-                            <rect key="frame" x="153" y="30" width="69" height="21"/>
+                            <rect key="frame" x="92" y="30" width="191" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="Piw-6q-MtN"/>
-                                <constraint firstAttribute="width" constant="69" id="UX8-Fp-OEq"/>
+                                <constraint firstAttribute="width" constant="191" id="UX8-Fp-OEq"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

@@ -54,7 +54,7 @@
     
     NSString *Uid = [AutomatePlist readPlistForKey:@"Uid"];
     
-    if (Uid && ![Uid  isEqual: @"0"]) {
+    if (Uid && ![Uid  isEqual: @"0"] &&![Uid  isEqual: @""]) {
         
         Login = 1;
     }else{
@@ -93,7 +93,7 @@
         }];
     }
 }
-
+//注销事件
 - (void)blockBtnClick {
     NSString *uid = [AutomatePlist readPlistForKey:@"Uid"];
     
@@ -116,12 +116,17 @@
         NSString  *ReturnType = [resultDict objectForKey:@"ReturnType"];
         if ([ReturnType isEqualToString:@"1001"]) {
             
+            NSDictionary *dict = @{@"User":@"jq"};
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginChangeNotification" object:nil userInfo:dict];
+            
             [WKProgressHUD popMessage:@"注销成功" inView:nil duration:0.5 animated:YES];
             [AutomatePlist writePlistForkey:@"Uid" value:@""];
             Login = 0;
             [self blockLogin];
             [self createNSArray];
             [_JQSZtableView reloadData];
+            
+            
             
         }else if ([ReturnType isEqualToString:@"T"]){
             
@@ -291,6 +296,27 @@
             WTRePsdController *RePsdVC = [[WTRePsdController alloc] init];
             RePsdVC.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:RePsdVC animated:YES];
+        }
+        
+        if (indexPath.section == 3 && indexPath.row == 0) {
+            
+            WTHelpViewController *aboutVC = [[WTHelpViewController alloc] init];
+            aboutVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:aboutVC animated:YES];
+        }
+        
+        if (indexPath.section == 3 && indexPath.row == 1) {
+            
+            WTFanKuiViewController *aboutVC = [[WTFanKuiViewController alloc] init];
+            aboutVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:aboutVC animated:YES];
+        }
+        
+        if (indexPath.section == 3 && indexPath.row == 2) {
+            
+            WTGuanYuViewController *aboutVC = [[WTGuanYuViewController alloc] init];
+            aboutVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:aboutVC animated:YES];
         }
         
         if (indexPath.section == 1 && indexPath.row == 0) {

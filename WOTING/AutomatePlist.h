@@ -11,6 +11,8 @@
 @interface AutomatePlist : NSObject
 
 +(NSString *)readPlistForKey:(NSString *)plkey;
++(NSDictionary *)readPlistForDict:(NSString *)plkey;
 +(void)writePlistForkey:(NSString *)plKey value:(NSString *)plValue;
++(void)writePlistForkey:(NSString *)plKey valueDict:(NSDictionary *)plValue;
 
 @end

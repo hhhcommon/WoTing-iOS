@@ -75,7 +75,7 @@
     
     NSDictionary *dict = _dataZJArr[indexPath.row];
     NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
-    
+    [self.navigationController popViewControllerAnimated:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
  
     
@@ -86,6 +86,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 /*
 #pragma mark - Navigation
 

@@ -32,6 +32,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scollerViewChange:) name:@"LIKELISTCHANGE" object:nil];
+    
     [self initTiteBarView];
     [self initScrollerView];
     
@@ -56,7 +58,6 @@
         if (i == 0) {
             
             AllViewController *wtallVC = [[AllViewController alloc] init];
-            //  skDongTaiVC.tagArr = sktagArr;
             [self addChildViewController:wtallVC];
             [contentScrollView addSubview:wtallVC.view];
             [wtallVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -357,6 +358,22 @@
             centerBtn.selected = NO;
             rightBtn.selected = NO;
         }
+    }
+}
+
+- (void)scollerViewChange:(NSNotification *)not {
+    
+    NSString *str = not.userInfo[@"Str"];
+    
+    if ([str isEqualToString:@"声音"]) {
+        
+        contentScrollView.contentOffset = CGPointMake(self.view.bounds.size.width * 2, 0);
+    }else if ([str isEqualToString:@"专辑"]) {
+        
+        contentScrollView.contentOffset = CGPointMake(self.view.bounds.size.width * 1, 0);
+    }else if ([str isEqualToString:@"电台"]){
+        
+        contentScrollView.contentOffset = CGPointMake(self.view.bounds.size.width * 3, 0);
     }
 }
 

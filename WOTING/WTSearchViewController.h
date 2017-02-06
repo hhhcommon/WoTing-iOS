@@ -10,8 +10,11 @@
 #import "WTBaseViewController.h"
 
 @interface WTSearchViewController : WTBaseViewController
+
 - (IBAction)backBtnClick:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *searchTField;
 - (IBAction)searchBtnClick:(id)sender;
+
+@property (nonatomic, copy) NSString *searchByText;
 
 @end

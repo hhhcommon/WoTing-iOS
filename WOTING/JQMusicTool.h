@@ -9,11 +9,14 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 #import "Singleton.h"
+#import "UCloudMediaPlayer.h"
 
 @class WTBoFangModel;
 @interface JQMusicTool : NSObject
 singleton_interface(JQMusicTool)
 @property(nonatomic,strong)AVPlayer *player;//播放器
+@property(strong, nonatomic) UCloudMediaPlayer *mediaPlayer;//flv播放器
+@property (nonatomic, copy) NSString *musicStr;//存路径
 /*
  *音乐播放前的准备工作
  */

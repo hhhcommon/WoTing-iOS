@@ -29,13 +29,13 @@
         [_ContentImg sd_setImageWithURL:[NSURL URLWithString:[NSString NULLToString:dict[@"ContentImg"]]] placeholderImage:[UIImage imageNamed:@"img_radio_default"]];
         
         //标题
-        _ContentName.text = dict[@"ContentName"];
+        _ContentName.text = [NSString NULLToString:dict[@"ContentName"]];
         
         //我听
-        _WTLab.text = dict[@"ContentPub"];
+        _WTLab.text = [NSString NULLToString:dict[@"ContentPub"]];
         
         //听众
-        _PlayCount.text = dict[@"PlayCount"];
+        _PlayCount.text = [NSString NULLToString:dict[@"PlayCount"]];
     }else{
         
     }

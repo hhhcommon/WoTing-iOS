@@ -59,13 +59,13 @@
         [self.tabBar addSubview:itemImgV];
         
         //创建按钮上的文字
-        UILabel *lb=[[UILabel alloc]initWithFrame:CGRectMake(0, 49 - POINT_Y(40) , 50, POINT_Y(30))];
+        UILabel *lb=[[UILabel alloc]initWithFrame:CGRectMake(i*K_Screen_Width/4 + POINT_X(65), 49 - POINT_Y(30) , 50, POINT_Y(30))];
         lb.userInteractionEnabled = YES;
         [lb setTextColor:[UIColor orangeColor]];
         lb.text=nav.tabBarItem.title;
-      //  lb.textAlignment=NSTextAlignmentCenter;
+        //  lb.textAlignment=NSTextAlignmentCenter;
         lb.font=[UIFont systemFontOfSize:13];
-        [itemImgV addSubview:lb];
+        [self.tabBar addSubview:lb];
         
         
         
@@ -73,7 +73,7 @@
         if(i==0)
         {
             itemImgV.image=nav.tabBarItem.selectedImage;
-           // [lb setTextColor:[UIColor orangeColor]];
+            // [lb setTextColor:[UIColor orangeColor]];
             //将当前高亮的按钮保存临时变量
             _tmpLb=lb;
             _tmpImgV=itemImgV;
@@ -88,9 +88,16 @@
         itemImgV.userInteractionEnabled=YES;
         //为每张图片添加tag
         itemImgV.tag=i+100;
-        lb.tag = i+100;
+        //lb.tag = i+200;
         [itemImgV addGestureRecognizer:tap];
         [lb addGestureRecognizer:tapL];
+        
+        
+        UITapGestureRecognizer *tapLabel=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapClick:)];
+        lb.userInteractionEnabled=YES;
+        //为每Label添加tag
+        lb.tag=i+200;
+        [lb addGestureRecognizer:tapLabel];
         
     }
     
@@ -100,20 +107,30 @@
 -(void)tapClick:(UITapGestureRecognizer *)tap
 {
     
+    long itemNumber = 0;
+    if (tap.view.tag <199) {
+        //这点击的是imageView
+        itemNumber = tap.view.tag - 100;
+        
+    }else{
+        //点击的是lable
+        itemNumber = tap.view.tag - 200;
+    }
+    
     //将临时变量改为低亮
-   // [_tmpLb setTextColor:[UIColor blackColor]];
+    // [_tmpLb setTextColor:[UIColor blackColor]];
     _tmpImgV.image=_tmpNavigationController.tabBarItem.image;
     
     //将点击的按钮变为高亮
     NSArray *navigationControllerArray=self.viewControllers;
     
-    UINavigationController *nav=[navigationControllerArray objectAtIndex:tap.view.tag-100];
+    UINavigationController *nav=[navigationControllerArray objectAtIndex:itemNumber];
     
-    UIImageView *imgV=(UIImageView *)tap.view;
+    UIImageView *imgV=[self.tabBar viewWithTag:itemNumber + 100];
     imgV.image=nav.tabBarItem.selectedImage;
     //获得图片上的label
-    UILabel *lb=(UILabel *)[imgV.subviews lastObject];
-   // [lb setTextColor:[UIColor orangeColor]];
+    UILabel *lb=[self.tabBar viewWithTag:itemNumber + 200];
+    // [lb setTextColor:[UIColor orangeColor]];
     
     
     //临时变量保存高亮按钮
@@ -122,7 +139,7 @@
     _tmpImgV=imgV;
     
     //实现子视图控制器页面的切换
-    self.selectedIndex=tap.view.tag-100;
+    self.selectedIndex= itemNumber;
     
     
     
@@ -135,13 +152,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

@@ -18,6 +18,17 @@
     return @"0";
     
 }
+
++(NSDictionary *)readPlistForDict:(NSString *)plkey
+{
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    if ([user valueForKey:plkey]) {
+        return [user valueForKey:plkey];
+    }
+    return nil;
+    
+}
+
 +(void)writePlistForkey:(NSString *)plKey value:(NSString *)plValue
 {
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
@@ -25,6 +36,12 @@
     
 }
 
++(void)writePlistForkey:(NSString *)plKey valueDict:(NSDictionary *)plValue
+{
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    [user setValue:plValue forKey:plKey];
+    
+}
 
 
 @end

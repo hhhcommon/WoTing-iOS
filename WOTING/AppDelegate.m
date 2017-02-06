@@ -43,7 +43,7 @@
     //设置友盟appkey
     [[UMSocialManager defaultManager] setUmSocialAppkey:@"585a24992ae85b6dba0017c0"];
     
-    //设置微信的appKey和appSecret
+    //设置微信的appKey和appSecret wxf121849552e18759
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wxf121849552e18759" appSecret:@"962517d5f0543ced89e2cd40591757ea" redirectURL:@"http://mobile.umeng.com/social"];
     
     
@@ -52,7 +52,7 @@
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"1105827057"  appSecret:nil redirectURL:@"http://mobile.umeng.com/social"];
     
     //设置新浪的appKey和appSecret
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:@"1499359778"  appSecret:@"452ace3e601bcc9390fd2680717d3a6b" redirectURL:@"http://sns.whalecloud.com/sina2/callback"];
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:@"1499359778"  appSecret:@"452ace3e601bcc9390fd2680717d3a6b" redirectURL:@"http://www.woting.com"];
     
     //设置音乐后台播放的会话类型
     AVAudioSession *session = [AVAudioSession sharedInstance];

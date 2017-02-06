@@ -8,12 +8,17 @@
 
 #import "WTDTController.h"
 
+#import "WTDTDetailViewController.h"
+
 @interface WTDTController ()<UITableViewDelegate, UITableViewDataSource>{
     
     
     NSMutableArray  *dataDTArr;
     
     NSMutableArray  *CityArr;
+    
+    NSMutableArray *_letterArr;
+
 }
 
 @end
@@ -26,6 +31,7 @@
     
     dataDTArr = [NSMutableArray arrayWithCapacity:0];
     CityArr = [NSMutableArray arrayWithCapacity:0];
+    _letterArr = [NSMutableArray arrayWithCapacity:0];
     
     _detableView.delegate = self;
     _detableView.dataSource = self;
@@ -33,8 +39,17 @@
     _detableView.showsHorizontalScrollIndicator = NO;
     
     _detableView.sectionIndexBackgroundColor = [UIColor clearColor];
-    
+    [self hideTableViewExtraLine];
     [self loadData];
+}
+
+//隐藏多余的行
+-(void)hideTableViewExtraLine
+{
+    UIView *view=[[UIView alloc]initWithFrame:CGRectZero];
+    self.detableView.tableFooterView=view;
+    
+    
 }
 
 - (void)loadData {
@@ -56,7 +71,7 @@
         
         parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",  @"2",@"CatalogType",@"1",@"ResultType",@"3",@"RelLevel",@"1",@"Page",nil];
     }
-
+    
     
     
     NSString *login_Str = WoTing_getCatalogInfo;
@@ -75,7 +90,7 @@
             [dataDTArr removeAllObjects];
             [dataDTArr addObjectsFromArray: ResultList[@"SubCata"]];
             
-         //   [self createrCSList];
+            [self createrCSList];
             
             [_detableView reloadData];
             
@@ -90,86 +105,143 @@
         NSLog(@"%@", error);
         
     }];
-
+    
     
 }
 
 - (void)createrCSList {
     
-    NSDictionary *dictA = [[NSDictionary alloc] init];
-    
     for (int i = 0; i < dataDTArr.count; i++) {
         
-        NSDictionary *dict = dataDTArr[i];
+        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:dataDTArr[i]];
+        
         NSString *CataName = dict[@"CatalogName"];
         
         NSString *Char = [WKProgressHUD firstCharactor:CataName];
-        NSLog(@"%@", Char);
-        if ([Char isEqualToString:@"A"]) {
+        
+        [dict setValue:Char forKey:@"CharName"];
+        
+        //去重
+        BOOL setBool = YES;
+        for (int z = 0; z < _letterArr.count; z++) {
             
-            [dictA setValue:@"CatalogName" forKey:CataName];
-        }else if ([Char isEqualToString:@"B"]) {
+            NSString *charEve = _letterArr[z][@"char"];
             
+            if ([charEve isEqualToString:Char]) {
+                
+                setBool = NO;
+                
+                NSMutableArray *cityArray = _letterArr[z][@"cityS"];
+                [cityArray addObject:dict];
+                
+                NSDictionary *charCityEveDict = @{@"char":Char,@"cityS":cityArray};
+                _letterArr[z] = charCityEveDict;
+                
+            }
+        }
+        
+        if (setBool == YES) {
+            
+            NSMutableArray *cityArray = [NSMutableArray arrayWithCapacity:0];
+            [cityArray addObject:dict];
+            NSDictionary *charCityEveDict = @{@"char":Char,@"cityS":cityArray};
+            [_letterArr addObject:charCityEveDict];
             
         }
+        
     }
+    
+    NSLog(@"%@",_letterArr);
+    
+    
+    //  _________________________________________________________________________________________________HYC_________________________________________________________________________________
+    //排序
+    for (int q = 0; q < _letterArr.count; q ++) {
+        
+        for (int w = 0; w < q; w++) {
+            
+            //比较两个字符串 大 小 相等
+            NSString *str15= _letterArr[w][@"char"];
+            NSString *str16=_letterArr[w+1][@"char"];
+            NSComparisonResult ret2=[str15 compare:str16];
+            
+            if (ret2==1) {
+                
+                NSDictionary *ttt = _letterArr[w];
+                
+                _letterArr[w] = _letterArr[w+1];
+                _letterArr[w+1] = ttt;
+                q--;
+                
+                
+            }
+            
+        }
+        
+    }
+
     
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    unichar ch = 65 + section;
-    NSString * str = [NSString stringWithUTF8String:(char *)&ch];
-    return str;
+
+    
+    return _letterArr[section][@"char"];
+    
 }
 
 -(NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
-  
+    
+    if (_letterArr) {
+        
+        NSMutableArray *array = [NSMutableArray arrayWithCapacity:0];
+        
+        for (NSDictionary *dict in _letterArr) {
+            
+            [array addObject:dict[@"char"]];
+            
+        }
+        
+        return array;
+    }
+    
     NSArray *rightShouZiMuArr = @[@"A",@"B",@"C",@"D",@"E",@"F",@"G",@"H",@"I",@"J",@"K",@"L",@"M",@"N",@"O",@"P",@"Q",@"R",@"S",@"T",@"U",@"V",@"W",@"X",@"Y",@"Z"];
     return rightShouZiMuArr;
     
 }
 
-//-(NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index
-//{
-//    NSInteger count = 0;
-//    
-//    for(NSString *character in dataDTArr)
-//    {
-//        if([character isEqualToString:title])
-//        {
-//            return count;
-//        }
-//        count ++;
-//    }
-//
-//    return 0;
-//}
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 26;
+    return _letterArr.count;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return ((dataDTArr && dataDTArr.count > 0) ? dataDTArr.count : 0);
-
+    //return ((dataDTArr && dataDTArr.count > 0) ? dataDTArr.count : 0);
+    
+    NSArray *array = _letterArr[section][@"cityS"];
+    return array.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    NSDictionary *cityDict = dataDTArr[indexPath.row];
     static NSString * cellID = @"cellID";
+    
     UITableViewCell * cell = [_detableView dequeueReusableCellWithIdentifier:cellID];
+    if (!cell) {
+        
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+        
+    }
     
-    cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     cell.selectionStyle =UITableViewCellSelectionStyleNone;
- 
     
-    cell.textLabel.text = cityDict[@"CatalogName"];
+    NSArray *array = _letterArr[indexPath.section][@"cityS"];
+    
+    cell.textLabel.text = array[indexPath.row][@"CatalogName"];
     
     
     return cell;
@@ -178,6 +250,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NSArray *array = _letterArr[indexPath.section][@"cityS"];
+    NSDictionary *dictEve = array[indexPath.row];
+    
+    WTDTDetailViewController *wtddVC = [[WTDTDetailViewController alloc] init];
+    wtddVC.nameStr = dictEve[@"CatalogName"];
+    wtddVC.contentID = dictEve[@"CatalogId"];
+    wtddVC.type = 2;
+    wtddVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:wtddVC animated:YES];
     
 }
 
@@ -190,14 +272,14 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 
 - (IBAction)backClick:(id)sender {

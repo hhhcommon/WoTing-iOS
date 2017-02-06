@@ -23,18 +23,21 @@
     
     _sureBtn.layer.cornerRadius = 5;
     _sureBtn.layer.masksToBounds = YES;
+    _sureBtn.backgroundColor = [UIColor lightGrayColor];
     
     [_numTextF addTarget:self action:@selector(Changed:) forControlEvents:UIControlEventEditingChanged];
 }
 
 - (void)Changed:(UITextField *)textf {
     
-    if (textf.text.length > 6 && textf.text.length < 20) {
+    if (textf.text.length >= 6 && textf.text.length < 20) {
         
         _sureBtn.selected = YES;
+        _sureBtn.backgroundColor = [UIColor JQTColor];
     }else {
         
         _sureBtn.selected = NO;
+        _sureBtn.backgroundColor = [UIColor lightGrayColor];
     }
     
 }
