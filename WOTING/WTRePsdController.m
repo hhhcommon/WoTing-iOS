@@ -68,6 +68,8 @@
             
             [WKProgressHUD popMessage:@"修改密码成功" inView:nil duration:0.5 animated:YES];
             
+            [self.navigationController popViewControllerAnimated:YES];
+            
         }else if ([ReturnType isEqualToString:@"1002"]){
             
             [WKProgressHUD popMessage:@"无法获取用户" inView:nil duration:0.5 animated:YES];
