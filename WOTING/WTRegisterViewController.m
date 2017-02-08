@@ -202,6 +202,10 @@
             
             [self createTime];  //设置时间器
             
+        }else if ([ReturnType isEqualToString:@"1002"]){
+            
+            [WKProgressHUD popMessage:@"状态错误，无法获取" inView:nil duration:0.5 animated:YES];
+            
         }else if ([ReturnType isEqualToString:@"T"]){
             
             [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];

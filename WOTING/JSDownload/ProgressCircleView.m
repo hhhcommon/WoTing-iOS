@@ -30,7 +30,7 @@
     float r = rect.size.height >= rect.size.width ? rect.size.width/2.0 : rect.size.height/2.0;
     CGPoint center = CGPointMake(rect.size.width/2.0, rect.size.height/2.0);
     CGContextRef ref = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(ref, 1);
+    CGContextSetLineWidth(ref, 2);
     CGContextSetFillColorWithColor(ref, [UIColor orangeColor].CGColor);
     CGContextAddArc(ref, center.x, center.y, r, - M_PI_2, - M_PI_2 + M_PI * 2, 0);
     CGContextStrokePath(ref);

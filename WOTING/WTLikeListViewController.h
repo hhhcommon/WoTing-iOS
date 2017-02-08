@@ -9,7 +9,10 @@
 #import "WTBaseViewController.h"
 
 @interface WTLikeListViewController : WTBaseViewController
+@property (weak, nonatomic) IBOutlet UILabel *NameLab;
 - (IBAction)backClick:(id)sender;
 - (IBAction)cleanBtnClick:(id)sender;
+
+@property (copy, nonatomic) NSString *label;
 
 @end

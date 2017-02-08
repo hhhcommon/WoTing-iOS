@@ -87,22 +87,49 @@
 //下载完成 ， 移除下载任务
 - (void)DownLoadWithPlist:(NSString *)str {
     
-    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"DownLoad" ofType:@"plist"];
-    NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+    NSMutableArray *array;
+    
+    if ([[NSMutableArray alloc]initWithContentsOfFile:JQ__Plist_managerName(@"DownLoad")]) {
+        
+        array = [[NSMutableArray alloc]initWithContentsOfFile:JQ__Plist_managerName(@"DownLoad")];
+    }else {
+        
+        array = [NSMutableArray arrayWithCapacity:0];
+    }
+//    NSMutableArray *array = [NSMutableArray arrayWithCapacity:0];
+    NSDictionary *writeDict = [[NSDictionary alloc] init];
     
     for (NSDictionary *dict in _urls) {
         
         if ([str isEqualToString:dict[@"ContentPlay"]]) {
             
-            [data setDictionary:dict];
             [_urls removeObject:dict];
             [_XZZTableView reloadData];
+
+            writeDict = [self PlistDictChange:dict];//取部分数据存储
+            
+            [array addObject:writeDict];
+            [array writeToFile:JQ__Plist_managerName(@"DownLoad") atomically:YES];
+            
         }
     }
-    NSLog(@"%@", data);
+
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"YIXIAZAI" object:nil];
 }
+
+- (NSDictionary *)PlistDictChange:(NSDictionary *)dict {
+    
+    NSMutableDictionary *Changedict = [[NSMutableDictionary alloc] init];
+    
+    [Changedict setValue:[NSString NULLToString:dict[@"ContentImg"]] forKey:@"ContentImg"];
+    [Changedict setValue:[NSString NULLToString:dict[@"ContentName"]] forKey:@"ContentName"];
+    [Changedict setValue:dict[@"PlayCount"] forKey:@"PlayCount"];
+    [Changedict setValue:[NSString NULLToString:dict[@"ContentPub"]] forKey:@"ContentPub"];
+    
+    return Changedict;
+}
+
 
 - (void)dealloc {
     

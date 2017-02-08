@@ -10,7 +10,10 @@
 #define WoTing_pch
 
 // 获取本地保存路径
-#define kDocumentPath   [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask,YES)objectAtIndex:0]
+#define kDocumentPath  [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask,YES) firstObject]
+
+//拼接plist的文件名  managerName为文件名  不需要带.plist
+#define JQ__Plist_managerName(managerName) [NSString stringWithFormat:@"%@/%@.plist",kDocumentPath,managerName]
 
 /**屏幕宽度*/
 #define K_Screen_Width [UIScreen mainScreen].bounds.size.width

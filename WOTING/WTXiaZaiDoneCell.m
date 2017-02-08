@@ -23,6 +23,7 @@
 
 - (void)setCellWithDict:(NSDictionary *)dict {
     
+    NSLog(@"%@",dict);
     //图片
     [_contentImg sd_setImageWithURL:[NSURL URLWithString:[NSString NULLToString:dict[@"ContentImg"]]] placeholderImage:[UIImage imageNamed:@"img_radio_default"]];
     

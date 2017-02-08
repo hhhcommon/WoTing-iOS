@@ -41,7 +41,7 @@
                         <color key="textColor" red="1" green="0.38915392440000002" blue="0.1089368786" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P9e-JX-t82">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P9e-JX-t82">
                         <rect key="frame" x="109" y="53" width="27" height="13"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="27" id="AdP-2a-3Ao"/>
@@ -61,10 +61,10 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QuU-ra-MQf">
-                        <rect key="frame" x="109" y="32" width="56" height="15"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QuU-ra-MQf">
+                        <rect key="frame" x="109" y="32" width="100" height="15"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="56" id="DJb-e4-y4Q"/>
+                            <constraint firstAttribute="width" constant="100" id="DJb-e4-y4Q"/>
                             <constraint firstAttribute="height" constant="15" id="lQg-cf-ORP"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>

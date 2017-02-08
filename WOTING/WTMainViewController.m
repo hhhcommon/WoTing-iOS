@@ -272,12 +272,22 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (Login == 1) {
+        if (indexPath.section == 0 && indexPath.row == 0) {
+            
+            
+            WTLikeListViewController *WTlikeVC = [[WTLikeListViewController alloc] init];
+            WTlikeVC.label = @"播放历史";
+            WTlikeVC.hidesBottomBarWhenPushed = YES;
+            
+            [self.navigationController pushViewController:WTlikeVC animated:YES];
+            
+        }
         
         if (indexPath.section == 0 && indexPath.row == 1) {
             
             
             WTLikeListViewController *WTlikeVC = [[WTLikeListViewController alloc] init];
-
+            WTlikeVC.label = @"我的喜欢";
             WTlikeVC.hidesBottomBarWhenPushed = YES;
             
             [self.navigationController pushViewController:WTlikeVC animated:YES];

@@ -76,6 +76,7 @@
                              dispatch_async(dispatch_get_main_queue(), ^{
                                  NSString *progressString  = [NSString stringWithFormat:@"%.2f",1.0 * downloadProgress.completedUnitCount / downloadProgress.totalUnitCount];
                                  circleView.progress = progressString.floatValue;
+                                 _JinDuLab.text = [NSString stringWithFormat:@"%.2lldKB", downloadProgress.completedUnitCount];
                              });
                              
                          }

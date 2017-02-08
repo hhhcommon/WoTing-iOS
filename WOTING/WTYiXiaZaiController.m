@@ -26,22 +26,30 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTabVliew:) name:@"YIXIAZAI" object:nil];
     
-    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"DownLoad" ofType:@"plist"];
-    NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+    NSMutableArray *array = [[NSMutableArray alloc]initWithContentsOfFile:JQ__Plist_managerName(@"DownLoad")];
     
-    [dataYXZArray addObject:data];
+    dataYXZArray = [NSMutableArray arrayWithArray:array];
     
     _YXZTableView.dataSource = self;
     _YXZTableView.delegate = self;
+    
+    [self registerCell];
+}
+
+- (void)registerCell {
+    
+    UINib *cellNib = [UINib nibWithNibName:@"WTXiaZaiDoneCell" bundle:nil];
+    
+    [_YXZTableView registerNib:cellNib forCellReuseIdentifier:@"cellID"];
+    
 }
 
 //新增下载任务完成后的通知
 - (void)reloadTabVliew:(NSNotification *)not {
     
-    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"DownLoad" ofType:@"plist"];
-    NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
-    
-    [dataYXZArray addObject:data];
+    NSMutableArray *array = [[NSMutableArray alloc]initWithContentsOfFile:JQ__Plist_managerName(@"DownLoad")];
+    NSLog(@"%@",JQ__Plist_managerName(@"DownLoad") );
+    dataYXZArray = [NSMutableArray arrayWithArray:array];
     
     [_YXZTableView reloadData];
 }
@@ -55,7 +63,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *cellID = @"cellIDL";
+    static NSString *cellID = @"cellID";
     
     WTXiaZaiDoneCell *cell = (WTXiaZaiDoneCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
     
