@@ -29,6 +29,7 @@
     NSMutableArray *array = [[NSMutableArray alloc]initWithContentsOfFile:JQ__Plist_managerName(@"DownLoad")];
     
     dataYXZArray = [NSMutableArray arrayWithArray:array];
+    _YXZTableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
     _YXZTableView.dataSource = self;
     _YXZTableView.delegate = self;

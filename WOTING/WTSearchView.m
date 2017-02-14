@@ -251,13 +251,22 @@
     
     if (![textFid.text  isEqual: @""]) {
         
-        WTSearchViewController *searchVC = [[WTSearchViewController alloc] init];
-        searchVC.searchByText = textFid.text;
-        searchVC.hidesBottomBarWhenPushed = YES;
-        [self.delegate.navigationController pushViewController:searchVC animated:YES];
+        NSMutableDictionary  *dict = [[NSMutableDictionary alloc] init];
+        [dict setValue:textFid.text forKey:@"Search"];
+        
+        NSDictionary *dictT = [NSDictionary dictionaryWithDictionary:dict];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:dictT];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"YUYINNOTIFICATION" object:nil];    //关闭蒙板
     }
     
     
+}
+
+
+- (void)dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 

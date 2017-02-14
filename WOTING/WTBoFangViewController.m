@@ -13,6 +13,10 @@
 #import "WTZhuanJiViewController.h"     //专辑页
 #import "WTGengDuoController.h"         //更多页
 
+#import "WTLikeListViewController.h"    //喜欢或播放历史界面
+#import "WTDingShiController.h"         //定时关闭
+#import "WTJMDViewController.h"       //节目单
+
 #import "WTBoFangTableViewCell.h"   //节目, 电台格式cell
 #import "WTLikeCell.h"      //专辑格式cell
 #import "WTBoFangCell.h"
@@ -62,8 +66,14 @@
     _musicIndex = 0;
     BoFangXQ = 0;
    
-    
+    //跳转过来的新数据
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableViewAndData:) name:@"TABLEVIEWCLICK" object:nil];
+    
+    //监听是否语音搜索完成
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(YUYinNotification) name:@"YUYINNOTIFICATION" object:nil];
+    
+    //监听是否是播放状态
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginbtnYes) name:@"BRGINBTNYES" object:nil];
     
     dataBFArray = [NSMutableArray arrayWithCapacity:0];
     _musics = [[NSMutableArray alloc] init];
@@ -79,6 +89,16 @@
 
 }
 
+//语音搜索结束
+- (void)YUYinNotification {
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        YuyinView.frame = CGRectMake(0, K_Screen_Height, K_Screen_Width, 250);
+    }];
+    
+    blackView.hidden = YES;
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
@@ -92,9 +112,16 @@
     
     NSDictionary *dataDict = nt.userInfo;
     [dataBFArray removeAllObjects];
-    [dataBFArray addObject:dataDict];
     
-    SearchStr = dataDict[@"ContentName"];
+    if (dataDict[@"ContentName"]) {
+        
+        [dataBFArray addObject:dataDict];
+        
+        SearchStr = dataDict[@"ContentName"];
+    }else {     //语音搜索传过来的字典
+        
+        SearchStr = dataDict[@"Search"];
+    }
     
     NSString *uid = [AutomatePlist readPlistForKey:@"Uid"];
     NSString *IMEI = [AutomatePlist readPlistForKey:@"IMEI"];
@@ -370,6 +397,10 @@
             [WKProgressHUD popMessage:@"节目进入下载任务列表" inView:nil duration:0.5 animated:YES];
             [self DownLoad];
             break;
+        case BtnTypeJMD://进入节目单
+
+            [self JinJMD];
+            break;
         case BtnTypeShare://点击分享
             
             [self ShareWT];
@@ -388,6 +419,16 @@
             break;
             
     }
+}
+
+#pragma mark 保存数据
+- (void)beginbtnYes {
+    
+    FMDatabase *db = [FMDBTool createDatabaseAndTable:@"BFLS"];
+    
+    NSDictionary *dict = dataBFArray[self.musicIndex];
+    NSString *sqlInsert = @"insert into BFLS values(?)";
+    [db executeUpdate:sqlInsert, dict];
 }
 
 #pragma mark 点击语音搜索
@@ -420,6 +461,16 @@
         YuyinView.frame = CGRectMake(0, K_Screen_Height - 250, K_Screen_Width, 250);
     }];
     
+}
+#pragma mark 进入节目单
+- (void)JinJMD {
+     WTBoFangModel *model = _musics[_musicIndex];
+    
+    WTJMDViewController *WTJieMuVC = [[WTJMDViewController alloc] init];
+    
+    WTJieMuVC.hidesBottomBarWhenPushed = YES;
+    WTJieMuVC.contentID = model.ContentId;
+    [self.navigationController pushViewController:WTJieMuVC animated:YES];
 }
 
 #pragma mark 点击更多
@@ -471,10 +522,18 @@
         [WKProgressHUD popMessage:@"查看主播" inView:nil duration:0.5 animated:YES];
     }else if (view.tag == 2){
         
-        [WKProgressHUD popMessage:@"播放历史" inView:nil duration:0.5 animated:YES];
-    }else {
+        WTLikeListViewController *WTlikeVC = [[WTLikeListViewController alloc] init];
+        WTlikeVC.label = @"播放历史";
+        WTlikeVC.hidesBottomBarWhenPushed = YES;
         
-        [WKProgressHUD popMessage:@"定时关闭" inView:nil duration:0.5 animated:YES];
+        [self.navigationController pushViewController:WTlikeVC animated:YES];
+    }else { //定时关闭
+        
+        WTDingShiController *WTDSVC = [[WTDingShiController alloc] init];
+        
+        WTDSVC.hidesBottomBarWhenPushed = YES;
+        
+        [self.navigationController pushViewController:WTDSVC animated:YES];
     }
 }
 
@@ -560,19 +619,7 @@
     [self.navigationController pushViewController:wtPLVC animated:YES];
 
 }
-//- (void)getUserInfoForPlatform:(UMSocialPlatformType)platformType
-//{
-//    [[UMSocialManager defaultManager] getUserInfoWithPlatform:platformType currentViewController:self completion:^(id result, NSError *error) {
-//        UMSocialUserInfoResponse *userinfo =result;
-//        NSString *message = [NSString stringWithFormat:@"name: %@\n icon: %@\n gender: %@\n",userinfo.name,userinfo.iconurl,userinfo.gender];
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"UserInfo"
-//                                                        message:message
-//                                                       delegate:nil
-//                                              cancelButtonTitle:NSLocalizedString(@"确定", nil)
-//                                              otherButtonTitles:nil];
-//        [alert show];
-//    }];
-//}
+
 - (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType
 {
     WTBoFangModel *model = _musics[_musicIndex];
@@ -700,8 +747,8 @@
     return 2;
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
     if (section == 0) {
         
         return 3;

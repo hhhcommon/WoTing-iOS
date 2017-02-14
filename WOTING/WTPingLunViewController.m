@@ -192,7 +192,7 @@
         NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
         NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
         
-        NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", _ContentID,@"ContentId",_Metype,@"MediaType", uid,@"UserId", _textFiled.text  ,@"Opinion", nil];
+        NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", _ContentID,@"ContentId",_Metype,@"MediaType", uid,@"UserId", _textFiled.text  ,@"Discuss", nil];
         
         NSString *login_Str = WoTing_PLget;
         
@@ -201,10 +201,12 @@
             NSDictionary *resultDict = (NSDictionary *)response;
             
             NSString  *ReturnType = [resultDict objectForKey:@"ReturnType"];
+            
             if ([ReturnType isEqualToString:@"1001"]) {
                 
                 [_textFiled resignFirstResponder];
-                
+                _textFiled.text = nil;
+                [self loadDataPL];  //刷新界面
             }else if ([ReturnType isEqualToString:@"T"]){
                 
                 [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];

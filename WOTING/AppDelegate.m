@@ -61,6 +61,7 @@
     
 //    NSString *userPhoneNameStr = [[UIDevice currentDevice] name];//手机名称
     NSString *phoneUDIDStr =  [[[UIDevice currentDevice] identifierForVendor] UUIDString];  //设备唯一标示码
+    phoneUDIDStr = [phoneUDIDStr stringByReplacingOccurrencesOfString:@"-" withString:@""];
     NSString *PhoneMobileClass = [WKProgressHUD deviceVersion]; //手机型号
     
     

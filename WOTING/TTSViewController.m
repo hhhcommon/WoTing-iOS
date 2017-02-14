@@ -33,6 +33,14 @@
     [self registerTabViewCell];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    /** 上拉加载更多 */
+    _TTSTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadTTSLike)];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -75,7 +83,7 @@
     }
     
     [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
-        
+        [_TTSTableView.mj_header endRefreshing];
         
         NSDictionary *resultDict = (NSDictionary *)response;
         
@@ -83,6 +91,7 @@
         if ([ReturnType isEqualToString:@"1001"]) {
             
             NSDictionary *ResultList = resultDict[@"ResultList"];
+            [_dataTTSArr removeAllObjects];
             
             if (_SearchStr == nil) {
                 
@@ -115,7 +124,7 @@
         
     } fail:^(NSError *error) {
         
-        NSLog(@"%@", error);
+        [_TTSTableView.mj_header endRefreshing];
         
     }];
     

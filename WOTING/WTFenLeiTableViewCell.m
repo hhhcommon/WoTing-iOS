@@ -41,7 +41,7 @@
     [self addSubview:whView];
     [whView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(weakSelf).with.offset(POINT_Y(10));
+        make.top.equalTo(weakSelf).with.offset(5);
         make.left.equalTo(weakSelf);
         make.right.equalTo(weakSelf);
         make.bottom.equalTo(weakSelf);

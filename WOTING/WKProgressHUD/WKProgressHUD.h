@@ -42,6 +42,8 @@ typedef void(^MyBlock)(void);
 //汉子转拼音首字母
 + (NSString *)firstCharactor:(NSString *)aString;
 
++ (NSString *)timeFormatted:(NSInteger)totalSeconds;
+
 + (void)PushAlertWithView:(UINavigationController *)selfViewControllerH andPushViewController:(UIViewController *)NextViewControllerH andMessage:(NSString *)message andHeader:(NSString *)HeaderMessage;
 
 + (void)presenAlertWithView:(UIViewController *)selfViewControllerH andPushViewController:(UIViewController *)NextViewControllerH andMessage:(NSString *)message andHeader:(NSString *)HeaderMessage andBlock:(MyBlock)presenblock;

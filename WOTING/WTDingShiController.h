@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface WTDingShiController : UIViewController
+- (IBAction)backBtnClick:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *TimeLab;
+@property (weak, nonatomic) IBOutlet UITableView *TimeTab;
 
 @end

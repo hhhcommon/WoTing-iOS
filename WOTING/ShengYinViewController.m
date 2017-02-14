@@ -31,12 +31,20 @@
     [self loadSYLike];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    /** 上拉加载更多 */
+    _SYTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadSYLike)];
+}
+
 //注册
 - (void)registerTabViewCell{
     
     UINib *cellNib = [UINib nibWithNibName:@"WTBoFangTableViewCell" bundle:nil];
     
-    [_SYTableView registerNib:cellNib forCellReuseIdentifier:@"cellID"];
+    [_SYTableView registerNib:cellNib forCellReuseIdentifier:@"cellIDSY"];
     
 }
 
@@ -68,7 +76,7 @@
     }
     
     [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
-        
+        [_SYTableView.mj_header endRefreshing];
         
         NSDictionary *resultDict = (NSDictionary *)response;
         
@@ -76,6 +84,7 @@
         if ([ReturnType isEqualToString:@"1001"]) {
             
             NSDictionary *ResultList = resultDict[@"ResultList"];
+            [_dataSYArr removeAllObjects];
             
             if (_SearchStr == nil) {
                 
@@ -87,12 +96,14 @@
                         
                     }
                 }
+
                 
             }else {
                 
                 for (NSDictionary *dict in ResultList[@"List"]) {
                     
                     if ([dict[@"MediaType"] isEqualToString:@"AUDIO"]) {
+                        
                         
                         [_dataSYArr addObject:dict];
                     }
@@ -110,7 +121,7 @@
         
     } fail:^(NSError *error) {
         
-        NSLog(@"%@", error);
+        [_SYTableView.mj_header endRefreshing];
         
     }];
     
@@ -131,7 +142,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    static NSString *cellID = @"cellID";
+    static NSString *cellID = @"cellIDSY";
     
     WTBoFangTableViewCell *cell = (WTBoFangTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
     

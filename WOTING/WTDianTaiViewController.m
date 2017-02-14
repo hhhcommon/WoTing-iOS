@@ -101,7 +101,7 @@
     
     //地方台
     UIButton *DFTaiBtn = [[UIButton alloc] init];
-    [DFTaiBtn setBackgroundImage:[UIImage imageNamed:@"icon_network_station.png"] forState:UIControlStateNormal];
+    [DFTaiBtn setBackgroundImage:[UIImage imageNamed:@"icon_local_station.png"] forState:UIControlStateNormal];
     [DFTaiBtn addTarget:self action:@selector(DTBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [headerView addSubview:DFTaiBtn];
     [DFTaiBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -126,7 +126,7 @@
     
     //网络台
     UIButton *WLTaiBtn = [[UIButton alloc] init];
-    [WLTaiBtn setImage:[UIImage imageNamed:@"icon_local_station.png"] forState:UIControlStateNormal];
+    [WLTaiBtn setImage:[UIImage imageNamed:@"icon_network_station.png"] forState:UIControlStateNormal];
     [WLTaiBtn addTarget:self action:@selector(DTWLBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [headerView addSubview:WLTaiBtn];
     [WLTaiBtn mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -30,28 +30,6 @@ singleton_implementation(JQMusicTool)
      流行音乐广播103.7FM    http://live-cdn.kksmg.com/channels/tvie/audio_loveradio/flv:fm
      
      */
-    
-    //遍历文件夹
-//    NSString *cachesPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
-//
-//    NSString *path;
-//    
-//    NSFileManager *myFileManager=[NSFileManager defaultManager];
-//    
-//    NSDirectoryEnumerator *myDirectoryEnumerator;
-//    
-//    myDirectoryEnumerator=[myFileManager enumeratorAtPath:cachesPath];
-//    
-//    //列举目录内容，可以遍历子目录
-//    
-//    while((path=[myDirectoryEnumerator nextObject])!=nil)
-//        
-//    {
-//        
-//        NSLog(@"%@",path);
-//        
-//    }
-    
     _musicStr = music.ContentPlay;
   //  _musicStr = @"http://live-cdn.kksmg.com/channels/tvie/audio_101/flv:fm";
     

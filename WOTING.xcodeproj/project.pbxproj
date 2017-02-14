@@ -146,6 +146,8 @@
 		0B1297A71E090E89009027BC /* WTZJJMController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B1297A51E090E89009027BC /* WTZJJMController.m */; };
 		0B1297A81E090E89009027BC /* WTZJJMController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B1297A61E090E89009027BC /* WTZJJMController.xib */; };
 		0B139EBA1E308D8C004DE06E /* MarqueeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B139EB91E308D8C004DE06E /* MarqueeLabel.m */; };
+		0B13B0C51E4B333F001963B3 /* WTDingShiCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B13B0C31E4B333F001963B3 /* WTDingShiCell.m */; };
+		0B13B0C61E4B333F001963B3 /* WTDingShiCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B13B0C41E4B333F001963B3 /* WTDingShiCell.xib */; };
 		0B1580B41E33426300DE2273 /* libUCloudMediaPlayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B1580AF1E33426300DE2273 /* libUCloudMediaPlayer.a */; };
 		0B1580B61E334E2E00DE2273 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B1580B51E334E2E00DE2273 /* AudioToolbox.framework */; };
 		0B1580B81E334E3A00DE2273 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B1580B71E334E3A00DE2273 /* AVFoundation.framework */; };
@@ -203,6 +205,41 @@
 		0B4282761E1B543000FAC2BA /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4282751E1B543000FAC2BA /* AsyncSocket.m */; };
 		0B42827F1E1B86A300FAC2BA /* WTBoFangCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B42827D1E1B86A300FAC2BA /* WTBoFangCell.m */; };
 		0B4282801E1B86A300FAC2BA /* WTBoFangCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B42827E1E1B86A300FAC2BA /* WTBoFangCell.xib */; };
+		0B4ED6861E52A16200EC4995 /* WTJMDCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4ED6841E52A16200EC4995 /* WTJMDCell.m */; };
+		0B4ED6871E52A16200EC4995 /* WTJMDCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B4ED6851E52A16200EC4995 /* WTJMDCell.xib */; };
+		0B554BB11E51555E0030B196 /* ChuCuoLe.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B554BAD1E51555E0030B196 /* ChuCuoLe.png */; };
+		0B554BB21E51555E0030B196 /* WeiDengLu.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B554BAE1E51555E0030B196 /* WeiDengLu.png */; };
+		0B554BB31E51555E0030B196 /* WuShuJu.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B554BAF1E51555E0030B196 /* WuShuJu.png */; };
+		0B554BB41E51555E0030B196 /* WuWangLuo.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B554BB01E51555E0030B196 /* WuWangLuo.png */; };
+		0B554C011E5185520030B196 /* XuanZhong.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B554C001E5185520030B196 /* XuanZhong.png */; };
+		0B554C151E51A5370030B196 /* play_flag_wave_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B554C031E51A5370030B196 /* play_flag_wave_01.png */; };
+		0B554C161E51A5370030B196 /* play_flag_wave_02.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B554C041E51A5370030B196 /* play_flag_wave_02.png */; };
+		0B554C171E51A5370030B196 /* play_flag_wave_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B554C051E51A5370030B196 /* play_flag_wave_03.png */; };
+		0B554C181E51A5370030B196 /* play_flag_wave_04.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B554C061E51A5370030B196 /* play_flag_wave_04.png */; };
+		0B554C191E51A5370030B196 /* play_flag_wave_05.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B554C071E51A5370030B196 /* play_flag_wave_05.png */; };
+		0B554C1A1E51A5370030B196 /* play_flag_wave_06.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B554C081E51A5370030B196 /* play_flag_wave_06.png */; };
+		0B554C1B1E51A5370030B196 /* play_flag_wave_07.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B554C091E51A5370030B196 /* play_flag_wave_07.png */; };
+		0B554C1C1E51A5370030B196 /* play_flag_wave_08.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B554C0A1E51A5370030B196 /* play_flag_wave_08.png */; };
+		0B554C1D1E51A5370030B196 /* play_flag_wave_09.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B554C0B1E51A5370030B196 /* play_flag_wave_09.png */; };
+		0B554C1E1E51A5370030B196 /* play_flag_wave_10.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B554C0C1E51A5370030B196 /* play_flag_wave_10.png */; };
+		0B554C1F1E51A5370030B196 /* play_flag_wave_11.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B554C0D1E51A5370030B196 /* play_flag_wave_11.png */; };
+		0B554C201E51A5370030B196 /* play_flag_wave_12.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B554C0E1E51A5370030B196 /* play_flag_wave_12.png */; };
+		0B554C211E51A5370030B196 /* play_flag_wave_13.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B554C0F1E51A5370030B196 /* play_flag_wave_13.png */; };
+		0B554C221E51A5370030B196 /* play_flag_wave_14.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B554C101E51A5370030B196 /* play_flag_wave_14.png */; };
+		0B554C231E51A5370030B196 /* play_flag_wave_15.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B554C111E51A5370030B196 /* play_flag_wave_15.png */; };
+		0B554C241E51A5370030B196 /* play_flag_wave_16.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B554C121E51A5370030B196 /* play_flag_wave_16.png */; };
+		0B554C251E51A5370030B196 /* play_flag_wave_17.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B554C131E51A5370030B196 /* play_flag_wave_17.png */; };
+		0B554C261E51A5370030B196 /* play_flag_wave_18.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B554C141E51A5370030B196 /* play_flag_wave_18.png */; };
+		0B554C2B1E51AF9B0030B196 /* WTJMDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B554C291E51AF9B0030B196 /* WTJMDViewController.m */; };
+		0B554C2C1E51AF9B0030B196 /* WTJMDViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B554C2A1E51AF9B0030B196 /* WTJMDViewController.xib */; };
+		0B554C301E51AFDE0030B196 /* WTJieMuXQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B554C2E1E51AFDE0030B196 /* WTJieMuXQViewController.m */; };
+		0B554C311E51AFDE0030B196 /* WTJieMuXQViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B554C2F1E51AFDE0030B196 /* WTJieMuXQViewController.xib */; };
+		0B612D231E4D5D95000D8FE9 /* FMDBTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B612D221E4D5D95000D8FE9 /* FMDBTool.m */; };
+		0B612D301E4D5E24000D8FE9 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B612D261E4D5E24000D8FE9 /* FMDatabase.m */; };
+		0B612D311E4D5E24000D8FE9 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B612D281E4D5E24000D8FE9 /* FMDatabaseAdditions.m */; };
+		0B612D321E4D5E24000D8FE9 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B612D2A1E4D5E24000D8FE9 /* FMDatabasePool.m */; };
+		0B612D331E4D5E24000D8FE9 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B612D2C1E4D5E24000D8FE9 /* FMDatabaseQueue.m */; };
+		0B612D341E4D5E24000D8FE9 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B612D2F1E4D5E24000D8FE9 /* FMResultSet.m */; };
 		0B7583F71DE938ED00E3D117 /* login_icon_microblog@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7583F01DE938ED00E3D117 /* login_icon_microblog@2x.png */; };
 		0B7583F81DE938ED00E3D117 /* login_icon_name@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7583F11DE938ED00E3D117 /* login_icon_name@2x.png */; };
 		0B7583F91DE938ED00E3D117 /* login_icon_password@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7583F21DE938ED00E3D117 /* login_icon_password@2x.png */; };
@@ -602,6 +639,9 @@
 		0B1297A61E090E89009027BC /* WTZJJMController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTZJJMController.xib; sourceTree = "<group>"; };
 		0B139EB81E308D8C004DE06E /* MarqueeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarqueeLabel.h; sourceTree = "<group>"; };
 		0B139EB91E308D8C004DE06E /* MarqueeLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarqueeLabel.m; sourceTree = "<group>"; };
+		0B13B0C21E4B333F001963B3 /* WTDingShiCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTDingShiCell.h; sourceTree = "<group>"; };
+		0B13B0C31E4B333F001963B3 /* WTDingShiCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTDingShiCell.m; sourceTree = "<group>"; };
+		0B13B0C41E4B333F001963B3 /* WTDingShiCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTDingShiCell.xib; sourceTree = "<group>"; };
 		0B1580AF1E33426300DE2273 /* libUCloudMediaPlayer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUCloudMediaPlayer.a; sourceTree = "<group>"; };
 		0B1580B01E33426300DE2273 /* UCloudMediaModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCloudMediaModule.h; sourceTree = "<group>"; };
 		0B1580B11E33426300DE2273 /* UCloudMediaPlayback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCloudMediaPlayback.h; sourceTree = "<group>"; };
@@ -685,6 +725,51 @@
 		0B42827C1E1B86A300FAC2BA /* WTBoFangCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTBoFangCell.h; sourceTree = "<group>"; };
 		0B42827D1E1B86A300FAC2BA /* WTBoFangCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTBoFangCell.m; sourceTree = "<group>"; };
 		0B42827E1E1B86A300FAC2BA /* WTBoFangCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTBoFangCell.xib; sourceTree = "<group>"; };
+		0B4ED6831E52A16200EC4995 /* WTJMDCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTJMDCell.h; sourceTree = "<group>"; };
+		0B4ED6841E52A16200EC4995 /* WTJMDCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTJMDCell.m; sourceTree = "<group>"; };
+		0B4ED6851E52A16200EC4995 /* WTJMDCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTJMDCell.xib; sourceTree = "<group>"; };
+		0B554BAD1E51555E0030B196 /* ChuCuoLe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChuCuoLe.png; sourceTree = "<group>"; };
+		0B554BAE1E51555E0030B196 /* WeiDengLu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WeiDengLu.png; sourceTree = "<group>"; };
+		0B554BAF1E51555E0030B196 /* WuShuJu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WuShuJu.png; sourceTree = "<group>"; };
+		0B554BB01E51555E0030B196 /* WuWangLuo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WuWangLuo.png; sourceTree = "<group>"; };
+		0B554C001E5185520030B196 /* XuanZhong.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = XuanZhong.png; sourceTree = "<group>"; };
+		0B554C031E51A5370030B196 /* play_flag_wave_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_flag_wave_01.png; sourceTree = "<group>"; };
+		0B554C041E51A5370030B196 /* play_flag_wave_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_flag_wave_02.png; sourceTree = "<group>"; };
+		0B554C051E51A5370030B196 /* play_flag_wave_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_flag_wave_03.png; sourceTree = "<group>"; };
+		0B554C061E51A5370030B196 /* play_flag_wave_04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_flag_wave_04.png; sourceTree = "<group>"; };
+		0B554C071E51A5370030B196 /* play_flag_wave_05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_flag_wave_05.png; sourceTree = "<group>"; };
+		0B554C081E51A5370030B196 /* play_flag_wave_06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_flag_wave_06.png; sourceTree = "<group>"; };
+		0B554C091E51A5370030B196 /* play_flag_wave_07.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_flag_wave_07.png; sourceTree = "<group>"; };
+		0B554C0A1E51A5370030B196 /* play_flag_wave_08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_flag_wave_08.png; sourceTree = "<group>"; };
+		0B554C0B1E51A5370030B196 /* play_flag_wave_09.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_flag_wave_09.png; sourceTree = "<group>"; };
+		0B554C0C1E51A5370030B196 /* play_flag_wave_10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_flag_wave_10.png; sourceTree = "<group>"; };
+		0B554C0D1E51A5370030B196 /* play_flag_wave_11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_flag_wave_11.png; sourceTree = "<group>"; };
+		0B554C0E1E51A5370030B196 /* play_flag_wave_12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_flag_wave_12.png; sourceTree = "<group>"; };
+		0B554C0F1E51A5370030B196 /* play_flag_wave_13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_flag_wave_13.png; sourceTree = "<group>"; };
+		0B554C101E51A5370030B196 /* play_flag_wave_14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_flag_wave_14.png; sourceTree = "<group>"; };
+		0B554C111E51A5370030B196 /* play_flag_wave_15.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_flag_wave_15.png; sourceTree = "<group>"; };
+		0B554C121E51A5370030B196 /* play_flag_wave_16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_flag_wave_16.png; sourceTree = "<group>"; };
+		0B554C131E51A5370030B196 /* play_flag_wave_17.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_flag_wave_17.png; sourceTree = "<group>"; };
+		0B554C141E51A5370030B196 /* play_flag_wave_18.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_flag_wave_18.png; sourceTree = "<group>"; };
+		0B554C281E51AF9B0030B196 /* WTJMDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTJMDViewController.h; sourceTree = "<group>"; };
+		0B554C291E51AF9B0030B196 /* WTJMDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTJMDViewController.m; sourceTree = "<group>"; };
+		0B554C2A1E51AF9B0030B196 /* WTJMDViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTJMDViewController.xib; sourceTree = "<group>"; };
+		0B554C2D1E51AFDE0030B196 /* WTJieMuXQViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTJieMuXQViewController.h; sourceTree = "<group>"; };
+		0B554C2E1E51AFDE0030B196 /* WTJieMuXQViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTJieMuXQViewController.m; sourceTree = "<group>"; };
+		0B554C2F1E51AFDE0030B196 /* WTJieMuXQViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTJieMuXQViewController.xib; sourceTree = "<group>"; };
+		0B612D211E4D5D95000D8FE9 /* FMDBTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDBTool.h; sourceTree = "<group>"; };
+		0B612D221E4D5D95000D8FE9 /* FMDBTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDBTool.m; sourceTree = "<group>"; };
+		0B612D251E4D5E24000D8FE9 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		0B612D261E4D5E24000D8FE9 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		0B612D271E4D5E24000D8FE9 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		0B612D281E4D5E24000D8FE9 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		0B612D291E4D5E24000D8FE9 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		0B612D2A1E4D5E24000D8FE9 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		0B612D2B1E4D5E24000D8FE9 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		0B612D2C1E4D5E24000D8FE9 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		0B612D2D1E4D5E24000D8FE9 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
+		0B612D2E1E4D5E24000D8FE9 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		0B612D2F1E4D5E24000D8FE9 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		0B7583F01DE938ED00E3D117 /* login_icon_microblog@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_icon_microblog@2x.png"; sourceTree = "<group>"; };
 		0B7583F11DE938ED00E3D117 /* login_icon_name@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_icon_name@2x.png"; sourceTree = "<group>"; };
 		0B7583F21DE938ED00E3D117 /* login_icon_password@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_icon_password@2x.png"; sourceTree = "<group>"; };
@@ -1352,6 +1437,7 @@
 		0B0C06121E24CD4300505CE4 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				0B13B0C11E4B32C5001963B3 /* View */,
 				0B0C06131E24CDB200505CE4 /* WTDingShiController.h */,
 				0B0C06141E24CDB200505CE4 /* WTDingShiController.m */,
 				0B0C06151E24CDB200505CE4 /* WTDingShiController.xib */,
@@ -1443,6 +1529,16 @@
 				0B0DC1BC1E0BBC9200CA584C /* UShareUI.framework */,
 			);
 			path = UMSocialUI;
+			sourceTree = "<group>";
+		};
+		0B13B0C11E4B32C5001963B3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0B13B0C21E4B333F001963B3 /* WTDingShiCell.h */,
+				0B13B0C31E4B333F001963B3 /* WTDingShiCell.m */,
+				0B13B0C41E4B333F001963B3 /* WTDingShiCell.xib */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		0B1580AD1E33426300DE2273 /* lib */ = {
@@ -1551,6 +1647,65 @@
 				0B4282751E1B543000FAC2BA /* AsyncSocket.m */,
 			);
 			path = socket;
+			sourceTree = "<group>";
+		};
+		0B554C021E51A5370030B196 /* play_flag_wave_01 */ = {
+			isa = PBXGroup;
+			children = (
+				0B554C031E51A5370030B196 /* play_flag_wave_01.png */,
+				0B554C041E51A5370030B196 /* play_flag_wave_02.png */,
+				0B554C051E51A5370030B196 /* play_flag_wave_03.png */,
+				0B554C061E51A5370030B196 /* play_flag_wave_04.png */,
+				0B554C071E51A5370030B196 /* play_flag_wave_05.png */,
+				0B554C081E51A5370030B196 /* play_flag_wave_06.png */,
+				0B554C091E51A5370030B196 /* play_flag_wave_07.png */,
+				0B554C0A1E51A5370030B196 /* play_flag_wave_08.png */,
+				0B554C0B1E51A5370030B196 /* play_flag_wave_09.png */,
+				0B554C0C1E51A5370030B196 /* play_flag_wave_10.png */,
+				0B554C0D1E51A5370030B196 /* play_flag_wave_11.png */,
+				0B554C0E1E51A5370030B196 /* play_flag_wave_12.png */,
+				0B554C0F1E51A5370030B196 /* play_flag_wave_13.png */,
+				0B554C101E51A5370030B196 /* play_flag_wave_14.png */,
+				0B554C111E51A5370030B196 /* play_flag_wave_15.png */,
+				0B554C121E51A5370030B196 /* play_flag_wave_16.png */,
+				0B554C131E51A5370030B196 /* play_flag_wave_17.png */,
+				0B554C141E51A5370030B196 /* play_flag_wave_18.png */,
+			);
+			path = play_flag_wave_01;
+			sourceTree = "<group>";
+		};
+		0B554C271E51AF6F0030B196 /* JieMuDan */ = {
+			isa = PBXGroup;
+			children = (
+				0B554C281E51AF9B0030B196 /* WTJMDViewController.h */,
+				0B554C291E51AF9B0030B196 /* WTJMDViewController.m */,
+				0B554C2A1E51AF9B0030B196 /* WTJMDViewController.xib */,
+				0B554C2D1E51AFDE0030B196 /* WTJieMuXQViewController.h */,
+				0B554C2E1E51AFDE0030B196 /* WTJieMuXQViewController.m */,
+				0B554C2F1E51AFDE0030B196 /* WTJieMuXQViewController.xib */,
+				0B4ED6831E52A16200EC4995 /* WTJMDCell.h */,
+				0B4ED6841E52A16200EC4995 /* WTJMDCell.m */,
+				0B4ED6851E52A16200EC4995 /* WTJMDCell.xib */,
+			);
+			name = JieMuDan;
+			sourceTree = "<group>";
+		};
+		0B612D241E4D5E24000D8FE9 /* FMDB */ = {
+			isa = PBXGroup;
+			children = (
+				0B612D251E4D5E24000D8FE9 /* FMDatabase.h */,
+				0B612D261E4D5E24000D8FE9 /* FMDatabase.m */,
+				0B612D271E4D5E24000D8FE9 /* FMDatabaseAdditions.h */,
+				0B612D281E4D5E24000D8FE9 /* FMDatabaseAdditions.m */,
+				0B612D291E4D5E24000D8FE9 /* FMDatabasePool.h */,
+				0B612D2A1E4D5E24000D8FE9 /* FMDatabasePool.m */,
+				0B612D2B1E4D5E24000D8FE9 /* FMDatabaseQueue.h */,
+				0B612D2C1E4D5E24000D8FE9 /* FMDatabaseQueue.m */,
+				0B612D2D1E4D5E24000D8FE9 /* FMDB.h */,
+				0B612D2E1E4D5E24000D8FE9 /* FMResultSet.h */,
+				0B612D2F1E4D5E24000D8FE9 /* FMResultSet.m */,
+			);
+			path = FMDB;
 			sourceTree = "<group>";
 		};
 		0B7583EF1DE938ED00E3D117 /* icon_Login&&regist */ = {
@@ -1729,10 +1884,16 @@
 		0BF2C5211DE2AC6000A42B3D /* WTimage */ = {
 			isa = PBXGroup;
 			children = (
+				0B554C021E51A5370030B196 /* play_flag_wave_01 */,
 				0B09A85E1E07E58500D60AC8 /* ZhuanJi */,
 				0BA47CB41DF519480000B322 /* WTceshi3.jpg */,
 				0BA47CB51DF519480000B322 /* WTceshi2.jpg */,
 				0BA47CB61DF519480000B322 /* WTceshi1.jpg */,
+				0B554C001E5185520030B196 /* XuanZhong.png */,
+				0B554BAD1E51555E0030B196 /* ChuCuoLe.png */,
+				0B554BAE1E51555E0030B196 /* WeiDengLu.png */,
+				0B554BAF1E51555E0030B196 /* WuShuJu.png */,
+				0B554BB01E51555E0030B196 /* WuWangLuo.png */,
 				0B30BA711DF17676000A75E2 /* menu.png */,
 				0B08D2D81E2B44F6005A2D6B /* AppIcon60x60@2x.png */,
 				0B08D2DA1E2B486F005A2D6B /* AppIcon80.png */,
@@ -1770,6 +1931,7 @@
 		0BF2C5231DE2ACC700A42B3D /* WTUtil */ = {
 			isa = PBXGroup;
 			children = (
+				0B612D241E4D5E24000D8FE9 /* FMDB */,
 				0B1580AD1E33426300DE2273 /* lib */,
 				0B0917ED1E2A0C5D00ADBFE1 /* SGQRCode */,
 				0B08EE7E1E14AD45007924A4 /* JSDownload */,
@@ -1795,6 +1957,8 @@
 				0B106EEE1DF8F7A30000E031 /* Singleton.h */,
 				0B106EEB1DF8F7700000E031 /* JQMusicTool.h */,
 				0B106EEC1DF8F7700000E031 /* JQMusicTool.m */,
+				0B612D211E4D5D95000D8FE9 /* FMDBTool.h */,
+				0B612D221E4D5D95000D8FE9 /* FMDBTool.m */,
 			);
 			name = WTUtil;
 			sourceTree = "<group>";
@@ -1922,6 +2086,7 @@
 		0BF2C56C1DE2F55C00A42B3D /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				0B554C271E51AF6F0030B196 /* JieMuDan */,
 				0BF2C56E1DE2F5B700A42B3D /* WTXiangJiangViewController.h */,
 				0BF2C56F1DE2F5B700A42B3D /* WTXiangJiangViewController.m */,
 				0BF2C5701DE2F5B700A42B3D /* WTXiangJiangViewController.xib */,
@@ -2273,19 +2438,25 @@
 				0B12979B1E08C9E6009027BC /* icon_zj_commit.png in Resources */,
 				0B09A8621E07E5EF00D60AC8 /* icon_zj_shu.png in Resources */,
 				0B1DF2CF1DE6AD2D00EE5FF2 /* mine_icon_play history@2x.png in Resources */,
+				0B554C241E51A5370030B196 /* play_flag_wave_16.png in Resources */,
 				0BFEFDAB1DE44346001FFD82 /* nav_background_normal@2x.png in Resources */,
 				0B08C4541E124050002851CC /* userNum.png in Resources */,
+				0B554C231E51A5370030B196 /* play_flag_wave_15.png in Resources */,
 				0B1DF2C81DE6AD2D00EE5FF2 /* mine_icon_234G@2x.png in Resources */,
 				0BFEFDA81DE44346001FFD82 /* home_btn_program details.png in Resources */,
 				0B0AEF911E0A2BAC00C58084 /* WTZhuanJiCell.xib in Resources */,
 				0B7584561DEE9C4D00E3D117 /* img_program_default.png in Resources */,
+				0B554C261E51A5370030B196 /* play_flag_wave_18.png in Resources */,
 				0B0918081E2A174100ADBFE1 /* erweiback.png in Resources */,
 				0B0858DC1DFE78FF00EA8DAD /* WTDTDetailViewController.xib in Resources */,
+				0B554C011E5185520030B196 /* XuanZhong.png in Resources */,
 				0B05BDB61E03AB6600CD4BEE /* WTLikeListViewController.xib in Resources */,
 				0B0BD4471DFFD72A00C4E236 /* WTDTController.xib in Resources */,
+				0B554C1B1E51A5370030B196 /* play_flag_wave_07.png in Resources */,
 				0B7584661DEECA0800E3D117 /* icon_more.png in Resources */,
 				0B1DF2CE1DE6AD2D00EE5FF2 /* mine_icon_my upload@2x.png in Resources */,
 				0BF2C4FE1DE2A36200A42B3D /* LaunchScreen.storyboard in Resources */,
+				0B554BB31E51555E0030B196 /* WuShuJu.png in Resources */,
 				0B08D2DB1E2B486F005A2D6B /* AppIcon80.png in Resources */,
 				0B08D2D91E2B44F6005A2D6B /* AppIcon60x60@2x.png in Resources */,
 				0B1EFED81DF01E1A0047CE75 /* WTDianTaiTableViewCell.xib in Resources */,
@@ -2293,12 +2464,15 @@
 				0B1DF2A91DE6942C00EE5FF2 /* mine_avatar bg.png in Resources */,
 				0B7583FA1DE938ED00E3D117 /* login_icon_phone@2x.png in Resources */,
 				0B8117A11DE80905007DE05D /* mine_set_icon_password@2x.png in Resources */,
+				0B554BB41E51555E0030B196 /* WuWangLuo.png in Resources */,
 				0B7584671DEECA0800E3D117 /* icon_share.png in Resources */,
 				0B7584041DE98DF200E3D117 /* back@2x.png in Resources */,
 				0BFEFDA61DE44346001FFD82 /* home_btn_last.png in Resources */,
 				0B7583FB1DE938ED00E3D117 /* login_icon_QQ@2x.png in Resources */,
+				0B554C251E51A5370030B196 /* play_flag_wave_17.png in Resources */,
 				0BF2C5A71DE3019B00A42B3D /* WTXiangTing_der@2x.png in Resources */,
 				0B75845E1DEE9C5C00E3D117 /* progressbar_circular@2x.png in Resources */,
+				0B554C1F1E51A5370030B196 /* play_flag_wave_11.png in Resources */,
 				0B75845D1DEE9C5C00E3D117 /* progressbar_cache.png in Resources */,
 				0BF2C5A31DE3019B00A42B3D /* WTXiangJiang_der@2x.png in Resources */,
 				0B1DF2D01DE6AD2D00EE5FF2 /* mine_icon_set@2x.png in Resources */,
@@ -2308,6 +2482,7 @@
 				0B0AEF571E0551AB007E9B64 /* WTPingLunCell.xib in Resources */,
 				0BC0DC211E02317800A19F64 /* WTSearchViewController.xib in Resources */,
 				0B75845C1DEE9C5C00E3D117 /* progressbar_bg.png in Resources */,
+				0B13B0C61E4B333F001963B3 /* WTDingShiCell.xib in Resources */,
 				0B05BDCA1E03B55600CD4BEE /* DianTaiViewController.xib in Resources */,
 				0B0858C01DFE52A800EA8DAD /* WTHelpViewController.xib in Resources */,
 				0B4282801E1B86A300FAC2BA /* WTBoFangCell.xib in Resources */,
@@ -2327,6 +2502,7 @@
 				0BF2C59B1DE3019B00A42B3D /* WTDownLoad_der@2x.png in Resources */,
 				0BA47CBA1DF519480000B322 /* WTceshi1.jpg in Resources */,
 				0B0858D11DFE554400EA8DAD /* WTRePsdController.xib in Resources */,
+				0B554C1D1E51A5370030B196 /* play_flag_wave_09.png in Resources */,
 				0B0C06171E24CDB200505CE4 /* WTDingShiController.xib in Resources */,
 				0B1DF27C1DE56BD100EE5FF2 /* WTBoFangViewController.xib in Resources */,
 				0BF2C5801DE2F65400A42B3D /* WTDownLoadViewController.xib in Resources */,
@@ -2334,15 +2510,19 @@
 				0BF2C5791DE2F5F500A42B3D /* WTXiangTingViewController.xib in Resources */,
 				0B7584421DED4CCD00E3D117 /* border-orange.png in Resources */,
 				0B05BDBB1E03AFF700CD4BEE /* AllViewController.xib in Resources */,
+				0B554C151E51A5370030B196 /* play_flag_wave_01.png in Resources */,
 				0B0C5DD11E25E9ED0033157D /* Intercom.png in Resources */,
 				0B0858D61DFE6C7900EA8DAD /* WTPingLunViewController.xib in Resources */,
 				0B12979D1E08C9E6009027BC /* icon_zj_likeer.png in Resources */,
 				0BF2C59F1DE3019B00A42B3D /* WTMain_der@2x.png in Resources */,
+				0B554C181E51A5370030B196 /* play_flag_wave_04.png in Resources */,
 				0B75845F1DEE9C5C00E3D117 /* progressbar_play.png in Resources */,
 				0BF2C5A41DE3019B00A42B3D /* WTXiangJiang_der@3x.png in Resources */,
 				0B0858B61DFE509900EA8DAD /* WTGuanYuViewController.xib in Resources */,
 				0B0A1C851E1DD99A0053D9E7 /* WTBoFangXQCell.xib in Resources */,
 				0B12979C1E08C9E6009027BC /* icon_zj_like.png in Resources */,
+				0B554C161E51A5370030B196 /* play_flag_wave_02.png in Resources */,
+				0B554C1C1E51A5370030B196 /* play_flag_wave_08.png in Resources */,
 				0B1DF2AA1DE6942C00EE5FF2 /* mine_default avatar_female.png in Resources */,
 				0B0CCA9E1E0CD6B60044C235 /* WTXiaZaiZhongController.xib in Resources */,
 				0BA47CB81DF519480000B322 /* WTceshi3.jpg in Resources */,
@@ -2356,9 +2536,11 @@
 				0B05BDCF1E03B56700CD4BEE /* TTSViewController.xib in Resources */,
 				0BF2C5721DE2F5B700A42B3D /* WTXiangJiangViewController.xib in Resources */,
 				0B8117A21DE80905007DE05D /* mine_set_icon_phone@2x.png in Resources */,
+				0B4ED6871E52A16200EC4995 /* WTJMDCell.xib in Resources */,
 				0BF2C59C1DE3019B00A42B3D /* WTDownLoad_der@3x.png in Resources */,
 				0B09A8561E07B6A100D60AC8 /* PL_biaoQ.png in Resources */,
 				0BA47CBF1DF539AA0000B322 /* WTFenLeiTableViewCell.xib in Resources */,
+				0B554C2C1E51AF9B0030B196 /* WTJMDViewController.xib in Resources */,
 				0BA47CB91DF519480000B322 /* WTceshi2.jpg in Resources */,
 				0BFEFDA71DE44346001FFD82 /* home_btn_next.png in Resources */,
 				0B1DF2991DE68DF800EE5FF2 /* mine_bg.png in Resources */,
@@ -2366,6 +2548,7 @@
 				0BA47CC31DF553DC0000B322 /* WTXian.png in Resources */,
 				0B7583FD1DE938ED00E3D117 /* login_icon_wechat@2x.png in Resources */,
 				0B7583F71DE938ED00E3D117 /* login_icon_microblog@2x.png in Resources */,
+				0B554C171E51A5370030B196 /* play_flag_wave_03.png in Resources */,
 				0B7584651DEECA0800E3D117 /* icon_download.png in Resources */,
 				0B1DF2D91DE6E52C00EE5FF2 /* WTLoginViewController.xib in Resources */,
 				0B0858C71DFE54A000EA8DAD /* WTUserNubController.xib in Resources */,
@@ -2375,8 +2558,11 @@
 				0B7583F91DE938ED00E3D117 /* login_icon_password@2x.png in Resources */,
 				0B1DF29B1DE68E0600EE5FF2 /* tab_bg.png in Resources */,
 				0B0DC1C71E0BBC9200CA584C /* read_me.txt in Resources */,
+				0B554C221E51A5370030B196 /* play_flag_wave_14.png in Resources */,
 				0B1EFEDE1DF031230047CE75 /* icon_local_station.png in Resources */,
+				0B554C1E1E51A5370030B196 /* play_flag_wave_10.png in Resources */,
 				0B0DC1C41E0BBC9200CA584C /* WeiboSDK.bundle in Resources */,
+				0B554C311E51AFDE0030B196 /* WTJieMuXQViewController.xib in Resources */,
 				0BF2C5A21DE3019B00A42B3D /* WTXiangJiang@3x.png in Resources */,
 				0BF2C4FB1DE2A36200A42B3D /* Assets.xcassets in Resources */,
 				0B7584461DED51E100E3D117 /* wt_play_stop@2x.png in Resources */,
@@ -2388,19 +2574,23 @@
 				0BF2C5A51DE3019B00A42B3D /* WTXiangTing@2x.png in Resources */,
 				0BD6B5441E15FC0C0039B88D /* DownLoad.plist in Resources */,
 				0B1DF2CC1DE6AD2D00EE5FF2 /* mine_icon_follow@2x.png in Resources */,
+				0B554BB21E51555E0030B196 /* WeiDengLu.png in Resources */,
 				0B12979E1E08C9E6009027BC /* icon_zj_share.png in Resources */,
 				0B8117A51DE80905007DE05D /* mine_set_icon_user name@2x.png in Resources */,
 				0BFEFDAE1DE44346001FFD82 /* nav_btn_search@2x.png in Resources */,
 				0B0DC1CB1E0BBC9200CA584C /* UMSocialSDKResources.bundle in Resources */,
 				0B09A8541E07B05D00D60AC8 /* WTLikeCell.xib in Resources */,
 				0B0858BB1DFE51B700EA8DAD /* WTFanKuiViewController.xib in Resources */,
+				0B554C1A1E51A5370030B196 /* play_flag_wave_06.png in Resources */,
 				0B7584021DE942FB00E3D117 /* WTRegisterViewController.xib in Resources */,
 				0B7584451DED51E100E3D117 /* wt_play_play@2x.png in Resources */,
 				0BF2C5551DE2B19100A42B3D /* LICENSE in Resources */,
 				0BFEFDAD1DE44346001FFD82 /* nav_btn_message@2x.png in Resources */,
+				0B554C211E51A5370030B196 /* play_flag_wave_13.png in Resources */,
 				0B1DF2BD1DE6A5C300EE5FF2 /* WTSheZhiViewController.xib in Resources */,
 				0BF2C5A81DE3019B00A42B3D /* WTXiangTing_der@3x.png in Resources */,
 				0BF2C5A01DE3019B00A42B3D /* WTMain_der@3x.png in Resources */,
+				0B554BB11E51555E0030B196 /* ChuCuoLe.png in Resources */,
 				0B0CCA991E0CD69A0044C235 /* WTYiXiaZaiController.xib in Resources */,
 				0BCFA1291DF66E2000CDED89 /* WTBoFangView.xib in Resources */,
 				0B81179F1DE80905007DE05D /* mine_set_icon_feedback@2x.png in Resources */,
@@ -2416,12 +2606,14 @@
 				0B75844F1DED7C1300E3D117 /* upload_icon_album.png in Resources */,
 				0B0DD9EE1E13B95E00FBEFB6 /* WTGengDuoController.xib in Resources */,
 				0B1DF2811DE56C1000EE5FF2 /* WTJieMuViewController.xib in Resources */,
+				0B554C201E51A5370030B196 /* play_flag_wave_12.png in Resources */,
 				0BFEFD991DE422F9001FFD82 /* logo.png in Resources */,
 				0B1DF2CD1DE6AD2D00EE5FF2 /* mine_icon_like@2x.png in Resources */,
 				0B7584511DED7C1300E3D117 /* upload_icon_time.png in Resources */,
 				0B1DF2CA1DE6AD2D00EE5FF2 /* mine_icon_codes@2x.png in Resources */,
 				0BFEFDA51DE44346001FFD82 /* home_btn_background@2x.png in Resources */,
 				0B1DF2891DE571DC00EE5FF2 /* WTDianTaiViewController.xib in Resources */,
+				0B554C191E51A5370030B196 /* play_flag_wave_05.png in Resources */,
 				0B09A85D1E07DAAE00D60AC8 /* WTZhuanJiViewController.xib in Resources */,
 				0B81179C1DE80905007DE05D /* mine_set_icon_about@2x.png in Resources */,
 				0B0918041E2A0C5D00ADBFE1 /* sound.caf in Resources */,
@@ -2464,6 +2656,7 @@
 				0BF2C5681DE2EEAD00A42B3D /* TabBarController.m in Sources */,
 				0B1DF2881DE571DC00EE5FF2 /* WTDianTaiViewController.m in Sources */,
 				0BF2C5511DE2B19100A42B3D /* AFSecurityPolicy.m in Sources */,
+				0B612D341E4D5E24000D8FE9 /* FMResultSet.m in Sources */,
 				0B7584331DED4B1900E3D117 /* NSData+ImageContentType.m in Sources */,
 				0B0918001E2A0C5D00ADBFE1 /* ScanSuccessJumpVC.m in Sources */,
 				0BF2C55C1DE2B19100A42B3D /* UIImageView+AFNetworking.m in Sources */,
@@ -2498,6 +2691,7 @@
 				0B7584381DED4B1900E3D117 /* SDWebImageDownloaderOperation.m in Sources */,
 				0B4282761E1B543000FAC2BA /* AsyncSocket.m in Sources */,
 				0B1297A71E090E89009027BC /* WTZJJMController.m in Sources */,
+				0B612D311E4D5E24000D8FE9 /* FMDatabaseAdditions.m in Sources */,
 				0B75843D1DED4B1900E3D117 /* UIImage+MultiFormat.m in Sources */,
 				0B75840E1DEBDA6500E3D117 /* WKWaitingProgressHUD.m in Sources */,
 				0B0A43211E1CF15A0085E2C8 /* WTBoFangJMCell.m in Sources */,
@@ -2531,6 +2725,7 @@
 				0B0A1C891E1E20580053D9E7 /* CityModel.m in Sources */,
 				0B1077731E1F47A5005AA9F3 /* WTLikeView.m in Sources */,
 				0B1EFED21DF002880047CE75 /* SDCycleScrollView.m in Sources */,
+				0B612D231E4D5D95000D8FE9 /* FMDBTool.m in Sources */,
 				0BC0DC2A1E02655400A19F64 /* WTBaseViewController.m in Sources */,
 				0B0AB65B1DF801710065D36F /* JSONModel+networking.m in Sources */,
 				0B7584341DED4B1900E3D117 /* SDImageCache.m in Sources */,
@@ -2545,6 +2740,7 @@
 				0B1DF2801DE56C1000EE5FF2 /* WTJieMuViewController.m in Sources */,
 				0B7584351DED4B1900E3D117 /* SDWebImageCompat.m in Sources */,
 				0B0CCA9D1E0CD6B60044C235 /* WTXiaZaiZhongController.m in Sources */,
+				0B554C2B1E51AF9B0030B196 /* WTJMDViewController.m in Sources */,
 				0BF2C5541DE2B19100A42B3D /* AFURLSessionManager.m in Sources */,
 				0B0858BF1DFE52A800EA8DAD /* WTHelpViewController.m in Sources */,
 				0B42827F1E1B86A300FAC2BA /* WTBoFangCell.m in Sources */,
@@ -2565,6 +2761,7 @@
 				0B08589F1DFE3D6100EA8DAD /* MJRefreshComponent.m in Sources */,
 				0B7584401DED4B1900E3D117 /* UIView+WebCacheOperation.m in Sources */,
 				0BFEFD901DE420E8001FFD82 /* MASLayoutConstraint.m in Sources */,
+				0B554C301E51AFDE0030B196 /* WTJieMuXQViewController.m in Sources */,
 				0B0858A01DFE3D6100EA8DAD /* MJRefreshFooter.m in Sources */,
 				0B0918021E2A0C5D00ADBFE1 /* SGScanningQRCodeVC.m in Sources */,
 				0B0918061E2A0C5D00ADBFE1 /* SGScanningQRCodeView.m in Sources */,
@@ -2579,6 +2776,7 @@
 				0B1EFED01DF002880047CE75 /* TAPageControl.m in Sources */,
 				0BF2C5501DE2B19100A42B3D /* AFNetworkReachabilityManager.m in Sources */,
 				0B05BDBA1E03AFF700CD4BEE /* AllViewController.m in Sources */,
+				0B13B0C51E4B333F001963B3 /* WTDingShiCell.m in Sources */,
 				0BCFA1271DF66CD700CDED89 /* WTBoFangView.m in Sources */,
 				0B08EE871E14AD57007924A4 /* JSDownLoadManager.m in Sources */,
 				0B1DF2951DE58C0C00EE5FF2 /* NSString+NullOfString.m in Sources */,
@@ -2589,10 +2787,12 @@
 				0B1DF27B1DE56BD100EE5FF2 /* WTBoFangViewController.m in Sources */,
 				0B0AEF561E0551AB007E9B64 /* WTPingLunCell.m in Sources */,
 				0B0AB6551DF801710065D36F /* JSONModelArray.m in Sources */,
+				0B4ED6861E52A16200EC4995 /* WTJMDCell.m in Sources */,
 				0BF2C4F01DE2A36200A42B3D /* main.m in Sources */,
 				0BF2C5711DE2F5B700A42B3D /* WTXiangJiangViewController.m in Sources */,
 				0B1DF2841DE5708800EE5FF2 /* SKMainScrollView.m in Sources */,
 				0B1DF28D1DE5721100EE5FF2 /* WTFenLeiViewController.m in Sources */,
+				0B612D331E4D5E24000D8FE9 /* FMDatabaseQueue.m in Sources */,
 				0B0CCAA21E0CDE410044C235 /* WTXiaZaiCell.m in Sources */,
 				0B0858AD1DFE3D6100EA8DAD /* NSBundle+MJRefresh.m in Sources */,
 				0B7584371DED4B1900E3D117 /* SDWebImageDownloader.m in Sources */,
@@ -2601,10 +2801,12 @@
 				0B75843C1DED4B1900E3D117 /* UIImage+GIF.m in Sources */,
 				0BFEFD8D1DE420E8001FFD82 /* MASCompositeConstraint.m in Sources */,
 				0B0858C61DFE54A000EA8DAD /* WTUserNubController.m in Sources */,
+				0B612D301E4D5E24000D8FE9 /* FMDatabase.m in Sources */,
 				0B09A8531E07B05D00D60AC8 /* WTLikeCell.m in Sources */,
 				0BF2C5561DE2B19100A42B3D /* README.md in Sources */,
 				0BFEFD911DE420E8001FFD82 /* MASViewAttribute.m in Sources */,
 				0B1DF2961DE58C0C00EE5FF2 /* UIColor+SKHexColor.m in Sources */,
+				0B612D321E4D5E24000D8FE9 /* FMDatabasePool.m in Sources */,
 				0B7584391DED4B1900E3D117 /* SDWebImageManager.m in Sources */,
 				0B0918031E2A0C5D00ADBFE1 /* SGAlertView.m in Sources */,
 				0B0AB65D1DF801710065D36F /* JSONValueTransformer.m in Sources */,

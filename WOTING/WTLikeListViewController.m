@@ -36,6 +36,11 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scollerViewChange:) name:@"LIKELISTCHANGE" object:nil];
     
+    if ([_label isEqualToString:@"播放历史"]) {
+        
+        FMDatabase *fm = [FMDBTool createDatabaseAndTable:nil];
+    }
+    
     [self initTiteBarView];
     [self initScrollerView];
     

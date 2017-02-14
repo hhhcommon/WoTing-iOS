@@ -129,10 +129,10 @@
     NSArray *titles = dataFenJArray[indexPath.row][@"children"];
     if (titles.count <= 4) {
         
-        return POINT_Y(200);
+        return 80;
     }else{
         
-        return POINT_Y(250);
+        return 100;
     }
     
     

@@ -105,6 +105,7 @@
                             <constraint firstAttribute="width" constant="33" id="qxB-Ss-5XO"/>
                         </constraints>
                         <state key="normal" image="icon_download.png"/>
+                        <state key="selected" image="home_btn_program details.png"/>
                         <connections>
                             <action selector="downLoadBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="V2G-9r-F30"/>
                         </connections>
@@ -157,15 +158,16 @@
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hng-bw-Kmj">
-                        <rect key="frame" x="95" y="239" width="32" height="20"/>
+                        <rect key="frame" x="85" y="239" width="52" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="AJE-lW-nU0"/>
-                            <constraint firstAttribute="width" constant="32" id="ucK-K7-LEY"/>
+                            <constraint firstAttribute="width" constant="52" id="ucK-K7-LEY"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                         <state key="normal" title="下载">
                             <color key="titleColor" red="1" green="0.38915392440000002" blue="0.1089368786" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
+                        <state key="selected" title="节目单"/>
                         <connections>
                             <action selector="downLoadBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Ev1-Tm-JNW"/>
                         </connections>
@@ -261,7 +263,7 @@
                     <constraint firstItem="cNS-b3-XaX" firstAttribute="top" secondItem="NEo-cI-7Vo" secondAttribute="bottom" constant="8" id="7Y8-1x-fEc"/>
                     <constraint firstAttribute="trailingMargin" secondItem="cfz-IE-MvW" secondAttribute="trailing" constant="18" id="9Et-Ol-8n2"/>
                     <constraint firstItem="912-ld-HE7" firstAttribute="top" secondItem="Zra-Cj-3dt" secondAttribute="bottom" constant="2" id="AV0-e7-UAc"/>
-                    <constraint firstItem="hng-bw-Kmj" firstAttribute="leading" secondItem="reS-ao-jHz" secondAttribute="trailing" constant="32" id="BWd-DV-9ls"/>
+                    <constraint firstItem="hng-bw-Kmj" firstAttribute="leading" secondItem="reS-ao-jHz" secondAttribute="trailing" constant="22" id="BWd-DV-9ls"/>
                     <constraint firstItem="DEr-vI-mTK" firstAttribute="top" secondItem="cNS-b3-XaX" secondAttribute="bottom" constant="15" id="DOR-42-Z3U"/>
                     <constraint firstItem="avk-um-q5i" firstAttribute="top" secondItem="ClA-al-p2a" secondAttribute="bottom" constant="2" id="DpZ-Vx-nSp"/>
                     <constraint firstItem="hng-bw-Kmj" firstAttribute="top" secondItem="a6w-pa-lJl" secondAttribute="bottom" constant="2" id="EX0-io-Qxa"/>
@@ -295,7 +297,7 @@
                     <constraint firstItem="a6w-pa-lJl" firstAttribute="top" secondItem="DEr-vI-mTK" secondAttribute="bottom" constant="8" id="mnS-ua-O9s"/>
                     <constraint firstItem="Zra-Cj-3dt" firstAttribute="top" secondItem="DEr-vI-mTK" secondAttribute="bottom" constant="8" id="nED-pd-pZc"/>
                     <constraint firstItem="ClA-al-p2a" firstAttribute="top" secondItem="DEr-vI-mTK" secondAttribute="bottom" constant="8" id="oD9-p9-ZT7"/>
-                    <constraint firstItem="avk-um-q5i" firstAttribute="leading" secondItem="hng-bw-Kmj" secondAttribute="trailing" constant="35" id="sk3-Tp-FAj"/>
+                    <constraint firstItem="avk-um-q5i" firstAttribute="leading" secondItem="hng-bw-Kmj" secondAttribute="trailing" constant="25" id="sk3-Tp-FAj"/>
                     <constraint firstItem="reS-ao-jHz" firstAttribute="top" secondItem="rCM-uc-aFk" secondAttribute="bottom" constant="2" id="uOb-GP-Ys8"/>
                     <constraint firstItem="cfz-IE-MvW" firstAttribute="leading" secondItem="NEo-cI-7Vo" secondAttribute="trailing" constant="17" id="wBa-5d-7k4"/>
                 </constraints>
@@ -304,19 +306,22 @@
                 <outlet property="ContentImgV" destination="xHC-Or-Vxh" id="dlZ-gC-JYq"/>
                 <outlet property="beforeBtn" destination="lwy-Oh-Ta6" id="fYr-h5-Le8"/>
                 <outlet property="beginBtn" destination="wzn-hC-7ng" id="Ycs-e5-EOq"/>
+                <outlet property="downLoadImgv" destination="a6w-pa-lJl" id="RGm-oT-ZdJ"/>
+                <outlet property="downLoadTitImgv" destination="hng-bw-Kmj" id="PC7-Tb-MuW"/>
                 <outlet property="nameLab" destination="NEo-cI-7Vo" id="dCu-wt-MgO"/>
                 <outlet property="nextBtn" destination="laq-Kb-7Kc" id="nCZ-zN-9Zx"/>
                 <outlet property="timeLab1" destination="dmI-rJ-ADc" id="s2C-Tx-Lgj"/>
                 <outlet property="timeLab2" destination="Nrk-P0-ge0" id="yTe-zs-NLn"/>
                 <outlet property="wtSlider" destination="DEr-vI-mTK" id="9Sj-6y-Wor"/>
             </connections>
-            <point key="canvasLocation" x="25" y="167"/>
+            <point key="canvasLocation" x="25" y="166.5"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="WT_BoFang_Kuang.png" width="130" height="130"/>
         <image name="home_btn_last.png" width="48" height="48"/>
         <image name="home_btn_next.png" width="48" height="48"/>
+        <image name="home_btn_program details.png" width="48" height="48"/>
         <image name="home_btn_traffic.png" width="48" height="48"/>
         <image name="home_btn_voice search.png" width="48" height="48"/>
         <image name="icon_comment.png" width="48" height="48"/>

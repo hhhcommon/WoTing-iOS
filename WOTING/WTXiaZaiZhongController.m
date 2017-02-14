@@ -34,6 +34,21 @@
     _XZZTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     [self registerTableCell];
+    
+    if (_urls.count == 0||_urls == nil) {
+        
+        UIImageView *ImgV = [[UIImageView alloc] init];
+        ImgV.image = [UIImage imageNamed:@"WuShuJu.png"];
+        [self.view addSubview:ImgV];
+        __weak WTXiaZaiZhongController *weakSelf = self;
+        [ImgV mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.centerX.equalTo(weakSelf.view);
+            make.centerY.equalTo(weakSelf.view);
+            make.width.mas_equalTo(K_Screen_Width/2);
+            make.height.mas_equalTo(K_Screen_Width/2);
+        }];
+    }
 }
 
 - (void)registerTableCell {
@@ -105,6 +120,20 @@
             
             [_urls removeObject:dict];
             [_XZZTableView reloadData];
+            if (_urls.count == 0) {
+                
+                UIImageView *ImgV = [[UIImageView alloc] init];
+                ImgV.image = [UIImage imageNamed:@"WuShuJu.png"];
+                [self.view addSubview:ImgV];
+                __weak WTXiaZaiZhongController *weakSelf = self;
+                [ImgV mas_makeConstraints:^(MASConstraintMaker *make) {
+                   
+                    make.centerX.equalTo(weakSelf.view);
+                    make.centerY.equalTo(weakSelf.view);
+                    make.width.mas_equalTo(K_Screen_Width/2);
+                    make.height.mas_equalTo(K_Screen_Width/2);
+                }];
+            }
 
             writeDict = [self PlistDictChange:dict];//取部分数据存储
             

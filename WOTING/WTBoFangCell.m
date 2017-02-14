@@ -26,7 +26,17 @@
 -(void)setPlayingMusic:(WTBoFangModel *)playingMusic{
     _playingMusic = playingMusic;
     
+    NSString *MediaType = playingMusic.MediaType;
     
+    if ([MediaType isEqualToString:@"AUDIO"]) {
+        
+        _downLoadImgv.selected = NO;
+        _downLoadImgv.selected = NO;
+    }else if ([MediaType isEqualToString:@"RADIO"]) {
+        
+        _downLoadImgv.selected = YES;
+        _downLoadImgv.selected = YES;
+    }
     //歌曲名
     self.nameLab.text = playingMusic.ContentName;
 //    self.nameLab.marqueeType = MLContinuous;
@@ -119,11 +129,19 @@
 - (IBAction)beforeBtnClick:(id)sender {
     
     [self notifyDelegateWithBtnType:BtnTypePrevious];
+    if (_beginBtn.selected == YES) {
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"BRGINBTNYES" object:nil];
+    }
 }
 //下一首
 - (IBAction)nextBtnClick:(id)sender {
     
     [self notifyDelegateWithBtnType:BtnTypeNext];
+    if (_beginBtn.selected == YES) {
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"BRGINBTNYES" object:nil];
+    }
 }
 //播放.暂停
 - (IBAction)beginBtnClick:(id)sender {
@@ -137,6 +155,7 @@
         
         button.selected = YES;
         [self notifyDelegateWithBtnType:BtnTypePlay];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"BRGINBTNYES" object:nil];
     }else{//暂停音乐
         NSLog(@"暂停音乐");
         //2.如果当前是暂停的状态，按钮的图片更改为播放的状态
@@ -186,6 +205,7 @@
 //当手指弹起的时候触发
 -(void)touchUp:(UISlider *)slider{
     [[JQMusicTool sharedJQMusicTool].player play];
+    _beginBtn.selected = YES;
 }
 //当值发生变化一直触发
 -(void)valueChange:(UISlider *)slider{
@@ -197,6 +217,8 @@
     
     //seekToTime 跳到指定的播放时间
     [[JQMusicTool sharedJQMusicTool].player seekToTime:currentTime];
+    
+    _beginBtn.selected = YES;
 }
 
 - (void)dealloc {
@@ -225,7 +247,15 @@
 //下载
 - (IBAction)downLoadBtn:(id)sender {
     
-    [self notifyDelegateWithBtnType:BtnTypeDownLoad];
+    if (_downLoadImgv.selected == YES) {
+        
+        [self notifyDelegateWithBtnType:BtnTypeJMD];
+
+    }else {
+        
+        [self notifyDelegateWithBtnType:BtnTypeDownLoad];
+    }
+
 }
 //分享
 - (IBAction)shareBtnClick:(id)sender {

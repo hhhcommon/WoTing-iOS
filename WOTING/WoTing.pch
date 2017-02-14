@@ -34,6 +34,7 @@
 #import "E_HUDView.h"
 #import "AutomatePlist.h"
 //#import "MediaManager.h"
+#import "FMDBTool.h"    
 
 #import "AFNetworking.h"
 #import "UIImageView+WebCache.h"
@@ -101,6 +102,9 @@
 
 /** 喜欢列表 */
 #define WoTing_likeList         (SKInterFaceServer@"content/getFavoriteList.do")
+
+/** 节目单数据 */
+#define WoTing_JMD          (SKInterFaceServer@"content/getBCProgramme.do")
 
 /** 获取评论列表 */
 #define WoTing_PLgetList        (SKInterFaceServer@"discuss/article/getList.do")

@@ -36,6 +36,14 @@
     [self createrRegisterCell];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    /** 上拉加载更多 */
+    _jqTabView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadDataGD)];
+}
+
 - (void)createrRegisterCell {
     
     UINib *cellNib = [UINib nibWithNibName:@"WTDianTaiTableViewCell" bundle:nil];
@@ -67,7 +75,7 @@
     }else if (_type == 3){
         
         //国家台
-        parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", @"RADIO",@"MediaType", @"9",@"CatalogType",@"3",@"ResultType",@"20",@"PerSize",@"dtfl2001",@"CatalogId",nil];
+        parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", @"RADIO",@"MediaType", @"9",@"CatalogType",@"3",@"ResultType",@"30",@"PageSize",@"dtfl2001",@"CatalogId",nil];
         
         
     }else {
@@ -80,6 +88,7 @@
     
     
     [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
+        [_jqTabView.mj_header endRefreshing];
         
         NSDictionary *resultDict = (NSDictionary *)response;
         
@@ -87,8 +96,33 @@
         if ([ReturnType isEqualToString:@"1001"]) {
             
             NSDictionary *ResultList = resultDict[@"ResultList"];
-            dataCellArr = ResultList[@"List"];
+//                        dataCellArr = ResultList[@"List"];
+            [dataCellArr addObjectsFromArray:ResultList[@"List"]];
             
+            if (_type == 3) {   //国家台
+                NSMutableArray *Zarray = [NSMutableArray arrayWithCapacity:0];
+                NSMutableArray *Garray = [NSMutableArray arrayWithCapacity:0];
+                NSMutableDictionary *dictZ = [NSMutableDictionary dictionaryWithCapacity:0];
+                NSMutableDictionary *dictG = [NSMutableDictionary dictionaryWithCapacity:0];
+                [dictZ setObject:@"中央台" forKey:@"TGP"];
+                [dictG setObject:@"国际台" forKey:@"TGP"];
+                for (NSDictionary *dict in ResultList[@"List"]) {
+                    
+                    if ([dict[@"ContentPub"] isEqualToString:@"中央人民广播电台"]) {
+                        
+                        [Zarray addObject:dict];
+                        [dictZ setObject:Zarray forKey:@"List"];
+                    }else if ([dict[@"ContentPub"] isEqualToString:@"中国国际广播电台"]) {
+                        
+                        [Garray addObject:dict];
+                        [dictG setObject:Garray forKey:@"List"];
+                    }
+                }
+                
+                [dataCellArr removeAllObjects];
+                [dataCellArr addObject:dictZ];
+                [dataCellArr addObject:dictG];
+            }
             
             [_jqTabView reloadData];
             
@@ -100,7 +134,7 @@
     } fail:^(NSError *error) {
         
         
-        NSLog(@"%@", error);
+        [_jqTabView.mj_header endRefreshing];
         
     }];
     
@@ -108,7 +142,26 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return dataCellArr.count;
+    
+    if (_type == 3) {
+        
+        NSArray *array = dataCellArr[section][@"List"];
+        return array.count;
+    }else {
+        
+        return dataCellArr.count;
+    }
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
+    if (_type == 3) {
+        
+        return dataCellArr.count;
+    }else {
+        
+        return 0;
+    }
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -122,7 +175,14 @@
         cell = [[WTDianTaiTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     }
     
-    NSDictionary *dict = dataCellArr[indexPath.row];
+    NSDictionary *dict;
+    if (_type == 3) {
+        
+        dict = dataCellArr[indexPath.section][@"List"][indexPath.row];
+    }else {
+        
+        dict = dataCellArr[indexPath.row];
+    }
     
     [cell setCellWithDict:dict];
     
@@ -130,7 +190,40 @@
     return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    
+    return 35;
+}
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    
+    if (_type == 3) {
+       
+        UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
+        view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        
+        UILabel *labeltitle = [[UILabel alloc] init];
+        labeltitle.text = dataCellArr[section][@"TGP"];
+        labeltitle.font = [UIFont boldSystemFontOfSize:15];
+        labeltitle.textColor = [UIColor skTitleCenterBlackColor];
+        [view addSubview:labeltitle];
+        
+        [labeltitle mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.mas_equalTo(20);
+            make.top.mas_equalTo(10);
+            make.width.mas_equalTo(120);
+            make.height.mas_equalTo(20);
+        }];
+        
+        return view;
+        
+    }else {
+        
+        return 0;
+    }
+    
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     

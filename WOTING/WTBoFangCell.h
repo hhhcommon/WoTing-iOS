@@ -16,6 +16,7 @@ typedef enum {
     BtnTypeNext,//下一首
     BtnTypeLike,//喜欢
     BtnTypeDownLoad,//下载
+    BtnTypeJMD,//节目单
     BtnTypeShare,//分享
     BtnTypeCommit,//评论
     BtnTypeMore,     //更多
@@ -56,6 +57,8 @@ typedef enum {
 - (IBAction)commitBtnClick:(id)sender;
 - (IBAction)moreBtnClick:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UIButton *downLoadImgv;
+@property (weak, nonatomic) IBOutlet UIButton *downLoadTitImgv;
 
 
 @property(nonatomic,strong)WTBoFangModel *playingMusic;//当前播放的音乐

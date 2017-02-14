@@ -35,6 +35,14 @@
     [self loadDTLike];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    /** 上拉加载更多 */
+    _DTTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadDTLike)];
+}
+
 //注册
 - (void)registerTabViewCell{
     
@@ -72,7 +80,7 @@
     }
     
     [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
-        
+        [_DTTableView.mj_header endRefreshing];
         
         NSDictionary *resultDict = (NSDictionary *)response;
         
@@ -80,6 +88,7 @@
         if ([ReturnType isEqualToString:@"1001"]) {
             
             NSDictionary *ResultList = resultDict[@"ResultList"];
+            [_dataDTArr removeAllObjects];
             
             if (_SearchStr == nil) {
                 
@@ -114,7 +123,7 @@
         
     } fail:^(NSError *error) {
         
-        NSLog(@"%@", error);
+        [_DTTableView.mj_header endRefreshing];
         
     }];
     
