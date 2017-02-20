@@ -12,10 +12,15 @@
 
 #import "WTDianTaiTableViewCell.h"
 
+#import "WTXJHeaderView.h"
+
 @interface WTDTDetailViewController ()<UITableViewDelegate, UITableViewDataSource>{
     
     
     NSMutableArray  *dataCellArr;// 数据源数组
+    NSString        *BeginCatalogId; //ID
+    
+    WTXJHeaderView      *XJsectionHView;
 }
 
 @end
@@ -40,8 +45,9 @@
     
     [super viewWillAppear:animated];
     
-    /** 上拉加载更多 */
+    /** 下拉刷新 */
     _jqTabView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadDataGD)];
+    _jqTabView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoveData)];
 }
 
 - (void)createrRegisterCell {
@@ -59,7 +65,6 @@
     NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
     NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
     
-    //"MediaType":"",//全部
     
     NSDictionary *parameters;
     
@@ -80,7 +85,8 @@
         
     }else {
         //地域选择
-        parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", @"RADIO",@"MediaType", @"2",@"CatalogType",@"3",@"ResultType",@"10",@"PerSize",_contentID,@"CatalogId",nil];
+        parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", @"RADIO",@"MediaType", @"2",@"CatalogType",@"1",@"ResultType",@"10",@"PerSize",_contentID,@"CatalogId",@"",@"BeginCatalogId",nil];
+        
     }
     
     
@@ -96,8 +102,13 @@
         if ([ReturnType isEqualToString:@"1001"]) {
             
             NSDictionary *ResultList = resultDict[@"ResultList"];
-//                        dataCellArr = ResultList[@"List"];
+            [dataCellArr removeAllObjects];
             [dataCellArr addObjectsFromArray:ResultList[@"List"]];
+            
+            if (_type == 2) {
+                
+                BeginCatalogId = ResultList[@"BeginCatalogId"];
+            }
             
             if (_type == 3) {   //国家台
                 NSMutableArray *Zarray = [NSMutableArray arrayWithCapacity:0];
@@ -140,6 +151,106 @@
     
 }
 
+//加载更多
+- (void)loadMoveData {
+    
+    static NSInteger page = 2;
+    NSString *pageStr = [NSString stringWithFormat:@"%ld",page];
+    
+    NSString *IMEI = [AutomatePlist readPlistForKey:@"IMEI"];
+    NSString *ScreenSize = [AutomatePlist readPlistForKey:@"ScreenSize"];
+    NSString *MobileClass = [AutomatePlist readPlistForKey:@"MobileClass"];
+    NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
+    NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
+    
+    
+    NSDictionary *parameters;
+    
+    if (_type == 0) {
+        //电台详情
+        parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", @"RADIO",@"MediaType", @"1",@"CatalogType",@"3",@"ResultType",@"10",@"PerSize",_contentID,@"CatalogId",pageStr,@"Page",nil];
+    }else if (_type == 1){
+        
+        //网络台
+        parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", @"RADIO",@"MediaType", @"9",@"CatalogType",@"3",@"ResultType",@"10",@"PerSize",@"dtfl2002",@"CatalogId",pageStr,@"Page",nil];
+        
+        
+    }else if (_type == 3){
+        
+        //国家台
+        parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", @"RADIO",@"MediaType", @"9",@"CatalogType",@"3",@"ResultType",@"30",@"PageSize",@"dtfl2001",@"CatalogId",pageStr,@"Page",nil];
+        
+        
+    }else {
+        //地域选择
+        parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", @"RADIO",@"MediaType", @"2",@"CatalogType",@"1",@"ResultType",@"10",@"PerSize",_contentID,@"CatalogId",BeginCatalogId,@"BeginCatalogId",pageStr,@"Page",nil];
+        
+    }
+    
+    
+    NSString *login_Str = WoTing_GetContents;
+    
+    
+    [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
+        [_jqTabView.mj_footer endRefreshing];
+        
+        NSDictionary *resultDict = (NSDictionary *)response;
+        
+        NSString  *ReturnType = [resultDict objectForKey:@"ReturnType"];
+        if ([ReturnType isEqualToString:@"1001"]) {
+            
+            NSDictionary *ResultList = resultDict[@"ResultList"];
+            
+            [dataCellArr addObject:ResultList[@"List"]];
+            
+            if (_type == 2) {
+                
+                BeginCatalogId = ResultList[@"BeginCatalogId"];
+            }
+            
+            if (_type == 3) {   //国家台
+                NSMutableArray *Zarray = [NSMutableArray arrayWithCapacity:0];
+                NSMutableArray *Garray = [NSMutableArray arrayWithCapacity:0];
+                NSMutableDictionary *dictZ = [NSMutableDictionary dictionaryWithCapacity:0];
+                NSMutableDictionary *dictG = [NSMutableDictionary dictionaryWithCapacity:0];
+                [dictZ setObject:@"中央台" forKey:@"TGP"];
+                [dictG setObject:@"国际台" forKey:@"TGP"];
+                for (NSDictionary *dict in ResultList[@"List"]) {
+                    
+                    if ([dict[@"ContentPub"] isEqualToString:@"中央人民广播电台"]) {
+                        
+                        [Zarray addObject:dict];
+                        [dictZ setObject:Zarray forKey:@"List"];
+                    }else if ([dict[@"ContentPub"] isEqualToString:@"中国国际广播电台"]) {
+                        
+                        [Garray addObject:dict];
+                        [dictG setObject:Garray forKey:@"List"];
+                    }
+                }
+                
+                [dataCellArr removeAllObjects];
+                [dataCellArr addObject:dictZ];
+                [dataCellArr addObject:dictG];
+            }
+            
+            [_jqTabView reloadData];
+            
+        }else if ([ReturnType isEqualToString:@"T"]){
+            
+            [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
+        }
+        
+    } fail:^(NSError *error) {
+        
+        
+        [_jqTabView.mj_footer endRefreshing];
+        
+    }];
+    
+    
+    
+}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
@@ -158,9 +269,12 @@
     if (_type == 3) {
         
         return dataCellArr.count;
+    }else if (_type == 2){
+        
+        return 3;
     }else {
         
-        return 0;
+        return 1;
     }
 }
 
@@ -179,6 +293,9 @@
     if (_type == 3) {
         
         dict = dataCellArr[indexPath.section][@"List"][indexPath.row];
+    }else if (_type == 2){
+        
+        dict = dataCellArr[indexPath.section][@"List"][indexPath.row];
     }else {
         
         dict = dataCellArr[indexPath.row];
@@ -192,7 +309,14 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 35;
+    if (_type == 3 || _type == 2) {
+        
+        return 35;
+    }else {
+        
+        return 0;
+    }
+    
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -217,6 +341,16 @@
         }];
         
         return view;
+        
+    }else if (_type == 2) {
+        
+        XJsectionHView = [[WTXJHeaderView alloc] init];
+        XJsectionHView.delegate = self;
+        XJsectionHView.NameLab.text = dataCellArr[section][@"CatalogName"];
+        XJsectionHView.NameStr = dataCellArr[section][@"CatalogName"];
+        XJsectionHView.contentId = dataCellArr[section][@"CatalogId"];
+        
+        return XJsectionHView;
         
     }else {
         

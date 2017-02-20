@@ -12,5 +12,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *JieMuDanTab;
 
 @property (nonatomic, copy) NSString *bcId; //节目ID
+@property (nonatomic, copy) NSString *timeSp;
+@property (nonatomic, strong) NSMutableArray  *dataJMDArr;
 
 @end

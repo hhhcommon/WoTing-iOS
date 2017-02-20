@@ -23,7 +23,7 @@
 
 - (void)setCellWithDict:(NSDictionary *)dict{
     
-    if (![dict isKindOfClass:[NSNull class]]) {
+//    if (![dict isKindOfClass:[NSNull class]]) {
         
         //图片
         [_ContentImg sd_setImageWithURL:[NSURL URLWithString:[NSString NULLToString:dict[@"ContentImg"]]] placeholderImage:[UIImage imageNamed:@"img_radio_default"]];
@@ -31,14 +31,19 @@
         //标题
         _ContentName.text = [NSString NULLToString:dict[@"ContentName"]];
         
-        //我听
-        _WTLab.text = [NSString NULLToString:dict[@"ContentPub"]];
-        
+        //我听[4]	(null)	@"IsPlaying" : @"体育新世界——金戈铁马"
+        if ([[NSString NULLToString:dict[@"IsPlaying"]] isEqualToString:@""]) {
+            
+            _WTLab.text = @"暂无节目单";
+        }else {
+            
+            _WTLab.text = [NSString NULLToString:dict[@"IsPlaying"]];
+        }
         //听众
-        _PlayCount.text = [NSString NULLToString:dict[@"PlayCount"]];
-    }else{
-        
-    }
+        _PlayCount.text = [NSString stringWithFormat:@"%@",[dict[@"PlayCount"] stringValue]];
+//    }else{
+//        
+//    }
 
 }
 

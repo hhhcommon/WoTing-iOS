@@ -16,6 +16,16 @@
     SKMainScrollView    *contentScrollView;
     UIView              *titleView;//标识栏
     UIImageView         *barLineImageView;//标识条
+    
+    NSString            *ENDStr;    //当前时间戳
+    NSMutableArray      *dataJMDArr1;    //节目单数据 1-7
+    NSMutableArray      *dataJMDArr2;
+    NSMutableArray      *dataJMDArr3;
+    NSMutableArray      *dataJMDArr4;
+    NSMutableArray      *dataJMDArr5;
+    NSMutableArray      *dataJMDArr6;
+    NSMutableArray      *dataJMDArr7;
+    NSInteger           day;        //当前星期几
 }
 
 @end
@@ -25,11 +35,77 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    dataJMDArr1 = [NSMutableArray arrayWithCapacity:0];
+    dataJMDArr2 = [NSMutableArray arrayWithCapacity:0];
+    dataJMDArr3 = [NSMutableArray arrayWithCapacity:0];
+    dataJMDArr4 = [NSMutableArray arrayWithCapacity:0];
+    dataJMDArr5 = [NSMutableArray arrayWithCapacity:0];
+    dataJMDArr6 = [NSMutableArray arrayWithCapacity:0];
+    dataJMDArr7 = [NSMutableArray arrayWithCapacity:0];
     
-    [self initTiteBarView];
-    [self initScrollerView];
+    NSString *timeSp = [self CreateZiFuChuanWithENDStr];
+    [self reloadData:timeSp];
+    
+//    [self initTiteBarView];
+//    [self initScrollerView];
 }
 
+- (void)reloadData:(NSString *)Str{
+    
+    NSString *uid = [AutomatePlist readPlistForKey:@"Uid"];
+    NSString *IMEI = [AutomatePlist readPlistForKey:@"IMEI"];
+    NSString *ScreenSize = [AutomatePlist readPlistForKey:@"ScreenSize"];
+    NSString *MobileClass = [AutomatePlist readPlistForKey:@"MobileClass"];
+    NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
+    NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
+    
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",uid,@"UserId",_contentID,@"BcId",Str,@"RequestTimes",  nil];
+    
+    NSString *login_Str = WoTing_JMD;
+    
+    [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
+        
+        NSDictionary *resultDict = (NSDictionary *)response;
+        
+        NSString  *ReturnType = [resultDict objectForKey:@"ReturnType"];
+        if ([ReturnType isEqualToString:@"1001"]) {
+            
+            NSArray *ResultList = resultDict[@"ResultList"];
+            [dataJMDArr1 removeAllObjects];
+            [dataJMDArr1 addObjectsFromArray: [ResultList objectAtIndex:0][@"List"]];
+            
+            [dataJMDArr2 removeAllObjects];
+            [dataJMDArr2 addObjectsFromArray: [ResultList objectAtIndex:1][@"List"]];
+            
+            [dataJMDArr3 removeAllObjects];
+            [dataJMDArr3 addObjectsFromArray: [ResultList objectAtIndex:2][@"List"]];
+            
+            [dataJMDArr4 removeAllObjects];
+            [dataJMDArr4 addObjectsFromArray: [ResultList objectAtIndex:3][@"List"]];
+            
+            [dataJMDArr5 removeAllObjects];
+            [dataJMDArr5 addObjectsFromArray: [ResultList objectAtIndex:4][@"List"]];
+            
+            [dataJMDArr6 removeAllObjects];
+            [dataJMDArr6 addObjectsFromArray: [ResultList objectAtIndex:5][@"List"]];
+            
+            [dataJMDArr7 removeAllObjects];
+            [dataJMDArr7 addObjectsFromArray: [ResultList objectAtIndex:6][@"List"]];
+            
+            [self initTiteBarView];
+            [self initScrollerView];
+        }else if ([ReturnType isEqualToString:@"T"]){
+            
+            [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
+        }
+        
+    } fail:^(NSError *error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+    
+}
 
 - (void)initScrollerView{
     
@@ -51,6 +127,11 @@
             
             WTJieMuXQViewController *wtTuiJianVC = [[WTJieMuXQViewController alloc] init];
             wtTuiJianVC.bcId = _contentID;
+            if (day == i +2) {
+                
+                wtTuiJianVC.timeSp = ENDStr;
+            }
+            wtTuiJianVC.dataJMDArr = dataJMDArr1;
             [self addChildViewController:wtTuiJianVC];
             [contentScrollView addSubview:wtTuiJianVC.view];
             [wtTuiJianVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -65,6 +146,11 @@
             
             WTJieMuXQViewController *wtDianTaiVC = [[WTJieMuXQViewController alloc] init];
             wtDianTaiVC.bcId = _contentID;
+            if (day == i+2) {
+                
+                wtDianTaiVC.timeSp = ENDStr;
+            }
+            wtDianTaiVC.dataJMDArr = dataJMDArr2;
             [self addChildViewController:wtDianTaiVC];
             [contentScrollView addSubview:wtDianTaiVC.view];
             [wtDianTaiVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -79,6 +165,11 @@
             
             WTJieMuXQViewController *wtDianTaiVC = [[WTJieMuXQViewController alloc] init];
             wtDianTaiVC.bcId = _contentID;
+            if (day == i+2) {
+                
+                wtDianTaiVC.timeSp = ENDStr;
+            }
+            wtDianTaiVC.dataJMDArr = dataJMDArr3;
             [self addChildViewController:wtDianTaiVC];
             [contentScrollView addSubview:wtDianTaiVC.view];
             [wtDianTaiVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -93,6 +184,11 @@
             
             WTJieMuXQViewController *wtDianTaiVC = [[WTJieMuXQViewController alloc] init];
             wtDianTaiVC.bcId = _contentID;
+            if (day == i+2) {
+                
+                wtDianTaiVC.timeSp = ENDStr;
+            }
+            wtDianTaiVC.dataJMDArr = dataJMDArr4;
             [self addChildViewController:wtDianTaiVC];
             [contentScrollView addSubview:wtDianTaiVC.view];
             [wtDianTaiVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -107,6 +203,11 @@
             
             WTJieMuXQViewController *wtDianTaiVC = [[WTJieMuXQViewController alloc] init];
             wtDianTaiVC.bcId = _contentID;
+            if (day == i+2) {
+                
+                wtDianTaiVC.timeSp = ENDStr;
+            }
+            wtDianTaiVC.dataJMDArr = dataJMDArr5;
             [self addChildViewController:wtDianTaiVC];
             [contentScrollView addSubview:wtDianTaiVC.view];
             [wtDianTaiVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -120,7 +221,13 @@
         }else if (i == 5) {
             
             WTJieMuXQViewController *wtDianTaiVC = [[WTJieMuXQViewController alloc] init];
-            wtDianTaiVC.bcId = _contentID;
+//            wtDianTaiVC.bcId = _contentID;
+            if (day == i+2) {
+                
+                wtDianTaiVC.timeSp = ENDStr;
+            }
+            wtDianTaiVC.dataJMDArr = dataJMDArr6;
+            
             [self addChildViewController:wtDianTaiVC];
             [contentScrollView addSubview:wtDianTaiVC.view];
             [wtDianTaiVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -134,7 +241,12 @@
         }else{
             
             WTJieMuXQViewController *wtFenLeiVC = [[WTJieMuXQViewController alloc] init];
-            wtFenLeiVC.bcId = _contentID;
+//            wtFenLeiVC.bcId = _contentID;
+            if (day == i -5) {
+                
+                wtFenLeiVC.timeSp = ENDStr;
+            }
+            wtFenLeiVC.dataJMDArr = dataJMDArr7;
             [self addChildViewController:wtFenLeiVC];
             [contentScrollView addSubview:wtFenLeiVC.view];
             [wtFenLeiVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -476,6 +588,99 @@
         contentScrollView.contentOffset = CGPointMake(self.view.bounds.size.width * 6, 0);
     }
 }
+
+//获取一周的时间戳
+- (NSString *)CreateZiFuChuanWithENDStr{
+    
+    NSString *ENdStr;
+    
+    NSDate *senddate = [NSDate date];
+    // 设置系统时区为本地时区
+    NSTimeZone *zone = [NSTimeZone systemTimeZone];
+    
+    // 计算本地时区与 GMT 时区的时间差
+    NSInteger interval = [zone secondsFromGMT];
+    
+    // 在 GMT 时间基础上追加时间差值，得到本地时间
+    senddate = [senddate dateByAddingTimeInterval:interval];
+    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[senddate timeIntervalSince1970]*1000];     //得到当前时间戳
+    ENDStr = timeSp;
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    NSInteger unitFlags = NSWeekdayCalendarUnit;
+    comps = [calendar components:unitFlags fromDate:senddate];
+    day = [comps weekday];    //得到今天星期几
+    
+    //    NSString *title = @",,,,,,";
+    //    NSMutableString *targerStr = [[NSMutableString alloc] initWithString:title];
+    if (day == 1) { //周日
+        NSString *time6 = [NSString stringWithFormat:@"%ld",[timeSp integerValue] - 86400000];
+        NSString *time5 = [NSString stringWithFormat:@"%ld",[time6 integerValue] - 86400000];
+        NSString *time4 = [NSString stringWithFormat:@"%ld",[time5 integerValue] - 86400000];
+        NSString *time3 = [NSString stringWithFormat:@"%ld",[time4 integerValue] - 86400000];
+        NSString *time2 = [NSString stringWithFormat:@"%ld",[time3 integerValue] - 86400000];
+        NSString *time1 = [NSString stringWithFormat:@"%ld",[time2 integerValue] - 86400000];
+        ENdStr = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@",time1,time2,time3,time4,time5,time6,timeSp];
+        
+    }else if (day == 2) { //周一
+        NSString *time2 = [NSString stringWithFormat:@"%ld",[timeSp integerValue] + 86400000];
+        NSString *time3 = [NSString stringWithFormat:@"%ld",[time2 integerValue] + 86400000];
+        NSString *time4 = [NSString stringWithFormat:@"%ld",[time3 integerValue] + 86400000];
+        NSString *time5 = [NSString stringWithFormat:@"%ld",[time4 integerValue] + 86400000];
+        NSString *time6 = [NSString stringWithFormat:@"%ld",[time5 integerValue] + 86400000];
+        NSString *time7 = [NSString stringWithFormat:@"%ld",[time6 integerValue] + 86400000];
+        ENdStr = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@",timeSp,time2,time3,time4,time5,time6,time7];
+        
+    }else if (day == 3) { //周二
+        NSString *time1 = [NSString stringWithFormat:@"%ld",[timeSp integerValue] - 86400000];
+        NSString *time3 = [NSString stringWithFormat:@"%ld",[timeSp integerValue] + 86400000];
+        NSString *time4 = [NSString stringWithFormat:@"%ld",[time3 integerValue] + 86400000];
+        NSString *time5 = [NSString stringWithFormat:@"%ld",[time4 integerValue] + 86400000];
+        NSString *time6 = [NSString stringWithFormat:@"%ld",[time5 integerValue] + 86400000];
+        NSString *time7 = [NSString stringWithFormat:@"%ld",[time6 integerValue] + 86400000];
+        ENdStr = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@",time1,timeSp,time3,time4,time5,time6,time7];
+        
+    }else if (day == 4) { //周三
+        NSString *time2 = [NSString stringWithFormat:@"%ld",[timeSp integerValue] - 86400000];
+        NSString *time1 = [NSString stringWithFormat:@"%ld",[time2 integerValue] - 86400000];
+        NSString *time4 = [NSString stringWithFormat:@"%ld",[timeSp integerValue] + 86400000];
+        NSString *time5 = [NSString stringWithFormat:@"%ld",[time4 integerValue] + 86400000];
+        NSString *time6 = [NSString stringWithFormat:@"%ld",[time5 integerValue] + 86400000];
+        NSString *time7 = [NSString stringWithFormat:@"%ld",[time6 integerValue] + 86400000];
+        ENdStr = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@",time1,time2,timeSp,time4,time5,time6,time7];
+        
+    }else if (day == 5) { //周四
+        NSString *time3 = [NSString stringWithFormat:@"%ld",[timeSp integerValue] - 86400000];
+        NSString *time2 = [NSString stringWithFormat:@"%ld",[time3 integerValue] - 86400000];
+        NSString *time1 = [NSString stringWithFormat:@"%ld",[time2 integerValue] - 86400000];
+        NSString *time5 = [NSString stringWithFormat:@"%ld",[timeSp integerValue] + 86400000];
+        NSString *time6 = [NSString stringWithFormat:@"%ld",[time5 integerValue] + 86400000];
+        NSString *time7 = [NSString stringWithFormat:@"%ld",[time6 integerValue] + 86400000];
+        ENdStr = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@",time1,time2,time3,timeSp,time5,time6,time7];
+        
+    }else if (day == 6) { //周五
+        NSString *time4 = [NSString stringWithFormat:@"%ld",[timeSp integerValue] - 86400000];
+        NSString *time3 = [NSString stringWithFormat:@"%ld",[time4 integerValue] - 86400000];
+        NSString *time2 = [NSString stringWithFormat:@"%ld",[time3 integerValue] - 86400000];
+        NSString *time1 = [NSString stringWithFormat:@"%ld",[time2 integerValue] - 86400000];
+        NSString *time6 = [NSString stringWithFormat:@"%ld",[timeSp integerValue] + 86400000];
+        NSString *time7 = [NSString stringWithFormat:@"%ld",[time6 integerValue] + 86400000];
+        ENdStr = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@",time1,time2,time3,time4,timeSp,time6,time7];
+        
+    }else if (day == 7) { //周六
+        NSString *time5 = [NSString stringWithFormat:@"%ld",[timeSp integerValue] - 86400000];
+        NSString *time4 = [NSString stringWithFormat:@"%ld",[time5 integerValue] - 86400000];
+        NSString *time3 = [NSString stringWithFormat:@"%ld",[time4 integerValue] - 86400000];
+        NSString *time2 = [NSString stringWithFormat:@"%ld",[time3 integerValue] - 86400000];
+        NSString *time1 = [NSString stringWithFormat:@"%ld",[time2 integerValue] - 86400000];
+        NSString *time7 = [NSString stringWithFormat:@"%ld",[timeSp integerValue] + 86400000];
+        ENdStr = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@",time1,time2,time3,time4,time5,timeSp,time7];
+        
+    }
+    
+    return ENdStr;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

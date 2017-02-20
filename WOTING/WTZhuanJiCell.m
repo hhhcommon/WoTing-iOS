@@ -26,20 +26,27 @@
     //标题
     _nameLab.text =[NSString NULLToString:dict[@"ContentName"]];
     
-    //我听
-    _numLab.text =[NSString NULLToString:dict[@"PlayCount"]];
+    //总共收听次数
+    NSString *NumLabStr = [NSString stringWithFormat:@"%@",[dict[@"PlayCount"] stringValue]];
+    _numLab.text = NumLabStr;
     
-    
-    _time2Lab.text = @"0'00''";
+    //播放时长
+    NSString *ContentTimes = [NSString NULLToString:dict[@"ContentTimes"]];
+    NSTimeInterval time=[ContentTimes doubleValue];
+    NSDate *detaildate=[NSDate dateWithTimeIntervalSince1970:time/1000.0];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"mm:ss"];
+    NSString *currentStr = [dateFormatter stringFromDate: detaildate];
+    _time2Lab.text = currentStr;
     
     //时间
-    NSString *timeStr = [NSString NULLToString:dict[@"ContentPubTimes"]];
-    NSTimeInterval time=[timeStr doubleValue];
-    NSDate *detaildate=[NSDate dateWithTimeIntervalSince1970:time];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    NSString *currentDateStr = [dateFormatter stringFromDate: detaildate];
-    //    NSString *currentDateStr = [WKProgressHUD timeForBeiJingTimeStamp:timeStr andsetDateFormat:@"mm:ss"];
+
+    NSString *timeStr = [NSString stringWithFormat:@"%@",[dict[@"ContentPubTime"] stringValue]];
+    NSTimeInterval timeT=[timeStr doubleValue];
+    NSDate *detaildateT=[NSDate dateWithTimeIntervalSince1970:timeT/1000.0];
+    NSDateFormatter *dateFormatterT = [[NSDateFormatter alloc] init];
+    [dateFormatterT setDateFormat:@"yyyy-MM-dd"];
+    NSString *currentDateStr = [dateFormatterT stringFromDate: detaildateT];
     
     _timeLab.text = currentDateStr;
     

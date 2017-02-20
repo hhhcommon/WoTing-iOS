@@ -46,6 +46,9 @@
     
     NSInteger       BoFangXQ;   //详情cell的高度
     NSInteger       BFXQdelegate; //传过来的值
+    
+    UIImageView     *BoFangimgV;
+    long            BoFangDH;   //播放动画判断
 }
 
 @property (nonatomic ,strong) AVPlayer   *player;
@@ -53,6 +56,8 @@
 @property (nonatomic, strong) WTBoFangCell   *headerV;
 @property(assign, nonatomic)NSInteger musicIndex;//当前播放音乐索引
 @property(strong,nonatomic) NSMutableArray *musics;//音乐数据
+
+@property(assign, nonatomic) BOOL SQLITE;
 
 @end
 
@@ -65,6 +70,7 @@
     changPag = 0;
     _musicIndex = 0;
     BoFangXQ = 0;
+    BoFangDH = 0;
    
     //跳转过来的新数据
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableViewAndData:) name:@"TABLEVIEWCLICK" object:nil];
@@ -74,6 +80,10 @@
     
     //监听是否是播放状态
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginbtnYes) name:@"BRGINBTNYES" object:nil];
+    //监听播放动画
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(boFangDongHua) name:@"BOFANGDONGHUA" object:nil];
+    //监听暂停动画
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(zanTingDongHua) name:@"ZANTINGDONGHUA" object:nil];
     
     dataBFArray = [NSMutableArray arrayWithCapacity:0];
     _musics = [[NSMutableArray alloc] init];
@@ -226,6 +236,8 @@
         NSString  *ReturnType = [resultDict objectForKey:@"ReturnType"];
         if ([ReturnType isEqualToString:@"1001"]) {
             
+            [_JQtableView.mj_footer resetNoMoreData];   //如果全部了，恢复控件
+            
             NSDictionary *ResultList = resultDict[@"ResultList"];
             [dataBFArray removeAllObjects];
             [dataBFArray addObjectsFromArray: ResultList[@"List"]];
@@ -298,7 +310,7 @@
                 [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
             }else if ([ReturnType isEqualToString:@"1011"]){
                 
-                [_JQtableView.mj_footer endRefreshingWithNoMoreData];
+                [_JQtableView.mj_footer endRefreshingWithNoMoreData];   //显示全部加载
             }
             
         } fail:^(NSError *error) {
@@ -425,10 +437,45 @@
 - (void)beginbtnYes {
     
     FMDatabase *db = [FMDBTool createDatabaseAndTable:@"BFLS"];
-    
     NSDictionary *dict = dataBFArray[self.musicIndex];
+    FMResultSet *resultSet = [db executeQuery:@"SELECT * FROM BFLS"];
+    // 遍历结果，如果重复就删除数据
+    while ([resultSet next]) {
+        
+        NSData *ID = [resultSet dataForColumn:@"BFLS"];
+        NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:ID options:NSJSONReadingMutableLeaves error:nil];
+        if ([dict[@"ContentId"] isEqualToString:jsonDict[@"ContentId"]]) {
+
+            NSString *deleteSql = [NSString stringWithFormat:@"delete from BFLS where BFLS='%@'",ID];
+            NSLog(@"%@", deleteSql);
+            //    NSString *deleteSql = @"delete from BFLS where MusicDict";
+            BOOL isOk = [db executeUpdate:deleteSql];
+            
+            if (isOk) {
+                NSLog(@"删除数据成功! 😄");
+            }else{
+                NSLog(@"删除数据失败! 💔");
+            }
+            
+        }
+    }
+    NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
     NSString *sqlInsert = @"insert into BFLS values(?)";
-    [db executeUpdate:sqlInsert, dict];
+    [db executeUpdate:sqlInsert, data];
+}
+
+#pragma mark 播放动画
+- (void)boFangDongHua {
+    
+    [BoFangimgV startAnimating];
+    
+}
+
+#pragma mark 暂停动画
+- (void)zanTingDongHua {
+    
+    [BoFangimgV stopAnimating];
+    
 }
 
 #pragma mark 点击语音搜索
@@ -830,7 +877,26 @@
           
             NSDictionary *dict = dataBFArray[indexPath.row];
             [cell setCellWithDict:dict];
-
+            
+            // 加载所有的动画图片
+            NSMutableArray *images = [NSMutableArray array];
+            for (int i = 1; i <= 18; i++) {
+                NSString *filename = [NSString stringWithFormat:@"%@_%d", @"play_flag_wave", i];
+                NSString *file = [[NSBundle mainBundle] pathForResource:filename ofType:@"png"];
+                UIImage *image = [UIImage imageWithContentsOfFile:file];
+                [images addObject:image];
+            }
+            
+            // 设置动画图片
+            BoFangimgV.animationImages = images;
+            cell.WTBoFangImgV = BoFangimgV;
+    
+            cell.WTBoFangImgV.hidden = YES;
+            
+            if (BoFangDH == (long)indexPath.row) {
+                
+                cell.WTBoFangImgV.hidden = NO;
+            }
             
             return cell;
         }
@@ -934,8 +1000,11 @@
             }
             
             self.musicIndex = indexPath.row;
+            BoFangDH = indexPath.row;
             //播放音乐
             [self playMusic];
+            [_JQtableView reloadData];
+            
         }
         
     }

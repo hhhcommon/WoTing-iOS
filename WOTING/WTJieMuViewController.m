@@ -213,14 +213,20 @@
 
 /** 菜单栏按钮被点击 */
 - (void)barButtonSelect:(UIButton *)aBtn {
-    
-    /** 首先切换标识条 */
-    [barLineImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+   
+   // [UIView animateWithDuration:0.5 animations:^{
         
-        make.width.equalTo(titleView.mas_width).with.multipliedBy(1.0/3);
-        make.height.mas_equalTo(POINT_Y(6));
-        make.centerX.equalTo(aBtn);
-        make.bottom.equalTo(titleView.mas_bottom);
+        /** 首先切换标识条 */
+        [barLineImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            
+            make.width.equalTo(titleView.mas_width).with.multipliedBy(1.0/3);
+            make.height.mas_equalTo(POINT_Y(6));
+            make.centerX.equalTo(aBtn);
+            make.bottom.equalTo(titleView.mas_bottom);
+            
+      //  }];
+        
+        
     }];
     
     aBtn.selected = YES;

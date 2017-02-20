@@ -12,4 +12,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *likeTabV;
 
 @property (nonatomic, copy) NSString *SearchStr;
+
+@property (nonatomic, strong) NSMutableArray    *dataAllArray;  //播放历史数据
+
 @end

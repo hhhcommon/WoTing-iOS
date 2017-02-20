@@ -33,7 +33,7 @@
     _WTLab.text =[NSString NULLToString:dict[@"ContentPub"]];
     
     //听众
-    _PlayCount.text = [NSString NULLToString:dict[@"PlayCount"]];
+    _PlayCount.text = [NSString stringWithFormat:@"%@",[dict[@"PlayCount"] stringValue]];
     
     
     //专辑数

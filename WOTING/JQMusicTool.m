@@ -55,7 +55,7 @@ singleton_implementation(JQMusicTool)
     
         NSURL *musicURL = [NSURL URLWithString:_musicStr];
         AVPlayerItem *songItem = [[AVPlayerItem alloc] initWithURL:musicURL];
-        
+//        [AVPlayerItem alloc] initWithURL:[NSURL fileURLWithPath:@""];
         if (self.player==nil) {
             
             

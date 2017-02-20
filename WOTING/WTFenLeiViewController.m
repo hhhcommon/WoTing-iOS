@@ -115,6 +115,7 @@
     
     cell = [[WTFenLeiTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
 
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     cell.nameLab.text = dataFenJArray[indexPath.row][@"name"];
     cell.titles = dataFenJArray[indexPath.row][@"children"];

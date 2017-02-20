@@ -18,7 +18,10 @@
 
 @interface WTLikeListViewController ()<UIScrollViewDelegate>{
     
-    NSMutableArray      *_DataArray;
+    NSMutableArray      *_DataArray;    //（播放历史）数据数组
+    NSMutableArray      *_DataShengYinArr;  //（播放历史）声音数据
+    NSMutableArray      *_DataDianTaiArr;   //（播放历史）电台数据
+    
     SKMainScrollView    *contentScrollView;
     UIView              *titleView;//标识栏
     UIImageView         *barLineImageView;//标识条
@@ -31,6 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    _DataArray = [NSMutableArray arrayWithCapacity:0];
     
     _NameLab.text = _label;
     
@@ -39,6 +43,16 @@
     if ([_label isEqualToString:@"播放历史"]) {
         
         FMDatabase *fm = [FMDBTool createDatabaseAndTable:nil];
+        // 1.执行查询语句
+        FMResultSet *resultSet = [fm executeQuery:@"SELECT * FROM BFLS"];
+        // 2.遍历结果
+            while ([resultSet next]) {
+                
+                NSData *ID = [resultSet dataForColumn:@"BFLS"];
+                NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:ID options:NSJSONReadingMutableLeaves error:nil];
+                [_DataArray addObject:jsonDict];
+
+            }
     }
     
     [self initTiteBarView];
@@ -80,7 +94,7 @@
             }else if (i == 1) {
                 
                 ZhuanJiViewController *wtzhuanjiVC = [[ZhuanJiViewController alloc] init];
-                // skXiaoZuVC.groupArr = skgroupArr;
+               
                 [self addChildViewController:wtzhuanjiVC];
                 [contentScrollView addSubview:wtzhuanjiVC.view];
                 [wtzhuanjiVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -154,6 +168,7 @@
             if (i == 0) {
                 
                 AllViewController *wtallVC = [[AllViewController alloc] init];
+                wtallVC.dataAllArray = _DataArray;
                 [self addChildViewController:wtallVC];
                 [contentScrollView addSubview:wtallVC.view];
                 [wtallVC.view mas_makeConstraints:^(MASConstraintMaker *make) {

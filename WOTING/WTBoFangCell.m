@@ -17,6 +17,8 @@
 
 @property(strong, nonatomic) UCloudMediaPlayer *mediaPlayer;
 
+@property (nonatomic, assign) int FIRSTBFANG;  //是否是第一次播放
+
 @end
 
 @implementation WTBoFangCell
@@ -26,17 +28,18 @@
 -(void)setPlayingMusic:(WTBoFangModel *)playingMusic{
     _playingMusic = playingMusic;
     
+    //判断是节目单还是去下载界面
     NSString *MediaType = playingMusic.MediaType;
-    
     if ([MediaType isEqualToString:@"AUDIO"]) {
         
         _downLoadImgv.selected = NO;
-        _downLoadImgv.selected = NO;
+        _downLoadTitImgv.selected = NO;
     }else if ([MediaType isEqualToString:@"RADIO"]) {
         
         _downLoadImgv.selected = YES;
-        _downLoadImgv.selected = YES;
+        _downLoadTitImgv.selected = YES;
     }
+    
     //歌曲名
     self.nameLab.text = playingMusic.ContentName;
 //    self.nameLab.marqueeType = MLContinuous;
@@ -131,7 +134,7 @@
     [self notifyDelegateWithBtnType:BtnTypePrevious];
     if (_beginBtn.selected == YES) {
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"BRGINBTNYES" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"BRGINBTNYES" object:nil];  //入库
     }
 }
 //下一首
@@ -140,7 +143,7 @@
     [self notifyDelegateWithBtnType:BtnTypeNext];
     if (_beginBtn.selected == YES) {
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"BRGINBTNYES" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"BRGINBTNYES" object:nil];  //入库
     }
 }
 //播放.暂停
@@ -155,13 +158,15 @@
         
         button.selected = YES;
         [self notifyDelegateWithBtnType:BtnTypePlay];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"BRGINBTNYES" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"BRGINBTNYES" object:nil];      //入库
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"BOFANGDONGHUA" object:nil];    //播放动画
     }else{//暂停音乐
         NSLog(@"暂停音乐");
         //2.如果当前是暂停的状态，按钮的图片更改为播放的状态
         
         button.selected = NO;
         [self notifyDelegateWithBtnType:BtnTypePause];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ZANTINGDONGHUA" object:nil];   //暂停动画
     }
 }
 
@@ -227,17 +232,17 @@
     
 }
 
-- (void)pauseTap:(UITapGestureRecognizer *)recognizer {
-    MarqueeLabel *continuousLabel2 = (MarqueeLabel *)recognizer.view;
-    
-    if (recognizer.state == UIGestureRecognizerStateEnded) {
-        if (!continuousLabel2.isPaused) {
-            [continuousLabel2 pauseLabel];
-        } else {
-            [continuousLabel2 unpauseLabel];
-        }
-    }
-}
+//- (void)pauseTap:(UITapGestureRecognizer *)recognizer {
+//    MarqueeLabel *continuousLabel2 = (MarqueeLabel *)recognizer.view;
+//    
+//    if (recognizer.state == UIGestureRecognizerStateEnded) {
+//        if (!continuousLabel2.isPaused) {
+//            [continuousLabel2 pauseLabel];
+//        } else {
+//            [continuousLabel2 unpauseLabel];
+//        }
+//    }
+//}
 
 //喜欢
 - (IBAction)likeBtnClick:(id)sender {

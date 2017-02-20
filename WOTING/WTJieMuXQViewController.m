@@ -12,7 +12,7 @@
 
 @interface WTJieMuXQViewController ()<UITableViewDelegate, UITableViewDataSource>{
     
-    NSMutableArray  *dataJMDArr;
+    
 }
 
 @end
@@ -23,13 +23,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    dataJMDArr = [NSMutableArray arrayWithCapacity:0];
     
     _JieMuDanTab.delegate = self;
     _JieMuDanTab.dataSource = self;
     
     [self RegisterJMDCell];
-    [self loadDataJMD];
+    
 }
 
 - (void)RegisterJMDCell {
@@ -39,48 +38,11 @@
     [_JieMuDanTab registerNib:nib forCellReuseIdentifier:@"cellJMD"];
 }
 
-- (void)loadDataJMD {
-    
-    NSString *uid = [AutomatePlist readPlistForKey:@"Uid"];
-    NSString *IMEI = [AutomatePlist readPlistForKey:@"IMEI"];
-    NSString *ScreenSize = [AutomatePlist readPlistForKey:@"ScreenSize"];
-    NSString *MobileClass = [AutomatePlist readPlistForKey:@"MobileClass"];
-    NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
-    NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
-    
-    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",uid,@"UserId",_bcId,@"BcId",@"",@"RequestTimes",  nil];
-    
-    NSString *login_Str = WoTing_JMD;
-    
-    [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
-        
-        NSDictionary *resultDict = (NSDictionary *)response;
-        
-        NSString  *ReturnType = [resultDict objectForKey:@"ReturnType"];
-        if ([ReturnType isEqualToString:@"1001"]) {
-            
-            NSDictionary *ResultList = resultDict[@"ResultList"];
-            [dataJMDArr removeAllObjects];
-            [dataJMDArr addObjectsFromArray: ResultList[@"List"]];
-            
-            [_JieMuDanTab reloadData];
-            
-        }else if ([ReturnType isEqualToString:@"T"]){
-            
-            [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
-        }
-        
-    } fail:^(NSError *error) {
-        
-        NSLog(@"%@", error);
-        
-    }];
-    
-}
+
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return dataJMDArr.count;
+    return _dataJMDArr.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -94,8 +56,48 @@
         cell = [[WTJMDCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     }
     
-   // NSDictionary *dict = dataJMDArr[indexPath.row];
+    cell.NameLab.text = _dataJMDArr[indexPath.row][@"Title"];
+    
+    NSString *beginStr = _dataJMDArr[indexPath.row][@"BeginTime"];
+    beginStr = [beginStr substringToIndex:5];
+    NSString *endStr = _dataJMDArr[indexPath.row][@"EndTime"];
+    endStr = [endStr substringToIndex:5];
+    cell.TimeLab.text = [NSString stringWithFormat:@"%@-%@",beginStr, endStr];
+    
+    cell.ZhiBoImgV.hidden = YES;
   
+    if (_timeSp != nil) {
+        NSDate *senddate = [NSDate date];
+
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+        NSString *currentStr = [dateFormatter stringFromDate: senddate];
+        NSArray *strArr = [currentStr componentsSeparatedByString:@" "];
+        NSString *Rstr = strArr[1];
+        
+        //1.创建一个时间格式
+        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+        //2.设置时间格式
+        [df setDateFormat:@"mm:ss"];
+        
+        //3.提取
+        NSDate *dateBegin = [df dateFromString:beginStr];
+        NSDate *dateEnd = [df dateFromString:endStr];
+        NSDate *dateRstr = [df dateFromString:Rstr];
+        
+        NSComparisonResult result1 = [dateRstr compare:dateBegin];
+        NSComparisonResult result2 = [dateRstr compare:dateEnd];
+        
+        if (result1 == NSOrderedDescending && result2 == NSOrderedAscending) {
+            
+            cell.TimeLab.textColor = [UIColor blackColor];
+            cell.NameLab.textColor = [UIColor blackColor];
+            cell.ZhiBoImgV.hidden = NO;
+        }
+        
+        
+    }
+    
     return cell;
     
 }

@@ -33,18 +33,17 @@
     _WTLab.text =[NSString NULLToString:dict[@"ContentPub"]];
     
     //听众
-    _PlayCount.text = [NSString NULLToString:dict[@"PlayCount"]];
+    _PlayCount.text = [NSString stringWithFormat:@"%@",dict[@"PlayCount"] ];
     
     //时间
-    NSString *timeStr = [NSString NULLToString:dict[@"ContentTimes"]];
-    NSTimeInterval time=[timeStr doubleValue];
+    NSString *ContentTimes = [NSString NULLToString:dict[@"ContentTimes"]];
+    NSTimeInterval time=[ContentTimes doubleValue];
     NSDate *detaildate=[NSDate dateWithTimeIntervalSince1970:time/1000.0];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"mm'ss''"];
-    NSString *currentDateStr = [dateFormatter stringFromDate: detaildate];
-//    NSString *currentDateStr = [WKProgressHUD timeForBeiJingTimeStamp:timeStr andsetDateFormat:@"mm:ss"];
+    [dateFormatter setDateFormat:@"mm:ss"];
+    NSString *currentStr = [dateFormatter stringFromDate: detaildate];
     
-    _ContentTimes.text = currentDateStr;
+    _ContentTimes.text = currentStr;
     
 }
 

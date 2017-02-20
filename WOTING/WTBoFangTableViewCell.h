@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *WTLab;
 @property (weak, nonatomic) IBOutlet UILabel *PlayCount;
 @property (weak, nonatomic) IBOutlet UILabel *ContentTimes;
+@property (weak, nonatomic) IBOutlet UIImageView *WTBoFangImgV;
 
 
 - (void)setCellWithDict:(NSDictionary *)dict;

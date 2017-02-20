@@ -39,6 +39,11 @@
     
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
+    return 1;
+}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return _dataZJArr.count;
@@ -57,6 +62,7 @@
     }
     
     NSDictionary *dict = _dataZJArr[indexPath.row];
+    
     [cell setCellWithDict:dict];
     
     
@@ -64,9 +70,61 @@
 
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    
+    return 44;
+}
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 50;
+    return 55;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
+    view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    
+    UILabel *labeltitle = [[UILabel alloc] init];
+    labeltitle.text = [NSString stringWithFormat:@"共%lu集", _dataZJArr.count];
+    labeltitle.font = [UIFont boldSystemFontOfSize:15];
+    labeltitle.textColor = [UIColor skTitleCenterBlackColor];
+    [view addSubview:labeltitle];
+    
+    [labeltitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.mas_equalTo(20);
+        make.top.mas_equalTo(10);
+        make.width.mas_equalTo(120);
+        make.height.mas_equalTo(24);
+    }];
+    
+    UIButton *DownLoadBtn = [[UIButton alloc] init];
+    [DownLoadBtn addTarget:self action:@selector(DownLoadBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [DownLoadBtn setImage:[UIImage imageNamed:@"ZJ_DownLoad.png"] forState:UIControlStateNormal];
+    [view addSubview:DownLoadBtn];
+    [DownLoadBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.right.mas_equalTo(-30);
+        make.top.mas_equalTo(10);
+        make.width.mas_equalTo(24);
+        make.height.mas_equalTo(24);
+    }];
+    
+    UIButton *PaiXuBtn = [[UIButton alloc] init];
+    [PaiXuBtn addTarget:self action:@selector(PaiXuBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [PaiXuBtn setImage:[UIImage imageNamed:@"PaiXu_Nol.png"] forState:UIControlStateNormal];
+    [PaiXuBtn setImage:[UIImage imageNamed:@"PaiXu_Sele.png"] forState:UIControlStateSelected];
+    [view addSubview:PaiXuBtn];
+    [PaiXuBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.right.equalTo(DownLoadBtn.mas_left).with.offset(-30);
+        make.top.mas_equalTo(10);
+        make.width.mas_equalTo(24);
+        make.height.mas_equalTo(24);
+    }];
+    
+    return view;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -84,6 +142,26 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+//专辑下载
+- (void)DownLoadBtnClick:(UIButton *)btn{
+    
+    
+    
+}
+
+//专辑排序
+- (void)PaiXuBtnClick:(UIButton *)btn {
+    
+    NSArray* reversedArray = [[_dataZJArr reverseObjectEnumerator] allObjects];
+    [_dataZJArr removeAllObjects];
+    [_dataZJArr addObjectsFromArray:reversedArray];
+    [_ZJJieMTabV reloadData];
+    
+    btn.selected ^= 1;
+    
+    
 }
 
 - (void)dealloc {

@@ -64,7 +64,8 @@
     
     /** 增加下拉刷新事件 */
     _FLDTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadData)];
-    
+    /** 增加上拉加载更多 */
+    _FLDTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(MoveData)];
 }
 
 //注册
@@ -86,8 +87,6 @@
     NSString *MobileClass = [AutomatePlist readPlistForKey:@"MobileClass"];
     NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
     NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
-    
-    //"MediaType":"","CatalogType":"3","CatalogId":"cn10","Page":"1","PerSize":"3","ResultType":"2","PageSize":"10"
     
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",uid,@"UserId", @"3",@"CatalogType",@"10",@"PageSize",@"2",@"ResultType",@"3",@"PerSize",_contentID,@"CatalogId", nil];
     
@@ -122,6 +121,57 @@
         
     }];
     
+}
+
+- (void)MoveData {
+    
+    static NSInteger page = 2;
+    NSString *pageStr = [NSString stringWithFormat:@"%ld",page];
+    
+    NSString *uid = [AutomatePlist readPlistForKey:@"Uid"];
+    
+    NSString *IMEI = [AutomatePlist readPlistForKey:@"IMEI"];
+    NSString *ScreenSize = [AutomatePlist readPlistForKey:@"ScreenSize"];
+    NSString *MobileClass = [AutomatePlist readPlistForKey:@"MobileClass"];
+    NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
+    NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
+    
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",uid,@"UserId", @"3",@"CatalogType",@"10",@"PageSize",@"2",@"ResultType",@"3",@"PerSize",_contentID,@"CatalogId",pageStr,@"Page", nil];
+    
+    NSString *login_Str = WoTing_GetContents;
+    
+    
+    [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
+        
+        [_FLDTableView.mj_footer endRefreshing];
+        
+        NSDictionary *resultDict = (NSDictionary *)response;
+        
+        NSString  *ReturnType = [resultDict objectForKey:@"ReturnType"];
+        if ([ReturnType isEqualToString:@"1001"]) {
+            
+            NSDictionary *ResultList = resultDict[@"ResultList"];
+            [dataFLDJArray addObjectsFromArray: ResultList[@"List"]];
+            
+            [_FLDTableView reloadData];
+            
+            
+        }else if ([ReturnType isEqualToString:@"T"]){
+            
+            [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
+        }else if ([ReturnType isEqualToString:@"1011"]){
+            
+            [_FLDTableView.mj_footer endRefreshingWithNoMoreData];
+        }
+        
+    } fail:^(NSError *error) {
+        
+        [_FLDTableView.mj_footer endRefreshing];
+        
+        
+    }];
+    
+    page++;
     
 }
 

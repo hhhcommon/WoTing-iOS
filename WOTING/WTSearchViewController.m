@@ -257,6 +257,38 @@
 //点击搜索
 - (IBAction)searchBtnClick:(id)sender {
     
+    if (_searchTField.text != nil) {
+        
+        FMDatabase *db = [FMDBTool createDatabaseAndTable:@"SEARCH"];
+        
+//        FMResultSet *resultSet = [db executeQuery:@"SELECT * FROM BFLS"];
+//        // 2.遍历结果
+//        while ([resultSet next]) {
+//            
+//            NSString *ID = [resultSet stringForColumn:@"SEARCH"];
+//            
+//            if ([_searchTField.text isEqualToString:ID]) {
+//                
+//                _SQLITE = YES;
+//            }
+//        }
+//        
+//        if (_SQLITE == YES) {
+//            
+//            NSString *deleteSql = [NSString stringWithFormat:@"delete from BFLS where MusicStr=%@",dict[@"ContentId"]];
+//            //    NSString *deleteSql = @"delete from BFLS where MusicDict";
+//            BOOL isOk = [db executeUpdate:deleteSql];
+//            if (isOk) {
+//                NSLog(@"删除数据成功! 😄");
+//            }else{
+//                NSLog(@"删除数据失败! 💔");
+//            }
+//        }
+        NSString *sqlInsert = @"insert into BFLS values(?)";
+        [db executeUpdate:sqlInsert, _searchTField];
+
+    }
+    
     [self initScrollerView];
     [self initTiteBarView];
 }
