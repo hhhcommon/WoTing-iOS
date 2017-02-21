@@ -85,7 +85,7 @@
         
     }else {
         //地域选择
-        parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", @"RADIO",@"MediaType", @"2",@"CatalogType",@"1",@"ResultType",@"10",@"PerSize",_contentID,@"CatalogId",@"",@"BeginCatalogId",nil];
+        parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", @"RADIO",@"MediaType", @"2",@"CatalogType",@"1",@"ResultType",@"3",@"PerSize",_contentID,@"CatalogId",@"",@"BeginCatalogId",nil];
         
     }
     
@@ -183,7 +183,7 @@
         
     }else {
         //地域选择
-        parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", @"RADIO",@"MediaType", @"2",@"CatalogType",@"1",@"ResultType",@"10",@"PerSize",_contentID,@"CatalogId",BeginCatalogId,@"BeginCatalogId",pageStr,@"Page",nil];
+        parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", @"RADIO",@"MediaType", @"2",@"CatalogType",@"1",@"ResultType",@"3",@"PerSize",_contentID,@"CatalogId",BeginCatalogId,@"BeginCatalogId",pageStr,@"Page",nil];
         
     }
     
@@ -201,7 +201,7 @@
             
             NSDictionary *ResultList = resultDict[@"ResultList"];
             
-            [dataCellArr addObject:ResultList[@"List"]];
+            [dataCellArr addObjectsFromArray:ResultList[@"List"]];
             
             if (_type == 2) {
                 
@@ -247,7 +247,7 @@
         
     }];
     
-    
+    page++;
     
 }
 
@@ -255,6 +255,10 @@
 {
     
     if (_type == 3) {
+        
+        NSArray *array = dataCellArr[section][@"List"];
+        return array.count;
+    }else if (_type == 2){
         
         NSArray *array = dataCellArr[section][@"List"];
         return array.count;
@@ -271,7 +275,7 @@
         return dataCellArr.count;
     }else if (_type == 2){
         
-        return 3;
+        return dataCellArr.count;
     }else {
         
         return 1;

@@ -8,18 +8,59 @@
 
 #import "Message.h"
 
+@interface Message()
+
+- (BOOL)equals:(Message *)msg;          //判断是否是应答消息
+- (BOOL)equalsMsg:(Message *)msg;
+
+@end
 
 @implementation Message
 
-- (void) fromBytes:(Byte[])binaryMsg{
+
+- (BOOL)isCtlAffirm{
     
+    return _affirm == 1 || _affirm == 3;
+}
+
+- (BOOL)isBizAffirm{
+    
+    return _affirm == 2 || _affirm == 3;
     
 }
 
-- (Byte* )toBytes{
+- (int)compareTo:(Message *)o{
     
-    Byte byte[] = {1,2,3};
-    
-    return byte;
+    long flag = _sendTime - o.sendTime;
+    if (flag == 0) {
+        
+        return 0;
+    }else if (flag >0){
+        
+        return 1;
+    }else{
+        
+        return -1;
+    }
 }
+
+- (BOOL)equalsMsg:(Message *)msg{
+    
+    if (_msgType != msg.msgType) {
+        
+        return false;
+    }else if (_msgType != msg.affirm){
+        
+        return false;
+    }else if (_fromType != msg.fromType){
+        
+        return false;
+    }else if (_toType != msg.toType){
+        
+        return false;
+    }
+    
+    return true;
+}
+
 @end

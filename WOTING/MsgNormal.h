@@ -10,4 +10,5 @@
 
 @interface MsgNormal : Message
 
+
 @end
