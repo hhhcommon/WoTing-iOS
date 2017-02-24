@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 
 #import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
 
 #import "WTXiangJiangViewController.h"
 #import "WTXiangTingViewController.h"
@@ -106,6 +107,20 @@
 
     [AutomatePlist writePlistForkey:@"GPS-longitude" value:[NSString  stringWithFormat:@"%f",newLocation.coordinate.longitude]];
     [AutomatePlist writePlistForkey:@"GPS-latitude" value:[NSString  stringWithFormat:@"%f",newLocation.coordinate.latitude]];
+    
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder reverseGeocodeLocation:manager.location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        
+        CLPlacemark *placemark = [placemarks objectAtIndex:0];
+        //获取城市
+        NSString *city = placemark.locality;
+        NSDictionary *dict = placemark.addressDictionary;
+        NSLog(@"%@,%@",city,dict);
+        NSLog(@"定位==%@,%@,%@,%@,%@,%@",placemark.administrativeArea,placemark.ISOcountryCode,placemark.subLocality,placemark.thoroughfare,placemark.subThoroughfare,placemark.postalCode);
+        [AutomatePlist writePlistForkey:@"City" value:city];
+    }];
+    
+    
 
 }
 

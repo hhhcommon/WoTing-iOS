@@ -34,10 +34,24 @@
         
         _downLoadImgv.selected = NO;
         _downLoadTitImgv.selected = NO;
+        self.wtSlider.userInteractionEnabled = YES;
     }else if ([MediaType isEqualToString:@"RADIO"]) {
         
         _downLoadImgv.selected = YES;
         _downLoadTitImgv.selected = YES;
+        self.wtSlider.userInteractionEnabled = NO;
+    }
+    
+    //判断当前播放是否添加过喜欢
+    NSString *ContentFavorite = playingMusic.ContentFavorite;
+    if ([ContentFavorite isEqualToString:@"0"]) {
+        
+        _likeImgv.selected = NO;
+        _likeTitImgv.selected = NO;
+    }else{
+        
+        _likeImgv.selected = YES;
+        _likeTitImgv.selected = YES;
     }
     
     //歌曲名

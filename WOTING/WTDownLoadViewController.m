@@ -10,6 +10,9 @@
 #import "WTYiXiaZaiController.h"
 #import "WTXiaZaiZhongController.h"
 
+#import "WTNewsViewController.h"
+#import "WTSearchViewController.h"
+
 #import "SKMainScrollView.h"
 
 @interface WTDownLoadViewController ()<UIScrollViewDelegate> {
@@ -145,9 +148,17 @@
 */
 
 - (IBAction)XiaoXiBtnClick:(id)sender {
+    
+    WTNewsViewController *wtnewVC = [[WTNewsViewController alloc] init];
+    wtnewVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:wtnewVC animated:YES];
 }
 
 - (IBAction)SearchBtnClick:(id)sender {
+    
+    WTSearchViewController *wtSearVC = [[WTSearchViewController alloc] init];
+    wtSearVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:wtSearVC animated:YES];
 }
 - (IBAction)YXZBtnClick:(id)sender {
     

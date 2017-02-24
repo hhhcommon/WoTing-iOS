@@ -213,6 +213,7 @@
             cell = [[WTBoFangTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
         }
         
+        cell.WTBoFangImgV.hidden = YES;
         NSDictionary *dict = dataTuiJArray[indexPath.row];
         [cell setCellWithDict:dict];
         

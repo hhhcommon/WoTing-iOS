@@ -10,8 +10,6 @@
 
 @interface Message()
 
-- (BOOL)equals:(Message *)msg;          //判断是否是应答消息
-- (BOOL)equalsMsg:(Message *)msg;
 
 @end
 

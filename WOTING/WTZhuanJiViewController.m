@@ -8,10 +8,14 @@
 
 #import "WTZhuanJiViewController.h"
 
+#import "WTPingLunViewController.h"     //评论页
+
 #import "WTZJTuijianController.h"
 #import "WTZJJMController.h"
 
 #import "SKMainScrollView.h"
+
+#import <UShareUI/UShareUI.h>   //分享
 
 @interface WTZhuanJiViewController ()<UIScrollViewDelegate> {
     
@@ -284,17 +288,63 @@
     
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+//专辑喜欢
 - (IBAction)likeBtnClick:(id)sender {
+    
 }
-
+//专辑评论
 - (IBAction)commitBtnClick:(id)sender {
+    
+    WTPingLunViewController *wtPLVC = [[WTPingLunViewController alloc] init];
+    
+    wtPLVC.hidesBottomBarWhenPushed = YES;
+    
+    wtPLVC.ContentID = dataZJDict[@"ContentID"];
+    wtPLVC.Metype = dataZJDict[@"MediaType"];
+    
+    [self.navigationController pushViewController:wtPLVC animated:YES];
 }
-
+//专辑分享
 - (IBAction)shareBtnClick:(id)sender {
+    
+    [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_Sina),@(UMSocialPlatformType_QQ),@(UMSocialPlatformType_Qzone),@(UMSocialPlatformType_WechatTimeLine),@(UMSocialPlatformType_WechatSession)]];
+    
+    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+        // 根据获取的platformType确定所选平台进行下一步操作
+        [self shareWebPageToPlatformType:platformType];
+    }];
 }
-- (IBAction)XQBtnClick:(id)sender {
+- (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType
+{
+    
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    
+    //创建网页内容对象 、 为显示图片 在加载block里进行分享
+    UIImageView *imageV = [[UIImageView alloc] init];
+    [imageV sd_setImageWithURL:[NSURL URLWithString:[NSString NULLToString:dataZJDict[@"ContentImg"]]] placeholderImage:[UIImage imageNamed:@"img_radio_default"]  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        
+        UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:dataZJDict[@"ContentName"] descr:dataZJDict[@"ContentDescn"] thumImage:image];
+        
+        //设置网页地址
+        shareObject.webpageUrl =dataZJDict[@"ContentShareURL"];
+        
+        //分享消息对象设置分享内容对象
+        messageObject.shareObject = shareObject;
+        
+        //调用分享接口
+        [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+            if (error) {
+                NSLog(@"************Share fail with error %@*********",error);
+            }else{
+                NSLog(@"response data is %@",data);
+            }
+        }];
+        
+    } ];
+    
+    
 }
 
-- (IBAction)JMBtnClick:(id)sender {
-}
 @end

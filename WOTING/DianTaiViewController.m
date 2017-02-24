@@ -32,7 +32,13 @@
     _DTTableView.tableFooterView = [[UIView alloc] init];
     
     [self registerTabViewCell];
-    [self loadDTLike];
+    
+    if (_dataDTLSArr) {     //播放历史
+        
+        [_DTTableView reloadData];
+    }else{
+        [self loadDTLike];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -133,7 +139,12 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _dataDTArr.count;
+    if (_dataDTLSArr) {
+        
+        return _dataDTLSArr.count;
+    }else {
+        return _dataDTArr.count;
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -143,33 +154,57 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    static NSString *cellID = @"cellID";
-    
-    WTBoFangTableViewCell *cell = (WTBoFangTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
-    
-    if (!cell) {
-        cell = [[WTBoFangTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+    if (_dataDTLSArr) {
+        
+        static NSString *cellID = @"cellID";
+        
+        WTBoFangTableViewCell *cell = (WTBoFangTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+        
+        if (!cell) {
+            cell = [[WTBoFangTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+        }
+        
+        cell.WTBoFangImgV.hidden = YES;
+        NSDictionary *dict = _dataDTLSArr[indexPath.row];
+        
+        [cell setCellWithDict:dict];
+        
+        
+        return cell;
+    }else {
+        static NSString *cellID = @"cellID";
+        
+        WTBoFangTableViewCell *cell = (WTBoFangTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+        
+        if (!cell) {
+            cell = [[WTBoFangTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+        }
+        cell.WTBoFangImgV.hidden = YES;
+        NSDictionary *dict = _dataDTArr[indexPath.row];
+        
+        [cell setCellWithDict:dict];
+        
+        
+        return cell;
     }
-    
-    NSDictionary *dict = _dataDTArr[indexPath.row];
-    
-    [cell setCellWithDict:dict];
-    
-    
-    return cell;
-    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    NSDictionary *dict = _dataDTArr[indexPath.row];
-    NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
-    [self.navigationController popViewControllerAnimated:YES];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
-    
+    if (_dataDTLSArr) {
+        
+        NSDictionary *dict = _dataDTLSArr[indexPath.row];
+        NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
+        [self.navigationController popViewControllerAnimated:YES];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
+    }else{
+        NSDictionary *dict = _dataDTArr[indexPath.row];
+        NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
+        [self.navigationController popViewControllerAnimated:YES];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

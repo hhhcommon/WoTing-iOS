@@ -21,6 +21,7 @@
     NSMutableArray      *_DataArray;    //（播放历史）数据数组
     NSMutableArray      *_DataShengYinArr;  //（播放历史）声音数据
     NSMutableArray      *_DataDianTaiArr;   //（播放历史）电台数据
+    NSMutableArray      *_DataTTSArr;   //（播放历史）TTS数据
     
     SKMainScrollView    *contentScrollView;
     UIView              *titleView;//标识栏
@@ -35,6 +36,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     _DataArray = [NSMutableArray arrayWithCapacity:0];
+    _DataShengYinArr = [NSMutableArray arrayWithCapacity:0];
+    _DataDianTaiArr = [NSMutableArray arrayWithCapacity:0];
+    _DataTTSArr = [NSMutableArray arrayWithCapacity:0];
     
     _NameLab.text = _label;
     
@@ -53,8 +57,67 @@
                 [_DataArray addObject:jsonDict];
 
             }
+        
+        NSMutableArray *Rarray = [NSMutableArray arrayWithCapacity:0];
+        NSMutableArray *Aarray = [NSMutableArray arrayWithCapacity:0];
+        NSMutableArray *Sarray = [NSMutableArray arrayWithCapacity:0];
+        NSMutableArray *Tarray = [NSMutableArray arrayWithCapacity:0];
+        NSMutableDictionary *dictR = [NSMutableDictionary dictionaryWithCapacity:0];
+        NSMutableDictionary *dictA = [NSMutableDictionary dictionaryWithCapacity:0];
+        NSMutableDictionary *dictS = [NSMutableDictionary dictionaryWithCapacity:0];
+        NSMutableDictionary *dictT = [NSMutableDictionary dictionaryWithCapacity:0];
+        [dictR setObject:@"RADIO" forKey:@"MediaType"];
+        [dictA setObject:@"AUDIO" forKey:@"MediaType"];
+        [dictS setObject:@"SEQU" forKey:@"MediaType"];
+        [dictT setObject:@"TTS" forKey:@"MediaType"];
+        for (NSDictionary *dict in _DataArray) {
+            
+            if ([dict[@"MediaType"] isEqualToString: @"RADIO"]) {
+                
+                [Rarray addObject:dict];
+                [_DataDianTaiArr addObjectsFromArray:Rarray];
+                [dictR setObject:Rarray forKey:@"List"];
+                
+                
+            }else if ([dict[@"MediaType"] isEqualToString: @"AUDIO"]) {
+                
+                [Aarray addObject:dict];
+                [_DataShengYinArr addObjectsFromArray:Aarray];
+                [dictA setObject:Aarray forKey:@"List"];
+                
+            }else if ([dict[@"MediaType"] isEqualToString: @"SEQU"]){
+                
+                [Sarray addObject:dict];
+                [dictS setObject:Sarray forKey:@"List"];
+                
+            }else if ([dict[@"MediaType"] isEqualToString: @"TTS"]){
+                
+                [Tarray addObject:dict];
+                [_DataTTSArr addObjectsFromArray:Tarray];
+                [dictT setObject:Tarray forKey:@"List"];
+                
+            }
+            
+        }
+        [_DataArray removeAllObjects];
+        if (Rarray.count != 0) {
+            
+            [_DataArray addObject:dictR];
+        }
+        if (Aarray.count != 0) {
+            
+            [_DataArray addObject:dictA];
+        }
+        if (Sarray.count != 0) {
+            
+            [_DataArray addObject:dictS];
+        }
+        if (Tarray.count != 0) {
+            
+            [_DataArray addObject:dictT];
+        }
     }
-    
+
     [self initTiteBarView];
     [self initScrollerView];
     
@@ -182,7 +245,7 @@
             }else if (i == 1){
                 
                 ShengYinViewController *wtSYVC = [[ShengYinViewController alloc] init];
-                //  skXiaoZuVC.userArr = skuserArr;
+                wtSYVC.dataSYLSArr = _DataShengYinArr;
                 [self addChildViewController:wtSYVC];
                 [contentScrollView addSubview:wtSYVC.view];
                 [wtSYVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -196,7 +259,7 @@
             }else if (i == 2) {
                 
                 DianTaiViewController *wtDTVC = [[DianTaiViewController alloc] init];
-                //  skXiaoZuVC.userArr = skuserArr;
+                wtDTVC.dataDTLSArr = _DataDianTaiArr;
                 [self addChildViewController:wtDTVC];
                 [contentScrollView addSubview:wtDTVC.view];
                 [wtDTVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -210,7 +273,7 @@
             }else{
                 
                 TTSViewController *wtttsVC = [[TTSViewController alloc] init];
-                //  skXiaoZuVC.userArr = skuserArr;
+                wtttsVC.dataTTSLSArr = _DataTTSArr;
                 [self addChildViewController:wtttsVC];
                 [contentScrollView addSubview:wtttsVC.view];
                 [wtttsVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -653,18 +716,36 @@
 
 //点击跳转到对应部分
 - (void)scollerViewChange:(NSNotification *)not {
-    
-    NSString *str = not.userInfo[@"Str"];
-    
-    if ([str isEqualToString:@"声音"]) {
+    if ([_label isEqualToString:@"我的喜欢"]) {
+        NSString *str = not.userInfo[@"Str"];
         
-        contentScrollView.contentOffset = CGPointMake(self.view.bounds.size.width * 2, 0);
-    }else if ([str isEqualToString:@"专辑"]) {
+        if ([str isEqualToString:@"声音"]) {
+            
+            contentScrollView.contentOffset = CGPointMake(self.view.bounds.size.width * 2, 0);
+        }else if ([str isEqualToString:@"专辑"]) {
+            
+            contentScrollView.contentOffset = CGPointMake(self.view.bounds.size.width * 1, 0);
+        }else if ([str isEqualToString:@"电台"]){
+            
+            contentScrollView.contentOffset = CGPointMake(self.view.bounds.size.width * 3, 0);
+        }else if ([str isEqualToString:@"TTS"]){
+            
+            contentScrollView.contentOffset = CGPointMake(self.view.bounds.size.width * 4, 0);
+        }
+    }else if ([_label isEqualToString:@"播放历史"]) {
+        NSString *str = not.userInfo[@"Str"];
         
-        contentScrollView.contentOffset = CGPointMake(self.view.bounds.size.width * 1, 0);
-    }else if ([str isEqualToString:@"电台"]){
+        if ([str isEqualToString:@"声音"]) {
+            
+            contentScrollView.contentOffset = CGPointMake(self.view.bounds.size.width * 1, 0);
+        }else if ([str isEqualToString:@"电台"]){
+            
+            contentScrollView.contentOffset = CGPointMake(self.view.bounds.size.width * 2, 0);
+        }else if ([str isEqualToString:@"TTS"]){
+            
+            contentScrollView.contentOffset = CGPointMake(self.view.bounds.size.width * 3, 0);
+        }
         
-        contentScrollView.contentOffset = CGPointMake(self.view.bounds.size.width * 3, 0);
     }
 }
 
@@ -690,5 +771,47 @@
 }
 
 - (IBAction)cleanBtnClick:(id)sender {
+    
+    if ([_label isEqualToString:@"播放历史"]){
+    
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"清空历史" message:@"是否清空历史记录" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *actiongengxin = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            
+            [alert dismissViewControllerAnimated:YES completion:nil];
+            
+        }];
+        
+        UIAlertAction *actionquxiao = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            
+            
+            FMDatabase *db = [FMDBTool createDatabaseAndTable:@"BFLS"];
+            BOOL isok = [db executeUpdate:@"DELETE FROM BFLS"];
+            if (isok) {
+                
+                NSLog(@"清空历史");
+                [_DataArray removeAllObjects];
+                [_DataShengYinArr removeAllObjects];
+                [_DataDianTaiArr removeAllObjects];
+                [_DataTTSArr removeAllObjects];
+                
+                [self initTiteBarView];
+                [self initScrollerView];
+                
+            }
+            
+        }];
+        
+        
+        [alert addAction:actiongengxin];
+        [alert addAction:actionquxiao];
+        
+        [self.navigationController presentViewController:alert animated:YES completion:nil];
+    }else if([_label isEqualToString:@"我的喜欢"]) {
+        
+        NSLog(@"清空喜欢");
+        
+    }
+    
 }
 @end

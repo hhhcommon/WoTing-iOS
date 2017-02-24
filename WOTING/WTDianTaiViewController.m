@@ -6,7 +6,11 @@
 //  Copyright © 2016年 jq. All rights reserved.
 //
 
+
 #import "WTDianTaiViewController.h"
+
+#import <CoreLocation/CoreLocation.h>
+
 #import "WTDTController.h"      //国家, 地方, 网络台
 
 #import "WTDTDetailViewController.h"
@@ -40,6 +44,8 @@
     dataDianTArray = [NSMutableArray arrayWithCapacity:0];
     dataListArr = [NSMutableArray arrayWithCapacity:0];
     
+    NSString *City = [AutomatePlist readPlistForKey:@"City"];
+        
     jqTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, K_Screen_Width, K_Screen_Height) style:UITableViewStyleGrouped];
     jqTableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     jqTableView.delegate = self;

@@ -14,5 +14,6 @@
 @property (nonatomic, strong) NSMutableArray *dataDTArr;
 
 @property (nonatomic, copy) NSString *SearchStr;
+@property (nonatomic, strong) NSMutableArray *dataDTLSArr;
 
 @end

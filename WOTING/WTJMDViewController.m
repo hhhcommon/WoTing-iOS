@@ -605,10 +605,11 @@
     senddate = [senddate dateByAddingTimeInterval:interval];
     NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[senddate timeIntervalSince1970]*1000];     //得到当前时间戳
     ENDStr = timeSp;
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *comps = [[NSDateComponents alloc] init];
-    NSInteger unitFlags = NSWeekdayCalendarUnit;
-    comps = [calendar components:unitFlags fromDate:senddate];
+    comps =[calendar components:(NSWeekCalendarUnit | NSWeekdayCalendarUnit |NSWeekdayOrdinalCalendarUnit)
+            
+                       fromDate:senddate];
     day = [comps weekday];    //得到今天星期几
     
     //    NSString *title = @",,,,,,";

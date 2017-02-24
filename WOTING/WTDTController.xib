@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2659" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -55,19 +55,27 @@
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="itc-WG-Mid">
-                    <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                    <rect key="frame" x="0.0" y="108" width="375" height="559"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
+                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="skX-cE-IIs">
+                    <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                    <textInputTraits key="textInputTraits"/>
+                </searchBar>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="P7Y-d6-LSf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="0lk-ed-ygp"/>
                 <constraint firstAttribute="bottom" secondItem="itc-WG-Mid" secondAttribute="bottom" id="KPO-0W-jYF"/>
                 <constraint firstAttribute="trailing" secondItem="itc-WG-Mid" secondAttribute="trailing" id="ZNc-ae-0hg"/>
+                <constraint firstItem="skX-cE-IIs" firstAttribute="top" secondItem="P7Y-d6-LSf" secondAttribute="bottom" id="dpV-sX-qqX"/>
+                <constraint firstItem="itc-WG-Mid" firstAttribute="top" secondItem="skX-cE-IIs" secondAttribute="bottom" id="dz2-en-27Q"/>
                 <constraint firstAttribute="trailing" secondItem="P7Y-d6-LSf" secondAttribute="trailing" id="fgi-xh-SvW"/>
+                <constraint firstAttribute="trailing" secondItem="skX-cE-IIs" secondAttribute="trailing" id="hdo-i1-uWf"/>
+                <constraint firstItem="skX-cE-IIs" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="q6r-Jd-dy7"/>
                 <constraint firstItem="itc-WG-Mid" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="rpM-gg-Itb"/>
                 <constraint firstItem="P7Y-d6-LSf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="vPJ-Sy-wYC"/>
-                <constraint firstItem="itc-WG-Mid" firstAttribute="top" secondItem="P7Y-d6-LSf" secondAttribute="bottom" id="zC2-gV-nv6"/>
+                <constraint firstItem="itc-WG-Mid" firstAttribute="top" secondItem="P7Y-d6-LSf" secondAttribute="bottom" constant="44" id="zC2-gV-nv6"/>
             </constraints>
             <point key="canvasLocation" x="33.5" y="54.5"/>
         </view>

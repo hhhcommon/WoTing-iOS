@@ -152,7 +152,7 @@
     if (!cell) {
         cell = [[WTBoFangTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     }
-    
+    cell.WTBoFangImgV.hidden = YES;
     NSDictionary *dict = _dataTTSArr[indexPath.row];
     [cell setCellWithDict:dict];
     

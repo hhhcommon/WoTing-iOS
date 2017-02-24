@@ -20,6 +20,9 @@
          contextName = "__26-[WTDTController loadData]_block_invoke:WTDTController.m">
       </ContextState>
       <ContextState
+         contextName = "-[WTDTDetailViewController loadMoveData]:WTDTDetailViewController.m">
+      </ContextState>
+      <ContextState
          contextName = "__41-[WTSearchViewController loadDataSearch:]_block_invoke:WTSearchViewController.m">
       </ContextState>
       <ContextState
@@ -35,6 +38,14 @@
       </ContextState>
       <ContextState
          contextName = "-[WTJieMuXQViewController tableView:cellForRowAtIndexPath:]:WTJieMuXQViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexPath.row">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[WTSearchViewController createrWithHotkey:]:WTSearchViewController.m">
       </ContextState>
       <ContextState
          contextName = "-[WTMainViewController LoginNotification:]:WTMainViewController.m">
@@ -79,6 +90,17 @@
          contextName = "__35-[ZhuanJiViewController loadZJLike]_block_invoke:ZhuanJiViewController.m">
       </ContextState>
       <ContextState
+         contextName = "-[WTBoFangViewController tableView:cellForRowAtIndexPath:]:WTBoFangViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexPath.row">
+            </PersistentString>
+            <PersistentString
+               value = "indexPath.section">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[WTLikeView MoveClick:]:WTLikeView.m">
          <PersistentStrings>
             <PersistentString
@@ -90,15 +112,6 @@
          contextName = "-[AllViewController loadDAtaLike]:AllViewController.m">
       </ContextState>
       <ContextState
-         contextName = "__39-[WTLoginViewController LoginBtnClick:]_block_invoke:WTLoginViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[WTZhuanJiViewController loadDataZJ]:WTZhuanJiViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[WTPingLunViewController FSBtnClick:]:WTPingLunViewController.m">
-      </ContextState>
-      <ContextState
          contextName = "-[WTDTDetailViewController tableView:cellForRowAtIndexPath:]:WTDTDetailViewController.m">
          <PersistentStrings>
             <PersistentString
@@ -108,6 +121,15 @@
                value = "indexPath.section">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[WTZhuanJiViewController loadDataZJ]:WTZhuanJiViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[WTPingLunViewController FSBtnClick:]:WTPingLunViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__39-[WTLoginViewController LoginBtnClick:]_block_invoke:WTLoginViewController.m">
       </ContextState>
       <ContextState
          contextName = "-[WTBoFangViewController tableView:didSelectRowAtIndexPath:]:WTBoFangViewController.m">
@@ -132,6 +154,9 @@
          contextName = "-[WTBoFangViewController playMusic]:WTBoFangViewController.m">
          <PersistentStrings>
             <PersistentString
+               value = "self.musics">
+            </PersistentString>
+            <PersistentString
                value = "self.musicIndex">
             </PersistentString>
          </PersistentStrings>
@@ -146,7 +171,31 @@
          contextName = "__49-[WTBoFangViewController reloadTableViewAndData:]_block_invoke:WTBoFangViewController.m">
       </ContextState>
       <ContextState
+         contextName = "__64-[AppDelegate locationManager:didUpdateToLocation:fromLocation:]_block_invoke:AppDelegate.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "placemark.addressDictionary">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[WTLikeListViewController viewDidLoad]:WTLikeListViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_DataArray">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[WTLoginViewController LoginBtnClick:]:WTLoginViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[WTBoFangViewController beginbtnYes]:WTBoFangViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.musicIndex">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "-[WTBoFangXQCell setDictWithCell:]:WTBoFangXQCell.m">
@@ -177,6 +226,9 @@
                value = "indexPath.section">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[WTDTDetailViewController loadDataGD]:WTDTDetailViewController.m">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

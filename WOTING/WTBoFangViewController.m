@@ -49,6 +49,7 @@
     
     UIImageView     *BoFangimgV;
     long            BoFangDH;   //播放动画判断
+    BOOL            isBegin;    //判断播放状态还是暂停状态
 }
 
 @property (nonatomic ,strong) AVPlayer   *player;
@@ -56,8 +57,6 @@
 @property (nonatomic, strong) WTBoFangCell   *headerV;
 @property(assign, nonatomic)NSInteger musicIndex;//当前播放音乐索引
 @property(strong,nonatomic) NSMutableArray *musics;//音乐数据
-
-@property(assign, nonatomic) BOOL SQLITE;
 
 @end
 
@@ -164,6 +163,8 @@
             
             changPag = 1;
             [_JQtableView.mj_footer resetNoMoreData];
+            self.musicIndex = 0;
+            BoFangDH = 0;
             [_JQtableView reloadData];
             [self playMusic];
             
@@ -433,49 +434,62 @@
     }
 }
 
-#pragma mark 保存数据
+#pragma mark 保存播放历史数据
 - (void)beginbtnYes {
     
     FMDatabase *db = [FMDBTool createDatabaseAndTable:@"BFLS"];
-    NSDictionary *dict = dataBFArray[self.musicIndex];
-    FMResultSet *resultSet = [db executeQuery:@"SELECT * FROM BFLS"];
-    // 遍历结果，如果重复就删除数据
-    while ([resultSet next]) {
+    
+    if (dataBFArray.count != 0) {
         
-        NSData *ID = [resultSet dataForColumn:@"BFLS"];
-        NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:ID options:NSJSONReadingMutableLeaves error:nil];
-        if ([dict[@"ContentId"] isEqualToString:jsonDict[@"ContentId"]]) {
-
-            NSString *deleteSql = [NSString stringWithFormat:@"delete from BFLS where BFLS='%@'",ID];
-            NSLog(@"%@", deleteSql);
-            //    NSString *deleteSql = @"delete from BFLS where MusicDict";
-            BOOL isOk = [db executeUpdate:deleteSql];
+        NSDictionary *dict = dataBFArray[self.musicIndex];
+        BOOL isRept = NO;
+        FMResultSet *resultSet = [db executeQuery:@"SELECT * FROM BFLS"];
+        // 遍历结果，如果重复就删除数据
+        while ([resultSet next]) {
             
-            if (isOk) {
-                NSLog(@"删除数据成功! 😄");
-            }else{
-                NSLog(@"删除数据失败! 💔");
+            NSData *ID = [resultSet dataForColumn:@"BFLS"];
+            NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:ID options:NSJSONReadingMutableLeaves error:nil];
+            if ([dict[@"ContentId"] isEqualToString:jsonDict[@"ContentId"]]) {
+                
+                //            NSString *deleteSql = [NSString stringWithFormat:@"delete from BFLS where BFLS='%@'",ID];
+                //            NSLog(@"%@", deleteSql);
+                //            //    NSString *deleteSql = @"delete from BFLS where MusicDict";
+                //            BOOL isOk = [db executeUpdate:deleteSql];
+                //
+                //            if (isOk) {
+                //                NSLog(@"删除数据成功! 😄");
+                //            }else{
+                //                NSLog(@"删除数据失败! 💔");
+                //            }
+                isRept = YES;
             }
-            
         }
+        if (!isRept) {
+            
+            NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
+            NSString *sqlInsert = @"insert into BFLS values(?)";
+            BOOL isOk = [db executeUpdate:sqlInsert, data];
+            if (isOk) {
+                NSLog(@"添加数据成功");
+            }
+        }
+ 
     }
-    NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
-    NSString *sqlInsert = @"insert into BFLS values(?)";
-    [db executeUpdate:sqlInsert, data];
+    
 }
 
 #pragma mark 播放动画
 - (void)boFangDongHua {
     
     [BoFangimgV startAnimating];
-    
+    isBegin = YES;
 }
 
 #pragma mark 暂停动画
 - (void)zanTingDongHua {
     
     [BoFangimgV stopAnimating];
-    
+    isBegin = NO;
 }
 
 #pragma mark 点击语音搜索
@@ -887,15 +901,19 @@
                 [images addObject:image];
             }
             
-            // 设置动画图片
-            BoFangimgV.animationImages = images;
-            cell.WTBoFangImgV = BoFangimgV;
     
             cell.WTBoFangImgV.hidden = YES;
             
             if (BoFangDH == (long)indexPath.row) {
                 
                 cell.WTBoFangImgV.hidden = NO;
+                cell.WTBoFangImgV.animationImages = images;
+                BoFangimgV = cell.WTBoFangImgV;
+                
+                if (isBegin) {  //判断播放状态
+                    
+                    [BoFangimgV startAnimating];
+                }
             }
             
             return cell;

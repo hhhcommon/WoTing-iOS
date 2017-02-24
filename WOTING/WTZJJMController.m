@@ -12,7 +12,7 @@
 
 @interface WTZJJMController ()<UITableViewDelegate, UITableViewDataSource>{
     
-    
+    BOOL isHeaderViewSelected;
 }
 
 @end
@@ -28,6 +28,7 @@
     _ZJJieMTabV.dataSource = self;
     _ZJJieMTabV.separatorStyle = UITableViewCellSeparatorStyleNone;
     
+    isHeaderViewSelected = NO;
     [self registerTableViewCell];
 }
 
@@ -115,6 +116,13 @@
     [PaiXuBtn addTarget:self action:@selector(PaiXuBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [PaiXuBtn setImage:[UIImage imageNamed:@"PaiXu_Nol.png"] forState:UIControlStateNormal];
     [PaiXuBtn setImage:[UIImage imageNamed:@"PaiXu_Sele.png"] forState:UIControlStateSelected];
+    if (isHeaderViewSelected) {
+        
+        PaiXuBtn.selected = YES;
+    }else{
+        
+        PaiXuBtn.selected = NO;
+    }
     [view addSubview:PaiXuBtn];
     [PaiXuBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -157,10 +165,12 @@
     NSArray* reversedArray = [[_dataZJArr reverseObjectEnumerator] allObjects];
     [_dataZJArr removeAllObjects];
     [_dataZJArr addObjectsFromArray:reversedArray];
+    if (isHeaderViewSelected == YES) {
+        isHeaderViewSelected = NO;
+    }else{
+        isHeaderViewSelected = YES;
+    }
     [_ZJJieMTabV reloadData];
-    
-    btn.selected ^= 1;
-    
     
 }
 

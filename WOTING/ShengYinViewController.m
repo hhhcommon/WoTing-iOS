@@ -28,7 +28,13 @@
     _SYTableView.tableFooterView = [[UIView alloc] init];
     
     [self registerTabViewCell];
-    [self loadSYLike];
+    
+    if (_dataSYLSArr) {
+        
+        [_SYTableView reloadData];
+    }else {
+        [self loadSYLike];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -131,7 +137,13 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _dataSYArr.count;
+    if (_dataSYLSArr) {
+        
+        return _dataSYLSArr.count;
+    }else {
+        return _dataSYArr.count;
+    }
+    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -141,32 +153,56 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (_dataSYLSArr) {
+        
+        static NSString *cellID = @"cellIDSY";
+        
+        WTBoFangTableViewCell *cell = (WTBoFangTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+        
+        if (!cell) {
+            cell = [[WTBoFangTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+        }
+        cell.WTBoFangImgV.hidden = YES;
+        NSDictionary *dict = _dataSYLSArr[indexPath.row];
+        [cell setCellWithDict:dict];
+        
+        
+        return cell;
+        
+    }else{
     
-    static NSString *cellID = @"cellIDSY";
-    
-    WTBoFangTableViewCell *cell = (WTBoFangTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
-    
-    if (!cell) {
-        cell = [[WTBoFangTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+        static NSString *cellID = @"cellIDSY";
+        
+        WTBoFangTableViewCell *cell = (WTBoFangTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+        
+        if (!cell) {
+            cell = [[WTBoFangTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+        }
+        cell.WTBoFangImgV.hidden = YES;
+        NSDictionary *dict = _dataSYArr[indexPath.row];
+        [cell setCellWithDict:dict];
+        
+        
+        return cell;
     }
-    
-    NSDictionary *dict = _dataSYArr[indexPath.row];
-    [cell setCellWithDict:dict];
-    
-    
-    return cell;
-   
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    NSDictionary *dict = _dataSYArr[indexPath.row];
-    NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
-    [self.navigationController popViewControllerAnimated:YES];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
-    
+    if (_dataSYLSArr) {
+        
+        NSDictionary *dict = _dataSYLSArr[indexPath.row];
+        NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
+        [self.navigationController popViewControllerAnimated:YES];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
+    }else{
+        NSDictionary *dict = _dataSYArr[indexPath.row];
+        NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
+        [self.navigationController popViewControllerAnimated:YES];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
+    }
 }
 
 

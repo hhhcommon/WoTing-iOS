@@ -278,7 +278,7 @@
     NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
     NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
     
-    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", @"1", @"UsePhone", _phoneTF.text, @"MainPhoneNum",_userNameTF.text,@"UserName",_psdTF.text,@"Password", nil];
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", @"1", @"UsePhone", _phoneTF.text, @"MainPhoneNum",_userNameTF.text,@"NickName",_psdTF.text,@"Password", nil];
     
     NSString *login_Str = LoginStr;
     

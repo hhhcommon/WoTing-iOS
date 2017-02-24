@@ -55,7 +55,7 @@
     if (!cell) {
         cell = [[WTJMDCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     }
-    
+    //WTJMDCell *cell = [[WTJMDCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     cell.NameLab.text = _dataJMDArr[indexPath.row][@"Title"];
     
     NSString *beginStr = _dataJMDArr[indexPath.row][@"BeginTime"];
@@ -93,6 +93,11 @@
             cell.TimeLab.textColor = [UIColor blackColor];
             cell.NameLab.textColor = [UIColor blackColor];
             cell.ZhiBoImgV.hidden = NO;
+        }else{
+            
+            cell.TimeLab.textColor = [UIColor lightGrayColor];
+            cell.NameLab.textColor = [UIColor lightGrayColor];
+            cell.ZhiBoImgV.hidden = YES;
         }
         
         

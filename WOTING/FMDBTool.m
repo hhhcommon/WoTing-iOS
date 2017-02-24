@@ -17,7 +17,7 @@
     NSLog(@"%@",fileName);
     FMDatabase *database;
     BOOL isOK = false ;
-    //不为空就建表， 为空则打开数据库
+    //yes 打开数据库 No 建表
         
     //根据路径创建数据库
     database = [FMDatabase databaseWithPath:fileName];

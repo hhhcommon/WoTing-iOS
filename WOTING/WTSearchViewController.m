@@ -119,6 +119,11 @@
     
 }
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+    [_searchTField resignFirstResponder];
+}
+
 
 //得到热门搜索
 - (void)createrWithHotkey:(NSArray *)array {
@@ -127,7 +132,7 @@
     view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:view];
     
-    
+    //热门搜索
     UILabel *labHot = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 100, 20)];
     if (array) {
         
@@ -165,11 +170,85 @@
         
     }
     
+    //搜索历史
+    NSMutableArray *arraySear = [NSMutableArray arrayWithCapacity:0];
+    FMDatabase *db = [FMDBTool createDatabaseAndTable:@"SEARCH"];
+    
+    FMResultSet *resultSet = [db executeQuery:@"SELECT * FROM SEARCH"];
+    // 2.遍历结果
+    while ([resultSet next]) {
+        
+        NSString *ID = [resultSet objectForKeyedSubscript:@"SEARCH"];
+        
+        [arraySear addObject:ID];
+    }
+    if (arraySear.count != 0) {
+        UILabel *labSear = [[UILabel alloc] initWithFrame:CGRectMake(20, 180, 100, 20)];
+        labSear.font = [UIFont systemFontOfSize:15];
+        labSear.text = @"历史搜索";
+        [view addSubview:labSear];
+        
+        UIButton *cleanBtn = [[UIButton alloc] init];
+        [cleanBtn setImage:[UIImage imageNamed:@"mine_set_icon_delete.png"] forState:UIControlStateNormal];
+        [cleanBtn addTarget:self action:@selector(cleanSearchHoy) forControlEvents:UIControlEventTouchUpInside];
+        
+        [view addSubview:cleanBtn];
+        [cleanBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.right.mas_equalTo(-20);
+            make.top.mas_equalTo(180);
+            make.width.mas_equalTo(20);
+            make.height.mas_equalTo(20);
+        }];
+    }
+    
+    NSInteger XXSear = 10;
+    NSInteger YYSear = 170;
+    NSInteger widthSe = K_Screen_Width/4 - 10;
+    NSInteger heightSe = 30;
+    
+    for (int i = 0; i < arraySear.count; i++) {
+        
+        NSString *title = [arraySear objectAtIndex:i];
+        
+        if (!(i%4)) {
+            
+            YYSear += 40;
+            XXSear = 10;
+            
+        }
+        
+        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(XXSear, YYSear, widthSe - 3, heightSe)];
+        [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [btn setTitle:title forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"search_kuang.png"] forState:UIControlStateNormal];
+        btn.titleLabel.font = [UIFont systemFontOfSize:13];
+        
+        [view addSubview:btn];
+        
+        XXSear += widthSe +10;
+        
+    }
+    
 }
+
+//清空搜索记录
+- (void)cleanSearchHoy{
+    
+    FMDatabase *db = [FMDBTool createDatabaseAndTable:@"SEARCH"];
+    BOOL isok = [db executeUpdate:@"DELETE FROM SEARCH"];
+    if (isok) {
+        
+        [self createrWithHotkey:dataSearchArr];
+    }
+}
+
 //热门搜索点击事件
 - (void)btnClick:(UIButton *)btn {
-    
+    [_searchTField resignFirstResponder];
     _searchTField.text = btn.titleLabel.text;
+    
     [self SearchChanged:_searchTField];
 }
 
@@ -231,6 +310,32 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     _searchTField.text = dataSearchArr[indexPath.row];
+    
+    //入库
+    FMDatabase *db = [FMDBTool createDatabaseAndTable:@"SEARCH"];
+    
+    FMResultSet *resultSet = [db executeQuery:@"SELECT * FROM SEARCH"];
+    BOOL isRepeat = NO;
+    // 2.遍历结果
+    while ([resultSet next]) {
+        
+        NSString *ID = [resultSet objectForKeyedSubscript:@"SEARCH"];
+        
+        if ([_searchTField.text isEqualToString:ID]) {
+            
+            isRepeat = YES;
+        }
+    }
+    if (!isRepeat) {
+        
+        NSString *sqlInsert = @"insert into SEARCH values(?)";
+        BOOL  isok = [db executeUpdate:sqlInsert, _searchTField.text];
+        if (isok) {
+            NSLog(@"搜索历史+1");
+        }
+    }
+    
+    [_searchTField resignFirstResponder];
     [self initScrollerView];
     [self initTiteBarView];
 }
@@ -256,39 +361,35 @@
 
 //点击搜索
 - (IBAction)searchBtnClick:(id)sender {
-    
+    //入库
     if (_searchTField.text != nil) {
         
+        //入库
         FMDatabase *db = [FMDBTool createDatabaseAndTable:@"SEARCH"];
         
-//        FMResultSet *resultSet = [db executeQuery:@"SELECT * FROM BFLS"];
-//        // 2.遍历结果
-//        while ([resultSet next]) {
-//            
-//            NSString *ID = [resultSet stringForColumn:@"SEARCH"];
-//            
-//            if ([_searchTField.text isEqualToString:ID]) {
-//                
-//                _SQLITE = YES;
-//            }
-//        }
-//        
-//        if (_SQLITE == YES) {
-//            
-//            NSString *deleteSql = [NSString stringWithFormat:@"delete from BFLS where MusicStr=%@",dict[@"ContentId"]];
-//            //    NSString *deleteSql = @"delete from BFLS where MusicDict";
-//            BOOL isOk = [db executeUpdate:deleteSql];
-//            if (isOk) {
-//                NSLog(@"删除数据成功! 😄");
-//            }else{
-//                NSLog(@"删除数据失败! 💔");
-//            }
-//        }
-        NSString *sqlInsert = @"insert into BFLS values(?)";
-        [db executeUpdate:sqlInsert, _searchTField];
+        FMResultSet *resultSet = [db executeQuery:@"SELECT * FROM SEARCH"];
+        BOOL isRepeat = NO;
+        // 2.遍历结果
+        while ([resultSet next]) {
+            
+            NSString *ID = [resultSet objectForKeyedSubscript:@"SEARCH"];
+            
+            if ([_searchTField.text isEqualToString:ID]) {
+                
+                isRepeat = YES;
+            }
+        }
+        if (!isRepeat) {
+            
+            NSString *sqlInsert = @"insert into SEARCH values(?)";
+            BOOL  isok = [db executeUpdate:sqlInsert, _searchTField.text];
+            if (isok) {
+                NSLog(@"搜索历史+1");
+            }
+        }
 
     }
-    
+    [_searchTField resignFirstResponder];
     [self initScrollerView];
     [self initTiteBarView];
 }

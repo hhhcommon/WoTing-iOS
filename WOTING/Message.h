@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-static Byte END_FIELD[2] = {'|', '|'};
-static Byte END_HEAD[2] = {'^', '^'};
-static Byte BEGIN_CTL [2] = {'|', '^'};
-static Byte BEGIN_MDA [2] = {'^', '|'};
-static int _MAXLENGTH = 20480;
+static const Byte END_FIELD[] = {'|', '|'};
+static const Byte END_HEAD[] = {'^', '^'};
+static const Byte BEGIN_CTL [] = {'|', '^'};
+static const Byte BEGIN_MDA [] = {'^', '|'};
+static const int _MAXLENGTH = 20480;
 
 
 @interface Message : NSObject
@@ -31,6 +31,9 @@ static int _MAXLENGTH = 20480;
 - (Byte *)toBytes;                      //把消息序列化为字节数组
 
 - (BOOL)isAck;                          //是否是应答消息
+
+- (BOOL)equals:(Message *)msg;          //判断是否是应答消息
+- (BOOL)equalsMsg:(Message *)msg;
 
 
 - (BOOL)isCtlAffirm;    //该条消息是否需要控制确认

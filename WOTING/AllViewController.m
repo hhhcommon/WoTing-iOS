@@ -47,7 +47,14 @@
     _likeTabV.tableFooterView = [[UIView alloc] init];
     
     [self registerTabViewCell];
-    [self loadDAtaLike];
+    
+    if (_dataAllArray) {    //播放历史
+        
+        [_likeTabV reloadData];
+    }else{
+        
+        [self loadDAtaLike];
+    }
 }
 
 //注册
@@ -178,22 +185,41 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    return dataLikeArr.count;
+    if (_dataAllArray) {    //播放历史
+        
+        return _dataAllArray.count;
+    }else{
     
+        return dataLikeArr.count;
+    }
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSArray *array = dataLikeArr[section][@"List"];
-    
-    if (array.count >= 3) {
+    if (_dataAllArray) {    //播放历史
         
-        return 3;
-    }else {
+        NSArray *array = _dataAllArray[section][@"List"];
         
-        return array.count;
+        if (array.count >= 3) {
+            
+            return 3;
+        }else {
+            
+            return array.count;
+        }
+        
+        
+    }else{
+        NSArray *array = dataLikeArr[section][@"List"];
+        
+        if (array.count >= 3) {
+            
+            return 3;
+        }else {
+            
+            return array.count;
+        }
     }
-    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -211,17 +237,27 @@
     
     wtLikeView = [[WTLikeView alloc] init];
     
-    if ([dataLikeArr[section][@"MediaType"] isEqualToString: @"RADIO"]) {
+    if (_dataAllArray) {    //播放历史
         
-        wtLikeView.NameLab.text = @"电台";
-    }else if ([dataLikeArr[section][@"MediaType"] isEqualToString: @"AUDIO"]) {
-        
-        wtLikeView.NameLab.text = @"声音";
-    }else if ([dataLikeArr[section][@"MediaType"] isEqualToString: @"SEQU"]){
-        
-        wtLikeView.NameLab.text = @"专辑";
+        if ([_dataAllArray[section][@"MediaType"] isEqualToString: @"RADIO"]) {
+            
+            wtLikeView.NameLab.text = @"电台";
+        }else if ([_dataAllArray[section][@"MediaType"] isEqualToString: @"AUDIO"]) {
+            
+            wtLikeView.NameLab.text = @"声音";
+        }
+    }else {
+        if ([dataLikeArr[section][@"MediaType"] isEqualToString: @"RADIO"]) {
+            
+            wtLikeView.NameLab.text = @"电台";
+        }else if ([dataLikeArr[section][@"MediaType"] isEqualToString: @"AUDIO"]) {
+            
+            wtLikeView.NameLab.text = @"声音";
+        }else if ([dataLikeArr[section][@"MediaType"] isEqualToString: @"SEQU"]){
+            
+            wtLikeView.NameLab.text = @"专辑";
+        }
     }
-    
     wtLikeView.delegate = self;
     
     return wtLikeView;
@@ -229,37 +265,72 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    if ([dataLikeArr[indexPath.section][@"MediaType"] isEqualToString:@"SEQU"]) {
+    if (_dataAllArray) {    //播放历史
         
-        static NSString *cellID = @"cellIDL";
-        
-        WTLikeCell *cell = (WTLikeCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
-        
-        if (!cell) {
-            cell = [[WTLikeCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+        if ([_dataAllArray[indexPath.section][@"MediaType"] isEqualToString:@"SEQU"]) {
+            
+            static NSString *cellID = @"cellIDL";
+            
+            WTLikeCell *cell = (WTLikeCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+            
+            if (!cell) {
+                cell = [[WTLikeCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+            }
+            
+            NSDictionary *dict = _dataAllArray[indexPath.section][@"List"][indexPath.row];;
+            [cell setCellWithDict:dict];
+            
+            
+            return cell;
+        }else {
+            
+            static NSString *cellID = @"cellID";
+            
+            WTBoFangTableViewCell *cell = (WTBoFangTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+            
+            if (!cell) {
+                cell = [[WTBoFangTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+            }
+            cell.WTBoFangImgV.hidden = YES;
+            NSDictionary *dict = _dataAllArray[indexPath.section][@"List"][indexPath.row];
+            [cell setCellWithDict:dict];
+            
+            
+            return cell;
         }
-        
-        NSDictionary *dict = dataLikeArr[indexPath.section][@"List"][indexPath.row];;
-        [cell setCellWithDict:dict];
-        
-        
-        return cell;
     }else {
-        
-        static NSString *cellID = @"cellID";
-        
-        WTBoFangTableViewCell *cell = (WTBoFangTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
-        
-        if (!cell) {
-            cell = [[WTBoFangTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+    
+        if ([dataLikeArr[indexPath.section][@"MediaType"] isEqualToString:@"SEQU"]) {
+            
+            static NSString *cellID = @"cellIDL";
+            
+            WTLikeCell *cell = (WTLikeCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+            
+            if (!cell) {
+                cell = [[WTLikeCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+            }
+            
+            NSDictionary *dict = dataLikeArr[indexPath.section][@"List"][indexPath.row];;
+            [cell setCellWithDict:dict];
+            
+            
+            return cell;
+        }else {
+            
+            static NSString *cellID = @"cellID";
+            
+            WTBoFangTableViewCell *cell = (WTBoFangTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+            
+            if (!cell) {
+                cell = [[WTBoFangTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+            }
+            cell.WTBoFangImgV.hidden = YES;
+            NSDictionary *dict = dataLikeArr[indexPath.section][@"List"][indexPath.row];
+            [cell setCellWithDict:dict];
+            
+            
+            return cell;
         }
-        
-        NSDictionary *dict = dataLikeArr[indexPath.section][@"List"][indexPath.row];
-        [cell setCellWithDict:dict];
-        
-        
-        return cell;
     }
 }
 
@@ -273,19 +344,37 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if ([dataLikeArr[indexPath.section][@"MediaType"] isEqualToString:@"SEQU"]) {
+    if (_dataAllArray) {    //播放历史
         
-        WTZhuanJiViewController *wtZJVC = [[WTZhuanJiViewController alloc] init];
-        
-        wtZJVC.contentID = [NSString NULLToString:dataLikeArr[indexPath.section][@"List"][indexPath.row][@"ContentId"]] ;
-        [self.navigationController pushViewController:wtZJVC animated:YES];
-        
-    }else{
-        
-        NSDictionary *dict = dataLikeArr[indexPath.section][@"List"][indexPath.row];
-        NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
-        [self.navigationController popViewControllerAnimated:YES];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
+        if ([_dataAllArray[indexPath.section][@"MediaType"] isEqualToString:@"SEQU"]) {
+            
+            WTZhuanJiViewController *wtZJVC = [[WTZhuanJiViewController alloc] init];
+            
+            wtZJVC.contentID = [NSString NULLToString:_dataAllArray[indexPath.section][@"List"][indexPath.row][@"ContentId"]] ;
+            [self.navigationController pushViewController:wtZJVC animated:YES];
+            
+        }else{
+            
+            NSDictionary *dict = _dataAllArray[indexPath.section][@"List"][indexPath.row];
+            NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
+            [self.navigationController popViewControllerAnimated:YES];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
+        }
+    }else {
+        if ([dataLikeArr[indexPath.section][@"MediaType"] isEqualToString:@"SEQU"]) {
+            
+            WTZhuanJiViewController *wtZJVC = [[WTZhuanJiViewController alloc] init];
+            
+            wtZJVC.contentID = [NSString NULLToString:dataLikeArr[indexPath.section][@"List"][indexPath.row][@"ContentId"]] ;
+            [self.navigationController pushViewController:wtZJVC animated:YES];
+            
+        }else{
+            
+            NSDictionary *dict = dataLikeArr[indexPath.section][@"List"][indexPath.row];
+            NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
+            [self.navigationController popViewControllerAnimated:YES];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
+        }
     }
 }
 

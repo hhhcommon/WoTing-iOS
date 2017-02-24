@@ -14,5 +14,4 @@
 @property (nonatomic, strong) NSMutableArray *dataZJArr;
 
 @property (nonatomic, copy) NSString *SearchStr;
-
 @end

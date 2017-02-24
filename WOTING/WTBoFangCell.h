@@ -57,8 +57,12 @@ typedef enum {
 - (IBAction)commitBtnClick:(id)sender;
 - (IBAction)moreBtnClick:(id)sender;
 
-@property (weak, nonatomic) IBOutlet UIButton *downLoadImgv;
-@property (weak, nonatomic) IBOutlet UIButton *downLoadTitImgv;
+@property (weak, nonatomic) IBOutlet UIButton *downLoadImgv;    //下载图标
+@property (weak, nonatomic) IBOutlet UIButton *downLoadTitImgv; //下载图标
+
+@property (weak, nonatomic) IBOutlet UIButton *likeImgv;
+
+@property (weak, nonatomic) IBOutlet UIButton *likeTitImgv;
 
 
 @property(nonatomic,strong)WTBoFangModel *playingMusic;//当前播放的音乐
