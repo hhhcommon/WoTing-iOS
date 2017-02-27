@@ -141,7 +141,7 @@
     
     NSDictionary *dict = _dataZJArr[indexPath.row];
     NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
  
     

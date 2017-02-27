@@ -13,4 +13,6 @@
 - (IBAction)backClick:(id)sender;
 @property (weak, nonatomic) IBOutlet UITableView *detableView;
 
+@property (nonatomic, copy) NSString *type;     //判断是否为城市切换, 传1位城市切换
+
 @end

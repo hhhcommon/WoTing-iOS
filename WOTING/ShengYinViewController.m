@@ -29,7 +29,7 @@
     
     [self registerTabViewCell];
     
-    if (_dataSYLSArr) {
+    if (_dataSYLSArr) {     //播放历史
         
         [_SYTableView reloadData];
     }else {
@@ -195,12 +195,12 @@
         
         NSDictionary *dict = _dataSYLSArr[indexPath.row];
         NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
-        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController popToRootViewControllerAnimated:YES];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
     }else{
         NSDictionary *dict = _dataSYArr[indexPath.row];
         NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
-        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController popToRootViewControllerAnimated:YES];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
     }
 }

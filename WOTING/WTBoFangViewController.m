@@ -50,6 +50,10 @@
     UIImageView     *BoFangimgV;
     long            BoFangDH;   //播放动画判断
     BOOL            isBegin;    //判断播放状态还是暂停状态
+    
+    WTBoFangCell    *bofangCell;
+    
+    
 }
 
 @property (nonatomic ,strong) AVPlayer   *player;
@@ -95,7 +99,7 @@
     [self loadData];
     [self registerTabViewCell];
     
-
+    bofangCell = [_JQtableView dequeueReusableCellWithIdentifier:@"cellIDB"];
 }
 
 //语音搜索结束
@@ -118,6 +122,9 @@
 
 //接受到了传过来的数据
 - (void)reloadTableViewAndData:(NSNotification *)nt {
+    self.musicIndex = 0;
+    BoFangDH = 0;
+    [self beginbtnYes];
     
     NSDictionary *dataDict = nt.userInfo;
     [dataBFArray removeAllObjects];
@@ -163,8 +170,7 @@
             
             changPag = 1;
             [_JQtableView.mj_footer resetNoMoreData];
-            self.musicIndex = 0;
-            BoFangDH = 0;
+            
             [_JQtableView reloadData];
             [self playMusic];
             
@@ -442,6 +448,9 @@
     if (dataBFArray.count != 0) {
         
         NSDictionary *dict = dataBFArray[self.musicIndex];
+        
+        NSLog( @"%@",dict);
+        
         BOOL isRept = NO;
         FMResultSet *resultSet = [db executeQuery:@"SELECT * FROM BFLS"];
         // 遍历结果，如果重复就删除数据
@@ -464,7 +473,7 @@
                 isRept = YES;
             }
         }
-        if (!isRept) {
+        if (!isRept) {         
             
             NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
             NSString *sqlInsert = @"insert into BFLS values(?)";
@@ -472,6 +481,7 @@
             if (isOk) {
                 NSLog(@"添加数据成功");
             }
+            //dict = nil;
         }
  
     }
@@ -733,7 +743,8 @@
     }else{
         self.musicIndex --;
     }
-    
+    BoFangDH = self.musicIndex;
+    [_JQtableView reloadData];
     [self playMusic];
 }
 
@@ -746,10 +757,18 @@
     }else{
         self.musicIndex ++;
     }
-    
-    
+    BoFangDH = self.musicIndex;
+    [_JQtableView reloadData];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
     [self playMusic];
 }
+
+- (void)HYCNext{
+    
+    [self next];
+    
+}
+
 
 -(void)playMusic{
     
@@ -765,7 +784,7 @@
         [[JQMusicTool sharedJQMusicTool] play];
     }
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(next) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(HYCNext) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
 }
 
 #pragma mark - 点击蒙板
@@ -826,13 +845,13 @@
     if (indexPath.section == 0) {
         
         if (indexPath.row == 0) {
-            static NSString *cellID = @"cellIDB";
+//            static NSString *cellID = @"cellIDB";
+//            
+//            WTBoFangCell *cell = (WTBoFangCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+            _headerV = bofangCell;
+            bofangCell.delegate = self;
             
-            WTBoFangCell *cell = (WTBoFangCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
-            _headerV = cell;
-            cell.delegate = self;
-            
-            return cell;
+            return bofangCell;
             
         }else if (indexPath.row == 1){
             
@@ -994,6 +1013,9 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    bofangCell.playing = YES;
+    bofangCell.beginBtn.selected = YES;
+    [self beginbtnYes];
     
     if (indexPath.section == 0) {
         
@@ -1019,8 +1041,11 @@
             
             self.musicIndex = indexPath.row;
             BoFangDH = indexPath.row;
+            
+            isBegin = YES;
             //播放音乐
             [self playMusic];
+            [[JQMusicTool sharedJQMusicTool] play];
             [_JQtableView reloadData];
             
         }

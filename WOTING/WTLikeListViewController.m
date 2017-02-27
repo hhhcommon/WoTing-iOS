@@ -75,6 +75,7 @@
             if ([dict[@"MediaType"] isEqualToString: @"RADIO"]) {
                 
                 [Rarray addObject:dict];
+                
                 [_DataDianTaiArr addObjectsFromArray:Rarray];
                 [dictR setObject:Rarray forKey:@"List"];
                 
@@ -82,6 +83,7 @@
             }else if ([dict[@"MediaType"] isEqualToString: @"AUDIO"]) {
                 
                 [Aarray addObject:dict];
+                [_DataShengYinArr removeAllObjects];
                 [_DataShengYinArr addObjectsFromArray:Aarray];
                 [dictA setObject:Aarray forKey:@"List"];
                 

@@ -152,6 +152,11 @@
 		0B139EBA1E308D8C004DE06E /* MarqueeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B139EB91E308D8C004DE06E /* MarqueeLabel.m */; };
 		0B13B0C51E4B333F001963B3 /* WTDingShiCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B13B0C31E4B333F001963B3 /* WTDingShiCell.m */; };
 		0B13B0C61E4B333F001963B3 /* WTDingShiCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B13B0C41E4B333F001963B3 /* WTDingShiCell.xib */; };
+		0B13C0101E611D2600811D1A /* AMapFoundationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B13C00E1E611D2600811D1A /* AMapFoundationKit.framework */; };
+		0B13C0111E611D2600811D1A /* AMapLocationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B13C00F1E611D2600811D1A /* AMapLocationKit.framework */; };
+		0B13C0131E611D8500811D1A /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B13C0121E611D8500811D1A /* JavaScriptCore.framework */; };
+		0B13C0151E611DC400811D1A /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B13C0141E611DC400811D1A /* libstdc++.6.0.9.tbd */; };
+		0B13C0171E611E0100811D1A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B13C0161E611E0100811D1A /* Security.framework */; };
 		0B1580B41E33426300DE2273 /* libUCloudMediaPlayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B1580AF1E33426300DE2273 /* libUCloudMediaPlayer.a */; };
 		0B1580B61E334E2E00DE2273 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B1580B51E334E2E00DE2273 /* AudioToolbox.framework */; };
 		0B1580B81E334E3A00DE2273 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B1580B71E334E3A00DE2273 /* AVFoundation.framework */; };
@@ -663,6 +668,11 @@
 		0B13B0C21E4B333F001963B3 /* WTDingShiCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTDingShiCell.h; sourceTree = "<group>"; };
 		0B13B0C31E4B333F001963B3 /* WTDingShiCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTDingShiCell.m; sourceTree = "<group>"; };
 		0B13B0C41E4B333F001963B3 /* WTDingShiCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTDingShiCell.xib; sourceTree = "<group>"; };
+		0B13C00E1E611D2600811D1A /* AMapFoundationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AMapFoundationKit.framework; sourceTree = "<group>"; };
+		0B13C00F1E611D2600811D1A /* AMapLocationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AMapLocationKit.framework; sourceTree = "<group>"; };
+		0B13C0121E611D8500811D1A /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		0B13C0141E611DC400811D1A /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		0B13C0161E611E0100811D1A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		0B1580AF1E33426300DE2273 /* libUCloudMediaPlayer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUCloudMediaPlayer.a; sourceTree = "<group>"; };
 		0B1580B01E33426300DE2273 /* UCloudMediaModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCloudMediaModule.h; sourceTree = "<group>"; };
 		0B1580B11E33426300DE2273 /* UCloudMediaPlayback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCloudMediaPlayback.h; sourceTree = "<group>"; };
@@ -1037,7 +1047,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B13C0171E611E0100811D1A /* Security.framework in Frameworks */,
+				0B13C0151E611DC400811D1A /* libstdc++.6.0.9.tbd in Frameworks */,
+				0B13C0131E611D8500811D1A /* JavaScriptCore.framework in Frameworks */,
 				0B6D74BC1E5C1B28006FAF49 /* MapKit.framework in Frameworks */,
+				0B13C0101E611D2600811D1A /* AMapFoundationKit.framework in Frameworks */,
 				0B6D74BA1E5C1B18006FAF49 /* CoreLocation.framework in Frameworks */,
 				0B1580BC1E334E6700DE2273 /* CoreMedia.framework in Frameworks */,
 				0B1580BA1E334E4D00DE2273 /* VideoToolbox.framework in Frameworks */,
@@ -1057,6 +1071,7 @@
 				0B0DC1C91E0BBC9200CA584C /* UMSocialCore.framework in Frameworks */,
 				0B0DC1C21E0BBC9200CA584C /* libSocialSina.a in Frameworks */,
 				0B0DC1CA1E0BBC9200CA584C /* UMSocialNetwork.framework in Frameworks */,
+				0B13C0111E611D2600811D1A /* AMapLocationKit.framework in Frameworks */,
 				0B0AEFCA1E0A73B700C58084 /* SystemConfiguration.framework in Frameworks */,
 				0B0AEFC81E0A6F3C00C58084 /* libsqlite3.tbd in Frameworks */,
 			);
@@ -1458,6 +1473,9 @@
 		0B0AEFC61E0A6F3C00C58084 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0B13C0161E611E0100811D1A /* Security.framework */,
+				0B13C0141E611DC400811D1A /* libstdc++.6.0.9.tbd */,
+				0B13C0121E611D8500811D1A /* JavaScriptCore.framework */,
 				0B6D74BB1E5C1B28006FAF49 /* MapKit.framework */,
 				0B6D74B91E5C1B18006FAF49 /* CoreLocation.framework */,
 				0B1580BB1E334E6700DE2273 /* CoreMedia.framework */,
@@ -1594,6 +1612,15 @@
 				0B13B0C41E4B333F001963B3 /* WTDingShiCell.xib */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		0B13C00D1E611D2600811D1A /* GaoDeSDK */ = {
+			isa = PBXGroup;
+			children = (
+				0B13C00E1E611D2600811D1A /* AMapFoundationKit.framework */,
+				0B13C00F1E611D2600811D1A /* AMapLocationKit.framework */,
+			);
+			path = GaoDeSDK;
 			sourceTree = "<group>";
 		};
 		0B1580AD1E33426300DE2273 /* lib */ = {
@@ -2033,6 +2060,7 @@
 		0BF2C5281DE2B17400A42B3D /* WTSDK */ = {
 			isa = PBXGroup;
 			children = (
+				0B13C00D1E611D2600811D1A /* GaoDeSDK */,
 				0B4282731E1B543000FAC2BA /* socket */,
 				0B0DC1911E0BBC9200CA584C /* UMSocial */,
 				0B08586E1DFE3D6100EA8DAD /* MJRefresh */,
@@ -2458,6 +2486,11 @@
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = 6VE5FNCJXM;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					0BF2C5031DE2A36200A42B3D = {
 						CreatedOnToolsVersion = 8.1;
@@ -3038,6 +3071,7 @@
 					"$(PROJECT_DIR)/WOTING/UMSocial/SocialLibraries/QQ",
 					"$(PROJECT_DIR)/WOTING/UMSocial/UMSocialSDK",
 					"$(PROJECT_DIR)/WOTING/UMSocial/UMSocialUI",
+					"$(PROJECT_DIR)/WOTING/GaoDeSDK",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/WOTING/WoTing.pch";
@@ -3074,6 +3108,7 @@
 					"$(PROJECT_DIR)/WOTING/UMSocial/SocialLibraries/QQ",
 					"$(PROJECT_DIR)/WOTING/UMSocial/UMSocialSDK",
 					"$(PROJECT_DIR)/WOTING/UMSocial/UMSocialUI",
+					"$(PROJECT_DIR)/WOTING/GaoDeSDK",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/WOTING/WoTing.pch";

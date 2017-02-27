@@ -197,12 +197,12 @@
         
         NSDictionary *dict = _dataDTLSArr[indexPath.row];
         NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
-        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController popToRootViewControllerAnimated:YES];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
     }else{
         NSDictionary *dict = _dataDTArr[indexPath.row];
         NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
-        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController popToRootViewControllerAnimated:YES];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
     }
 }

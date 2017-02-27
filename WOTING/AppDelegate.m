@@ -9,8 +9,9 @@
 #import "AppDelegate.h"
 
 #import <CoreLocation/CoreLocation.h>
+#import <AMapFoundationKit/AMapFoundationKit.h>
 #import <MapKit/MapKit.h>
-
+#import <AMapLocationKit/AMapLocationKit.h>
 #import "WTXiangJiangViewController.h"
 #import "WTXiangTingViewController.h"
 #import "WTDownLoadViewController.h"
@@ -19,7 +20,7 @@
 #import "TabBarController.h"
 
 
-@interface AppDelegate ()<CLLocationManagerDelegate>
+@interface AppDelegate ()<AMapLocationManagerDelegate>
 @property (nonatomic, strong) UINavigationController *XJNavC;
 @property (nonatomic, strong) UINavigationController *XTNavC;
 @property (nonatomic, strong) UINavigationController *DLNavC;
@@ -31,7 +32,7 @@
 @property (nonatomic, strong) WTMainViewController *MainViewC;
 @property (nonatomic, strong) TabBarController *TabViewC;
 
-@property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic, strong) AMapLocationManager *locationManager;
 
 @end
 
@@ -40,6 +41,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    //高德地图appkey
+    [AMapServices sharedServices].apiKey =@"8e0d786ce71ce2ec317d41b32ba5d712";
     
     //设置友盟appkey
     [[UMSocialManager defaultManager] setUmSocialAppkey:@"585a24992ae85b6dba0017c0"];
@@ -66,25 +70,61 @@
     NSString *PhoneMobileClass = [WKProgressHUD deviceVersion]; //手机型号
     
     
-    CGRect rx = [ UIScreen mainScreen ].bounds;
+    CGRect rx = [UIScreen mainScreen ].bounds;
     NSString *ScreenSize = [NSString stringWithFormat:@"%f*%f",rx.size.width,rx.size.height];
     [AutomatePlist writePlistForkey:@"ScreenSize" value:ScreenSize];
 
     [AutomatePlist writePlistForkey:@"IMEI" value:phoneUDIDStr];
     [AutomatePlist writePlistForkey:@"MobileClass" value:PhoneMobileClass];
     
-    self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.delegate = self;
-    self.locationManager.distanceFilter = 1.0;
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    //定位
     
-    if([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)])
-    {
-        [self.locationManager requestAlwaysAuthorization]; // 永久授权
-        [self.locationManager requestWhenInUseAuthorization]; //使用中授权
+    self.locationManager = [[AMapLocationManager alloc] init];
+    
+    [self.locationManager setDelegate:self];
+    
+    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyHundredMeters];
+    
+    [self.locationManager setLocationTimeout:6];
+    
+    [self.locationManager setReGeocodeTimeout:3];
+    //带逆地理的单次定位
+    [self.locationManager requestLocationWithReGeocode:YES completionBlock:^(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error) {
+        
+        if (error)
+        {
+            NSLog(@"locError:{%ld - %@};", (long)error.code, error.localizedDescription);
+            
+            if (error.code == AMapLocationErrorLocateFailed)
+            {
+                return;
+            }
+        }
+        
+        //定位信息
+        NSLog(@"location:%@", location);
+        
+        //逆地理信息
+        if (regeocode)
+        {
+            NSString *cityStr = [regeocode.adcode substringToIndex:2];
+            
+            NSString *City = [NSString stringWithFormat:@"%@0000",cityStr];
+            [AutomatePlist writePlistForkey:@"City" value:City];
+            [AutomatePlist writePlistForkey:@"cityPro" value:regeocode.province];
+        }
+    }];
+
+    //iOS 9（包含iOS 9）之后新特性：将允许出现这种场景，同一app中多个locationmanager：一些只能在前台定位，另一些可在后台定位，并可随时禁止其后台定位。
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9) {
+        self.locationManager.allowsBackgroundLocationUpdates = YES;
+    }else {
+        //iOS 9（不包含iOS 9） 之前设置允许后台定位参数，保持不会被系统挂起
+        [self.locationManager setPausesLocationUpdatesAutomatically:NO];
     }
-    [self.locationManager startUpdatingLocation]; //开始定位
-    
+    //开始持续定位
+//    [self.locationManager startUpdatingLocation];
+    [self.locationManager setLocatingWithReGeocode:YES];
     
     //设置window
     _window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -102,27 +142,13 @@
 }
 
 #pragma mark -- 定位服务成功并回调代理
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
-{
-
-    [AutomatePlist writePlistForkey:@"GPS-longitude" value:[NSString  stringWithFormat:@"%f",newLocation.coordinate.longitude]];
-    [AutomatePlist writePlistForkey:@"GPS-latitude" value:[NSString  stringWithFormat:@"%f",newLocation.coordinate.latitude]];
+- (void)amapLocationManager:(AMapLocationManager *)manager didUpdateLocation:(CLLocation *)location reGeocode:(AMapLocationReGeocode *)reGeocode{
     
-    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    [geocoder reverseGeocodeLocation:manager.location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
-        
-        CLPlacemark *placemark = [placemarks objectAtIndex:0];
-        //获取城市
-        NSString *city = placemark.locality;
-        NSDictionary *dict = placemark.addressDictionary;
-        NSLog(@"%@,%@",city,dict);
-        NSLog(@"定位==%@,%@,%@,%@,%@,%@",placemark.administrativeArea,placemark.ISOcountryCode,placemark.subLocality,placemark.thoroughfare,placemark.subThoroughfare,placemark.postalCode);
-        [AutomatePlist writePlistForkey:@"City" value:city];
-    }];
-    
-    
+    [AutomatePlist writePlistForkey:@"GPS-longitude" value:[NSString  stringWithFormat:@"%f",location.coordinate.longitude]];
+    [AutomatePlist writePlistForkey:@"GPS-latitude" value:[NSString  stringWithFormat:@"%f",location.coordinate.latitude]];
 
 }
+
 
 #pragma mark -- 创建分栏控制器
 - (UIViewController *)crateTabBarControllerView{
@@ -202,7 +228,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     
-    [self.locationManager stopUpdatingLocation]; //停止定位
+//    [self.locationManager stopUpdatingLocation]; //停止定位
 }
 
 

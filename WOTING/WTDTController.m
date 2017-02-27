@@ -254,13 +254,23 @@
     NSArray *array = _letterArr[indexPath.section][@"cityS"];
     NSDictionary *dictEve = array[indexPath.row];
     
-    WTDTDetailViewController *wtddVC = [[WTDTDetailViewController alloc] init];
-    wtddVC.nameStr = dictEve[@"CatalogName"];
-    wtddVC.contentID = dictEve[@"CatalogId"];
-    wtddVC.type = 2;
-    wtddVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:wtddVC animated:YES];
-    
+    if ([_type isEqualToString:@"1"]) {
+        
+        NSMutableDictionary *Mdict = [[NSMutableDictionary alloc] init];
+        [Mdict setObject:dictEve[@"CatalogName"]  forKey:@"CatalogName"];
+        [Mdict setObject:dictEve[@"CatalogId"] forKey:@"CatalogId"];
+        NSDictionary *dict = [NSDictionary dictionaryWithDictionary:Mdict];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"XZCHENGSHI" object:nil userInfo:dict];
+        [self.navigationController popViewControllerAnimated:YES];
+    }else {
+
+        WTDTDetailViewController *wtddVC = [[WTDTDetailViewController alloc] init];
+        wtddVC.nameStr = dictEve[@"CatalogName"];
+        wtddVC.contentID = dictEve[@"CatalogId"];
+        wtddVC.type = 2;
+        wtddVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:wtddVC animated:YES];
+    }
 }
 
 

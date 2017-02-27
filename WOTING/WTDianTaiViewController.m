@@ -44,7 +44,8 @@
     dataDianTArray = [NSMutableArray arrayWithCapacity:0];
     dataListArr = [NSMutableArray arrayWithCapacity:0];
     
-    NSString *City = [AutomatePlist readPlistForKey:@"City"];
+    //接收城市切换传递过来的信息..
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(JieShouDianTai:) name:@"XZCHENGSHI" object:nil];
         
     jqTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, K_Screen_Width, K_Screen_Height) style:UITableViewStyleGrouped];
     jqTableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -196,14 +197,16 @@
 //数据请求
 - (void)loadData {
     
+    NSString *City = [AutomatePlist readPlistForKey:@"City"];
+    
     NSString *IMEI = [AutomatePlist readPlistForKey:@"IMEI"];
+    NSString *uid = [AutomatePlist readPlistForKey:@"Uid"];
     NSString *ScreenSize = [AutomatePlist readPlistForKey:@"ScreenSize"];
     NSString *MobileClass = [AutomatePlist readPlistForKey:@"MobileClass"];
     NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
     NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
     
-    //"MediaType":"",//全部
-    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", @"RADIO",@"MediaType", @"1",@"CatalogType",@"1",@"ResultType",@"3",@"PerSize",nil];
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", @"RADIO",@"MediaType",uid,@"UserId", @"",@"CatalogId",@"1",@"CatalogType",@"1",@"ResultType",@"3",@"PerSize",nil];
     
     NSString *login_Str = WoTing_GetContents;
     
@@ -218,7 +221,7 @@
         if ([ReturnType isEqualToString:@"1001"]) {
             
             NSDictionary *ResultList = resultDict[@"ResultList"];
-            [dataListArr removeAllObjects];
+           // [dataListArr removeAllObjects];
             [dataListArr addObjectsFromArray: ResultList[@"List"]];
             BeginCatalogId = ResultList[@"BeginCatalogId"];
             
@@ -235,7 +238,46 @@
         
     }];
     
-    
+    //"MediaType":"",//全部
+    if (![City  isEqual: @""]) {
+        NSString *cityPro = [AutomatePlist readPlistForKey:@"cityPro"];
+        
+        NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", @"RADIO",@"MediaType",uid,@"UserId", City,@"CatalogId",@"2",@"CatalogType",@"3",@"ResultType",@"3",@"PerSize",@"3",@"PageSize",nil];
+        
+        NSString *login_Str = WoTing_GetContents;
+        
+        [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
+            
+          //  [jqTableView.mj_header endRefreshing];
+            
+            NSDictionary *resultDict = (NSDictionary *)response;
+            
+            NSString  *ReturnType = [resultDict objectForKey:@"ReturnType"];
+            if ([ReturnType isEqualToString:@"1001"]) {
+                
+                NSDictionary *ResultList = resultDict[@"ResultList"];
+                NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:0];
+                [dict setObject:ResultList[@"List"] forKey:@"List"];
+                //[0]	(null)	@"CatalogName" : @"新闻"
+                [dict setObject:cityPro forKey:@"CatalogName"];
+                [dict setObject:City forKey:@"CatalogId"];
+                [dataListArr removeAllObjects];
+                [dataListArr addObject: dict];
+                
+                
+               // [jqTableView reloadData];
+                
+            }else if ([ReturnType isEqualToString:@"T"]){
+                
+                [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
+            }
+            
+        } fail:^(NSError *error) {
+            
+          //  [jqTableView.mj_header endRefreshing];
+            
+        }];
+    }
 }
 
 - (void)loadMoveData {
@@ -288,6 +330,94 @@
 }
 
 
+- (void)JieShouDianTai:(NSNotification *)not{
+    
+    NSDictionary *dataDict = not.userInfo;
+    
+    NSString *City = dataDict[@"CatalogId"];
+    
+    NSString *IMEI = [AutomatePlist readPlistForKey:@"IMEI"];
+    NSString *uid = [AutomatePlist readPlistForKey:@"Uid"];
+    NSString *ScreenSize = [AutomatePlist readPlistForKey:@"ScreenSize"];
+    NSString *MobileClass = [AutomatePlist readPlistForKey:@"MobileClass"];
+    NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
+    NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
+    
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", @"RADIO",@"MediaType",uid,@"UserId", @"",@"CatalogId",@"1",@"CatalogType",@"1",@"ResultType",@"3",@"PerSize",nil];
+    
+    NSString *login_Str = WoTing_GetContents;
+    
+    
+    [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
+        
+        [jqTableView.mj_header endRefreshing];
+        
+        NSDictionary *resultDict = (NSDictionary *)response;
+        
+        NSString  *ReturnType = [resultDict objectForKey:@"ReturnType"];
+        if ([ReturnType isEqualToString:@"1001"]) {
+            
+            NSDictionary *ResultList = resultDict[@"ResultList"];
+            // [dataListArr removeAllObjects];
+            [dataListArr addObjectsFromArray: ResultList[@"List"]];
+            BeginCatalogId = ResultList[@"BeginCatalogId"];
+            
+            [jqTableView reloadData];
+            
+        }else if ([ReturnType isEqualToString:@"T"]){
+            
+            [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
+        }
+        
+    } fail:^(NSError *error) {
+        
+        [jqTableView.mj_header endRefreshing];
+        
+    }];
+    
+    //"MediaType":"",//全部
+    if (![City  isEqual: @""]) {
+        NSString *cityPro = dataDict[@"CatalogName"];
+        
+        NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", @"RADIO",@"MediaType",uid,@"UserId", City,@"CatalogId",@"2",@"CatalogType",@"3",@"ResultType",@"3",@"PerSize",@"3",@"PageSize",nil];
+        
+        NSString *login_Str = WoTing_GetContents;
+        
+        [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
+            
+            //  [jqTableView.mj_header endRefreshing];
+            
+            NSDictionary *resultDict = (NSDictionary *)response;
+            
+            NSString  *ReturnType = [resultDict objectForKey:@"ReturnType"];
+            if ([ReturnType isEqualToString:@"1001"]) {
+                
+                NSDictionary *ResultList = resultDict[@"ResultList"];
+                NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:0];
+                [dict setObject:ResultList[@"List"] forKey:@"List"];
+                //[0]	(null)	@"CatalogName" : @"新闻"
+                [dict setObject:cityPro forKey:@"CatalogName"];
+                [dict setObject:City forKey:@"CatalogId"];
+                [dataListArr removeAllObjects];
+                [dataListArr addObject: dict];
+                
+                
+                // [jqTableView reloadData];
+                
+            }else if ([ReturnType isEqualToString:@"T"]){
+                
+                [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
+            }
+            
+        } fail:^(NSError *error) {
+            
+            //  [jqTableView.mj_header endRefreshing];
+            
+        }];
+    }
+}
+
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
     return dataListArr.count;
@@ -337,7 +467,23 @@
     XJsectionHView.NameStr = dataListArr[section][@"CatalogName"];
     XJsectionHView.contentId = dataListArr[section][@"CatalogId"];
     
+    if (section == 0) {
+        
+        XJsectionHView.NameLab.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(Namelabclick:)];
+        [XJsectionHView.NameLab addGestureRecognizer:tap];
+    }
+    
     return XJsectionHView;
+}
+
+//点击电台页的城市名却换城市
+- (void)Namelabclick:(UITapGestureRecognizer *)tap{
+    
+    WTDTController *wtDC = [[WTDTController alloc] init];
+    wtDC.type = @"1";
+    wtDC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:wtDC animated:YES];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
