@@ -76,12 +76,15 @@
                              dispatch_async(dispatch_get_main_queue(), ^{
                                  NSString *progressString  = [NSString stringWithFormat:@"%.2f",1.0 * downloadProgress.completedUnitCount / downloadProgress.totalUnitCount];
                                  circleView.progress = progressString.floatValue;
-                                 _JinDuLab.text = [NSString stringWithFormat:@"%.2lldKB", downloadProgress.completedUnitCount];
+                                 _JinDuLab.text = [NSString stringWithFormat:@"%.2fMB/%0.2lldMB", circleView.progress/100, downloadProgress.totalUnitCount/1000/100];
+                                 
                              });
                              
                          }
                              path:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
                                  //
+                                 _sizeLab.text = [NSString stringWithFormat:@"%0.2lldMB", response.expectedContentLength];
+                                 
                                  NSString *cachesPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
                                  NSString *path = [cachesPath stringByAppendingPathComponent:response.suggestedFilename];
                                  return [NSURL fileURLWithPath:path];

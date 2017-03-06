@@ -34,7 +34,7 @@
     _playConLab.text =[NSString NULLToString:dict[@"ContentPub"]];
     
     //听众
-    _numberLab.text = [NSString NULLToString:dict[@"PlayCount"]];
+    _numberLab.text = [NSString stringWithFormat:@"%@集", @"1"];
 
     
   //  _ContentTimes.text = currentDateStr;

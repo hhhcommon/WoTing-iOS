@@ -113,6 +113,7 @@
 	<string>我听需要您的同意,才能启动语音识别</string>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>audio</string>
 		<string>location</string>
 	</array>
 	<key>UILaunchStoryboardName</key>

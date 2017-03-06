@@ -75,7 +75,9 @@
     
     [_FLDTableView registerNib:cellNib forCellReuseIdentifier:@"cellID"];
     
+    UINib *LikecellNib = [UINib nibWithNibName:@"WTLikeCell" bundle:nil];
     
+    [_FLDTableView registerNib:LikecellNib forCellReuseIdentifier:@"cellIDL"];
 }
 
 - (void)loadData {
@@ -244,7 +246,7 @@
         
         NSDictionary *dict = dataFLDJArray[indexPath.row];
         NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
-        
+        [self.navigationController popToRootViewControllerAnimated:YES];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
     }
 }

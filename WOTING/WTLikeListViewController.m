@@ -46,7 +46,7 @@
     
     if ([_label isEqualToString:@"播放历史"]) {
         
-        FMDatabase *fm = [FMDBTool createDatabaseAndTable:nil];
+        FMDatabase *fm = [FMDBTool createDatabaseAndTable:@"BFLS"];
         // 1.执行查询语句
         FMResultSet *resultSet = [fm executeQuery:@"SELECT * FROM BFLS"];
         // 2.遍历结果
@@ -75,7 +75,7 @@
             if ([dict[@"MediaType"] isEqualToString: @"RADIO"]) {
                 
                 [Rarray addObject:dict];
-                
+                [_DataDianTaiArr removeAllObjects];
                 [_DataDianTaiArr addObjectsFromArray:Rarray];
                 [dictR setObject:Rarray forKey:@"List"];
                 

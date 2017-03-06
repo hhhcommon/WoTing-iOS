@@ -192,8 +192,16 @@
         
     } fail:^(NSError *error) {
         
-        NSLog(@"%@", error);
+        [_musics removeAllObjects];
+        for (NSDictionary *dict in dataBFArray) {
+            
+            WTBoFangModel *model = [[WTBoFangModel alloc] initWithDictionary:dict error:nil];
+            [_musics addObject:model];
+        }
         
+        changPag = 1;
+        [_JQtableView reloadData];
+        [self playMusic];
     }];
     
     

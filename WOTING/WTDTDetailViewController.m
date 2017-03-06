@@ -21,6 +21,8 @@
     NSString        *BeginCatalogId; //ID
     
     WTXJHeaderView      *XJsectionHView;
+    
+    BOOL            isDYXZ;     //判断地域选择更多数据里的样式 NO:安徽台样式 YES:北京台无分类样式
 }
 
 @end
@@ -33,6 +35,7 @@
     
     _NameLab.text = _nameStr;
     dataCellArr = [NSMutableArray arrayWithCapacity:0];
+    isDYXZ = NO;
     
     _jqTabView.delegate = self;
     _jqTabView.dataSource = self;
@@ -70,7 +73,7 @@
     
     if (_type == 0) {
         //电台详情
-       parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", @"RADIO",@"MediaType", @"1",@"CatalogType",@"3",@"ResultType",@"10",@"PerSize",_contentID,@"CatalogId",nil];
+       parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", @"RADIO",@"MediaType", @"2",@"CatalogType",@"3",@"ResultType",@"10",@"PerSize",_contentID,@"CatalogId",nil];
     }else if (_type == 1){
         
         //网络台
@@ -83,7 +86,7 @@
         parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", @"RADIO",@"MediaType", @"9",@"CatalogType",@"3",@"ResultType",@"30",@"PageSize",@"dtfl2001",@"CatalogId",nil];
         
         
-    }else {
+    }else if (_type == 2){
         //地域选择
         parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", @"RADIO",@"MediaType", @"2",@"CatalogType",@"1",@"ResultType",@"3",@"PerSize",_contentID,@"CatalogId",@"",@"BeginCatalogId",nil];
         
@@ -108,6 +111,18 @@
             if (_type == 2) {
                 
                 BeginCatalogId = ResultList[@"BeginCatalogId"];
+                if (dataCellArr.count != 0) {
+                
+                    if ([dataCellArr[0][@"CatalogType"] isEqualToString:@"2"]) {
+                        
+                        isDYXZ = NO;   //有分类样式
+                    }else {
+                        isDYXZ = YES;   //无分类样式
+                    }
+                }else{
+                    
+                    [self loadDataBeijingDetilWith:nil];    //地方台北京市点击 nil:初始化
+                }
             }
             
             if (_type == 3) {   //国家台
@@ -200,12 +215,26 @@
         if ([ReturnType isEqualToString:@"1001"]) {
             
             NSDictionary *ResultList = resultDict[@"ResultList"];
-            
+            NSArray *dataArr = ResultList[@"List"];
             [dataCellArr addObjectsFromArray:ResultList[@"List"]];
             
             if (_type == 2) {
                 
                 BeginCatalogId = ResultList[@"BeginCatalogId"];
+                
+                if (dataArr.count != 0) {
+                    
+                    if ([dataCellArr[0][@"CatalogType"] isEqualToString:@"2"]) {
+                        
+                        isDYXZ = NO;   //有分类样式
+                    }else {
+                        isDYXZ = YES;   //无分类样式
+                    }
+                }else{
+                    
+                    [self loadDataBeijingDetilWith:pageStr];    //地方台北京市点击
+                }
+                
             }
             
             if (_type == 3) {   //国家台
@@ -260,8 +289,15 @@
         return array.count;
     }else if (_type == 2){
         
-        NSArray *array = dataCellArr[section][@"List"];
-        return array.count;
+        if (isDYXZ == NO) {
+            
+            NSArray *array = dataCellArr[section][@"List"];
+            return array.count;
+        }else{
+            
+            return dataCellArr.count;
+        }
+        
     }else {
         
         return dataCellArr.count;
@@ -275,7 +311,14 @@
         return dataCellArr.count;
     }else if (_type == 2){
         
-        return dataCellArr.count;
+        if (isDYXZ == NO) {
+            
+            return dataCellArr.count;
+        }else{
+            
+            return 1;
+        }
+        
     }else {
         
         return 1;
@@ -299,7 +342,14 @@
         dict = dataCellArr[indexPath.section][@"List"][indexPath.row];
     }else if (_type == 2){
         
-        dict = dataCellArr[indexPath.section][@"List"][indexPath.row];
+        if (isDYXZ == NO) {
+            
+            dict = dataCellArr[indexPath.section][@"List"][indexPath.row];
+        }else{
+            
+            dict = dataCellArr[indexPath.row];
+        }
+        
     }else {
         
         dict = dataCellArr[indexPath.row];
@@ -315,7 +365,12 @@
     
     if (_type == 3 || _type == 2) {
         
-        return 35;
+        if (isDYXZ == NO) {
+            return 35;
+        }else{
+            
+            return 0;
+        }
     }else {
         
         return 0;
@@ -347,15 +402,18 @@
         return view;
         
     }else if (_type == 2) {
-        
-        XJsectionHView = [[WTXJHeaderView alloc] init];
-        XJsectionHView.delegate = self;
-        XJsectionHView.NameLab.text = dataCellArr[section][@"CatalogName"];
-        XJsectionHView.NameStr = dataCellArr[section][@"CatalogName"];
-        XJsectionHView.contentId = dataCellArr[section][@"CatalogId"];
-        
-        return XJsectionHView;
-        
+        if (isDYXZ == NO) {
+            XJsectionHView = [[WTXJHeaderView alloc] init];
+            XJsectionHView.delegate = self;
+            XJsectionHView.NameLab.text = dataCellArr[section][@"CatalogName"];
+            XJsectionHView.NameStr = dataCellArr[section][@"CatalogName"];
+            XJsectionHView.contentId = dataCellArr[section][@"CatalogId"];
+            
+            return XJsectionHView;
+        }else{
+            
+            return 0;
+        }
     }else {
         
         return 0;
@@ -378,14 +436,38 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if ([dataCellArr[indexPath.row][@"MediaType"] isEqualToString:@"SEQU"]) {
+//    if ([dataCellArr[indexPath.row][@"MediaType"] isEqualToString:@"SEQU"]) {
+//        
+//        WTZhuanJiViewController *wtZJVC = [[WTZhuanJiViewController alloc] init];
+//        wtZJVC.hidesBottomBarWhenPushed = YES;
+//        wtZJVC.contentID = [NSString NULLToString:dataCellArr[indexPath.row][@"ContentId"]] ;
+//        [self.navigationController pushViewController:wtZJVC animated:YES];
+//        
+//    }
+    
+    if (_type == 3) {
         
-        WTZhuanJiViewController *wtZJVC = [[WTZhuanJiViewController alloc] init];
-        wtZJVC.hidesBottomBarWhenPushed = YES;
-        wtZJVC.contentID = [NSString NULLToString:dataCellArr[indexPath.row][@"ContentId"]] ;
-        [self.navigationController pushViewController:wtZJVC animated:YES];
+        NSDictionary *dict = dataCellArr[indexPath.section][@"List"][indexPath.row];
+        NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
+    }else if (_type == 2){
         
-    }else{
+        if (isDYXZ == NO) {
+            
+            NSDictionary *dict = dataCellArr[indexPath.section][@"List"][indexPath.row];
+            NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
+        }else{
+            
+            NSDictionary *dict = dataCellArr[indexPath.row];
+            NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
+        }
+        
+    }else {
         
         NSDictionary *dict = dataCellArr[indexPath.row];
         NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
@@ -394,6 +476,59 @@
     }
 }
 
+//北京等不分类城市, 从新请求结果
+- (void)loadDataBeijingDetilWith:(NSString *)pageStr{
+    
+    NSString *IMEI = [AutomatePlist readPlistForKey:@"IMEI"];
+    NSString *ScreenSize = [AutomatePlist readPlistForKey:@"ScreenSize"];
+    NSString *MobileClass = [AutomatePlist readPlistForKey:@"MobileClass"];
+    NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
+    NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
+    
+    NSDictionary *parameters;
+    if (!pageStr) {
+        
+         parameters= [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", @"RADIO",@"MediaType", @"2",@"CatalogType",@"3",@"ResultType",@"3",@"PerSize",_contentID,@"CatalogId",@"1",@"Page",nil];
+    }else{
+        
+        
+        parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", @"RADIO",@"MediaType", @"2",@"CatalogType",@"3",@"ResultType",@"3",@"PerSize",_contentID,@"CatalogId",pageStr,@"Page",nil];
+    }
+    
+    NSString *login_Str = WoTing_GetContents;
+    
+    
+    [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
+        [_jqTabView.mj_header endRefreshing];
+        
+        NSDictionary *resultDict = (NSDictionary *)response;
+        
+        NSString  *ReturnType = [resultDict objectForKey:@"ReturnType"];
+        if ([ReturnType isEqualToString:@"1001"]) {
+            
+            NSDictionary *ResultList = resultDict[@"ResultList"];
+            
+            if (!pageStr) {
+               [dataCellArr removeAllObjects];
+            }
+            
+            [dataCellArr addObjectsFromArray:ResultList[@"List"]];
+            
+        }else if ([ReturnType isEqualToString:@"T"]){
+            
+            [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
+        }
+        isDYXZ = YES;
+        [_jqTabView reloadData];
+        
+    } fail:^(NSError *error) {
+        
+        
+        [_jqTabView.mj_header endRefreshing];
+        
+    }];
+
+}
 
 - (void)dealloc {
     

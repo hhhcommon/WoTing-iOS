@@ -25,15 +25,17 @@
 
 @implementation WTDownLoadViewController
 
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        dataDownArr = [NSMutableArray arrayWithCapacity:0];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(JiaZaiArray:) name:@"XIAZAIDICT" object:nil];
-    }
-    return self;
-}
+//- (instancetype)init
+//{
+//    self = [super init];
+//    if (self) {
+////        dataDownArr = [NSMutableArray arrayWithCapacity:0];
+////        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(JiaZaiArray:) name:@"XIAZAIDICT" object:nil];
+//        self.navigationController.navigationBar.hidden = YES;
+//        [self initScrollerView];
+//    }
+//    return self;
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -45,15 +47,15 @@
     [self initScrollerView];
 }
 
-- (void)JiaZaiArray:(NSNotification *)not {
-    
-    NSDictionary *dict = not.userInfo;
-    
-    
-    [dataDownArr addObject:dict];
-    
-    [self initScrollerView];
-}
+//- (void)JiaZaiArray:(NSNotification *)not {
+//    
+//    NSDictionary *dict = not.userInfo;
+//    
+//    
+//    [dataDownArr addObject:dict];
+//    
+//    [self initScrollerView];
+//}
 
 
 - (void)initScrollerView{
@@ -90,7 +92,6 @@
         }else if (i == 1) {
             
             WTXiaZaiZhongController *wtDianTaiVC = [[WTXiaZaiZhongController alloc] init];
-            wtDianTaiVC.urls = dataDownArr;
             
             [self addChildViewController:wtDianTaiVC];
             [contentScrollView addSubview:wtDianTaiVC.view];

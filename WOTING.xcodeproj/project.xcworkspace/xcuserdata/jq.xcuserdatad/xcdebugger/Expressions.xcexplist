@@ -11,6 +11,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "__35-[WTDianTaiViewController loadData]_block_invoke:WTDianTaiViewController.m">
+      </ContextState>
+      <ContextState
          contextName = "__33-[AllViewController loadDAtaLike]_block_invoke:AllViewController.m">
       </ContextState>
       <ContextState
@@ -41,6 +44,14 @@
          <PersistentStrings>
             <PersistentString
                value = "indexPath.row">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[WTDianTaiViewController tableView:cellForRowAtIndexPath:]:WTDianTaiViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexPath.section">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -101,6 +112,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[WTDianTaiViewController loadData]:WTDianTaiViewController.m">
+      </ContextState>
+      <ContextState
          contextName = "-[WTLikeView MoveClick:]:WTLikeView.m">
          <PersistentStrings>
             <PersistentString
@@ -140,12 +154,23 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[WTYiXiaZaiController tableView:cellForRowAtIndexPath:]:WTYiXiaZaiController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexPath.row">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[WTXJHeaderView MoveClick:]:WTXJHeaderView.m">
          <PersistentStrings>
             <PersistentString
                value = "_NameLab.text">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__48-[WTDTDetailViewController loadDataBeijingDetil]_block_invoke:WTDTDetailViewController.m">
       </ContextState>
       <ContextState
          contextName = "__38-[WTPingLunViewController FSBtnClick:]_block_invoke:WTPingLunViewController.m">

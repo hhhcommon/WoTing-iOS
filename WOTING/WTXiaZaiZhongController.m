@@ -13,7 +13,7 @@
 
 @interface WTXiaZaiZhongController ()<WTXiaZaiCellDelegate, UITableViewDelegate, UITableViewDataSource>{
     
-    
+    NSMutableArray  *_urls;
 }
 
 @end
@@ -25,6 +25,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    _urls = [NSMutableArray arrayWithCapacity:0];
     
     _XZZTableView.delegate = self;
     _XZZTableView.dataSource = self;
@@ -33,22 +34,54 @@
     
     _XZZTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(XiaZaiDict:) name:@"XIAZAIDICT" object:nil];
+    
     [self registerTableCell];
     
-    if (_urls.count == 0||_urls == nil) {
+//    if (_urls.count == 0||_urls == nil) {
+//        
+//        UIImageView *ImgV = [[UIImageView alloc] init];
+//        ImgV.image = [UIImage imageNamed:@"WuShuJu.png"];
+//        ImgV.userInteractionEnabled = YES;
+//        [self.view addSubview:ImgV];
+//        __weak WTXiaZaiZhongController *weakSelf = self;
+//        [ImgV mas_makeConstraints:^(MASConstraintMaker *make) {
+//            
+//            make.centerX.equalTo(weakSelf.view);
+//            make.centerY.equalTo(weakSelf.view);
+//            make.width.mas_equalTo(K_Screen_Width/2);
+//            make.height.mas_equalTo(K_Screen_Width/2);
+//        }];
+//    }
+}
+
+//接受到下载到的数据
+- (void)XiaZaiDict:(NSNotification *)not{
+    
+    NSDictionary *dict = not.userInfo;
+    
+    FMDatabase *db = [FMDBTool createDatabaseAndTable:@"XIAZAI"];
+    
         
-        UIImageView *ImgV = [[UIImageView alloc] init];
-        ImgV.image = [UIImage imageNamed:@"WuShuJu.png"];
-        [self.view addSubview:ImgV];
-        __weak WTXiaZaiZhongController *weakSelf = self;
-        [ImgV mas_makeConstraints:^(MASConstraintMaker *make) {
+    BOOL isRept = NO;
+    FMResultSet *resultSet = [db executeQuery:@"SELECT * FROM XIAZAI"];
+    // 遍历结果，如果重复就删除数据
+    while ([resultSet next]) {
+        
+        NSData *ID = [resultSet dataForColumn:@"XIAZAI"];
+        NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:ID options:NSJSONReadingMutableLeaves error:nil];
+        if ([dict[@"ContentId"] isEqualToString:jsonDict[@"ContentId"]]) {
             
-            make.centerX.equalTo(weakSelf.view);
-            make.centerY.equalTo(weakSelf.view);
-            make.width.mas_equalTo(K_Screen_Width/2);
-            make.height.mas_equalTo(K_Screen_Width/2);
-        }];
+            isRept = YES;
+        }
     }
+    if (!isRept) {
+        
+        [_urls addObject:dict];
+        
+        [_XZZTableView reloadData];
+    }
+    
 }
 
 - (void)registerTableCell {
@@ -83,7 +116,7 @@
     }
 
     [cell Content:_urls[indexPath.row]];
-    [cell changeBeginAndStop];
+    [cell changeBeginAndStop];  //开始下载任务...
     cell.delegate = self;
     
     return cell;
@@ -102,62 +135,70 @@
 //下载完成 ， 移除下载任务
 - (void)DownLoadWithPlist:(NSString *)str {
     
-    NSMutableArray *array;
-    
-    if ([[NSMutableArray alloc]initWithContentsOfFile:JQ__Plist_managerName(@"DownLoad")]) {
-        
-        array = [[NSMutableArray alloc]initWithContentsOfFile:JQ__Plist_managerName(@"DownLoad")];
-    }else {
-        
-        array = [NSMutableArray arrayWithCapacity:0];
-    }
-//    NSMutableArray *array = [NSMutableArray arrayWithCapacity:0];
-    NSDictionary *writeDict = [[NSDictionary alloc] init];
-    
     for (NSDictionary *dict in _urls) {
         
         if ([str isEqualToString:dict[@"ContentPlay"]]) {
             
-            [_urls removeObject:dict];
-            [_XZZTableView reloadData];
-            if (_urls.count == 0) {
+            FMDatabase *db = [FMDBTool createDatabaseAndTable:@"XIAZAI"];
+            
+            NSLog( @"%@",dict);
+            
+            BOOL isRept = NO;
+            FMResultSet *resultSet = [db executeQuery:@"SELECT * FROM XIAZAI"];
+            // 遍历结果，如果重复就删除数据
+            while ([resultSet next]) {
                 
-                UIImageView *ImgV = [[UIImageView alloc] init];
-                ImgV.image = [UIImage imageNamed:@"WuShuJu.png"];
-                [self.view addSubview:ImgV];
-                __weak WTXiaZaiZhongController *weakSelf = self;
-                [ImgV mas_makeConstraints:^(MASConstraintMaker *make) {
-                   
-                    make.centerX.equalTo(weakSelf.view);
-                    make.centerY.equalTo(weakSelf.view);
-                    make.width.mas_equalTo(K_Screen_Width/2);
-                    make.height.mas_equalTo(K_Screen_Width/2);
-                }];
+                NSData *ID = [resultSet dataForColumn:@"XIAZAI"];
+                NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:ID options:NSJSONReadingMutableLeaves error:nil];
+                if ([dict[@"ContentId"] isEqualToString:jsonDict[@"ContentId"]]){
+                    
+                    isRept = YES;
+                }
+            }
+            if (!isRept) {
+                
+                NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
+                NSString *sqlInsert = @"insert into XIAZAI values(?)";
+                BOOL isOk = [db executeUpdate:sqlInsert, data];
+                if (isOk) {
+                    NSLog(@"添加数据成功");
+                    [_urls removeObject:dict];
+                    [_XZZTableView reloadData];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"YIXIAZAI" object:nil];
+                }
+
             }
 
-            writeDict = [self PlistDictChange:dict];//取部分数据存储
-            
-            [array addObject:writeDict];
-            [array writeToFile:JQ__Plist_managerName(@"DownLoad") atomically:YES];
             
         }
     }
 
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"YIXIAZAI" object:nil];
+    
 }
 
-- (NSDictionary *)PlistDictChange:(NSDictionary *)dict {
-    
-    NSMutableDictionary *Changedict = [[NSMutableDictionary alloc] init];
-    
-    [Changedict setValue:[NSString NULLToString:dict[@"ContentImg"]] forKey:@"ContentImg"];
-    [Changedict setValue:[NSString NULLToString:dict[@"ContentName"]] forKey:@"ContentName"];
-    [Changedict setValue:dict[@"PlayCount"] forKey:@"PlayCount"];
-    [Changedict setValue:[NSString NULLToString:dict[@"ContentPub"]] forKey:@"ContentPub"];
-    
-    return Changedict;
-}
+//- (NSDictionary *)PlistDictChange:(NSDictionary *)dict {
+//    
+//    NSMutableDictionary *Changedict = [[NSMutableDictionary alloc] init];
+//    
+//    [Changedict setValue: [NSString NULLToString:dict[@"ContentTimes"]] forKey:@"ContentTimes"];
+//    [Changedict setValue:[NSString NULLToString:dict[@"ContentPub"]] forKey:@"ContentPub"];
+//    [Changedict setValue:[NSString NULLToString:dict[@"ContentShareURL"]] forKey:@"ContentShareURL"];
+//    [Changedict setValue:[NSString NULLToString:dict[@"MediaType"]] forKey:@"MediaType"];
+//    [Changedict setValue:[NSString NULLToString:dict[@"ContentName"]] forKey:@"ContentName"];
+//    [Changedict setValue:[NSString NULLToString:dict[@"ContentImg"]] forKey:@"ContentImg"];
+//    [Changedict setValue:[NSString NULLToString:dict[@"ContentId"]] forKey:@"ContentId"];
+//    [Changedict setValue:[NSString NULLToString:dict[@"PlayCount"]] forKey:@"PlayCount"];
+//    
+//    [Changedict setValue:[NSString NULLToString:dict[@"SeqInfo"][@"ContentId"]] forKey:@"SeqContentId"];
+//    [Changedict setValue:[NSString NULLToString:dict[@"SeqInfo"][@"ContentImg"]] forKey:@"SeqContentImg"];
+//    [Changedict setValue:[NSString NULLToString:dict[@"SeqInfo"][@"ContentName"]] forKey:@"SeqContentName"];
+//    [Changedict setValue:[NSString NULLToString:dict[@"SeqInfo"][@"ContentPub"]] forKey:@"SeqContentPub"];
+//    
+//    
+//    
+//    return Changedict;
+//}
 
 
 - (void)dealloc {

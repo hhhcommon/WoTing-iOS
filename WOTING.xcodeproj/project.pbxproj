@@ -214,6 +214,15 @@
 		0B4282761E1B543000FAC2BA /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4282751E1B543000FAC2BA /* AsyncSocket.m */; };
 		0B42827F1E1B86A300FAC2BA /* WTBoFangCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B42827D1E1B86A300FAC2BA /* WTBoFangCell.m */; };
 		0B4282801E1B86A300FAC2BA /* WTBoFangCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B42827E1E1B86A300FAC2BA /* WTBoFangCell.xib */; };
+		0B4E92751E66DE3C001DE73F /* upload_NeiCun.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B4E92741E66DE3C001DE73F /* upload_NeiCun.png */; };
+		0B4E92771E66E41F001DE73F /* WeiXuanZhong.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B4E92761E66E41F001DE73F /* WeiXuanZhong.png */; };
+		0B4E927B1E67BBCE001DE73F /* WTXiaZaiXuanZhongCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4E92791E67BBCE001DE73F /* WTXiaZaiXuanZhongCell.m */; };
+		0B4E927C1E67BBCE001DE73F /* WTXiaZaiXuanZhongCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B4E927A1E67BBCE001DE73F /* WTXiaZaiXuanZhongCell.xib */; };
+		0B4E927E1E67CE8F001DE73F /* icon_delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B4E927D1E67CE8F001DE73F /* icon_delete.png */; };
+		0B4E92821E682AEB001DE73F /* WTXiaZaiDetilController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4E92801E682AEB001DE73F /* WTXiaZaiDetilController.m */; };
+		0B4E92831E682AEB001DE73F /* WTXiaZaiDetilController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B4E92811E682AEB001DE73F /* WTXiaZaiDetilController.xib */; };
+		0B4E92871E682DD2001DE73F /* WTXiaZaiDetilCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4E92851E682DD2001DE73F /* WTXiaZaiDetilCell.m */; };
+		0B4E92881E682DD2001DE73F /* WTXiaZaiDetilCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B4E92861E682DD2001DE73F /* WTXiaZaiDetilCell.xib */; };
 		0B4ED6861E52A16200EC4995 /* WTJMDCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4ED6841E52A16200EC4995 /* WTJMDCell.m */; };
 		0B4ED6871E52A16200EC4995 /* WTJMDCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B4ED6851E52A16200EC4995 /* WTJMDCell.xib */; };
 		0B548BF21E603EB000F131D7 /* icon_delike.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B548BF11E603EB000F131D7 /* icon_delike.png */; };
@@ -756,6 +765,18 @@
 		0B42827C1E1B86A300FAC2BA /* WTBoFangCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTBoFangCell.h; sourceTree = "<group>"; };
 		0B42827D1E1B86A300FAC2BA /* WTBoFangCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTBoFangCell.m; sourceTree = "<group>"; };
 		0B42827E1E1B86A300FAC2BA /* WTBoFangCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTBoFangCell.xib; sourceTree = "<group>"; };
+		0B4E92741E66DE3C001DE73F /* upload_NeiCun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upload_NeiCun.png; sourceTree = "<group>"; };
+		0B4E92761E66E41F001DE73F /* WeiXuanZhong.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WeiXuanZhong.png; sourceTree = "<group>"; };
+		0B4E92781E67BBCE001DE73F /* WTXiaZaiXuanZhongCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTXiaZaiXuanZhongCell.h; sourceTree = "<group>"; };
+		0B4E92791E67BBCE001DE73F /* WTXiaZaiXuanZhongCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTXiaZaiXuanZhongCell.m; sourceTree = "<group>"; };
+		0B4E927A1E67BBCE001DE73F /* WTXiaZaiXuanZhongCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTXiaZaiXuanZhongCell.xib; sourceTree = "<group>"; };
+		0B4E927D1E67CE8F001DE73F /* icon_delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_delete.png; sourceTree = "<group>"; };
+		0B4E927F1E682AEB001DE73F /* WTXiaZaiDetilController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTXiaZaiDetilController.h; sourceTree = "<group>"; };
+		0B4E92801E682AEB001DE73F /* WTXiaZaiDetilController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTXiaZaiDetilController.m; sourceTree = "<group>"; };
+		0B4E92811E682AEB001DE73F /* WTXiaZaiDetilController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTXiaZaiDetilController.xib; sourceTree = "<group>"; };
+		0B4E92841E682DD2001DE73F /* WTXiaZaiDetilCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTXiaZaiDetilCell.h; sourceTree = "<group>"; };
+		0B4E92851E682DD2001DE73F /* WTXiaZaiDetilCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTXiaZaiDetilCell.m; sourceTree = "<group>"; };
+		0B4E92861E682DD2001DE73F /* WTXiaZaiDetilCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTXiaZaiDetilCell.xib; sourceTree = "<group>"; };
 		0B4ED6831E52A16200EC4995 /* WTJMDCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTJMDCell.h; sourceTree = "<group>"; };
 		0B4ED6841E52A16200EC4995 /* WTJMDCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTJMDCell.m; sourceTree = "<group>"; };
 		0B4ED6851E52A16200EC4995 /* WTJMDCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTJMDCell.xib; sourceTree = "<group>"; };
@@ -1974,6 +1995,7 @@
 				0BA47CB61DF519480000B322 /* WTceshi1.jpg */,
 				0B60237E1E55749B004FCE5D /* ZhiBo.png */,
 				0B554C001E5185520030B196 /* XuanZhong.png */,
+				0B4E92761E66E41F001DE73F /* WeiXuanZhong.png */,
 				0B554BAD1E51555E0030B196 /* ChuCuoLe.png */,
 				0B554BAE1E51555E0030B196 /* WeiDengLu.png */,
 				0B554BAF1E51555E0030B196 /* WuShuJu.png */,
@@ -1985,6 +2007,7 @@
 				0B09A8551E07B6A100D60AC8 /* PL_biaoQ.png */,
 				0B1DF29A1DE68E0600EE5FF2 /* tab_bg.png */,
 				0B1DF2981DE68DF800EE5FF2 /* mine_bg.png */,
+				0B4E927D1E67CE8F001DE73F /* icon_delete.png */,
 				0B7584411DED4CCD00E3D117 /* border-orange.png */,
 				0B7584541DEE9C4D00E3D117 /* img_program_default.png */,
 				0B7584551DEE9C4D00E3D117 /* img_radio_default.png */,
@@ -2278,6 +2301,9 @@
 				0B0CCA9A1E0CD6B60044C235 /* WTXiaZaiZhongController.h */,
 				0B0CCA9B1E0CD6B60044C235 /* WTXiaZaiZhongController.m */,
 				0B0CCA9C1E0CD6B60044C235 /* WTXiaZaiZhongController.xib */,
+				0B4E927F1E682AEB001DE73F /* WTXiaZaiDetilController.h */,
+				0B4E92801E682AEB001DE73F /* WTXiaZaiDetilController.m */,
+				0B4E92811E682AEB001DE73F /* WTXiaZaiDetilController.xib */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -2291,6 +2317,12 @@
 				0BD6B5451E1609550039B88D /* WTXiaZaiDoneCell.h */,
 				0BD6B5461E1609550039B88D /* WTXiaZaiDoneCell.m */,
 				0BD6B5471E1609550039B88D /* WTXiaZaiDoneCell.xib */,
+				0B4E92781E67BBCE001DE73F /* WTXiaZaiXuanZhongCell.h */,
+				0B4E92791E67BBCE001DE73F /* WTXiaZaiXuanZhongCell.m */,
+				0B4E927A1E67BBCE001DE73F /* WTXiaZaiXuanZhongCell.xib */,
+				0B4E92841E682DD2001DE73F /* WTXiaZaiDetilCell.h */,
+				0B4E92851E682DD2001DE73F /* WTXiaZaiDetilCell.m */,
+				0B4E92861E682DD2001DE73F /* WTXiaZaiDetilCell.xib */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -2410,6 +2442,7 @@
 				0BFEFDA31DE44346001FFD82 /* nav_btn_message@2x.png */,
 				0BFEFDA41DE44346001FFD82 /* nav_btn_search@2x.png */,
 				0B09A8571E07C6B600D60AC8 /* upload_JS.png */,
+				0B4E92741E66DE3C001DE73F /* upload_NeiCun.png */,
 				0B75844C1DED7C1300E3D117 /* upload_icon_album.png */,
 				0B75844D1DED7C1300E3D117 /* upload_icon_play amount.png */,
 				0B75844E1DED7C1300E3D117 /* upload_icon_time.png */,
@@ -2535,6 +2568,7 @@
 				0B09A8621E07E5EF00D60AC8 /* icon_zj_shu.png in Resources */,
 				0B1DF2CF1DE6AD2D00EE5FF2 /* mine_icon_play history@2x.png in Resources */,
 				0B554C241E51A5370030B196 /* play_flag_wave_16.png in Resources */,
+				0B4E927E1E67CE8F001DE73F /* icon_delete.png in Resources */,
 				0BFEFDAB1DE44346001FFD82 /* nav_background_normal@2x.png in Resources */,
 				0B08C4541E124050002851CC /* userNum.png in Resources */,
 				0B554C231E51A5370030B196 /* play_flag_wave_15.png in Resources */,
@@ -2566,6 +2600,7 @@
 				0B7584671DEECA0800E3D117 /* icon_share.png in Resources */,
 				0B7584041DE98DF200E3D117 /* back@2x.png in Resources */,
 				0BFEFDA61DE44346001FFD82 /* home_btn_last.png in Resources */,
+				0B4E927C1E67BBCE001DE73F /* WTXiaZaiXuanZhongCell.xib in Resources */,
 				0B7583FB1DE938ED00E3D117 /* login_icon_QQ@2x.png in Resources */,
 				0B554C251E51A5370030B196 /* play_flag_wave_17.png in Resources */,
 				0BF2C5A71DE3019B00A42B3D /* WTXiangTing_der@2x.png in Resources */,
@@ -2593,9 +2628,11 @@
 				0B1EFEDD1DF031230047CE75 /* icon_central_station.png in Resources */,
 				0B8117A41DE80905007DE05D /* mine_set_icon_update@2x.png in Resources */,
 				0B0DC1C81E0BBC9200CA584C /* README.txt in Resources */,
+				0B4E92881E682DD2001DE73F /* WTXiaZaiDetilCell.xib in Resources */,
 				0BFEFDAA1DE44346001FFD82 /* home_btn_voice search.png in Resources */,
 				0B0A43221E1CF15A0085E2C8 /* WTBoFangJMCell.xib in Resources */,
 				0BC0DC261E02318600A19F64 /* WTNewsViewController.xib in Resources */,
+				0B4E92771E66E41F001DE73F /* WeiXuanZhong.png in Resources */,
 				0B0BD44E1E0134F800C4E236 /* WTFLDetaliController.xib in Resources */,
 				0B0BD4491E00E5AC00C4E236 /* icon_like.png in Resources */,
 				0BF2C59B1DE3019B00A42B3D /* WTDownLoad_der@2x.png in Resources */,
@@ -2681,6 +2718,7 @@
 				0B0DC1CB1E0BBC9200CA584C /* UMSocialSDKResources.bundle in Resources */,
 				0B60237A1E5573A2004FCE5D /* PaiXu_Nol.png in Resources */,
 				0B09A8541E07B05D00D60AC8 /* WTLikeCell.xib in Resources */,
+				0B4E92751E66DE3C001DE73F /* upload_NeiCun.png in Resources */,
 				0B0858BB1DFE51B700EA8DAD /* WTFanKuiViewController.xib in Resources */,
 				0B554C1A1E51A5370030B196 /* play_flag_wave_6.png in Resources */,
 				0B7584021DE942FB00E3D117 /* WTRegisterViewController.xib in Resources */,
@@ -2720,6 +2758,7 @@
 				0B81179C1DE80905007DE05D /* mine_set_icon_about@2x.png in Resources */,
 				0B0918041E2A0C5D00ADBFE1 /* sound.caf in Resources */,
 				0BF2C5871DE2F69400A42B3D /* WTMainViewController.xib in Resources */,
+				0B4E92831E682AEB001DE73F /* WTXiaZaiDetilController.xib in Resources */,
 				0B30BA721DF17676000A75E2 /* menu.png in Resources */,
 				0BF2C59E1DE3019B00A42B3D /* WTMain@3x.png in Resources */,
 				0B7584641DEECA0800E3D117 /* icon_comment.png in Resources */,
@@ -2779,6 +2818,7 @@
 				0B0858DB1DFE78FF00EA8DAD /* WTDTDetailViewController.m in Sources */,
 				0B0D30A71E569AC20063193A /* WTZhanJiTJCell.m in Sources */,
 				0B139EBA1E308D8C004DE06E /* MarqueeLabel.m in Sources */,
+				0B4E92871E682DD2001DE73F /* WTXiaZaiDetilCell.m in Sources */,
 				0B1EFED11DF002880047CE75 /* SDCollectionViewCell.m in Sources */,
 				0B0BD44D1E0134F800C4E236 /* WTFLDetaliController.m in Sources */,
 				0BF2C55D1DE2B19100A42B3D /* UIProgressView+AFNetworking.m in Sources */,
@@ -2844,6 +2884,7 @@
 				0B0AB65A1DF801710065D36F /* JSONHTTPClient.m in Sources */,
 				0B1DF2801DE56C1000EE5FF2 /* WTJieMuViewController.m in Sources */,
 				0B7584351DED4B1900E3D117 /* SDWebImageCompat.m in Sources */,
+				0B4E927B1E67BBCE001DE73F /* WTXiaZaiXuanZhongCell.m in Sources */,
 				0B0CCA9D1E0CD6B60044C235 /* WTXiaZaiZhongController.m in Sources */,
 				0B554C2B1E51AF9B0030B196 /* WTJMDViewController.m in Sources */,
 				0BF2C5541DE2B19100A42B3D /* AFURLSessionManager.m in Sources */,
@@ -2872,6 +2913,7 @@
 				0B0918061E2A0C5D00ADBFE1 /* SGScanningQRCodeView.m in Sources */,
 				0B75840D1DEBDA6500E3D117 /* WKProgressHUD.m in Sources */,
 				0B0BD4461DFFD72A00C4E236 /* WTDTController.m in Sources */,
+				0B4E92821E682AEB001DE73F /* WTXiaZaiDetilController.m in Sources */,
 				0B75843F1DED4B1900E3D117 /* UIImageView+WebCache.m in Sources */,
 				0B0858BA1DFE51B700EA8DAD /* WTFanKuiViewController.m in Sources */,
 				0BF2C5781DE2F5F500A42B3D /* WTXiangTingViewController.m in Sources */,

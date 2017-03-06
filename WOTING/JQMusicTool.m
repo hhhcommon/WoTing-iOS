@@ -53,9 +53,48 @@ singleton_implementation(JQMusicTool)
             self.mediaPlayer = nil;
         }
     
-        NSURL *musicURL = [NSURL URLWithString:_musicStr];
-        AVPlayerItem *songItem = [[AVPlayerItem alloc] initWithURL:musicURL];
-//        [AVPlayerItem alloc] initWithURL:[NSURL fileURLWithPath:@""];
+        AVPlayerItem *songItem;
+        
+        FMDatabase *db = [FMDBTool createDatabaseAndTable:@"XIAZAI"];
+        
+        BOOL isRept = NO;
+        FMResultSet *resultSet = [db executeQuery:@"SELECT * FROM XIAZAI"];
+        // 遍历结果，如果重复就删除数据
+        while ([resultSet next]) {
+            
+            NSData *ID = [resultSet dataForColumn:@"XIAZAI"];
+            NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:ID options:NSJSONReadingMutableLeaves error:nil];
+            if ([_musicStr isEqualToString:jsonDict[@"ContentPlay"]]){
+                
+                isRept = YES;
+            }
+        }
+        if (!isRept) {  //播网络
+            
+            NSURL *musicURL = [NSURL URLWithString:_musicStr];
+            songItem = [[AVPlayerItem alloc] initWithURL:musicURL];
+        }else {         //播本地
+            //遍历文件夹
+            NSString *appDocDir = [[[[NSFileManager defaultManager] URLsForDirectory: NSCachesDirectory inDomains:NSUserDomainMask] lastObject] relativePath];
+            
+            NSArray *contentOfFolder = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:appDocDir error:NULL];
+            for (NSString *aPath in contentOfFolder) {
+                NSString * fullPath = [appDocDir stringByAppendingPathComponent:aPath];
+                BOOL isDir = NO;
+                if ([[NSFileManager defaultManager] fileExistsAtPath:fullPath isDirectory:&isDir])
+                {
+                    
+                    if ([_musicStr hasSuffix:aPath]) {
+                        
+                      songItem = [[AVPlayerItem alloc] initWithURL:[NSURL fileURLWithPath:fullPath]];
+                    }
+                    
+                }
+            }
+        }
+        
+        
+
         if (self.player==nil) {
             
             

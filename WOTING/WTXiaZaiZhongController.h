@@ -11,6 +11,5 @@
 @interface WTXiaZaiZhongController : UIViewController
 @property (weak, nonatomic) IBOutlet UITableView *XZZTableView;
 
-@property (nonatomic, strong) NSMutableArray  *urls;
 
 @end

@@ -101,9 +101,6 @@
             }
         }
         
-        //定位信息
-        NSLog(@"location:%@", location);
-        
         //逆地理信息
         if (regeocode)
         {
@@ -228,7 +225,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     
-//    [self.locationManager stopUpdatingLocation]; //停止定位
+    [self.locationManager stopUpdatingLocation]; //停止定位
 }
 
 
