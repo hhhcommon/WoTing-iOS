@@ -13,10 +13,13 @@
 #import "WTXiaZaiDoneCell.h"
 #import "WTXiaZaiXuanZhongCell.h"
 
-@interface WTYiXiaZaiController ()<UITableViewDelegate, UITableViewDataSource, WTXiaZaiXuanZhongCellDelegate>{
+@interface WTYiXiaZaiController ()<UITableViewDelegate, UITableViewDataSource>{
  
     NSMutableArray *dataYXZArray;   //最后的数据
     NSMutableArray *dataWeiArr;     //未处理前的数据
+    
+    NSMutableArray  *dataXuanZhongCellArr;  //选中cell个数
+    NSInteger       *cellinteger;   //记录当前cell
     
     NSInteger   type;   //0:默认类型    1:待删除类型
     BOOL        isHeaderView;   //全选按钮状态
@@ -32,6 +35,7 @@
     // Do any additional setup after loading the view from its nib.
     dataYXZArray = [NSMutableArray arrayWithCapacity:0];
     dataWeiArr = [NSMutableArray arrayWithCapacity:0];
+    dataXuanZhongCellArr = [NSMutableArray arrayWithCapacity:0];
     type = 0;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTabVliew:) name:@"YIXIAZAI" object:nil];
@@ -47,7 +51,22 @@
    
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
+    //通知下载完成
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadData) name:@"XIAZAIWANCHENG" object:nil];
+    
+    [dataXuanZhongCellArr removeAllObjects];    //清空选中下标
+    type = 0;
+    [self loadData];
+}
+
 - (void)loadData{
+    
+    [dataYXZArray removeAllObjects];
+    [dataXuanZhongCellArr removeAllObjects];    //清空选中下标
     
     FMDatabase *fm = [FMDBTool createDatabaseAndTable:@"XIAZAI"];
     // 1.执行查询语句
@@ -55,13 +74,18 @@
     // 2.遍历结果
     while ([resultSet next]) {
         
+        BOOL isXIAZAI = [resultSet boolForColumn:@"XIAZAIBOOL"];
         NSData *ID = [resultSet dataForColumn:@"XIAZAI"];
         NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:ID options:NSJSONReadingMutableLeaves error:nil];
-        [dataYXZArray addObject:jsonDict];
         
+        if (isXIAZAI) {
+            
+            [dataYXZArray addObject:jsonDict];
+            
+        }
+ 
     }
     
-      //  dataYXZArray = [self HYC_RearrangeWitharray:dataWeiArr andDictKeyName:@"ContentId"];
     
      [_YXZTableView reloadData];
     
@@ -124,7 +148,8 @@
 //新增下载任务完成后的通知
 - (void)reloadTabVliew:(NSNotification *)not {
     
-    [dataYXZArray removeAllObjects];
+    [dataYXZArray removeAllObjects];    //清空数据源
+    
     FMDatabase *fm = [FMDBTool createDatabaseAndTable:@"XIAZAI"];
     // 1.执行查询语句
     FMResultSet *resultSet = [fm executeQuery:@"SELECT * FROM XIAZAI"];
@@ -133,8 +158,12 @@
         
         NSData *ID = [resultSet dataForColumn:@"XIAZAI"];
         NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:ID options:NSJSONReadingMutableLeaves error:nil];
-        [dataYXZArray addObject:jsonDict];
         
+        if ([resultSet boolForColumn:@"XIAZAIBOOL"]) {
+            
+            [dataYXZArray addObject:jsonDict];
+        }
+
     }
     
     [_YXZTableView reloadData];
@@ -237,15 +266,14 @@
 - (void)CleanBtnClick {
     
     if (isQuanXuan) {
-        
-        
-        
+
         //遍历文件夹
         NSString *appDocDir = [[[[NSFileManager defaultManager] URLsForDirectory: NSCachesDirectory inDomains:NSUserDomainMask] lastObject] relativePath];
         
         NSArray *contentOfFolder = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:appDocDir error:NULL];
         int count = 1;
         for (NSString *aPath in contentOfFolder) {
+            
             NSString * fullPath = [appDocDir stringByAppendingPathComponent:aPath];
             BOOL isDir = NO;
             if ([[NSFileManager defaultManager] fileExistsAtPath:fullPath isDirectory:&isDir])
@@ -277,8 +305,73 @@
     
     }else { //还原 type
         
-        type = 0;
-        [_YXZTableView reloadData];
+        if (dataXuanZhongCellArr.count) {
+            
+            FMDatabase *db = [FMDBTool createDatabaseAndTable:@"XIAZAI"];
+            
+            
+            BOOL isRept = NO;
+            FMResultSet *resultSet = [db executeQuery:@"SELECT * FROM XIAZAI"];
+            // 遍历结果，如果重复就删除数据
+            
+            for (NSString *HYCstr in dataXuanZhongCellArr) {
+
+                NSString *HYCcontentID = dataYXZArray[[HYCstr intValue]][@"ContentId"];
+                NSString *LJQContentPlay = dataYXZArray[[HYCstr intValue]][@"ContentPlay"];
+                
+                while ([resultSet next]) {
+                    
+                    NSData *ID = [resultSet dataForColumn:@"XIAZAI"];
+                    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:ID options:NSJSONReadingMutableLeaves error:nil];
+                    
+                    if ([HYCcontentID isEqualToString:jsonDict[@"ContentId"]]) {
+                        
+                        isRept = YES;
+                    }
+                    
+                }
+                
+                if (isRept) {
+                    
+                    NSString *deleteSql = [NSString stringWithFormat:@"delete from XIAZAI where XIAZAINum='%@'",HYCcontentID];
+
+                    BOOL isOk = [db executeUpdate:deleteSql];
+                    
+                    if (isOk) {
+                        NSLog(@"删除数据成功! 😄");
+                        [self loadData];    //加载数据
+                        type = 0;
+                        
+                        //遍历文件夹
+                        NSString *appDocDir = [[[[NSFileManager defaultManager] URLsForDirectory: NSCachesDirectory inDomains:NSUserDomainMask] lastObject] relativePath];
+                        
+                        NSArray *contentOfFolder = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:appDocDir error:NULL];
+                        
+                        for (NSString *aPath in contentOfFolder) {
+                            
+                            NSString * fullPath = [appDocDir stringByAppendingPathComponent:aPath];
+                            
+                            if ([LJQContentPlay hasSuffix:aPath]) {
+                                
+                                [[NSFileManager defaultManager] removeItemAtPath:fullPath error:nil];   //删除数据
+                                NSLog(@"删除数据成功! 😄");
+                            }
+                        }
+                        
+                    }else{
+                        NSLog(@"删除数据失败! 💔");
+                    }
+
+                }
+                
+            }
+            
+        }else{
+
+            type = 0;
+            [dataXuanZhongCellArr removeAllObjects];    //清空选中下标
+            [_YXZTableView reloadData];
+        }
     }
     
 }
@@ -338,7 +431,11 @@
             cell = [[WTXiaZaiXuanZhongCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
         }
         
-        cell.delegate = self;
+        UIButton *cellBtn = cell.XuanZhongBtn;
+        
+        cellBtn.tag = indexPath.row + 100;
+        [cellBtn addTarget:self action:@selector(XuanZhongBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+
         if (dataYXZArray[indexPath.row][@"SeqInfo"]) {
             
             [cell setCellWithDict:dataYXZArray[indexPath.row][@"SeqInfo"]];
@@ -360,16 +457,37 @@
     
 }
 
-#pragma mark -WTXiaZaiXuanZhongCellDelegate
+#pragma mark -选中事件
 - (void)XuanZhongBtnClick:(UIButton *)btn{
     
     if (btn.selected) {
         
+        [dataXuanZhongCellArr removeObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - 100]];
+        
         btn.selected = NO;
+        
+        if (dataXuanZhongCellArr.count != dataYXZArray.count){
+            
+            isHeaderView = NO;
+            isQuanXuan = NO;   //全选
+            NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:0];
+            [_YXZTableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
     }else{
+
+        [dataXuanZhongCellArr addObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - 100]];
         
         btn.selected = YES;
+        
+        if (dataXuanZhongCellArr.count == dataYXZArray.count) {
+            
+            isHeaderView = YES;
+            isQuanXuan = YES;   //全选
+            [_YXZTableView reloadData];
+        }
     }
+    
+    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{

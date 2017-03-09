@@ -11,7 +11,7 @@
 
 #import "WTXiaZaiDetilCell.h"
 
-@interface WTXiaZaiDetilController ()<UITableViewDataSource, UITableViewDelegate, WTXiaZaiDetilCellDelegate>
+@interface WTXiaZaiDetilController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *dataDetilArr;
 
@@ -27,11 +27,19 @@
     _XiaZaiDetilTab.dataSource = self;
     _XiaZaiDetilTab.delegate = self;
     
+    
+    [self registerTableViewCell];
+    [self loadData];
+}
+
+- (void)loadData {
+    
+    
     if (_dataDict) {
         
         if (_dataDict[@"SeqInfo"]) {
             
-           _contentName.text = _dataDict[@"SeqInfo"][@"ContentName"];
+            _contentName.text = _dataDict[@"SeqInfo"][@"ContentName"];
         }else {
             
             _contentName.text = _dataDict[@"ContentName"];
@@ -39,11 +47,8 @@
         
         _jiLab.text = [NSString stringWithFormat:@"共%@个节目", @"1"];
         _sizeLab.text = [NSString stringWithFormat:@"共%@MB",@""];
-       [_dataDetilArr addObject:_dataDict];
+        [_dataDetilArr addObject:_dataDict];
     }
-    
-    
-    [self registerTableViewCell];
     
     [_XiaZaiDetilTab reloadData];
 }
@@ -73,15 +78,77 @@
         cell = [[WTXiaZaiDetilCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     }
     
-    cell.delegate = self;
+    UIButton *cellBtn = cell.cleanBtn;
+    
+    cellBtn.tag = indexPath.row + 200;
+    [cellBtn addTarget:self action:@selector(CleanClick:) forControlEvents:UIControlEventTouchUpInside];
+
     [cell setCellwithDict:_dataDetilArr[indexPath.row]];
     
     return cell;
 }
 
 //删除单个节目单体
-- (void)CleanClick{
+- (void)CleanClick:(UIButton *)btn{
     
+    int indexPath = (int)btn.tag - 200;
+    
+    FMDatabase *db = [FMDBTool createDatabaseAndTable:@"XIAZAI"];
+    
+    
+    BOOL isRept = NO;
+    FMResultSet *resultSet = [db executeQuery:@"SELECT * FROM XIAZAI"];
+    // 遍历结果，如果重复就删除数据
+
+    NSString *HYCcontentID = _dataDetilArr[indexPath][@"ContentId"];
+    NSString *LJQContentPlay = _dataDetilArr[indexPath][@"ContentPlay"];
+    
+    while ([resultSet next]) {
+        
+        NSData *ID = [resultSet dataForColumn:@"XIAZAI"];
+        NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:ID options:NSJSONReadingMutableLeaves error:nil];
+        
+        if ([HYCcontentID isEqualToString:jsonDict[@"ContentId"]]) {
+            
+            isRept = YES;
+        }
+        
+    }
+    
+    if (isRept) {
+        
+        NSString *deleteSql = [NSString stringWithFormat:@"delete from XIAZAI where XIAZAINum='%@'",HYCcontentID];
+        //NSLog(@"%@", deleteSql);
+        //                        NSString *deleteSql = @"delete from BFLS where MusicDict";
+        BOOL isOk = [db executeUpdate:deleteSql];
+        
+        if (isOk) {
+            NSLog(@"删除数据成功! 😄");
+            [_dataDetilArr removeAllObjects];
+            [_XiaZaiDetilTab reloadData];
+            
+            //遍历文件夹
+            NSString *appDocDir = [[[[NSFileManager defaultManager] URLsForDirectory: NSCachesDirectory inDomains:NSUserDomainMask] lastObject] relativePath];
+            
+            NSArray *contentOfFolder = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:appDocDir error:NULL];
+            
+            for (NSString *aPath in contentOfFolder) {
+                
+                NSString * fullPath = [appDocDir stringByAppendingPathComponent:aPath];
+                
+                if ([LJQContentPlay hasSuffix:aPath]) {
+                    
+                    [[NSFileManager defaultManager] removeItemAtPath:fullPath error:nil];   //删除数据
+                    NSLog(@"删除数据成功! 😄");
+                }
+            }
+            
+        }else{
+            NSLog(@"删除数据失败! 💔");
+        }
+        
+    }
+        
     
 }
 

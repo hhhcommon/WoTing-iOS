@@ -337,6 +337,8 @@
 		0BC0DC251E02318600A19F64 /* WTNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC0DC231E02318600A19F64 /* WTNewsViewController.m */; };
 		0BC0DC261E02318600A19F64 /* WTNewsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BC0DC241E02318600A19F64 /* WTNewsViewController.xib */; };
 		0BC0DC2A1E02655400A19F64 /* WTBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC0DC291E02655400A19F64 /* WTBaseViewController.m */; };
+		0BCC34FC1E6D3C1B00055B38 /* WTZhuanJiDownloadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BCC34FA1E6D3C1B00055B38 /* WTZhuanJiDownloadCell.m */; };
+		0BCC34FD1E6D3C1B00055B38 /* WTZhuanJiDownloadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BCC34FB1E6D3C1B00055B38 /* WTZhuanJiDownloadCell.xib */; };
 		0BCFA1271DF66CD700CDED89 /* WTBoFangView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BCFA1261DF66CD700CDED89 /* WTBoFangView.m */; };
 		0BCFA1291DF66E2000CDED89 /* WTBoFangView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BCFA1281DF66E2000CDED89 /* WTBoFangView.xib */; };
 		0BD6B5441E15FC0C0039B88D /* DownLoad.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0BD6B5431E15FC0C0039B88D /* DownLoad.plist */; };
@@ -929,6 +931,9 @@
 		0BC0DC241E02318600A19F64 /* WTNewsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTNewsViewController.xib; sourceTree = "<group>"; };
 		0BC0DC281E02655400A19F64 /* WTBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTBaseViewController.h; sourceTree = "<group>"; };
 		0BC0DC291E02655400A19F64 /* WTBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTBaseViewController.m; sourceTree = "<group>"; };
+		0BCC34F91E6D3C1B00055B38 /* WTZhuanJiDownloadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTZhuanJiDownloadCell.h; sourceTree = "<group>"; };
+		0BCC34FA1E6D3C1B00055B38 /* WTZhuanJiDownloadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTZhuanJiDownloadCell.m; sourceTree = "<group>"; };
+		0BCC34FB1E6D3C1B00055B38 /* WTZhuanJiDownloadCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTZhuanJiDownloadCell.xib; sourceTree = "<group>"; };
 		0BCFA1251DF66CD700CDED89 /* WTBoFangView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTBoFangView.h; sourceTree = "<group>"; };
 		0BCFA1261DF66CD700CDED89 /* WTBoFangView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTBoFangView.m; sourceTree = "<group>"; };
 		0BCFA1281DF66E2000CDED89 /* WTBoFangView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTBoFangView.xib; sourceTree = "<group>"; };
@@ -2268,6 +2273,9 @@
 				0B0D30A41E569AC20063193A /* WTZhanJiTJCell.h */,
 				0B0D30A51E569AC20063193A /* WTZhanJiTJCell.m */,
 				0B0D30A61E569AC20063193A /* WTZhanJiTJCell.xib */,
+				0BCC34F91E6D3C1B00055B38 /* WTZhuanJiDownloadCell.h */,
+				0BCC34FA1E6D3C1B00055B38 /* WTZhuanJiDownloadCell.m */,
+				0BCC34FB1E6D3C1B00055B38 /* WTZhuanJiDownloadCell.xib */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -2668,6 +2676,7 @@
 				0B0C5DD31E2635C30033157D /* search_kuang.png in Resources */,
 				0B1297A31E090987009027BC /* WTZJTuijianController.xib in Resources */,
 				0B05BDC01E03B52E00CD4BEE /* ZhuanJiViewController.xib in Resources */,
+				0BCC34FD1E6D3C1B00055B38 /* WTZhuanJiDownloadCell.xib in Resources */,
 				0B0DC1C01E0BBC9200CA584C /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				0B05BDCF1E03B56700CD4BEE /* TTSViewController.xib in Resources */,
 				0BF2C5721DE2F5B700A42B3D /* WTXiangJiangViewController.xib in Resources */,
@@ -2821,6 +2830,7 @@
 				0B4E92871E682DD2001DE73F /* WTXiaZaiDetilCell.m in Sources */,
 				0B1EFED11DF002880047CE75 /* SDCollectionViewCell.m in Sources */,
 				0B0BD44D1E0134F800C4E236 /* WTFLDetaliController.m in Sources */,
+				0BCC34FC1E6D3C1B00055B38 /* WTZhuanJiDownloadCell.m in Sources */,
 				0BF2C55D1DE2B19100A42B3D /* UIProgressView+AFNetworking.m in Sources */,
 				0B1798381E2337F8003824EE /* WTMoveView.m in Sources */,
 				0B1DF2971DE58C0C00EE5FF2 /* UIView+SKFrame.m in Sources */,

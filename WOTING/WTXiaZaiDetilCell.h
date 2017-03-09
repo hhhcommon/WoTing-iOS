@@ -7,12 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-@class WTXiaZaiDetilCell;
-@protocol WTXiaZaiDetilCellDelegate <NSObject>
-
-- (void)CleanClick;
-
-@end
 
 @interface WTXiaZaiDetilCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *contentImg;
@@ -20,9 +14,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *contentPub;
 @property (weak, nonatomic) IBOutlet UILabel *jiLab;
 @property (weak, nonatomic) IBOutlet UILabel *sizeLab;
-- (IBAction)cleanBtnClick:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *cleanBtn;
 
-@property (nonatomic, weak) id <WTXiaZaiDetilCellDelegate> delegate;
 
 - (void)setCellwithDict:(NSDictionary *)dict;
 

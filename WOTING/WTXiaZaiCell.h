@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class WTXiaZaiCell;
-@protocol WTXiaZaiCellDelegate <NSObject>
-
-- (void)DownLoadWithPlist:(NSString *)str;
-
-@end
+//@class WTXiaZaiCell;
+//@protocol WTXiaZaiCellDelegate <NSObject>
+//
+//- (void)DownLoadWithPlist:(NSString *)str;
+//
+//@end
 
 @interface WTXiaZaiCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *contentImg;
@@ -24,7 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *JinDuLab;
 @property (weak, nonatomic) IBOutlet UIView *DownloadView;
 
-@property (nonatomic, weak) id <WTXiaZaiCellDelegate> delegate;
+//@property (nonatomic, weak) id <WTXiaZaiCellDelegate> delegate;
 @property (nonatomic,copy)NSString *url;
 
 - (void)Content:(NSDictionary *)dict;

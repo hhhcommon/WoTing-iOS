@@ -42,8 +42,19 @@
         if (isOK) {
             
             NSLog(@"打开数据库成功");
+        }else if ([tableName isEqualToString:@"XIAZAI"]){
+            
+            //创表
+            NSString *Name = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (%@Num text, %@ id,  %@BOOL text );",tableName, tableName, tableName, tableName];
+            
+            BOOL result = [database executeUpdate:Name];
+            if (result)
+            {
+                NSLog(@"创建表成功");
+            }
+            
         }else{
-            //4.创表
+            //创表
             NSString *Name = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (%@ id);",tableName, tableName];
             
             BOOL result = [database executeUpdate:Name];

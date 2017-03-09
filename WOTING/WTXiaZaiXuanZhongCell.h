@@ -8,14 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@class WTXiaZaiXuanZhongCell;
-@protocol WTXiaZaiXuanZhongCellDelegate <NSObject>
-
-- (void)XuanZhongBtnClick:(UIButton *)btn;
-
-@end
-
-
 @interface WTXiaZaiXuanZhongCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *contentImg;
 @property (weak, nonatomic) IBOutlet UILabel *contentName;
@@ -23,9 +15,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *JiLab;
 @property (weak, nonatomic) IBOutlet UILabel *sizeLab;
 @property (weak, nonatomic) IBOutlet UIButton *XuanZhongBtn;
-- (IBAction)xuanzhongBtnClick:(id)sender;
 
-@property (nonatomic, weak) id <WTXiaZaiXuanZhongCellDelegate> delegate;
+@property (nonatomic, strong) NSNumber *CellNumber;
+
 
 - (void)setCellWithDict:(NSDictionary *)dict;
 

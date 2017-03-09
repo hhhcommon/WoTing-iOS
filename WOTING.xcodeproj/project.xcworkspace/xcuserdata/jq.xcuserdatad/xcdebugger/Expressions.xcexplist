@@ -29,6 +29,9 @@
          contextName = "__41-[WTSearchViewController loadDataSearch:]_block_invoke:WTSearchViewController.m">
       </ContextState>
       <ContextState
+         contextName = "-[WTLikeCell setCellWithDict:]:WTLikeCell.m">
+      </ContextState>
+      <ContextState
          contextName = "-[WTBoFangCell setPlayingMusic:]:WTBoFangCell.m">
          <PersistentStrings>
             <PersistentString
@@ -210,6 +213,9 @@
                value = "_DataArray">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[WTDianTaiTableViewCell setCellWithDict:]:WTDianTaiTableViewCell.m">
       </ContextState>
       <ContextState
          contextName = "-[WTLoginViewController LoginBtnClick:]:WTLoginViewController.m">

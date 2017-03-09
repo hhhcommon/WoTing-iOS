@@ -19,6 +19,7 @@
 
 @property (nonatomic, assign) int FIRSTBFANG;  //是否是第一次播放
 
+
 @end
 
 @implementation WTBoFangCell
@@ -27,6 +28,25 @@
 #pragma mark 设置当前播放的音乐，并显示数据
 -(void)setPlayingMusic:(WTBoFangModel *)playingMusic{
     _playingMusic = playingMusic;
+    BOOL isXIAZAI = NO;
+    _downLoadImgv.enabled = YES;
+    _downLoadTitImgv.enabled = YES;
+    
+    //判断本地数据库里是否下载该节目
+    FMDatabase *fm = [FMDBTool createDatabaseAndTable:@"XIAZAI"];
+    // 1.执行查询语句
+    FMResultSet *resultSet = [fm executeQuery:@"SELECT * FROM XIAZAI"];
+    // 2.遍历结果
+    while ([resultSet next]) {
+        
+        NSData *ID = [resultSet dataForColumn:@"XIAZAI"];
+        NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:ID options:NSJSONReadingMutableLeaves error:nil];
+        
+        if ([playingMusic.ContentId isEqualToString:jsonDict[@"ContentId"]]) {
+            
+            isXIAZAI = YES;
+        }
+    }
     
     //判断是节目单还是去下载界面
     NSString *MediaType = playingMusic.MediaType;
@@ -35,11 +55,17 @@
         _downLoadImgv.selected = NO;
         _downLoadTitImgv.selected = NO;
         self.wtSlider.userInteractionEnabled = YES;
+        if (isXIAZAI) {
+            
+            _downLoadImgv.enabled = NO;
+            _downLoadTitImgv.enabled = NO;
+        }
     }else if ([MediaType isEqualToString:@"RADIO"]) {
         
         _downLoadImgv.selected = YES;
         _downLoadTitImgv.selected = YES;
         self.wtSlider.userInteractionEnabled = NO;
+        
     }
     
     //判断当前播放是否添加过喜欢

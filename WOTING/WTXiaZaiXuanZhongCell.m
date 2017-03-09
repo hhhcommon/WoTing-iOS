@@ -37,13 +37,4 @@
     _sizeLab.text = [NSString stringWithFormat:@"%@MB", @""];
 }
 
-
-
-- (IBAction)xuanzhongBtnClick:(id)sender {
-    
-    if ([self.delegate respondsToSelector:@selector(XuanZhongBtnClick:)]) {
-        
-        [self.delegate XuanZhongBtnClick:_XuanZhongBtn];
-    }
-}
 @end

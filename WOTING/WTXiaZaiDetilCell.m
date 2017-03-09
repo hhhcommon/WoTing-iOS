@@ -38,11 +38,4 @@
     
 }
 
-- (IBAction)cleanBtnClick:(id)sender {
-    
-    if ([self.delegate respondsToSelector:@selector(CleanClick)]) {
-        
-        [self.delegate CleanClick];
-    }
-}
 @end

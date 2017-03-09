@@ -15,6 +15,9 @@ typedef NSURL *(^JSDownloadPath)(NSURL * targetPath, NSURLResponse * response);
 typedef void(^JSDownloadCompletionBlock)(NSURLResponse * response, NSURL * filePath, NSError * error);
 
 @interface JSDownLoadManager : NSObject
+
++ (instancetype)sharedManager;
+
 /**
  *  下载
  *

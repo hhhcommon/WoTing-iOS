@@ -11,15 +11,25 @@
 #import "WTXiaZaiCell.h"
 
 
-@interface WTXiaZaiZhongController ()<WTXiaZaiCellDelegate, UITableViewDelegate, UITableViewDataSource>{
+@interface WTXiaZaiZhongController ()<UITableViewDelegate, UITableViewDataSource>{
     
     NSMutableArray  *_urls;
+    
+    BOOL    isDownLoad;     //判断当前是否有下载
 }
 
 @end
 
 @implementation WTXiaZaiZhongController
 
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadData) name:@"XIAZAIWEIWANCHENG" object:nil];
+    
+//    [self loadData];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -34,9 +44,11 @@
     
     _XZZTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(XiaZaiDict:) name:@"XIAZAIDICT" object:nil];
+  //  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(XiaZaiDict:) name:@"XIAZAIDICT" object:nil];
     
     [self registerTableCell];
+    
+    [self loadData];
     
 //    if (_urls.count == 0||_urls == nil) {
 //        
@@ -55,34 +67,90 @@
 //    }
 }
 
-//接受到下载到的数据
-- (void)XiaZaiDict:(NSNotification *)not{
+
+- (void)loadData {
     
-    NSDictionary *dict = not.userInfo;
+    [_urls removeAllObjects];
     
     FMDatabase *db = [FMDBTool createDatabaseAndTable:@"XIAZAI"];
-    
-        
-    BOOL isRept = NO;
+
     FMResultSet *resultSet = [db executeQuery:@"SELECT * FROM XIAZAI"];
-    // 遍历结果，如果重复就删除数据
+
     while ([resultSet next]) {
+        
+        BOOL isXIAZAI = [resultSet boolForColumn:@"XIAZAIBOOL"];
         
         NSData *ID = [resultSet dataForColumn:@"XIAZAI"];
         NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:ID options:NSJSONReadingMutableLeaves error:nil];
-        if ([dict[@"ContentId"] isEqualToString:jsonDict[@"ContentId"]]) {
+        if (!isXIAZAI) {
             
-            isRept = YES;
+            [_urls addObject:jsonDict];
+          
         }
     }
-    if (!isRept) {
-        
-        [_urls addObject:dict];
-        
-        [_XZZTableView reloadData];
-    }
-    
+   
+    [_XZZTableView reloadData];
 }
+
+
+//接受到下载到的数据
+//- (void)XiaZaiDict:(NSNotification *)not{
+//    
+//    NSDictionary *dict = not.userInfo;
+//    
+//    if (dict[@"DownLoad"]) {
+//        
+//        for (NSDictionary *JQdict in dict[@"DownLoad"]) {
+//            
+//            FMDatabase *db = [FMDBTool createDatabaseAndTable:@"XIAZAI"];
+//            
+//            
+//            BOOL isRept = NO;
+//            FMResultSet *resultSet = [db executeQuery:@"SELECT * FROM XIAZAI"];
+//            // 遍历结果，如果重复就删除数据
+//            while ([resultSet next]) {
+//                
+//                NSData *ID = [resultSet dataForColumn:@"XIAZAI"];
+//                NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:ID options:NSJSONReadingMutableLeaves error:nil];
+//                if ([JQdict[@"ContentId"] isEqualToString:jsonDict[@"ContentId"]]) {
+//                    
+//                    isRept = YES;
+//                }
+//            }
+//            if (!isRept) {
+//                
+//                [_urls addObject:dict];
+//                
+//                [_XZZTableView reloadData];
+//            }
+//        }
+//        
+//    }else{
+//    
+//        FMDatabase *db = [FMDBTool createDatabaseAndTable:@"XIAZAI"];
+//        
+//            
+//        BOOL isRept = NO;
+//        FMResultSet *resultSet = [db executeQuery:@"SELECT * FROM XIAZAI"];
+//        // 遍历结果，如果重复就删除数据
+//        while ([resultSet next]) {
+//            
+//            NSData *ID = [resultSet dataForColumn:@"XIAZAI"];
+//            NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:ID options:NSJSONReadingMutableLeaves error:nil];
+//            if ([dict[@"ContentId"] isEqualToString:jsonDict[@"ContentId"]]) {
+//                
+//                isRept = YES;
+//            }
+//        }
+//        if (!isRept) {
+//            
+//            [_urls addObject:dict];
+//            
+//            [_XZZTableView reloadData];
+//        }
+//    }
+//    
+//}
 
 - (void)registerTableCell {
     
@@ -116,8 +184,9 @@
     }
 
     [cell Content:_urls[indexPath.row]];
-    [cell changeBeginAndStop];  //开始下载任务...
-    cell.delegate = self;
+    
+//    [cell changeBeginAndStop];  //开始下载任务...
+//    cell.delegate = self;
     
     return cell;
 }
@@ -134,46 +203,46 @@
 
 //下载完成 ， 移除下载任务
 - (void)DownLoadWithPlist:(NSString *)str {
-    
-    for (NSDictionary *dict in _urls) {
-        
-        if ([str isEqualToString:dict[@"ContentPlay"]]) {
-            
-            FMDatabase *db = [FMDBTool createDatabaseAndTable:@"XIAZAI"];
-            
-            NSLog( @"%@",dict);
-            
-            BOOL isRept = NO;
-            FMResultSet *resultSet = [db executeQuery:@"SELECT * FROM XIAZAI"];
-            // 遍历结果，如果重复就删除数据
-            while ([resultSet next]) {
-                
-                NSData *ID = [resultSet dataForColumn:@"XIAZAI"];
-                NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:ID options:NSJSONReadingMutableLeaves error:nil];
-                if ([dict[@"ContentId"] isEqualToString:jsonDict[@"ContentId"]]){
-                    
-                    isRept = YES;
-                }
-            }
-            if (!isRept) {
-                
-                NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
-                NSString *sqlInsert = @"insert into XIAZAI values(?)";
-                BOOL isOk = [db executeUpdate:sqlInsert, data];
-                if (isOk) {
-                    NSLog(@"添加数据成功");
-                    [_urls removeObject:dict];
-                    [_XZZTableView reloadData];
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"YIXIAZAI" object:nil];
-                }
 
-            }
+//    for (NSDictionary *dict in _urls) {
+//        
+//        if ([str isEqualToString:dict[@"ContentPlay"]]) {
+//            
+//            FMDatabase *db = [FMDBTool createDatabaseAndTable:@"XIAZAI"];
+//            
+//            NSLog( @"%@",dict);
+//            
+//            BOOL isRept = NO;
+//            FMResultSet *resultSet = [db executeQuery:@"SELECT * FROM XIAZAI"];
+//            // 遍历结果，如果重复就删除数据
+//            while ([resultSet next]) {
+//                
+//                NSData *ID = [resultSet dataForColumn:@"XIAZAI"];
+//                NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:ID options:NSJSONReadingMutableLeaves error:nil];
+//                if ([dict[@"ContentId"] isEqualToString:jsonDict[@"ContentId"]]){
+//                    
+//                    isRept = YES;
+//                }
+//            }
+//            if (!isRept) {
+//                
+//                NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
+//                NSString *sqlInsert = @"insert into XIAZAI values(?,?)";
+//                BOOL isOk = [db executeUpdate:sqlInsert, data, dict[@"ContentId"]];
+//                if (isOk) {
+//                    NSLog(@"添加数据成功");
+//                    [_urls removeObject:dict];
+//                    [_XZZTableView reloadData];
+//                    [[NSNotificationCenter defaultCenter] postNotificationName:@"YIXIAZAI" object:nil];
+//                }
+//                
+//            }
+//            
+//            
+//        }
+//    }
 
-            
-        }
-    }
-
-    
+    [self loadData];
     
 }
 

@@ -17,6 +17,16 @@
 
 @implementation JSDownLoadManager
 
++ (instancetype)sharedManager {
+    
+    static JSDownLoadManager *downloadManager;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        downloadManager = [[self alloc] init];
+    });
+    return downloadManager;
+}
+
 - (void)downloadWithURL:(NSString *)url
                progress:(JSDownloadProgressBlock)downloadProgressBlock
                    path:(JSDownloadPath)downloadPath

@@ -171,6 +171,9 @@
                         <state key="normal" title="下载">
                             <color key="titleColor" red="1" green="0.38915392440000002" blue="0.1089368786" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
+                        <state key="disabled" title="已下载">
+                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
                         <state key="selected" title="节目单">
                             <color key="titleColor" red="1" green="0.38915392440000002" blue="0.1089368786" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>

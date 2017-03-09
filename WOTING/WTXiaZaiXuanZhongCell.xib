@@ -27,9 +27,6 @@
                         </constraints>
                         <state key="normal" image="WeiXuanZhong.png"/>
                         <state key="selected" image="XuanZhong.png"/>
-                        <connections>
-                            <action selector="xuanzhongBtnClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="IsM-Cb-n4X"/>
-                        </connections>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QlC-4C-8Cs">
                         <rect key="frame" x="50" y="6" width="60" height="60"/>

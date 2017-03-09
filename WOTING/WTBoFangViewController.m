@@ -28,6 +28,8 @@
 #import "WTBoFangModel.h"
 #import "JQMusicTool.h"
 
+#import "JSDownLoadManager.h"   //下载器
+
 
 #import <UShareUI/UShareUI.h>   //分享
 
@@ -61,6 +63,8 @@
 @property (nonatomic, strong) WTBoFangCell   *headerV;
 @property(assign, nonatomic)NSInteger musicIndex;//当前播放音乐索引
 @property(strong,nonatomic) NSMutableArray *musics;//音乐数据
+
+@property (nonatomic, strong) JSDownLoadManager *manager;//下载器
 
 @end
 
@@ -620,9 +624,133 @@
 #pragma mark 点击下载
 - (void)DownLoad {
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"XIAZAIDICT" object:nil userInfo:dataBFArray[_musicIndex]];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"XIAZAIDICT" object:nil userInfo:dataBFArray[_musicIndex]];
+    
+    FMDatabase *db = [FMDBTool createDatabaseAndTable:@"XIAZAI"];
+    
+    BOOL isRept = NO;
+    FMResultSet *resultSet = [db executeQuery:@"SELECT * FROM XIAZAI"];
+    // 遍历结果，如果重复就删除数据
+    while ([resultSet next]) {
+        
+        NSData *ID = [resultSet dataForColumn:@"XIAZAI"];
+        NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:ID options:NSJSONReadingMutableLeaves error:nil];
+        if ([dataBFArray[_musicIndex][@"ContentId"] isEqualToString:jsonDict[@"ContentId"]]){
+            
+            isRept = YES;
+        }
+    }
+    if (!isRept) {
+        
+        NSData *data = [NSJSONSerialization dataWithJSONObject:dataBFArray[_musicIndex] options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *sqlInsert = @"insert into XIAZAI values(?,?,?)";
+        BOOL isOk = [db executeUpdate:sqlInsert, dataBFArray[_musicIndex][@"ContentId"],data ,@"0"];
+        if (isOk) {
+            NSLog(@"添加数据成功");
+            //通知下载中
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"XIAZAIWEIWANCHENG" object:nil];
+            
+            [self GCDdownLoad]; //开始下载
+        }
+        
+    }
+
     
 }
+
+//懒加载下载器
+- (JSDownLoadManager *)manager{
+    
+    if (!_manager) {
+        _manager = [[JSDownLoadManager alloc] init];
+    }
+    return _manager;
+}
+
+//异步下载
+- (void)GCDdownLoad{
+    
+    //开启异步下载线程
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [self.manager downloadWithURL:dataBFArray[_musicIndex][@"ContentPlay"]
+                             progress:^(NSProgress *downloadProgress) {
+                                 
+                                 NSMutableDictionary *LJQDict = [NSMutableDictionary dictionaryWithCapacity:0];
+                                
+//                                 NSTimeInterval period = 0.1; //设置时间间隔
+//                                 dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+//                                 dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+//                                 dispatch_source_set_timer(_timer, dispatch_walltime(NULL, 0), period * NSEC_PER_SEC, 0); //每秒执行
+//                                 dispatch_source_set_event_handler(_timer, ^{
+                                     //在这里执行事件
+                                     NSString *JQstr = [NSString stringWithFormat:@"%f", downloadProgress.fractionCompleted];
+                                     [LJQDict setObject:JQstr forKey:@"Progress"];
+                                     [LJQDict setObject:[NSString stringWithFormat:@"%0.2fMB/%0.2fMB", downloadProgress.completedUnitCount/1024.0/1024, downloadProgress.totalUnitCount/1024.0/1024] forKey:@"JinDuLab"];
+                                     [LJQDict setObject:dataBFArray[_musicIndex][@"ContentPlay"] forKey:@"url"];
+                                     NSDictionary *jqdict = [NSDictionary dictionaryWithDictionary:LJQDict];
+                                     
+                                     [[NSNotificationCenter defaultCenter] postNotificationName:@"RELOADCELLPROGRESS" object:nil userInfo:jqdict];
+//                                 });
+//                                 dispatch_resume(_timer);
+                                 
+//                                     circleView.progress = downloadProgress.fractionCompleted;
+//                                     
+//                                     _JinDuLab.text =[NSString stringWithFormat:@"%0.2fMB/%0.2fMB", downloadProgress.completedUnitCount/1024.0/1024, downloadProgress.totalUnitCount/1024.0/1024];
+
+                                 
+                             }
+                                 path:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+                                     
+                                     NSString *cachesPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
+                                     NSString *path = [cachesPath stringByAppendingPathComponent:response.suggestedFilename];
+                                     return [NSURL fileURLWithPath:path];
+                                 }
+                           completion:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+                               //此时已在主线程
+
+                               NSString *path = [filePath path];
+                               NSLog(@"************文件路径:%@",path);
+                               
+                               FMDatabase *db = [FMDBTool createDatabaseAndTable:@"XIAZAI"];
+                               
+                               BOOL isRept = NO;
+                               FMResultSet *resultSet = [db executeQuery:@"SELECT * FROM XIAZAI"];
+                               // 遍历结果，如果重复就删除数据
+                               while ([resultSet next]) {
+                                   
+                                   NSData *ID = [resultSet dataForColumn:@"XIAZAI"];
+                                   NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:ID options:NSJSONReadingMutableLeaves error:nil];
+                                   if ([dataBFArray[_musicIndex][@"ContentPlay"] isEqualToString:jsonDict[@"ContentPlay"]] && [[resultSet stringForColumn:@"XIAZAIBOOL"] isEqualToString:@"0"]){
+                                       
+                                       isRept = YES;
+                                   }
+                               }
+                               if (isRept) {
+                                   
+                            //       NSData *data = [NSJSONSerialization dataWithJSONObject:dataBFArray[_musicIndex] options:NSJSONWritingPrettyPrinted error:nil];
+                                   BOOL isOk = [db executeUpdate:@"UPDATE XIAZAI SET XIAZAIBOOL = ? WHERE XIAZAINum =?",@"1",dataBFArray[_musicIndex][@"ContentId"]];
+                                   if (isOk) {
+                                       NSLog(@"更改数据成功! 😄");
+                                       
+                                       [db close];  //关闭数据库
+                                       
+                                       //通知下载完成
+                                       [[NSNotificationCenter defaultCenter] postNotificationName:@"XIAZAIWANCHENG" object:nil];
+                                       //通知下载中刷新UI
+                                       [[NSNotificationCenter defaultCenter] postNotificationName:@"XIAZAIWEIWANCHENG" object:nil];
+                                   }else{
+                                       NSLog(@"更改数据失败! 💔");
+                                   }
+
+                               }
+                               
+
+                           }];
+    });
+    
+}
+
 
 #pragma mark 点击喜欢
 - (void)addLike {
