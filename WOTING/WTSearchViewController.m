@@ -13,7 +13,7 @@
 #import "ShengYinViewController.h"
 #import "DianTaiViewController.h"
 #import "TTSViewController.h"
-
+#import "BoFangTabbarView.h"
 #import "SKMainScrollView.h"
 
 @interface WTSearchViewController ()<UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource>{
@@ -28,7 +28,15 @@
     SKMainScrollView    *contentScrollView;
     UIView              *titleView;//标识栏
     UIImageView         *barLineImageView;//标识条
+    
+    BoFangTabbarView *firstBarV;
+    int  count;
 }
+
+
+@property (nonatomic,assign)CGAffineTransform startTransform; //记录最开始contentImg的旋转位置
+
+@property (nonatomic,strong)NSTimer *timer;
 
 @end
 
@@ -36,6 +44,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+ 
+    
     // Do any additional setup after loading the view from its nib.
     dataSearchArr = [[NSArray alloc] init];
     
@@ -57,6 +68,68 @@
         [self loadDataSearch:nil];
     }
     
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
+    NSString *Imgv = [AutomatePlist readPlistForKey:@"ImgV"];
+    NSString *transformbegin = [AutomatePlist readPlistForKey:@"transformbegin"];
+    NSString *transform = [AutomatePlist readPlistForKey:@"transform"];
+    count = [transform intValue];
+    
+    firstBarV = [[BoFangTabbarView alloc] init];
+    
+    [firstBarV.HYCContentImageName sd_setImageWithURL:[NSURL URLWithString:[NSString NULLToString:Imgv]] placeholderImage:[UIImage imageNamed:@"img_radio_default"]];
+    //记录一开始的旋转位置
+    _startTransform = firstBarV.HYCContentImageName.transform;
+    
+    firstBarV.HYCKuangImageName.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapGesturRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(LJQbtnClick:)];
+    [firstBarV.HYCKuangImageName addGestureRecognizer:tapGesturRecognizer];
+    
+    _timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(runTimeXUAN) userInfo:nil repeats:YES];
+    if ([transformbegin isEqualToString:@"0"]) {
+        
+        [_timer setFireDate:[NSDate distantFuture]];    //暂停
+        firstBarV.LJQStopImage.hidden = NO;
+    }else{
+        
+        [_timer setFireDate:[NSDate distantPast]];
+        firstBarV.LJQStopImage.hidden = YES;
+    }
+    
+    
+    
+    
+    [self.view addSubview:firstBarV];
+    [firstBarV mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.mas_equalTo(0);
+        make.bottom.mas_equalTo(0);
+        make.width.mas_equalTo(K_Screen_Width/4.0);
+        make.height.mas_equalTo(49);
+    }];
+}
+
+- (void)LJQbtnClick:(UITapGestureRecognizer *)tap{
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"TABBARSELECATE" object:nil];
+    
+    self.tabBarController.selectedIndex = 0;
+    
+}
+
+- (void)runTimeXUAN{
+    
+    count+=1;
+    
+    if (count == 360) {
+        
+        count = 0;
+    }
+    firstBarV.HYCContentImageName.transform = CGAffineTransformMakeRotation((M_PI / 180.0f)*count);
 }
 
 //网络请求,热门搜索
@@ -107,6 +180,10 @@
                 
                 [self createrWithHotkey:dataSearchArr];
             }
+        }else if ([ReturnType isEqualToString:@"1011"]){
+            
+            [WKProgressHUD popMessage:@"暂无搜索记录" inView:nil duration:0.5 animated:YES];
+            
         }
         
         

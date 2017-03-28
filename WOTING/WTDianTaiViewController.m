@@ -212,13 +212,11 @@
     [Mdict setObject:City forKey:@"CatalogId"];
     [Mdict setObject:@"2" forKey:@"CatalogType"];
     
-//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:Mdict options:NSJSONWritingPrettyPrinted error:nil];
-//    NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", @"RADIO",@"MediaType",uid,@"UserId", Mdict,@"FilterData",@"1",@"CatalogType",@"1",@"ResultType",@"3",@"PerSize",@"1",@"Page",nil];
     
     NSString *login_Str = WoTing_GetContents;
     
+    [WKProgressHUD showInView:self.view withText:@"加载中..." animated:YES];
     
     [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
         
@@ -230,21 +228,23 @@
         if ([ReturnType isEqualToString:@"1001"]) {
             
             NSDictionary *ResultList = resultDict[@"ResultList"];
-           // [dataListArr removeAllObjects];
+
             [dataListArr addObjectsFromArray: ResultList[@"List"]];
             BeginCatalogId = ResultList[@"BeginCatalogId"];
             
             [jqTableView reloadData];
+            [WKProgressHUD dismissAll:YES];
             
         }else if ([ReturnType isEqualToString:@"T"]){
             
             [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
+            [WKProgressHUD dismissAll:YES];
         }
         
     } fail:^(NSError *error) {
         
         [jqTableView.mj_header endRefreshing];
-        
+        [WKProgressHUD dismissAll:YES];
     }];
     
     
@@ -319,86 +319,8 @@
     NSString *cityPro = dataDict[@"CatalogName"];
     [AutomatePlist writePlistForkey:@"cityPro" value:cityPro];
     
-    [self loadData];
-//    NSString *IMEI = [AutomatePlist readPlistForKey:@"IMEI"];
-//    NSString *uid = [AutomatePlist readPlistForKey:@"Uid"];
-//    NSString *ScreenSize = [AutomatePlist readPlistForKey:@"ScreenSize"];
-//    NSString *MobileClass = [AutomatePlist readPlistForKey:@"MobileClass"];
-//    NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
-//    NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
-//    
-//    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", @"RADIO",@"MediaType",uid,@"UserId", @"",@"CatalogId",@"1",@"CatalogType",@"1",@"ResultType",@"3",@"PerSize",nil];
-//    
-//    NSString *login_Str = WoTing_GetContents;
-//    
-//    
-//    [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
-//        
-//        [jqTableView.mj_header endRefreshing];
-//        
-//        NSDictionary *resultDict = (NSDictionary *)response;
-//        
-//        NSString  *ReturnType = [resultDict objectForKey:@"ReturnType"];
-//        if ([ReturnType isEqualToString:@"1001"]) {
-//            
-//            NSDictionary *ResultList = resultDict[@"ResultList"];
-//            // [dataListArr removeAllObjects];
-//            [dataListArr addObjectsFromArray: ResultList[@"List"]];
-//            BeginCatalogId = ResultList[@"BeginCatalogId"];
-//            
-//            [jqTableView reloadData];
-//            
-//        }else if ([ReturnType isEqualToString:@"T"]){
-//            
-//            [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
-//        }
-//        
-//    } fail:^(NSError *error) {
-//        
-//        [jqTableView.mj_header endRefreshing];
-//        
-//    }];
-//    
-//    //"MediaType":"",//全部
-//    if (![City  isEqual: @""]) {
-//        NSString *cityPro = dataDict[@"CatalogName"];
-//        
-//        NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", @"RADIO",@"MediaType",uid,@"UserId", City,@"CatalogId",@"2",@"CatalogType",@"3",@"ResultType",@"3",@"PerSize",@"3",@"PageSize",nil];
-//        
-//        NSString *login_Str = WoTing_GetContents;
-//        
-//        [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
-//            
-//            //  [jqTableView.mj_header endRefreshing];
-//            
-//            NSDictionary *resultDict = (NSDictionary *)response;
-//            
-//            NSString  *ReturnType = [resultDict objectForKey:@"ReturnType"];
-//            if ([ReturnType isEqualToString:@"1001"]) {
-//                
-//                NSDictionary *ResultList = resultDict[@"ResultList"];
-//                NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:0];
-//                [dict setObject:ResultList[@"List"] forKey:@"List"];
-//                //[0]	(null)	@"CatalogName" : @"新闻"
-//                [dict setObject:cityPro forKey:@"CatalogName"];
-//                [dict setObject:City forKey:@"CatalogId"];
-//                [dataListArr removeAllObjects];
-//                [dataListArr addObject: dict];
-//                
-//                
-//                // [jqTableView reloadData];
-//                
-//            }else if ([ReturnType isEqualToString:@"T"]){
-//                
-//                [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
-//            }
-//            
-//        } fail:^(NSError *error) {
-//            
-//            //  [jqTableView.mj_header endRefreshing];
-//            
-//        }];
-//    }
+    [self loadData];    //请求网络
+
 }
 
 
@@ -483,6 +405,10 @@
     NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
+    //回首页
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"TABBARSELECATE" object:nil];
+    
+    self.tabBarController.selectedIndex = 0;
 }
 
 //电台数据第一次请求

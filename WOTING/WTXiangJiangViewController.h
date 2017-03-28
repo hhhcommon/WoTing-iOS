@@ -13,9 +13,12 @@
 - (IBAction)XiaoXibtnClick:(id)sender;
 
 - (IBAction)SearchBtnClick:(id)sender;
-@property (weak, nonatomic) IBOutlet UIButton *BoFangBtn;
-@property (weak, nonatomic) IBOutlet UIButton *JieMuBtn;
-- (IBAction)BoFangBtnClick:(id)sender;
-- (IBAction)JieMuBtnClick:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIView *NavView;
+
+//@property (weak, nonatomic) IBOutlet UIButton *BoFangBtn;
+//@property (weak, nonatomic) IBOutlet UIButton *JieMuBtn;
+//- (IBAction)BoFangBtnClick:(id)sender;
+//- (IBAction)JieMuBtnClick:(id)sender;
 
 @end

@@ -39,7 +39,21 @@
     _YanZMBtn.layer.cornerRadius = 5;
     _YanZMBtn.layer.masksToBounds = YES;
     
+    
+    
     [_YanZMTF addTarget:self action:@selector(changeNum:) forControlEvents:UIControlEventEditingChanged];
+}
+
+
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+    [_phoneTF resignFirstResponder];
+    [_userNameTF resignFirstResponder];
+    [_psdTF resignFirstResponder];
+    [_YanZMTF resignFirstResponder];
+    
+    
 }
 
 - (void)changeNum:(UITextField *)tf {
@@ -103,43 +117,44 @@
 - (IBAction)QueDBtnClick:(id)sender {
     
     if (_QueDBtn.selected == YES) {
-        
-        NSString *IMEI = [AutomatePlist readPlistForKey:@"IMEI"];
-        NSString *ScreenSize = [AutomatePlist readPlistForKey:@"ScreenSize"];
-        NSString *MobileClass = [AutomatePlist readPlistForKey:@"MobileClass"];
-        NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
-        NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
-        
-        NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", _phoneTF.text, @"PhoneNum", nil];
-        
-        NSString *login_Str = WoTing_phone;
-        
-        
-        [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
-            
-            
-            NSDictionary *resultDict = (NSDictionary *)response;
-            
-            NSString  *ReturnType = [resultDict objectForKey:@"ReturnType"];
-            if ([ReturnType isEqualToString:@"1001"]) {
-                
-                [self YanZhengMa];  //验证验证码
-                
-            }else if ([ReturnType isEqualToString:@"1002"]){
-                
-                [WKProgressHUD popMessage:@"手机已绑定" inView:nil duration:0.5 animated:YES];
-            }else if ([ReturnType isEqualToString:@"1000"]){
-                
-                [WKProgressHUD popMessage:@"无法获取手机号" inView:nil duration:0.5 animated:YES];
-            }
-            
-        } fail:^(NSError *error) {
-            
-            
-            NSLog(@"%@", error);
-            
-        }];
+        [self YanZhengMa];  //验证验证码
 
+//        NSString *IMEI = [AutomatePlist readPlistForKey:@"IMEI"];
+//        NSString *ScreenSize = [AutomatePlist readPlistForKey:@"ScreenSize"];
+//        NSString *MobileClass = [AutomatePlist readPlistForKey:@"MobileClass"];
+//        NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
+//        NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
+//        
+//        NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude", _phoneTF.text, @"PhoneNum", nil];
+//        
+//        NSString *login_Str = WoTing_phone;
+//        
+//        
+//        [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
+//            
+//            
+//            NSDictionary *resultDict = (NSDictionary *)response;
+//            
+//            NSString  *ReturnType = [resultDict objectForKey:@"ReturnType"];
+//            if ([ReturnType isEqualToString:@"1001"]) {
+//                
+//                [self YanZhengMa];  //验证验证码
+//                
+//            }else if ([ReturnType isEqualToString:@"1002"]){
+//                
+//                [WKProgressHUD popMessage:@"手机已绑定" inView:nil duration:0.5 animated:YES];
+//            }else if ([ReturnType isEqualToString:@"1000"]){
+//                
+//                [WKProgressHUD popMessage:@"无法获取手机号" inView:nil duration:0.5 animated:YES];
+//            }
+//            
+//        } fail:^(NSError *error) {
+//            
+//            
+//            NSLog(@"%@", error);
+//            
+//        }];
+//
     }
 }
 
@@ -148,20 +163,38 @@
     
     if (_phoneTF.text.length == 11) {   //输入11位手机号后， 可以获取验证码
         
-        if (_YanZMBtn.selected == NO) {
+        if (![_userNameTF.text isEqualToString:@""]) {
             
-            if (_FirstYZM == 0) {
+            if (![_psdTF.text isEqualToString:@""]) {
+
+                if (_YanZMBtn.selected == NO) {
+                    
+                    
+                    if (_FirstYZM == 0) {
+                    
+                        [_phoneTF resignFirstResponder];
+                        [_userNameTF resignFirstResponder];
+                        [_psdTF resignFirstResponder];
+                        
+                       [self GetVerificationCode:WoTing_phone];    //获取验证码
+                    }else {
+                        
+                        [self GetVerificationCode:WoTing_yanZM];    //再次获取验证码
+                    }
                 
-               [self GetVerificationCode:WoTing_phone];    //获取验证码
-            }else {
+          
+                }else{
+                    
+                    [WKProgressHUD popMessage:@"两次获取时间间隔最少60秒" inView:nil duration:0.5 animated:YES];
+                    
+                }
+            }else{
                 
-                [self GetVerificationCode:WoTing_yanZM];    //再次获取验证码
+                [WKProgressHUD popMessage:@"请输入密码" inView:nil duration:0.5 animated:YES];
             }
-  
-        }else{
+        }else {
             
-            [WKProgressHUD popMessage:@"两次获取时间间隔最少60秒" inView:nil duration:0.5 animated:YES];
-            
+            [WKProgressHUD popMessage:@"请输入昵称" inView:nil duration:0.5 animated:YES];
         }
     }else {
         
@@ -293,6 +326,17 @@
             
             [WKProgressHUD popMessage:@"注册成功" inView:nil duration:0.5 animated:YES];
             
+            NSDictionary *UserId = resultDict[@"UserInfo"];
+            NSDictionary *heheDict = [[NSDictionary alloc] initWithDictionary:UserId];
+            
+            [AutomatePlist writePlistForkey:@"LoginDict" valueDict:heheDict];
+            [AutomatePlist writePlistForkey:@"Uid" value:heheDict[@"UserId"]];
+            [AutomatePlist writePlistForkey:@"UName" value:heheDict[@"UserName"]];
+            [AutomatePlist writePlistForkey:@"Region" value:heheDict[@"Region"]];
+            [AutomatePlist writePlistForkey:@"NickName" value:heheDict[@"NickName"]];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginChangeNotification" object:nil userInfo:heheDict];
+            [self.navigationController popToRootViewControllerAnimated:YES];
         }else if ([ReturnType isEqualToString:@"T"]){
             
             [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];

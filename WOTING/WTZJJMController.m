@@ -488,8 +488,12 @@
     
         NSDictionary *dict = _dataZJArr[indexPath.row];
         NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        
         [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
+        //回首页
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"TABBARSELECATE" object:nil];
+        
+        self.tabBarController.selectedIndex = 0;
     }
     
 }
@@ -502,8 +506,10 @@
 //取消下载按钮
 - (void)QuXiaoBtnClick{
     
+    [dataZJJMCellArr removeAllObjects];
     typeDownLoad = NO;
     [_ZJJieMTabV reloadData];
+    
 }
 
 //专辑下载

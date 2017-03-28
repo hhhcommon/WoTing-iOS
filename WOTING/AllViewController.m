@@ -90,7 +90,7 @@
         
     }else {
         
-        parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",uid,@"UserId",_SearchStr,@"SearchStr", nil];
+        parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",uid,@"UserId",_SearchStr,@"SearchStr", @"12",@"PageSize",@"2",@"ResultType",nil];
         
         login_Str = WoTing_searchBy;
         
@@ -357,8 +357,13 @@
             
             NSDictionary *dict = _dataAllArray[indexPath.section][@"List"][indexPath.row];
             NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
-            [self.navigationController popViewControllerAnimated:YES];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
+            
+            self.tabBarController.selectedIndex = 0;
+            //回首页
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"TABBARSELECATE" object:nil];
+            
+            
         }
     }else {
         if ([dataLikeArr[indexPath.section][@"MediaType"] isEqualToString:@"SEQU"]) {
@@ -372,8 +377,14 @@
             
             NSDictionary *dict = dataLikeArr[indexPath.section][@"List"][indexPath.row];
             NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
-            [self.navigationController popToRootViewControllerAnimated:YES];
+            
             [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
+            
+            self.tabBarController.selectedIndex = 0;
+            //回首页
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"TABBARSELECATE" object:nil];
+            
+            
         }
     }
 }

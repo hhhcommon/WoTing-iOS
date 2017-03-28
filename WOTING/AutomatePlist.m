@@ -29,17 +29,35 @@
     
 }
 
++(id)readPlistFortransfrom:(NSString *)plkey{
+    
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    if ([user valueForKey:plkey]) {
+        return [user valueForKey:plkey];
+    }
+    return nil;
+    
+}
+
++(void)writePlistForkey:(NSString *)plkey valueTransfrom:(id )plValue{
+    
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    [user setValue:plValue forKey:plkey];
+    [user synchronize];
+}
+
 +(void)writePlistForkey:(NSString *)plKey value:(NSString *)plValue
 {
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     [user setValue:plValue forKey:plKey];
-    
+    [user synchronize];
 }
 
 +(void)writePlistForkey:(NSString *)plKey valueDict:(NSDictionary *)plValue
 {
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     [user setValue:plValue forKey:plKey];
+    [user synchronize];
     
 }
 

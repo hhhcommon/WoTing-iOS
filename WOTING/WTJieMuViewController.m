@@ -8,19 +8,14 @@
 
 #import "WTJieMuViewController.h"
 
-#import "WTTuiJianViewController.h"
-#import "WTDianTaiViewController.h"
-#import "WTFenLeiViewController.h"
+#import "WTBoFangTableViewCell.h"
+#import "WTJMXQTableCell.h"
 
-#import "SKMainScrollView.h"
 
-@interface WTJieMuViewController ()<UIScrollViewDelegate>{
+@interface WTJieMuViewController ()<UITableViewDataSource, UITableViewDelegate>{
     
-    SKMainScrollView    *contentScrollView;
-    UIView              *titleView;//标识栏
-    UIImageView         *barLineImageView;//标识条
+    CGFloat  contentHeigth;
 }
-
 
 @end
 
@@ -30,231 +25,125 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self initTiteBarView];
-    [self initScrollerView];
+    _JMXQTabV.delegate = self;
+    _JMXQTabV.dataSource = self;
+    
+    [self registerTabJMCell];
 }
 
-- (void)initScrollerView{
+- (void)registerTabJMCell{
     
-    //  __weak WTXiangJiangViewController *weakSelf = self;
-    contentScrollView = [[SKMainScrollView alloc] initWithFrame:CGRectMake(0, POINT_Y(90), K_Screen_Width, K_Screen_Height - POINT_Y(90) - 49 - 64)];
-    contentScrollView.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:contentScrollView];
+    UINib *nib = [UINib nibWithNibName:@"WTBoFangTableViewCell" bundle:nil];
+    [_JMXQTabV registerNib:nib forCellReuseIdentifier:@"CellIDBF"];
     
-    // 防止scroll上下拖动
-    contentScrollView.contentSize = CGSizeMake(K_Screen_Width * 3, 0);
-    contentScrollView.pagingEnabled = YES;
-    contentScrollView.bounces = NO;
-    contentScrollView.contentOffset = CGPointMake(0, 0);
-    contentScrollView.delegate = self;
+    UINib *nibJM = [UINib nibWithNibName:@"WTJMXQTableCell" bundle:nil];
+    [_JMXQTabV registerNib:nibJM forCellReuseIdentifier:@"CellIDJM"];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    for (int i = 0; i < 3; i ++) {
+    return 2;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+    if (section == 0) {
         
-        if (i == 0) {
+        return 1;
+    }else{
+        
+        return 1;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    
+    if (section == 0) {
+        
+        return 0.000000000001;
+    }else{
+        
+        return 10;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (indexPath.section == 0) {
+        
+        return 70;
+    }else{
+        
+        return 410 + contentHeigth - 21;
+    }
+    
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+ 
+    if (indexPath.section == 0) {
+        
+        static NSString *cellID = @"CellIDBF";
+        
+        WTBoFangTableViewCell *cell = (WTBoFangTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+        
+        if (_dataDictJM != nil) {
             
-            WTTuiJianViewController *wtTuiJianVC = [[WTTuiJianViewController alloc] init];
-            //  skDongTaiVC.tagArr = sktagArr;
-            [self addChildViewController:wtTuiJianVC];
-            [contentScrollView addSubview:wtTuiJianVC.view];
-            [wtTuiJianVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+            NSDictionary *dict = [NSDictionary dictionaryWithDictionary:_dataDictJM];
+            [cell setCellWithDict:dict];
+        }
+        
+        cell.WTBoFangImgV.hidden = YES;
+        
+        return cell;
+    }else{
+        
+        static NSString *cellID = @"CellIDJM";
+        
+        WTJMXQTableCell *cell = (WTJMXQTableCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+        
+        if (_dataDictJM != nil) {
+            
+            cell.contentImageName.layer.cornerRadius = 45/2.0;
+            cell.contentImageName.layer.masksToBounds = YES;
+            [cell.contentImageName sd_setImageWithURL:[NSURL URLWithString:[NSString NULLToString:_dataDictJM[@"ContentImg"]]] placeholderImage:[UIImage imageNamed:@"img_radio_default"]];
+            
+            cell.fromLab.text = [NSString NULLToString:_dataDictJM[@"ContentPub"]];
+            
+            cell.contentLab.text = [NSString NULLToString:_dataDictJM[@"ContentDescn"]];
+            contentHeigth = [cell.contentLab.text boundingRectWithSize:CGSizeMake(cell.contentLab.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size.height;
+            cell.ContentHeight.constant = contentHeigth;
+            
+            if (_dataDictJM[@"ContentPersons"]) {//[12]	(null)	@"ContentPersons" : @"1 element"[0]	(null)	@"RefName" : @"主播"[2]	(null)	@"PerName" : @"我是宋小明啊"[5]	(null)	@"ContentPub" : @"喜马拉雅"
+                cell.contantNameLab.text = [NSString NULLToString:_dataDictJM[@"ContentPersons"][0][@"PerName"]];
                 
-                make.width.equalTo(contentScrollView);
-                make.height.equalTo(contentScrollView);
-                make.left.mas_equalTo(@0);
-                make.centerY.equalTo(contentScrollView);
-            }];
-            
-        }else if (i == 1) {
-            
-            WTDianTaiViewController *wtDianTaiVC = [[WTDianTaiViewController alloc] init];
-            // skXiaoZuVC.groupArr = skgroupArr;
-            [self addChildViewController:wtDianTaiVC];
-            [contentScrollView addSubview:wtDianTaiVC.view];
-            [wtDianTaiVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+            }else{
                 
-                make.width.equalTo(contentScrollView);
-                make.height.equalTo(contentScrollView);
-                make.left.mas_equalTo(K_Screen_Width * i);
-                make.centerY.equalTo(contentScrollView);
-            }];
+                cell.contantNameLab.text = @"暂无主播信息";
+            }
             
-        }else{
-            
-            WTFenLeiViewController *wtFenLeiVC = [[WTFenLeiViewController alloc] init];
-            //  skXiaoZuVC.userArr = skuserArr;
-            [self addChildViewController:wtFenLeiVC];
-            [contentScrollView addSubview:wtFenLeiVC.view];
-            [wtFenLeiVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+            if (_dataDictJM[@"ContentCatalogs"]) { //[14]	(null)	@"ContentCatalogs" : @"1 element" [1]	(null)	@"CataTitle" : @"内容分类/脱口秀场"
                 
-                make.width.equalTo(contentScrollView);
-                make.height.equalTo(contentScrollView);
-                make.left.mas_equalTo(K_Screen_Width * i);
-                make.centerY.equalTo(contentScrollView);
-            }];
+                cell.BiaoQianLab.text = [NSString NULLToString:_dataDictJM[@"ContentCatalogs"][0][@"CataTitle"]];
+            }else{
+                
+                cell.BiaoQianLab.text = @"暂无标签";
+            }
             
             
         }
+        
+        return cell;
+        
     }
-    
     
 }
 
-- (void)initTiteBarView{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, K_Screen_Width, POINT_Y(90))];
-    titleView.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:titleView];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    
-    UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    leftBtn.tag = 1221;
-    [leftBtn setTitle:@"推荐" forState:UIControlStateNormal];
-    [leftBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [leftBtn setTitleColor:[UIColor JQTColor] forState:UIControlStateSelected];
-    leftBtn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
-    [titleView addSubview:leftBtn];
-    [leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.width.equalTo(titleView.mas_width).with.multipliedBy(1.0/3);
-        make.height.mas_equalTo(POINT_Y(90));
-        make.left.equalTo(titleView);
-        make.top.equalTo(titleView);
-    }];
-    leftBtn.selected = YES;
-    
-    UIButton *centerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    centerBtn.tag = 1222;
-    [centerBtn setTitle:@"电台" forState:UIControlStateNormal];
-    [centerBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [centerBtn setTitleColor:[UIColor JQTColor] forState:UIControlStateSelected];
-    centerBtn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
-    [titleView addSubview:centerBtn];
-    [centerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.width.equalTo(titleView.mas_width).with.multipliedBy(1.0/3);
-        make.height.mas_equalTo(POINT_Y(90));
-        make.left.equalTo(leftBtn.mas_right);
-        make.top.equalTo(titleView);
-    }];
-    
-    
-    UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    rightBtn.tag = 1223;
-    [rightBtn setTitle:@"分类" forState:UIControlStateNormal];
-    [rightBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [rightBtn setTitleColor:[UIColor JQTColor] forState:UIControlStateSelected];
-    rightBtn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
-    [titleView addSubview:rightBtn];
-    [rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.width.equalTo(titleView.mas_width).with.multipliedBy(1.0/3);
-        make.height.mas_equalTo(POINT_Y(90));
-        make.left.equalTo(centerBtn.mas_right);
-        make.top.equalTo(titleView);
-    }];
-    
-    
-    barLineImageView = [[UIImageView alloc] init];
-    barLineImageView.backgroundColor = [UIColor JQTColor];
-    barLineImageView.layer.cornerRadius = 2.0;
-    [titleView addSubview:barLineImageView];
-    [barLineImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.width.equalTo(titleView.mas_width).with.multipliedBy(1.0/3);
-        make.height.mas_equalTo(POINT_Y(6));
-        make.centerX.equalTo(leftBtn);
-        make.bottom.equalTo(titleView.mas_bottom);
-    }];
-    
-    [leftBtn addTarget:self action:@selector(barButtonSelect:) forControlEvents:UIControlEventTouchUpInside];
-    [centerBtn addTarget:self action:@selector(barButtonSelect:) forControlEvents:UIControlEventTouchUpInside];
-    [rightBtn addTarget:self action:@selector(barButtonSelect:) forControlEvents:UIControlEventTouchUpInside];
-    
-}
-
-#pragma mark - 视图左右切换
-/** scrollView左右滑动 */
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    /** 如果滑动的ScrollView是contentScrollView，则通过判断偏移量，设置当前菜单选中状态 */
-    if (scrollView == contentScrollView) {
-        
-        /** 首先切换标识条 */
-        [barLineImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            
-            make.width.equalTo(titleView.mas_width).with.multipliedBy(1.0/3);
-            make.height.mas_equalTo(POINT_Y(6));
-            make.left.mas_equalTo((scrollView.contentOffset.x/3));
-            make.bottom.equalTo(titleView.mas_bottom);
-        }];
-        
-        UIButton *leftBtn = (UIButton *)[titleView viewWithTag:1221];
-        UIButton *centerBtn = (UIButton *)[titleView viewWithTag:1222];
-        UIButton *rightBtn = (UIButton *)[titleView viewWithTag:1223];
-        
-        if (scrollView.contentOffset.x == K_Screen_Width) {
-            
-            leftBtn.selected = NO;
-            centerBtn.selected = YES;
-            rightBtn.selected = NO;
-
-        }else if (scrollView.contentOffset.x == 0){
-            
-            leftBtn.selected = YES;
-            centerBtn.selected = NO;
-            rightBtn.selected = NO;
-        }else if (scrollView.contentOffset.x == K_Screen_Width*2){
-            
-            leftBtn.selected = NO;
-            centerBtn.selected = NO;
-            rightBtn.selected = YES;
-        }
-    }
-}
-
-/** 菜单栏按钮被点击 */
-- (void)barButtonSelect:(UIButton *)aBtn {
-   
-   // [UIView animateWithDuration:0.5 animations:^{
-        
-        /** 首先切换标识条 */
-        [barLineImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            
-            make.width.equalTo(titleView.mas_width).with.multipliedBy(1.0/3);
-            make.height.mas_equalTo(POINT_Y(6));
-            make.centerX.equalTo(aBtn);
-            make.bottom.equalTo(titleView.mas_bottom);
-            
-      //  }];
-        
-        
-    }];
-    
-    aBtn.selected = YES;
-    
-    UIButton *leftBtn = (UIButton *)[titleView viewWithTag:1221];
-    UIButton *centerBtn = (UIButton *)[titleView viewWithTag:1222];
-    UIButton *rightBtn = (UIButton *)[titleView viewWithTag:1223];
-    if (aBtn.tag == 1221) {
-        
-        centerBtn.selected = NO;
-        rightBtn.selected = NO;
-        
-        contentScrollView.contentOffset = CGPointMake(self.view.bounds.size.width * 0, 0);
-        
-    }else if (aBtn.tag == 1222) {
-        
-        leftBtn.selected = NO;
-        rightBtn.selected = NO;
-        
-        contentScrollView.contentOffset = CGPointMake(self.view.bounds.size.width * 1, 0);
-        
-    }else if (aBtn.tag == 1223) {
-        
-        centerBtn.selected = NO;
-        leftBtn.selected = NO;
-        
-        contentScrollView.contentOffset = CGPointMake(self.view.bounds.size.width * 2, 0);
-    }
 }
 
 
@@ -273,4 +162,8 @@
 }
 */
 
+- (IBAction)backBtnClick:(id)sender {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
 @end

@@ -10,6 +10,7 @@
 #import "WTFenLeiTableViewCell.h"
 
 #import "WTFLDetaliController.h"
+#import "WTFLDetailTitleController.h"
 
 @implementation WTFenLeiTableViewCell{
     
@@ -102,7 +103,22 @@
 
 - (void)btnClick:(UIButton *)btn {
     
-    WTFLDetaliController *wtflVC = [[WTFLDetaliController alloc] init];
+//    WTFLDetaliController *wtflVC = [[WTFLDetaliController alloc] init];
+//    
+//    wtflVC.hidesBottomBarWhenPushed = YES;
+//    wtflVC.nameL = btn.titleLabel.text;
+//    
+//    for (NSDictionary *dict in titlesArr) {
+//        
+//        if ([dict[@"name"] isEqualToString:btn.titleLabel.text]) {
+//            
+//            NSString *contentID = [dict objectForKey:@"id"];
+//            wtflVC.contentID = contentID;
+//        }
+//    }
+//    
+//    [self.delegate.navigationController pushViewController:wtflVC animated:YES];
+    WTFLDetailTitleController *wtflVC = [[WTFLDetailTitleController alloc] init];
     
     wtflVC.hidesBottomBarWhenPushed = YES;
     wtflVC.nameL = btn.titleLabel.text;
@@ -117,7 +133,6 @@
     }
     
     [self.delegate.navigationController pushViewController:wtflVC animated:YES];
-    
 }
 
 - (void)awakeFromNib {

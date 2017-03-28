@@ -12,25 +12,26 @@
 #import <AMapFoundationKit/AMapFoundationKit.h>
 #import <MapKit/MapKit.h>
 #import <AMapLocationKit/AMapLocationKit.h>
+#import "WTBoFangViewController.h"
 #import "WTXiangJiangViewController.h"
 #import "WTXiangTingViewController.h"
-#import "WTDownLoadViewController.h"
 #import "WTMainViewController.h"
 
-#import "TabBarController.h"
+#import "MainViewController.h"
+
 
 
 @interface AppDelegate ()<AMapLocationManagerDelegate>
-@property (nonatomic, strong) UINavigationController *XJNavC;
+@property (nonatomic, strong) UINavigationController *BFNavC;
 @property (nonatomic, strong) UINavigationController *XTNavC;
-@property (nonatomic, strong) UINavigationController *DLNavC;
+@property (nonatomic, strong) UINavigationController *XJNavC;
 @property (nonatomic, strong) UINavigationController *MainNavC;
 
-@property (nonatomic, strong) WTXiangJiangViewController *XJViewC;
+@property (nonatomic, strong) WTBoFangViewController *BFViewC;
 @property (nonatomic, strong) WTXiangTingViewController *XTViewC;
-@property (nonatomic, strong) WTDownLoadViewController *DLViewC;
+@property (nonatomic, strong) WTXiangJiangViewController *XJViewC;
 @property (nonatomic, strong) WTMainViewController *MainViewC;
-@property (nonatomic, strong) TabBarController *TabViewC;
+@property (nonatomic, strong) MainViewController *TabViewC;
 
 @property (nonatomic, strong) AMapLocationManager *locationManager;
 
@@ -61,6 +62,9 @@
     
     //设置音乐后台播放的会话类型
     AVAudioSession *session = [AVAudioSession sharedInstance];
+//    [session setCategory:AVAudioSessionCategoryPlayAndRecord
+//             withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker
+//                   error:nil];
     [session setCategory:AVAudioSessionCategoryPlayback error:nil];
     [session setActive:YES error:nil];
     
@@ -149,40 +153,41 @@
 
 #pragma mark -- 创建分栏控制器
 - (UIViewController *)crateTabBarControllerView{
+    
+    //创建播放对象
+    _BFViewC = [[WTBoFangViewController alloc] init];
+    _BFNavC = [[UINavigationController alloc] initWithRootViewController:_BFViewC];
+    //创建对应视图控制器的标签按钮
+    UITabBarItem *BFItem = [[UITabBarItem alloc] initWithTitle:@"下载" image:[UIImage imageNamed:@"WTDownLoad.png"] selectedImage:[UIImage imageNamed:@"WTDownLoad_der.png"]];
+    _BFNavC.tabBarItem = BFItem;
 
     //创建享听对象
     _XJViewC = [[WTXiangJiangViewController alloc] init];
     _XJNavC = [[UINavigationController alloc] initWithRootViewController:_XJViewC];
     //创建对应视图控制器的标签按钮
-    UITabBarItem *XJItem = [[UITabBarItem alloc] initWithTitle:@"享听" image:[UIImage imageNamed:@"WTXiangTing.png"] selectedImage:[UIImage imageNamed:@"WTXiangTing_der.png"]];
+    UITabBarItem *XJItem = [[UITabBarItem alloc] initWithTitle:@"享听" image:[UIImage imageNamed:@"WTting.png"] selectedImage:[UIImage imageNamed:@"WTting_der.png"]];
     _XJNavC.tabBarItem = XJItem;
 
     //创建享讲对象
     _XTViewC = [[WTXiangTingViewController alloc] init];
     _XTNavC = [[UINavigationController alloc] initWithRootViewController:_XTViewC];
     //创建对应视图控制器的标签按钮
-    UITabBarItem *XTItem = [[UITabBarItem alloc] initWithTitle:@"享讲" image:[UIImage imageNamed:@"WTXiangJiang.png"] selectedImage:[UIImage imageNamed:@"WTXiangJiang_der.png"]];
+    UITabBarItem *XTItem = [[UITabBarItem alloc] initWithTitle:@"享讲" image:[UIImage imageNamed:@"WTjiang.png"] selectedImage:[UIImage imageNamed:@"WTjiang_der.png"]];
     _XTNavC.tabBarItem = XTItem;
-    
-    //创建下载对象
-    _DLViewC = [[WTDownLoadViewController alloc] init];
-    _DLNavC = [[UINavigationController alloc] initWithRootViewController:_DLViewC];
-    //创建对应视图控制器的标签按钮
-    UITabBarItem *DLItem = [[UITabBarItem alloc] initWithTitle:@"下载" image:[UIImage imageNamed:@"WTDownLoad.png"] selectedImage:[UIImage imageNamed:@"WTDownLoad_der.png"]];
-    _DLNavC.tabBarItem = DLItem;
     
     //创建我的对象
     _MainViewC = [[WTMainViewController alloc] init];
     _MainNavC = [[UINavigationController alloc] initWithRootViewController:_MainViewC];
     //创建对应视图控制器的标签按钮
-    UITabBarItem *MainItem = [[UITabBarItem alloc] initWithTitle:@"我的" image:[UIImage imageNamed:@"WTMain.png"] selectedImage:[UIImage imageNamed:@"WTMain_der.png"]];
+    UITabBarItem *MainItem = [[UITabBarItem alloc] initWithTitle:@"我的" image:[UIImage imageNamed:@"WTwode.png"] selectedImage:[UIImage imageNamed:@"WTwode_der.png"]];
     _MainNavC.tabBarItem = MainItem;
-    
-    //创建根视图控制器对象
-    _TabViewC = [[TabBarController alloc] init];
-    //添加标签控制器中的子视图控制器
-    _TabViewC.viewControllers = @[_XJNavC, _XTNavC, _DLNavC, _MainNavC];
 
+    //创建根视图控制器对象
+    _TabViewC = [[MainViewController alloc] init];
+    //添加标签控制器中的子视图控制器
+    _TabViewC.viewControllers = @[_BFNavC,_XJNavC, _XTNavC, _MainNavC];
+    
+    
     return _TabViewC;
 }
 
@@ -226,6 +231,11 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     
     [self.locationManager stopUpdatingLocation]; //停止定位
+    
+    //记录暂停
+    [AutomatePlist writePlistForkey:@"transformbegin" value:@"0"];
+    
+    [AutomatePlist writePlistForkey:@"ImgV" value:@"img_radio_default"];
 }
 
 

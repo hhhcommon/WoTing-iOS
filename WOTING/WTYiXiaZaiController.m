@@ -74,11 +74,11 @@
     // 2.遍历结果
     while ([resultSet next]) {
         
-        BOOL isXIAZAI = [resultSet boolForColumn:@"XIAZAIBOOL"];
+        NSString *isXIAZAI = [resultSet stringForColumn:@"XIAZAIBOOL"];
         NSData *ID = [resultSet dataForColumn:@"XIAZAI"];
         NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:ID options:NSJSONReadingMutableLeaves error:nil];
         
-        if (isXIAZAI) {
+        if ([isXIAZAI isEqualToString:@"1"]) {
             
             [dataYXZArray addObject:jsonDict];
             

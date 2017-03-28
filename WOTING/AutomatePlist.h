@@ -12,7 +12,8 @@
 
 +(NSString *)readPlistForKey:(NSString *)plkey;
 +(NSDictionary *)readPlistForDict:(NSString *)plkey;
++(id)readPlistFortransfrom:(NSString *)plkey;
 +(void)writePlistForkey:(NSString *)plKey value:(NSString *)plValue;
 +(void)writePlistForkey:(NSString *)plKey valueDict:(NSDictionary *)plValue;
-
++(void)writePlistForkey:(NSString *)plkey valueTransfrom:(id )plValue;
 @end

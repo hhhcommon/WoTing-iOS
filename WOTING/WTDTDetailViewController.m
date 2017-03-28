@@ -17,6 +17,10 @@
 @interface WTDTDetailViewController ()<UITableViewDelegate, UITableViewDataSource>{
     
     
+    BoFangTabbarView *firstBarV;
+    
+    int  count; //旋转角度
+    
     NSMutableArray  *dataCellArr;// 数据源数组
     NSString        *BeginCatalogId; //ID
     
@@ -24,6 +28,9 @@
     
     BOOL            isDYXZ;     //判断地域选择更多数据里的样式 NO:安徽台样式 YES:北京台无分类样式
 }
+
+@property (nonatomic,assign)CGAffineTransform startTransform; //记录最开始contentImg的旋转位置
+@property (nonatomic,strong)NSTimer *timer;
 
 @end
 
@@ -44,6 +51,13 @@
     [self createrRegisterCell];
 }
 
+- (void)viewDidDisappear:(BOOL)animated{
+    
+    [super viewDidDisappear:animated];
+    
+    self.navigationController.navigationBarHidden = YES;
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
@@ -51,6 +65,69 @@
     /** 下拉刷新 */
     _jqTabView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadDataGD)];
     _jqTabView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoveData)];
+    
+    NSString *Imgv = [AutomatePlist readPlistForKey:@"ImgV"];
+    NSString *transformbegin = [AutomatePlist readPlistForKey:@"transformbegin"];
+    NSString *transform = [AutomatePlist readPlistForKey:@"transform"];
+    count = [transform intValue];
+    
+    firstBarV = [[BoFangTabbarView alloc] init];
+    
+    [firstBarV.HYCContentImageName sd_setImageWithURL:[NSURL URLWithString:[NSString NULLToString:Imgv]] placeholderImage:[UIImage imageNamed:@"img_radio_default"]];
+    //记录一开始的旋转位置
+    _startTransform = firstBarV.HYCContentImageName.transform;
+    
+    firstBarV.HYCKuangImageName.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapGesturRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(btnClick:)];
+    [firstBarV.HYCKuangImageName addGestureRecognizer:tapGesturRecognizer];
+    
+    if (_timer) {
+        
+        
+    }else{
+        
+        _timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(runTimeXUAN) userInfo:nil repeats:YES];
+    }
+    if ([transformbegin isEqualToString:@"0"]) {
+        
+        [_timer setFireDate:[NSDate distantFuture]];    //暂停
+        firstBarV.LJQStopImage.hidden = NO;
+    }else{
+        
+        [_timer setFireDate:[NSDate distantPast]];
+        firstBarV.LJQStopImage.hidden = YES;
+    }
+    
+    
+    
+    
+    [self.view addSubview:firstBarV];
+    [firstBarV mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.mas_equalTo(0);
+        make.bottom.mas_equalTo(0);
+        make.width.mas_equalTo(K_Screen_Width/4.0);
+        make.height.mas_equalTo(49);
+    }];
+}
+
+- (void)btnClick:(UITapGestureRecognizer *)tap{
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"TABBARSELECATE" object:nil];
+    
+    self.tabBarController.selectedIndex = 0;
+    
+}
+
+- (void)runTimeXUAN{
+    
+    count+=1;
+    
+    if (count == 360) {
+        
+        count = 0;
+    }
+    firstBarV.HYCContentImageName.transform = CGAffineTransformMakeRotation((M_PI / 180.0f)*count);
 }
 
 - (void)createrRegisterCell {
@@ -95,6 +172,7 @@
     
     NSString *login_Str = WoTing_GetContents;
     
+    NSLog(@"%@", parameters);
     
     [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
         [_jqTabView.mj_header endRefreshing];
@@ -436,43 +514,51 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-//    if ([dataCellArr[indexPath.row][@"MediaType"] isEqualToString:@"SEQU"]) {
-//        
-//        WTZhuanJiViewController *wtZJVC = [[WTZhuanJiViewController alloc] init];
-//        wtZJVC.hidesBottomBarWhenPushed = YES;
-//        wtZJVC.contentID = [NSString NULLToString:dataCellArr[indexPath.row][@"ContentId"]] ;
-//        [self.navigationController pushViewController:wtZJVC animated:YES];
-//        
-//    }
     
     if (_type == 3) {
         
         NSDictionary *dict = dataCellArr[indexPath.section][@"List"][indexPath.row];
         NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
-        [self.navigationController popToRootViewControllerAnimated:YES];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
+        
+        //回首页
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"TABBARSELECATE" object:nil];
+        
+        self.tabBarController.selectedIndex = 0;
     }else if (_type == 2){
         
         if (isDYXZ == NO) {
             
             NSDictionary *dict = dataCellArr[indexPath.section][@"List"][indexPath.row];
             NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
-            [self.navigationController popToRootViewControllerAnimated:YES];
+            
             [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
+            
+            //回首页
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"TABBARSELECATE" object:nil];
+            
+            self.tabBarController.selectedIndex = 0;
         }else{
             
             NSDictionary *dict = dataCellArr[indexPath.row];
             NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
-            [self.navigationController popToRootViewControllerAnimated:YES];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
+            //回首页
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"TABBARSELECATE" object:nil];
+            
+            self.tabBarController.selectedIndex = 0;
         }
         
     }else {
         
         NSDictionary *dict = dataCellArr[indexPath.row];
         NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
-        [self.navigationController popToRootViewControllerAnimated:YES];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
+        
+        //回首页
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"TABBARSELECATE" object:nil];
+        
+        self.tabBarController.selectedIndex = 0;
     }
 }
 

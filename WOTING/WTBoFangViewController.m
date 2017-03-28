@@ -9,6 +9,9 @@
 #import "WTBoFangViewController.h"
 #import <AVFoundation/AVFoundation.h>
 
+#import "WTNewsViewController.h"
+#import "WTSearchViewController.h"
+
 #import "WTPingLunViewController.h"     //评论页
 #import "WTZhuanJiViewController.h"     //专辑页
 #import "WTGengDuoController.h"         //更多页
@@ -74,6 +77,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    self.navigationController.navigationBar.hidden = YES;
+    
     changPag = 0;
     _musicIndex = 0;
     BoFangXQ = 0;
@@ -104,6 +109,9 @@
     [self registerTabViewCell];
     
     bofangCell = [_JQtableView dequeueReusableCellWithIdentifier:@"cellIDB"];
+    
+    
+    _JQtableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoveData)];
 }
 
 //语音搜索结束
@@ -121,7 +129,7 @@
     [super viewWillAppear:animated];
     
     /** 上拉加载更多 */
-    _JQtableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoveData)];
+    
 }
 
 //接受到了传过来的数据
@@ -178,6 +186,10 @@
             [_JQtableView reloadData];
             [self playMusic];
             
+            //改变图片
+            NSDictionary *dataDict = dataBFArray[_musicIndex];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"CHANGEIMAGEVIEW" object:nil userInfo:dataDict];
+            
         }else if ([ReturnType isEqualToString:@"T"]){
             
             [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
@@ -192,6 +204,10 @@
             }
             [_JQtableView reloadData];
             [self playMusic];
+            
+            //改变图片
+            NSDictionary *dataDict = dataBFArray[self.musicIndex];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"CHANGEIMAGEVIEW" object:nil userInfo:dataDict];
         }
         
     } fail:^(NSError *error) {
@@ -206,6 +222,9 @@
         changPag = 1;
         [_JQtableView reloadData];
         [self playMusic];
+        //改变图片
+        NSDictionary *dataDict = dataBFArray[_musicIndex];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"CHANGEIMAGEVIEW" object:nil userInfo:dataDict];
     }];
     
     
@@ -247,6 +266,7 @@
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",@"0",@"PageType",@"10",@"PageSize",  nil];
     
     NSString *login_Str = WoTing_MainPage;
+    NSLog(@"%@", parameters);
     
     [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
         
@@ -269,6 +289,9 @@
             [_JQtableView reloadData];
             [self playMusic];
             
+            //改变图片
+            NSDictionary *dataDict = dataBFArray[_musicIndex];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"CHANGEIMAGEVIEW" object:nil userInfo:dataDict];
         }else if ([ReturnType isEqualToString:@"T"]){
             
             [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
@@ -420,13 +443,11 @@
             break;
         case BtnTypeLike://点击喜欢
             
-           // [WKProgressHUD popMessage:@"点击喜欢" inView:nil duration:0.5 animated:YES];
-            [self  addLike];
+        
             break;
         case BtnTypeDownLoad://点击下载
             
-            [WKProgressHUD popMessage:@"节目进入下载任务列表" inView:nil duration:0.5 animated:YES];
-            [self DownLoad];
+           
             break;
         case BtnTypeJMD://进入节目单
 
@@ -434,11 +455,11 @@
             break;
         case BtnTypeShare://点击分享
             
-            [self ShareWT];
+           
             break;
         case BtnTypeCommit://点击评论
             
-            [self Commits];
+         
             break;
         case BtnTypeMore://点击更多
             
@@ -558,32 +579,15 @@
 
 #pragma mark 点击更多
 - (void)MoveBtn {
-    //蒙板
-    if (!blackView) {
-        
-        blackView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, K_Screen_Width, K_Screen_Height + 300)];
-        [self.view addSubview:blackView];
-    }
-    blackView.hidden = NO;
-    blackView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
-    blackView.userInteractionEnabled = YES;
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(blackViewtap:)];
-    [blackView addGestureRecognizer:tap];
     
-    //更多View
-    if (!MoveView) {
+    WTGengDuoController *gengDVC = [[WTGengDuoController alloc] init];
+    if (dataBFArray.count != 0) {
         
-        MoveView = [[WTMoveView alloc] initWithFrame:CGRectMake(0, K_Screen_Height, K_Screen_Width, 350)];
-        MoveView.userInteractionEnabled = YES;
-        MoveView.delegate = self;
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(Viewtap)];
-        [MoveView addGestureRecognizer:tap];
-        [blackView addSubview:MoveView];
+        gengDVC.dataDict = dataBFArray[_musicIndex];
     }
-
-    [UIView animateWithDuration:0.5 animations:^{
-        MoveView.frame = CGRectMake(0, K_Screen_Height - 390, K_Screen_Width, 390);
-    }];
+    
+    gengDVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:gengDVC animated:YES];
 }
 - (void)Viewtap {
 }
@@ -621,255 +625,7 @@
 }
 
 
-#pragma mark 点击下载
-- (void)DownLoad {
-    
-//    [[NSNotificationCenter defaultCenter] postNotificationName:@"XIAZAIDICT" object:nil userInfo:dataBFArray[_musicIndex]];
-    
-    FMDatabase *db = [FMDBTool createDatabaseAndTable:@"XIAZAI"];
-    
-    BOOL isRept = NO;
-    FMResultSet *resultSet = [db executeQuery:@"SELECT * FROM XIAZAI"];
-    // 遍历结果，如果重复就删除数据
-    while ([resultSet next]) {
-        
-        NSData *ID = [resultSet dataForColumn:@"XIAZAI"];
-        NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:ID options:NSJSONReadingMutableLeaves error:nil];
-        if ([dataBFArray[_musicIndex][@"ContentId"] isEqualToString:jsonDict[@"ContentId"]]){
-            
-            isRept = YES;
-        }
-    }
-    if (!isRept) {
-        
-        NSData *data = [NSJSONSerialization dataWithJSONObject:dataBFArray[_musicIndex] options:NSJSONWritingPrettyPrinted error:nil];
-        NSString *sqlInsert = @"insert into XIAZAI values(?,?,?)";
-        BOOL isOk = [db executeUpdate:sqlInsert, dataBFArray[_musicIndex][@"ContentId"],data ,@"0"];
-        if (isOk) {
-            NSLog(@"添加数据成功");
-            //通知下载中
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"XIAZAIWEIWANCHENG" object:nil];
-            
-            [self GCDdownLoad]; //开始下载
-        }
-        
-    }
 
-    
-}
-
-//懒加载下载器
-- (JSDownLoadManager *)manager{
-    
-    if (!_manager) {
-        _manager = [[JSDownLoadManager alloc] init];
-    }
-    return _manager;
-}
-
-//异步下载
-- (void)GCDdownLoad{
-    
-    //开启异步下载线程
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-        [self.manager downloadWithURL:dataBFArray[_musicIndex][@"ContentPlay"]
-                             progress:^(NSProgress *downloadProgress) {
-                                 
-                                 NSMutableDictionary *LJQDict = [NSMutableDictionary dictionaryWithCapacity:0];
-                                
-//                                 NSTimeInterval period = 0.1; //设置时间间隔
-//                                 dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-//                                 dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
-//                                 dispatch_source_set_timer(_timer, dispatch_walltime(NULL, 0), period * NSEC_PER_SEC, 0); //每秒执行
-//                                 dispatch_source_set_event_handler(_timer, ^{
-                                     //在这里执行事件
-                                     NSString *JQstr = [NSString stringWithFormat:@"%f", downloadProgress.fractionCompleted];
-                                     [LJQDict setObject:JQstr forKey:@"Progress"];
-                                     [LJQDict setObject:[NSString stringWithFormat:@"%0.2fMB/%0.2fMB", downloadProgress.completedUnitCount/1024.0/1024, downloadProgress.totalUnitCount/1024.0/1024] forKey:@"JinDuLab"];
-                                     [LJQDict setObject:dataBFArray[_musicIndex][@"ContentPlay"] forKey:@"url"];
-                                     NSDictionary *jqdict = [NSDictionary dictionaryWithDictionary:LJQDict];
-                                     
-                                     [[NSNotificationCenter defaultCenter] postNotificationName:@"RELOADCELLPROGRESS" object:nil userInfo:jqdict];
-//                                 });
-//                                 dispatch_resume(_timer);
-                                 
-//                                     circleView.progress = downloadProgress.fractionCompleted;
-//                                     
-//                                     _JinDuLab.text =[NSString stringWithFormat:@"%0.2fMB/%0.2fMB", downloadProgress.completedUnitCount/1024.0/1024, downloadProgress.totalUnitCount/1024.0/1024];
-
-                                 
-                             }
-                                 path:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
-                                     
-                                     NSString *cachesPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
-                                     NSString *path = [cachesPath stringByAppendingPathComponent:response.suggestedFilename];
-                                     return [NSURL fileURLWithPath:path];
-                                 }
-                           completion:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
-                               //此时已在主线程
-
-                               NSString *path = [filePath path];
-                               NSLog(@"************文件路径:%@",path);
-                               
-                               FMDatabase *db = [FMDBTool createDatabaseAndTable:@"XIAZAI"];
-                               
-                               BOOL isRept = NO;
-                               FMResultSet *resultSet = [db executeQuery:@"SELECT * FROM XIAZAI"];
-                               // 遍历结果，如果重复就删除数据
-                               while ([resultSet next]) {
-                                   
-                                   NSData *ID = [resultSet dataForColumn:@"XIAZAI"];
-                                   NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:ID options:NSJSONReadingMutableLeaves error:nil];
-                                   if ([dataBFArray[_musicIndex][@"ContentPlay"] isEqualToString:jsonDict[@"ContentPlay"]] && [[resultSet stringForColumn:@"XIAZAIBOOL"] isEqualToString:@"0"]){
-                                       
-                                       isRept = YES;
-                                   }
-                               }
-                               if (isRept) {
-                                   
-                            //       NSData *data = [NSJSONSerialization dataWithJSONObject:dataBFArray[_musicIndex] options:NSJSONWritingPrettyPrinted error:nil];
-                                   BOOL isOk = [db executeUpdate:@"UPDATE XIAZAI SET XIAZAIBOOL = ? WHERE XIAZAINum =?",@"1",dataBFArray[_musicIndex][@"ContentId"]];
-                                   if (isOk) {
-                                       NSLog(@"更改数据成功! 😄");
-                                       
-                                       [db close];  //关闭数据库
-                                       
-                                       //通知下载完成
-                                       [[NSNotificationCenter defaultCenter] postNotificationName:@"XIAZAIWANCHENG" object:nil];
-                                       //通知下载中刷新UI
-                                       [[NSNotificationCenter defaultCenter] postNotificationName:@"XIAZAIWEIWANCHENG" object:nil];
-                                   }else{
-                                       NSLog(@"更改数据失败! 💔");
-                                   }
-
-                               }
-                               
-
-                           }];
-    });
-    
-}
-
-
-#pragma mark 点击喜欢
-- (void)addLike {
-    
-    WTBoFangModel *model = _musics[_musicIndex];
-    NSString *MediaType = model.MediaType;
-    NSString *ContentId = model.ContentId;
-    NSString *ContentFavorite = model.ContentFavorite;
-    
-    NSString *uid = [AutomatePlist readPlistForKey:@"Uid"];
-    NSString *IMEI = [AutomatePlist readPlistForKey:@"IMEI"];
-    NSString *ScreenSize = [AutomatePlist readPlistForKey:@"ScreenSize"];
-    NSString *MobileClass = [AutomatePlist readPlistForKey:@"MobileClass"];
-    NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
-    NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
-    
-    NSDictionary *parameters;
-    
-    if ([ContentFavorite isEqualToString:@"0"]) {
-        
-       parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",MediaType,@"MediaType",ContentId,@"ContentId",uid,@"UserId",@"1",@"Flag",  nil];
-        
-    }else {
-        
-        parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",MediaType,@"MediaType",ContentId,@"ContentId",uid,@"UserId",@"0",@"Flag",  nil];
-    }
-
-    
-    NSString *login_Str = WoTing_like;
-    
-    [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
-        
-        [_JQtableView.mj_header endRefreshing];
-        
-        NSDictionary *resultDict = (NSDictionary *)response;
-        
-        NSString  *ReturnType = [resultDict objectForKey:@"ReturnType"];
-        if ([ReturnType isEqualToString:@"1001"]) {
-            
-            [WKProgressHUD popMessage:@"添加成功" inView:nil duration:0.5 animated:YES];
-            
-            
-        }else if ([ReturnType isEqualToString:@"T"]){
-            
-            [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
-        }else if ([ReturnType isEqualToString:@"200"]){
-            
-            [AutomatePlist writePlistForkey:@"Uid" value:@""];
-            [WKProgressHUD popMessage:@"请先登录后再试" inView:nil duration:0.5 animated:YES];
-        }
-        
-    } fail:^(NSError *error) {
-        
-        
-    }];
-    
-    
-}
-
-#pragma mark 点击评论
-- (void)Commits {
-    
-    WTBoFangModel *model = _musics[_musicIndex];
-    
-
-    WTPingLunViewController *wtPLVC = [[WTPingLunViewController alloc] init];
-    
-    wtPLVC.hidesBottomBarWhenPushed = YES;
-    
-    wtPLVC.ContentID = model.ContentId;
-    wtPLVC.Metype = model.MediaType;
-    
-    [self.navigationController pushViewController:wtPLVC animated:YES];
-
-}
-
-- (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType
-{
-    WTBoFangModel *model = _musics[_musicIndex];
-    
-    //创建分享消息对象
-    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
-    
-    //创建网页内容对象 、 为显示图片 在加载block里进行分享
-    UIImageView *imageV = [[UIImageView alloc] init];
-    [imageV sd_setImageWithURL:[NSURL URLWithString:[NSString NULLToString:model.ContentImg]] placeholderImage:[UIImage imageNamed:@"img_radio_default"]  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        
-        UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:model.ContentName descr:model.ContentDescn thumImage:image];
-        
-        //设置网页地址
-        shareObject.webpageUrl =model.ContentShareURL;
-        
-        //分享消息对象设置分享内容对象
-        messageObject.shareObject = shareObject;
-        
-        //调用分享接口
-        [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
-            if (error) {
-                NSLog(@"************Share fail with error %@*********",error);
-            }else{
-                NSLog(@"response data is %@",data);
-            }
-        }];
-        
-    } ];
-    
-    
-}
-#pragma mark 点击分享
-- (void)ShareWT {
-    
-    [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_Sina),@(UMSocialPlatformType_QQ),@(UMSocialPlatformType_Qzone),@(UMSocialPlatformType_WechatTimeLine),@(UMSocialPlatformType_WechatSession)]];
-    
-    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
-        // 根据获取的platformType确定所选平台进行下一步操作
-        [self shareWebPageToPlatformType:platformType];
-    }];
-
-}
 
 
 #pragma mark 播放上一首
@@ -879,9 +635,13 @@
     }else{
         self.musicIndex --;
     }
+    //改变图片
+    NSDictionary *dataDict = dataBFArray[self.musicIndex];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"CHANGEIMAGEVIEW" object:nil userInfo:dataDict];
     BoFangDH = self.musicIndex;
     [_JQtableView reloadData];
     [self playMusic];
+    [[JQMusicTool sharedJQMusicTool] play];
 }
 
 #pragma mark 播放下一首
@@ -893,10 +653,14 @@
     }else{
         self.musicIndex ++;
     }
+    //改变图片
+    NSDictionary *dataDict = dataBFArray[self.musicIndex];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"CHANGEIMAGEVIEW" object:nil userInfo:dataDict];
     BoFangDH = self.musicIndex;
     [_JQtableView reloadData];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
     [self playMusic];
+    [[JQMusicTool sharedJQMusicTool] play];
 }
 
 - (void)HYCNext{
@@ -908,19 +672,25 @@
 
 -(void)playMusic{
     
-    //2.重新初始化一个 "播放器"
-    [[JQMusicTool sharedJQMusicTool] prepareToPlayWithMusic:self.musics[self.musicIndex]];
-    
-    //3.更改 “播放器工具条” 的数据
-    self.headerV.playingMusic = self.musics[self.musicIndex];
-    
-    //4.播放
-    if (self.headerV.isPlaying) {
+    if (self.musics.count == 0) {
         
-        [[JQMusicTool sharedJQMusicTool] play];
+    }else{
+        //2.重新初始化一个 "播放器"
+        [[JQMusicTool sharedJQMusicTool] prepareToPlayWithMusic:self.musics[self.musicIndex]];
+        
+        //3.更改 “播放器工具条” 的数据
+        self.headerV.playingMusic = self.musics[self.musicIndex];
+        
+        //4.播放
+        if (self.headerV.isPlaying) {
+            
+            [[JQMusicTool sharedJQMusicTool] play];
+        }
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(HYCNext) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
     }
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(HYCNext) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+        
 }
 
 #pragma mark - 点击蒙板
@@ -967,7 +737,7 @@
     
     if (section == 0) {
         
-        return 3;
+        return 1;
     }else {
         
         return dataBFArray.count;
@@ -981,47 +751,14 @@
     if (indexPath.section == 0) {
         
         if (indexPath.row == 0) {
-//            static NSString *cellID = @"cellIDB";
-//            
-//            WTBoFangCell *cell = (WTBoFangCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+
             _headerV = bofangCell;
             bofangCell.delegate = self;
             
             return bofangCell;
             
-        }else if (indexPath.row == 1){
-            
-            static NSString *cellID = @"cellIDJM";
-            
-            WTBoFangJMCell *cell = (WTBoFangJMCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
-            
-            cell.delegate = self;
-            
-            return cell;
-            
-            
-        }else {
-            
-            static NSString *cellID = @"cellIDXQ";
-            
-            WTBoFangXQCell *cell = (WTBoFangXQCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
-            
-            cell.delegate = self;
-            
-            if (_musics && _musics.count != 0) {
-                
-                WTBoFangModel *model = _musics[_musicIndex];
-                
-                [cell setDictWithCell:model];
-            }
-            if (BoFangXQ == 0) {
-                
-                cell.hidden = YES;
-            }
-            
-            return cell;
-            
         }
+
 
         
     }else {
@@ -1128,14 +865,15 @@
         
         if (indexPath.row == 0) {
             
-            return 280;
-        }else if (indexPath.row == 1){
-            
-            return 44;
-        }else{
-            
-            return BoFangXQ;
+            return 180;
         }
+//        else if (indexPath.row == 1){
+//            
+//            return 44;
+//        }else{
+//            
+//            return BoFangXQ;
+//        }
         
     }else {
     
@@ -1149,9 +887,7 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    bofangCell.playing = YES;
-    bofangCell.beginBtn.selected = YES;
-    [self beginbtnYes];
+    
     
     if (indexPath.section == 0) {
         
@@ -1169,6 +905,10 @@
             
         }else{
         
+            bofangCell.playing = YES;
+            bofangCell.beginBtn.selected = YES;
+            [self beginbtnYes];
+            
             //如果cell处于显示状态， 使其隐藏
             if (BoFangXQ != 0) {
                 
@@ -1183,6 +923,16 @@
             [self playMusic];
             [[JQMusicTool sharedJQMusicTool] play];
             [_JQtableView reloadData];
+            
+            //改变图片
+            NSDictionary *dataDict = dataBFArray[indexPath.row];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"CHANGEIMAGEVIEW" object:nil userInfo:dataDict];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"BENGINTIME" object:nil];   //开始旋转
+            //还原动画
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"RESTORETIME" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"BOFANGDONGHUA" object:nil];    //播放动画
+            
+            
             
         }
         
@@ -1204,4 +954,18 @@
 }
 */
 
+- (IBAction)NewBtnClick:(id)sender {
+    
+    WTNewsViewController *wtnewVC = [[WTNewsViewController alloc] init];
+    wtnewVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:wtnewVC animated:YES];
+}
+
+- (IBAction)searchBtnClick:(id)sender {
+    
+    WTSearchViewController *wtSearVC = [[WTSearchViewController alloc] init];
+    wtSearVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:wtSearVC animated:YES];
+
+}
 @end

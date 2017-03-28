@@ -75,11 +75,13 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5eg-ZM-c8E">
-                        <rect key="frame" x="267" y="53" width="30" height="35"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5eg-ZM-c8E">
+                        <rect key="frame" x="267" y="55" width="30" height="30"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="35" id="fr8-W9-aFl"/>
+                            <constraint firstAttribute="height" constant="30" id="2ei-Vy-civ"/>
+                            <constraint firstAttribute="width" constant="30" id="XaU-Fy-MyI"/>
                         </constraints>
+                        <state key="normal" image="ZhuanJi_Guanzhu.png"/>
                         <connections>
                             <action selector="GuanZhuBtnClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="b4h-Yq-kTN"/>
                         </connections>
@@ -96,7 +98,6 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="5eg-ZM-c8E" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="45" id="61Z-9J-LMj"/>
                     <constraint firstItem="qEq-n7-zfD" firstAttribute="top" secondItem="Xnx-wI-tq9" secondAttribute="bottom" constant="21" id="A5N-UL-8HY"/>
                     <constraint firstItem="1V2-FJ-K7W" firstAttribute="leading" secondItem="CLZ-MI-AMK" secondAttribute="trailing" constant="17" id="DPz-nq-IqV"/>
                     <constraint firstItem="qEq-n7-zfD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="LTU-hP-E10"/>
@@ -107,9 +108,9 @@
                     <constraint firstItem="vH7-dH-I4m" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="WgG-Re-vfD"/>
                     <constraint firstAttribute="trailingMargin" secondItem="Xnx-wI-tq9" secondAttribute="trailing" constant="9" id="Zpb-U8-CLV"/>
                     <constraint firstItem="37J-i3-zvn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="6" id="ayQ-bY-IJq"/>
-                    <constraint firstItem="5eg-ZM-c8E" firstAttribute="leading" secondItem="1V2-FJ-K7W" secondAttribute="trailing" constant="15" id="cFx-ii-K3H"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="5eg-ZM-c8E" secondAttribute="trailing" constant="15" id="bQn-ZX-ZuJ"/>
                     <constraint firstItem="Xnx-wI-tq9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="e3K-oZ-PA0"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="5eg-ZM-c8E" secondAttribute="trailing" constant="15" id="etm-Y1-uuZ"/>
+                    <constraint firstItem="5eg-ZM-c8E" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="47" id="fBO-55-Zgh"/>
                     <constraint firstItem="Xnx-wI-tq9" firstAttribute="top" secondItem="sax-g0-05F" secondAttribute="bottom" constant="12" id="he8-DH-VDa"/>
                     <constraint firstItem="vH7-dH-I4m" firstAttribute="top" secondItem="qEq-n7-zfD" secondAttribute="bottom" constant="16" id="hz6-Wp-Fb6"/>
                     <constraint firstItem="CLZ-MI-AMK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="mi0-8u-sny"/>
@@ -126,4 +127,7 @@
             <point key="canvasLocation" x="-39" y="63.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="ZhuanJi_Guanzhu.png" width="58" height="58"/>
+    </resources>
 </document>

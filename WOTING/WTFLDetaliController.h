@@ -7,13 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "WTBaseViewController.h"
 
-@interface WTFLDetaliController : WTBaseViewController
+#import "GUITabPagerViewController.h"
+
+@interface WTFLDetaliController : GUITabPagerViewController
 
 - (IBAction)balckBtnClick:(id)sender;
 @property (weak, nonatomic) IBOutlet UILabel *nameLab;
 @property (weak, nonatomic) IBOutlet UITableView *FLDTableView;
+
 
 @property (nonatomic, copy) NSString *contentID;
 @property (nonatomic, copy) NSString *nameL;

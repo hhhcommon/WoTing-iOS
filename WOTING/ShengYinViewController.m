@@ -75,7 +75,7 @@
         
     }else {
         
-        parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",uid,@"UserId",_SearchStr,@"SearchStr",@"SEQU",@"MediaType", nil];
+        parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",uid,@"UserId",_SearchStr,@"SearchStr",@"AUDIO",@"MediaType", nil];
         
         login_Str = WoTing_searchBy;
         
@@ -195,13 +195,21 @@
         
         NSDictionary *dict = _dataSYLSArr[indexPath.row];
         NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
-        [self.navigationController popToRootViewControllerAnimated:YES];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
+        
+        //回首页
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"TABBARSELECATE" object:nil];
+        
+        self.tabBarController.selectedIndex = 0;
     }else{
         NSDictionary *dict = _dataSYArr[indexPath.row];
         NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
-        [self.navigationController popToRootViewControllerAnimated:YES];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
+        
+        //回首页
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"TABBARSELECATE" object:nil];
+        
+        self.tabBarController.selectedIndex = 0;
     }
 }
 

@@ -35,6 +35,9 @@
 #import "AutomatePlist.h"
 //#import "MediaManager.h"
 #import "FMDBTool.h"    
+#import "HMSegmentedControl.h"  //可滑动的切换条
+#import "YZDisplayViewController.h"
+#import "MCDownloadManager.h"   //新下载器
 
 #import "AFNetworking.h"
 #import "UIImageView+WebCache.h"
@@ -43,9 +46,9 @@
 #import <UMSocialCore/UMSocialCore.h>
 #import <AVFoundation/AVFoundation.h>
 #import "MarqueeLabel.h"
-
+#import "BoFangTabbarView.h"
 #import "ZCBNetworking.h"
-
+#import "AppDelegate.h"
 
 #pragma mark - 数据请求接口
 
@@ -120,6 +123,18 @@
 
 /** 提交反馈 */
 #define WoTing_FanKui       (SKInterFaceServer@"opinion/app/commit.do")
+
+/** 举报接口 */
+#define WoTing_JuBao    (SKInterFaceServer@"content/accuse.do")
+
+/** 轮播图 */
+#define WoTing_LunBo    (SKInterFaceServer@"content/getLoopImgs.do")
+
+/** 点击订阅 */
+#define WoTing_DingYue      (SKInterFaceServer@"content/clickSubscribe.do")
+
+/** 订阅节目列表 */
+#define WoTing_DingYueList  (SKInterFaceServer@"content/getSubscribeList.do")
 
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.

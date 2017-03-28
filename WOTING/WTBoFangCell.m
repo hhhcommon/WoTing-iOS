@@ -29,8 +29,8 @@
 -(void)setPlayingMusic:(WTBoFangModel *)playingMusic{
     _playingMusic = playingMusic;
     BOOL isXIAZAI = NO;
-    _downLoadImgv.enabled = YES;
-    _downLoadTitImgv.enabled = YES;
+//    _downLoadImgv.enabled = YES;
+//    _downLoadTitImgv.enabled = YES;
     
     //判断本地数据库里是否下载该节目
     FMDatabase *fm = [FMDBTool createDatabaseAndTable:@"XIAZAI"];
@@ -52,18 +52,18 @@
     NSString *MediaType = playingMusic.MediaType;
     if ([MediaType isEqualToString:@"AUDIO"]) {
         
-        _downLoadImgv.selected = NO;
-        _downLoadTitImgv.selected = NO;
+//        _downLoadImgv.selected = NO;
+//        _downLoadTitImgv.selected = NO;
         self.wtSlider.userInteractionEnabled = YES;
         if (isXIAZAI) {
             
-            _downLoadImgv.enabled = NO;
-            _downLoadTitImgv.enabled = NO;
+//            _downLoadImgv.enabled = NO;
+//            _downLoadTitImgv.enabled = NO;
         }
     }else if ([MediaType isEqualToString:@"RADIO"]) {
         
-        _downLoadImgv.selected = YES;
-        _downLoadTitImgv.selected = YES;
+//        _downLoadImgv.selected = YES;
+//        _downLoadTitImgv.selected = YES;
         self.wtSlider.userInteractionEnabled = NO;
         
     }
@@ -72,29 +72,20 @@
     NSString *ContentFavorite = playingMusic.ContentFavorite;
     if ([ContentFavorite isEqualToString:@"0"]) {
         
-        _likeImgv.selected = NO;
-        _likeTitImgv.selected = NO;
+//        _likeImgv.selected = NO;
+//        _likeTitImgv.selected = NO;
     }else{
         
-        _likeImgv.selected = YES;
-        _likeTitImgv.selected = YES;
+//        _likeImgv.selected = YES;
+//        _likeTitImgv.selected = YES;
     }
     
     //歌曲名
     self.nameLab.text = playingMusic.ContentName;
-//    self.nameLab.marqueeType = MLContinuous;
-//    self.nameLab.scrollDuration = 10.0f;
-//    self.nameLab.fadeLength = 10.0f;
-//    self.nameLab.trailingBuffer = 30.0f;
-//    
-//    self.nameLab.userInteractionEnabled = YES;
-//    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pauseTap:)];
-//    tapRecognizer.numberOfTapsRequired = 1;
-//    tapRecognizer.numberOfTouchesRequired = 1;
-//    [self.nameLab addGestureRecognizer:tapRecognizer];
+
     
     //歌曲图片
-    [self.ContentImgV sd_setImageWithURL:[NSURL URLWithString:[NSString NULLToString:playingMusic.ContentImg]]];
+    [self.ContentImgV sd_setImageWithURL:[NSURL URLWithString:[NSString NULLToString:playingMusic.ContentImg]] placeholderImage:[UIImage imageNamed:@"img_radio_default"]];
     
     //设置总时间
     NSTimeInterval time=[playingMusic.ContentTimes doubleValue];
@@ -144,6 +135,9 @@
     [[JQMusicTool sharedJQMusicTool].player addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
     
     
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    // 注册打断通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(AVAudioSessionInterruptionNotification:) name:AVAudioSessionInterruptionNotification object:session];
     
 }
 
@@ -167,24 +161,52 @@
     }
 }
 
+#pragma mark -- 打断事件
+
+- (void)AVAudioSessionInterruptionNotification: (NSNotification *)notificaiton {
+    NSLog(@"%@", notificaiton.userInfo);
+    
+    AVAudioSessionInterruptionType type = [notificaiton.userInfo[AVAudioSessionInterruptionTypeKey] intValue];
+    if (type == AVAudioSessionInterruptionTypeBegan) {
+        
+        [[JQMusicTool sharedJQMusicTool].player pause];
+        _beginBtn.selected = NO;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ZANTINGDONGHUA" object:nil];   //暂停动画
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"STOPTIME" object:nil];     //旋转动画暂停
+    } else {
+        [[JQMusicTool sharedJQMusicTool].player play];
+        _beginBtn.selected = YES;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"BOFANGDONGHUA" object:nil];    //播放动画
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"BENGINTIME" object:nil];     //旋转动画开始
+    }
+}
+
 
 //前一首
 - (IBAction)beforeBtnClick:(id)sender {
     
     [self notifyDelegateWithBtnType:BtnTypePrevious];
-    if (_beginBtn.selected == YES) {
+    //还原动画
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"RESTORETIME" object:nil];
+    _beginBtn.selected = YES;
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"BRGINBTNYES" object:nil];  //入库
-    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"BRGINBTNYES" object:nil];  //入库
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"BOFANGDONGHUA" object:nil];    //播放动画
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"BENGINTIME" object:nil];     //旋转动画开始
+    
 }
 //下一首
 - (IBAction)nextBtnClick:(id)sender {
     
     [self notifyDelegateWithBtnType:BtnTypeNext];
-    if (_beginBtn.selected == YES) {
+    //还原动画
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"RESTORETIME" object:nil];
+    _beginBtn.selected = YES;
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"BRGINBTNYES" object:nil];  //入库
-    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"BRGINBTNYES" object:nil];  //入库
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"BOFANGDONGHUA" object:nil];    //播放动画
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"BENGINTIME" object:nil];     //旋转动画开始
+    
 }
 //播放.暂停
 - (IBAction)beginBtnClick:(id)sender {
@@ -197,16 +219,20 @@
         //1.如果是播放的状态，按钮的图片更改为暂停的状态
         
         button.selected = YES;
-        [self notifyDelegateWithBtnType:BtnTypePlay];
+//        [self notifyDelegateWithBtnType:BtnTypePlay];
+        [[JQMusicTool sharedJQMusicTool].player play];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"BRGINBTNYES" object:nil];      //入库
         [[NSNotificationCenter defaultCenter] postNotificationName:@"BOFANGDONGHUA" object:nil];    //播放动画
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"BENGINTIME" object:nil];     //旋转动画开始
     }else{//暂停音乐
         NSLog(@"暂停音乐");
         //2.如果当前是暂停的状态，按钮的图片更改为播放的状态
         
         button.selected = NO;
-        [self notifyDelegateWithBtnType:BtnTypePause];
+//        [self notifyDelegateWithBtnType:BtnTypePause];
+        [[JQMusicTool sharedJQMusicTool].player pause];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ZANTINGDONGHUA" object:nil];   //暂停动画
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"STOPTIME" object:nil];     //旋转动画暂停
     }
 }
 
@@ -270,52 +296,12 @@
     
     [[JQMusicTool sharedJQMusicTool].player removeObserver:self forKeyPath:@"status"];
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-//- (void)pauseTap:(UITapGestureRecognizer *)recognizer {
-//    MarqueeLabel *continuousLabel2 = (MarqueeLabel *)recognizer.view;
-//    
-//    if (recognizer.state == UIGestureRecognizerStateEnded) {
-//        if (!continuousLabel2.isPaused) {
-//            [continuousLabel2 pauseLabel];
-//        } else {
-//            [continuousLabel2 unpauseLabel];
-//        }
-//    }
-//}
 
-//喜欢
-- (IBAction)likeBtnClick:(id)sender {
-    
-    [self notifyDelegateWithBtnType:BtnTypeLike];
-}
-//下载
-- (IBAction)downLoadBtn:(id)sender {
-    
-    if (_downLoadImgv.selected == YES) {
-        
-        [self notifyDelegateWithBtnType:BtnTypeJMD];
-
-    }else {
-        
-        [self notifyDelegateWithBtnType:BtnTypeDownLoad];
-    }
-
-}
-//分享
-- (IBAction)shareBtnClick:(id)sender {
-    
-    [self notifyDelegateWithBtnType:BtnTypeShare];
-}
-//评论
-- (IBAction)commitBtnClick:(id)sender {
-    
-    [self notifyDelegateWithBtnType:BtnTypeCommit];
-}
-//更多
-- (IBAction)moreBtnClick:(id)sender {
+- (IBAction)GengDuoBtnClick:(id)sender {
     
     [self notifyDelegateWithBtnType:BtnTypeMore];
 }
-
 @end

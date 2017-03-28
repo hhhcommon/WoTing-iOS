@@ -45,24 +45,12 @@ typedef enum {
 - (IBAction)beforeBtnClick:(id)sender; //前一首
 - (IBAction)nextBtnClick:(id)sender;    //下一首
 
+- (IBAction)GengDuoBtnClick:(id)sender;
 @property (weak, nonatomic) IBOutlet UISlider *wtSlider;    //播放条
 @property (weak, nonatomic) IBOutlet UILabel *timeLab1;     //当前时间
 @property (weak, nonatomic) IBOutlet UILabel *timeLab2;     //总时间
 - (IBAction)beginBtnClick:(id)sender;      // 播放/暂停
 
-//喜欢, 下载, 分享, 评论, 更多
-- (IBAction)likeBtnClick:(id)sender;
-- (IBAction)downLoadBtn:(id)sender;
-- (IBAction)shareBtnClick:(id)sender;
-- (IBAction)commitBtnClick:(id)sender;
-- (IBAction)moreBtnClick:(id)sender;
-
-@property (weak, nonatomic) IBOutlet UIButton *downLoadImgv;    //下载图标
-@property (weak, nonatomic) IBOutlet UIButton *downLoadTitImgv; //下载图标
-
-@property (weak, nonatomic) IBOutlet UIButton *likeImgv;
-
-@property (weak, nonatomic) IBOutlet UIButton *likeTitImgv;
 
 
 @property(nonatomic,strong)WTBoFangModel *playingMusic;//当前播放的音乐

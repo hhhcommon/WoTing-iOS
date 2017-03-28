@@ -7,24 +7,34 @@
 //
 
 #import "WTFLDetaliController.h"
-
+#import "MainViewController.h"
 #import "WTZhuanJiViewController.h"
 
 #import "WTBoFangTableViewCell.h"
 #import "WTLikeCell.h"
 
-/** 轮播图片 */
-#import "SDCycleScrollView.h"
+#import "ChildViewController.h"
 
-@interface WTFLDetaliController ()<SDCycleScrollViewDelegate, UITableViewDelegate, UITableViewDataSource>{
+#import "FullChildViewController.h"
+
+
+@interface WTFLDetaliController (){
     
     /** 数据数组 */
     NSMutableArray          *dataFLDJArray;
-    
-    /** 轮播图 */
-    SDCycleScrollView        *scrollView;
+    NSMutableArray          *dataFLTArr;    //得到分类详情列表名
+
     NSArray                 *imageNameArray;
+    
+    
+    BoFangTabbarView *firstBarV;
+    
+    int  count; //旋转角度
 }
+
+@property (nonatomic,assign)CGAffineTransform startTransform; //记录最开始contentImg的旋转位置
+@property (nonatomic,strong)NSTimer *timer;
+
 
 @end
 
@@ -33,26 +43,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.navigationController.navigationBarHidden = YES;
+
+    
     _nameLab.text = _nameL;
     dataFLDJArray = [NSMutableArray arrayWithCapacity:0];
+    dataFLTArr = [NSMutableArray arrayWithCapacity:0];
     
-    imageNameArray = [[NSArray alloc] initWithObjects:@"WTceshi1.jpg",@"WTceshi2.jpg",@"WTceshi3.jpg",@"WTceshi4.jpg", nil];
-    
+    [self loadBarTitle];        //获取到分类详情文字
 
-    _FLDTableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    _FLDTableView.delegate = self;
-    _FLDTableView.dataSource = self;
-
-    _FLDTableView.tableFooterView = [[UIView alloc] init];
-    
-    scrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, POINT_Y(320)) delegate:self placeholderImage:[UIImage imageNamed:@"liangYan.png"]];
-    scrollView.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    _FLDTableView.tableHeaderView = scrollView;
-    
-    scrollView.imageURLStringsGroup = imageNameArray;//图片
-    /** 设置轮播pageControl位置 */
-    scrollView.pageControlAliment = SDCycleScrollViewPageContolAlimentRight;
-    scrollView.currentPageDotColor = [UIColor JQTColor];
     
     [self registerTabViewCell];
     [self loadData];
@@ -66,6 +65,68 @@
     _FLDTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadData)];
     /** 增加上拉加载更多 */
     _FLDTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(MoveData)];
+    
+    NSString *Imgv = [AutomatePlist readPlistForKey:@"ImgV"];
+    NSString *transformbegin = [AutomatePlist readPlistForKey:@"transformbegin"];
+    NSString *transform = [AutomatePlist readPlistForKey:@"transform"];
+    count = [transform intValue];
+    
+    firstBarV = [[BoFangTabbarView alloc] init];
+    
+    [firstBarV.HYCContentImageName sd_setImageWithURL:[NSURL URLWithString:[NSString NULLToString:Imgv]] placeholderImage:[UIImage imageNamed:@"img_radio_default"]];
+    //记录一开始的旋转位置
+    _startTransform = firstBarV.HYCContentImageName.transform;
+    
+    firstBarV.HYCKuangImageName.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapGesturRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(btnClick:)];
+    [firstBarV.HYCKuangImageName addGestureRecognizer:tapGesturRecognizer];
+    
+    if (_timer) {
+        
+        
+    }else{
+        _timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(runTimeXUAN) userInfo:nil repeats:YES];
+    }
+    if ([transformbegin isEqualToString:@"0"]) {
+        
+        [_timer setFireDate:[NSDate distantFuture]];    //暂停
+        firstBarV.LJQStopImage.hidden = NO;
+    }else{
+        
+        [_timer setFireDate:[NSDate distantPast]];
+        firstBarV.LJQStopImage.hidden = YES;
+    }
+    
+    
+    
+    
+    [self.view addSubview:firstBarV];
+    [firstBarV mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.mas_equalTo(0);
+        make.bottom.mas_equalTo(0);
+        make.width.mas_equalTo(K_Screen_Width/4.0);
+        make.height.mas_equalTo(49);
+    }];
+}
+
+- (void)btnClick:(UITapGestureRecognizer *)tap{
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"TABBARSELECATE" object:nil];
+    
+    self.tabBarController.selectedIndex = 0;
+    
+}
+
+- (void)runTimeXUAN{
+    
+    count+=1;
+    
+    if (count == 360) {
+        
+        count = 0;
+    }
+    firstBarV.HYCContentImageName.transform = CGAffineTransformMakeRotation((M_PI / 180.0f)*count);
 }
 
 //注册
@@ -177,78 +238,77 @@
     
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return dataFLDJArray.count;
-}
 
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+// 添加所有子控制器
+- (void)setUpAllViewController
 {
     
-    if ([dataFLDJArray[indexPath.row][@"MediaType"] isEqualToString:@"SEQU"]) {
+    for (int i = 0; i < dataFLTArr.count+1 ; i++) {
         
-        static NSString *cellID = @"cellIDL";
-        
-        WTLikeCell *cell = (WTLikeCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
-        
-        if (!cell) {
-            cell = [[WTLikeCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+        if (i == 0) {
+            
+            FullChildViewController *wordVc1 = [[FullChildViewController alloc] init];
+            wordVc1.title = @"推荐";
+            [self addChildViewController:wordVc1];
+        }else{
+            
+            FullChildViewController *wordVc1 = [[FullChildViewController alloc] init];
+            wordVc1.title = dataFLTArr[i-1][@"CatalogName"];
+            [self addChildViewController:wordVc1];
         }
-        
-        NSDictionary *dict = dataFLDJArray[indexPath.row];
-        [cell setCellWithDict:dict];
-        
-        
-        return cell;
-    }else {
-        
-        static NSString *cellID = @"cellID";
-        
-        WTBoFangTableViewCell *cell = (WTBoFangTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
-        
-        if (!cell) {
-            cell = [[WTBoFangTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
-        }
-        cell.WTBoFangImgV.hidden = YES;
-        NSDictionary *dict = dataFLDJArray[indexPath.row];
-        [cell setCellWithDict:dict];
-        
-        
-        return cell;
     }
     
+
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+#pragma mark - 获取bar上的文字分类
+- (void)loadBarTitle{
     
+    NSString *uid = [AutomatePlist readPlistForKey:@"Uid"];
     
-    return 0.000000000000001;
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 70;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSString *IMEI = [AutomatePlist readPlistForKey:@"IMEI"];
+    NSString *ScreenSize = [AutomatePlist readPlistForKey:@"ScreenSize"];
+    NSString *MobileClass = [AutomatePlist readPlistForKey:@"MobileClass"];
+    NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
+    NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
     
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",uid,@"UserId",@"1",@"ResultType",_contentID,@"CatalogId", @"0",@"RelLevel",nil];
     
-    if ([dataFLDJArray[indexPath.row][@"MediaType"] isEqualToString:@"SEQU"]) {
+    NSString *login_Str = WoTing_getCatalogInfo;
+    
+    [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
         
-        WTZhuanJiViewController *wtZJVC = [[WTZhuanJiViewController alloc] init];
-        wtZJVC.hidesBottomBarWhenPushed = YES;
-        wtZJVC.contentID = [NSString NULLToString:dataFLDJArray[indexPath.row][@"ContentId"]] ;
-        [self.navigationController pushViewController:wtZJVC animated:YES];
+        NSDictionary *resultDict = (NSDictionary *)response;
         
-    }else{
+        NSString  *ReturnType = [resultDict objectForKey:@"ReturnType"];
+        if ([ReturnType isEqualToString:@"1001"]) {
+            
+            NSDictionary *ResultList = resultDict[@"CatalogData"];
+            
+            if (ResultList[@"SubCata"]) {
+                
+                [dataFLTArr removeAllObjects];
+                [dataFLTArr addObjectsFromArray: ResultList[@"SubCata"]];
+                
+                // 添加所有子控制器
+            //    [self setUpAllViewController];
+                
+            }else {
+                
+                
+                [self loadData];    //不带bar文字的
+                
+            }
+        }else if ([ReturnType isEqualToString:@"T"]){
+            
+            [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
+        }
         
-        NSDictionary *dict = dataFLDJArray[indexPath.row];
-        NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
-        [self.navigationController popToRootViewControllerAnimated:YES];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
-    }
+    } fail:^(NSError *error) {
+        
+        
+    }];
+    
 }
 
 

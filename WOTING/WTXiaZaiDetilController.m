@@ -171,7 +171,11 @@
     NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    
+    //回首页
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"TABBARSELECATE" object:nil];
+    
+    self.tabBarController.selectedIndex = 0;
     
 }
 

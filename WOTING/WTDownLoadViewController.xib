@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2659" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -11,8 +11,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WTDownLoadViewController">
             <connections>
-                <outlet property="XZZBtn" destination="LKR-k5-BfC" id="NzB-p9-34p"/>
-                <outlet property="YXZBtn" destination="wbp-kW-JxH" id="nPP-XI-etA"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -24,90 +22,36 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kou-V1-zaO">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5OS-mg-H46">
-                            <rect key="frame" x="187" y="22" width="1" height="21"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的下载" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RIt-3K-xSw">
+                            <rect key="frame" x="134" y="33" width="108" height="21"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="21" id="hCE-pk-YZa"/>
-                                <constraint firstAttribute="width" constant="1" id="oRJ-kf-zeZ"/>
+                                <constraint firstAttribute="height" constant="21" id="mpP-Fy-YCO"/>
+                                <constraint firstAttribute="width" constant="108" id="vCA-9O-8xL"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="URt-Q3-40p">
-                            <rect key="frame" x="17" y="23" width="25" height="25"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ei-ZV-e6F">
+                            <rect key="frame" x="8" y="26" width="22" height="30"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="25" id="9Jj-Ik-pQC"/>
-                                <constraint firstAttribute="height" constant="25" id="oko-nC-Iap"/>
+                                <constraint firstAttribute="width" constant="22" id="3E6-57-Nqu"/>
+                                <constraint firstAttribute="height" constant="30" id="wMT-o2-IQ1"/>
                             </constraints>
-                            <state key="normal" image="nav_btn_message.png"/>
+                            <state key="normal" image="back.png"/>
                             <connections>
-                                <action selector="XiaoXiBtnClick:" destination="-1" eventType="touchUpInside" id="Ntq-SS-sB0"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dNO-I7-4Bp">
-                            <rect key="frame" x="330" y="23" width="25" height="25"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="25" id="LpR-LO-Eea"/>
-                                <constraint firstAttribute="width" constant="25" id="UzT-fg-C1f"/>
-                            </constraints>
-                            <state key="normal" image="nav_btn_search.png"/>
-                            <connections>
-                                <action selector="SearchBtnClick:" destination="-1" eventType="touchUpInside" id="diO-pD-rWl"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wbp-kW-JxH">
-                            <rect key="frame" x="91" y="21" width="90" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="90" id="9I9-xy-nd3"/>
-                                <constraint firstAttribute="height" constant="30" id="M7b-FV-YY7"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <state key="normal" title="已下载" backgroundImage="nav_background_normal.png">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="selected" backgroundImage="nav_background_selected.png">
-                                <color key="titleColor" red="1" green="0.38915392440000002" blue="0.1089368786" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="YXZBtnClick:" destination="-1" eventType="touchUpInside" id="kEa-zE-Kzj"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LKR-k5-BfC">
-                            <rect key="frame" x="198" y="21" width="90" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="30" id="bZw-4D-CN0"/>
-                                <constraint firstAttribute="width" constant="90" id="oJW-Cy-EaI"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <state key="normal" title="下载中" backgroundImage="nav_background_normal.png">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="selected" backgroundImage="nav_background_selected.png">
-                                <color key="titleColor" red="1" green="0.38915392440000002" blue="0.1089368786" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="XZZBtnClick:" destination="-1" eventType="touchUpInside" id="UeM-Vf-Z3y"/>
+                                <action selector="backBtnClick:" destination="-1" eventType="touchUpInside" id="uVA-nD-O5U"/>
                             </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="1" green="0.25076781660000003" blue="0.019189018320000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="375" id="1Yt-dd-Q5e"/>
-                        <constraint firstItem="wbp-kW-JxH" firstAttribute="top" secondItem="kou-V1-zaO" secondAttribute="top" constant="21" id="3tK-an-Lr2"/>
-                        <constraint firstItem="5OS-mg-H46" firstAttribute="centerX" secondItem="kou-V1-zaO" secondAttribute="centerX" id="5JV-6N-16H"/>
+                        <constraint firstItem="RIt-3K-xSw" firstAttribute="top" secondItem="kou-V1-zaO" secondAttribute="top" constant="33" id="7po-m0-LfZ"/>
                         <constraint firstAttribute="height" constant="64" id="CJR-Zh-fe6"/>
-                        <constraint firstItem="5OS-mg-H46" firstAttribute="top" secondItem="kou-V1-zaO" secondAttribute="top" constant="22" id="Fdz-2P-fko"/>
-                        <constraint firstAttribute="trailing" secondItem="dNO-I7-4Bp" secondAttribute="trailing" constant="20" id="SRW-dH-VK2"/>
-                        <constraint firstItem="5OS-mg-H46" firstAttribute="leading" secondItem="wbp-kW-JxH" secondAttribute="trailing" constant="6" id="SVk-wt-yc2"/>
-                        <constraint firstItem="URt-Q3-40p" firstAttribute="top" secondItem="kou-V1-zaO" secondAttribute="top" constant="23" id="Srq-9U-xIf"/>
-                        <constraint firstAttribute="bottom" secondItem="5OS-mg-H46" secondAttribute="bottom" constant="21" id="Us3-Cz-uHt"/>
-                        <constraint firstItem="dNO-I7-4Bp" firstAttribute="top" secondItem="kou-V1-zaO" secondAttribute="top" constant="23" id="XnR-HZ-Fj2"/>
-                        <constraint firstItem="URt-Q3-40p" firstAttribute="leading" secondItem="kou-V1-zaO" secondAttribute="leading" constant="17" id="eks-ZG-tIt"/>
-                        <constraint firstItem="LKR-k5-BfC" firstAttribute="top" secondItem="kou-V1-zaO" secondAttribute="top" constant="21" id="vO9-DP-GzC"/>
-                        <constraint firstItem="LKR-k5-BfC" firstAttribute="leading" secondItem="5OS-mg-H46" secondAttribute="trailing" constant="10" id="xgH-FR-y7T"/>
+                        <constraint firstItem="4ei-ZV-e6F" firstAttribute="top" secondItem="kou-V1-zaO" secondAttribute="top" constant="26" id="YcO-LU-qNM"/>
+                        <constraint firstItem="RIt-3K-xSw" firstAttribute="centerX" secondItem="kou-V1-zaO" secondAttribute="centerX" id="fdN-cu-e7J"/>
+                        <constraint firstItem="4ei-ZV-e6F" firstAttribute="leading" secondItem="kou-V1-zaO" secondAttribute="leading" constant="8" id="v30-sM-FJv"/>
                     </constraints>
                 </view>
             </subviews>
@@ -121,9 +65,6 @@
         </view>
     </objects>
     <resources>
-        <image name="nav_background_normal.png" width="86" height="28"/>
-        <image name="nav_background_selected.png" width="86" height="28"/>
-        <image name="nav_btn_message.png" width="21" height="21"/>
-        <image name="nav_btn_search.png" width="21" height="21"/>
+        <image name="back.png" width="24" height="24"/>
     </resources>
 </document>

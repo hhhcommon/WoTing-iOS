@@ -8,7 +8,13 @@
 
 #import "WTNewsViewController.h"
 
-@interface WTNewsViewController ()
+#import "MainViewController.h"
+
+@interface WTNewsViewController (){
+    
+    
+}
+
 
 @end
 
@@ -17,7 +23,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    
 }
+
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
+}
+
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

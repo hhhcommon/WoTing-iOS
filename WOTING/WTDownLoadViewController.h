@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface WTDownLoadViewController : UIViewController
-- (IBAction)XiaoXiBtnClick:(id)sender;
-- (IBAction)SearchBtnClick:(id)sender;
-@property (weak, nonatomic) IBOutlet UIButton *YXZBtn;
-@property (weak, nonatomic) IBOutlet UIButton *XZZBtn;
-- (IBAction)YXZBtnClick:(id)sender;
-- (IBAction)XZZBtnClick:(id)sender;
+
+
+- (IBAction)backBtnClick:(id)sender;
+
+
+
 
 @end

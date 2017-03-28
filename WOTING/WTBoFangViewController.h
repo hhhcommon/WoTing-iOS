@@ -11,6 +11,8 @@
 @interface WTBoFangViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UITableView *JQtableView;
+- (IBAction)NewBtnClick:(id)sender;
+- (IBAction)searchBtnClick:(id)sender;
 
 
 @end

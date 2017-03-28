@@ -99,7 +99,7 @@
                                     </constraints>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 </textField>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_icon_name.png" translatesAutoresizingMaskIntoConstraints="NO" id="0Em-6e-7ze">
                                     <rect key="frame" x="10" y="38" width="26" height="27"/>
@@ -184,7 +184,8 @@
                                     <rect key="frame" x="236" y="0.0" width="95" height="35"/>
                                     <color key="backgroundColor" red="1" green="0.25076781660000003" blue="0.019189018320000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="35" id="z0J-ns-zUb"/>
+                                        <constraint firstAttribute="height" constant="35" id="fkT-gD-wpl"/>
+                                        <constraint firstAttribute="width" constant="95" id="ufZ-nu-fyD"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -203,19 +204,19 @@
                                     </constraints>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                 </textField>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="lpd-91-IC2" firstAttribute="leading" secondItem="nrD-lK-ckH" secondAttribute="leading" constant="8" id="SHp-Zj-3Ky"/>
-                                <constraint firstItem="2wA-du-Eah" firstAttribute="top" secondItem="nrD-lK-ckH" secondAttribute="top" id="bUa-Rl-Hli"/>
+                                <constraint firstAttribute="trailing" secondItem="2wA-du-Eah" secondAttribute="trailing" id="a65-Cw-9Qg"/>
                                 <constraint firstItem="JtU-Mf-njU" firstAttribute="leading" secondItem="lpd-91-IC2" secondAttribute="trailing" constant="8" id="cGA-yT-eVd"/>
                                 <constraint firstItem="JtU-Mf-njU" firstAttribute="top" secondItem="nrD-lK-ckH" secondAttribute="top" id="chb-3e-BJv"/>
-                                <constraint firstItem="2wA-du-Eah" firstAttribute="leading" secondItem="JtU-Mf-njU" secondAttribute="trailing" constant="5" id="dZz-tD-POl"/>
                                 <constraint firstAttribute="height" constant="35" id="eTt-h4-fQ8"/>
                                 <constraint firstItem="lpd-91-IC2" firstAttribute="top" secondItem="nrD-lK-ckH" secondAttribute="top" constant="4" id="ikG-Fm-z7S"/>
-                                <constraint firstAttribute="trailing" secondItem="2wA-du-Eah" secondAttribute="trailing" id="qk0-gW-ZIR"/>
+                                <constraint firstItem="2wA-du-Eah" firstAttribute="leading" secondItem="JtU-Mf-njU" secondAttribute="trailing" constant="5" id="vcN-n0-1tp"/>
+                                <constraint firstItem="2wA-du-Eah" firstAttribute="top" secondItem="nrD-lK-ckH" secondAttribute="top" id="yvY-ax-hSl"/>
                             </constraints>
                         </view>
                     </subviews>

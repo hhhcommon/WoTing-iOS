@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2659" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -12,8 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WTXiangJiangViewController">
             <connections>
-                <outlet property="BoFangBtn" destination="bGb-43-nCF" id="YCP-Ar-EXR"/>
-                <outlet property="JieMuBtn" destination="bhl-oU-nlI" id="3l5-Zx-oMX"/>
+                <outlet property="NavView" destination="abk-sa-HuF" id="Zyj-31-Auj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -49,68 +48,15 @@
                                 <action selector="SearchBtnClick:" destination="-1" eventType="touchUpInside" id="9Y3-rW-ggM"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bhl-oU-nlI">
-                            <rect key="frame" x="198" y="21" width="90" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="90" id="LLZ-CA-o10"/>
-                                <constraint firstAttribute="height" constant="30" id="RTr-Sb-4xY"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <state key="normal" title="节目" backgroundImage="nav_background_normal.png">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="selected" title="节目" backgroundImage="nav_background_selected.png">
-                                <color key="titleColor" red="1" green="0.25076781660000003" blue="0.019189018320000001" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
-                            <state key="highlighted" title="节目" backgroundImage="nav_background_normal.png"/>
-                            <connections>
-                                <action selector="JieMuBtnClick:" destination="-1" eventType="touchUpInside" id="BKR-ix-Hc8"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGb-43-nCF">
-                            <rect key="frame" x="91" y="21" width="90" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="90" id="1QW-2X-T3z"/>
-                                <constraint firstAttribute="height" constant="30" id="sfT-cj-H3O"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                            <state key="normal" title="播放" backgroundImage="nav_background_normal.png">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="selected" title="播放" backgroundImage="nav_background_selected.png">
-                                <color key="titleColor" red="1" green="0.25076781660000003" blue="0.019189018320000001" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
-                            <state key="highlighted" title="播放" backgroundImage="nav_background_normal.png"/>
-                            <connections>
-                                <action selector="BoFangBtnClick:" destination="-1" eventType="touchUpInside" id="lSL-P2-hi5"/>
-                            </connections>
-                        </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kwv-4c-2b6">
-                            <rect key="frame" x="189" y="25" width="1" height="21"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="1" id="fGB-hR-iil"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                     </subviews>
                     <color key="backgroundColor" red="1" green="0.25076781660000003" blue="0.019189018320000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstItem="Kwv-4c-2b6" firstAttribute="leading" secondItem="bGb-43-nCF" secondAttribute="trailing" constant="8" id="9Ob-er-qPu"/>
-                        <constraint firstAttribute="bottom" secondItem="bGb-43-nCF" secondAttribute="bottom" constant="13" id="COi-Wo-Hho"/>
-                        <constraint firstItem="Kwv-4c-2b6" firstAttribute="centerX" secondItem="abk-sa-HuF" secondAttribute="centerX" constant="2" id="EIq-wx-U3g"/>
                         <constraint firstItem="1B6-ha-PR8" firstAttribute="leading" secondItem="abk-sa-HuF" secondAttribute="leading" constant="17" id="EsL-Yt-vd2"/>
-                        <constraint firstAttribute="bottom" secondItem="bhl-oU-nlI" secondAttribute="bottom" constant="13" id="QS1-rv-hP6"/>
                         <constraint firstAttribute="trailing" secondItem="xAK-jk-aEs" secondAttribute="trailing" constant="20" id="QTl-7u-dh5"/>
-                        <constraint firstItem="bhl-oU-nlI" firstAttribute="leading" secondItem="Kwv-4c-2b6" secondAttribute="trailing" constant="8" id="bU9-CV-Gn1"/>
                         <constraint firstItem="1B6-ha-PR8" firstAttribute="top" secondItem="abk-sa-HuF" secondAttribute="top" constant="23" id="cDb-CU-czh"/>
                         <constraint firstAttribute="height" constant="64" id="frC-v8-YSE"/>
-                        <constraint firstAttribute="bottom" secondItem="Kwv-4c-2b6" secondAttribute="bottom" constant="18" id="gP1-cu-qTN"/>
                         <constraint firstAttribute="width" constant="375" id="jbj-AU-NsL"/>
                         <constraint firstItem="xAK-jk-aEs" firstAttribute="top" secondItem="abk-sa-HuF" secondAttribute="top" constant="23" id="qEP-eY-df3"/>
-                        <constraint firstItem="Kwv-4c-2b6" firstAttribute="top" secondItem="abk-sa-HuF" secondAttribute="top" constant="25" id="zXF-1g-TzL"/>
                     </constraints>
                 </view>
             </subviews>
@@ -124,8 +70,6 @@
         </view>
     </objects>
     <resources>
-        <image name="nav_background_normal.png" width="86" height="28"/>
-        <image name="nav_background_selected.png" width="86" height="28"/>
         <image name="nav_btn_message.png" width="21" height="21"/>
         <image name="nav_btn_search.png" width="21" height="21"/>
     </resources>

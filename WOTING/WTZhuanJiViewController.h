@@ -17,9 +17,12 @@
 - (IBAction)likeBtnClick:(id)sender;
 - (IBAction)commitBtnClick:(id)sender;
 - (IBAction)shareBtnClick:(id)sender;
+- (IBAction)dingYueBtnClick:(id)sender;
+
 @property (weak, nonatomic) IBOutlet UIView *titleView;
 
 @property (nonatomic, copy) NSString *contentID;
 
+- (IBAction)JuBaoBtnClick:(id)sender;
 
 @end

@@ -197,13 +197,21 @@
         
         NSDictionary *dict = _dataDTLSArr[indexPath.row];
         NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
-        [self.navigationController popToRootViewControllerAnimated:YES];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
+        
+        //回首页
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"TABBARSELECATE" object:nil];
+        
+        self.tabBarController.selectedIndex = 0;
     }else{
         NSDictionary *dict = _dataDTArr[indexPath.row];
         NSDictionary *DataDict = [[NSDictionary alloc] initWithDictionary:dict];
-        [self.navigationController popToRootViewControllerAnimated:YES];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:DataDict];
+        
+        //回首页
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"TABBARSELECATE" object:nil];
+        
+        self.tabBarController.selectedIndex = 0;
     }
 }
 

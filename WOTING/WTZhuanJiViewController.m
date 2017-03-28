@@ -9,6 +9,7 @@
 #import "WTZhuanJiViewController.h"
 
 #import "WTPingLunViewController.h"     //评论页
+#import "WTJuBaoViewController.h"       //举报页
 
 #import "WTZJTuijianController.h"
 #import "WTZJJMController.h"
@@ -292,6 +293,62 @@
 //专辑喜欢
 - (IBAction)likeBtnClick:(id)sender {
     
+    NSString *MediaType = dataZJDict[@"MediaType"];
+    NSString *ContentId = dataZJDict[@"ContentId"];
+    NSString *ContentFavorite = dataZJDict[@"ContentFavorite"];
+    
+    NSString *uid = [AutomatePlist readPlistForKey:@"Uid"];
+    NSString *IMEI = [AutomatePlist readPlistForKey:@"IMEI"];
+    NSString *ScreenSize = [AutomatePlist readPlistForKey:@"ScreenSize"];
+    NSString *MobileClass = [AutomatePlist readPlistForKey:@"MobileClass"];
+    NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
+    NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
+    
+    if ([uid isEqualToString:@"0"]||[uid isEqualToString:@""]) {
+        
+        NSDictionary *parameters;
+        
+        if ([ContentFavorite isEqualToString:@"0"] || ContentFavorite == nil) {
+            
+            parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",MediaType,@"MediaType",ContentId,@"ContentId",uid,@"UserId",@"1",@"Flag",  nil];
+            
+        }else {
+            
+            parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",MediaType,@"MediaType",ContentId,@"ContentId",uid,@"UserId",@"0",@"Flag",  nil];
+        }
+        
+        
+        NSString *login_Str = WoTing_like;
+        
+        [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
+            
+            NSDictionary *resultDict = (NSDictionary *)response;
+            
+            NSString  *ReturnType = [resultDict objectForKey:@"ReturnType"];
+            if ([ReturnType isEqualToString:@"1001"]) {
+                
+                [WKProgressHUD popMessage:@"添加喜欢成功" inView:nil duration:0.5 animated:YES];
+                
+                
+            }else if ([ReturnType isEqualToString:@"T"]){
+                
+                [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
+            }else if ([ReturnType isEqualToString:@"200"]){
+                
+                [AutomatePlist writePlistForkey:@"Uid" value:@""];
+                [WKProgressHUD popMessage:@"请先登录后再试" inView:nil duration:0.5 animated:YES];
+            }
+            
+        } fail:^(NSError *error) {
+            
+            
+        }];
+    }else{
+        
+        [WKProgressHUD popMessage:@"需要登录" inView:nil duration:0.5 animated:YES];
+    }
+    
+    
 }
 //专辑评论
 - (IBAction)commitBtnClick:(id)sender {
@@ -314,6 +371,65 @@
         // 根据获取的platformType确定所选平台进行下一步操作
         [self shareWebPageToPlatformType:platformType];
     }];
+}
+
+//点击专辑订阅
+- (IBAction)dingYueBtnClick:(id)sender {
+    
+    NSString *ContentId = dataZJDict[@"ContentId"];
+    NSString *ContentFavorite = dataZJDict[@"ContentFavorite"];
+    
+    NSString *uid = [AutomatePlist readPlistForKey:@"Uid"];
+    NSString *IMEI = [AutomatePlist readPlistForKey:@"IMEI"];
+    NSString *ScreenSize = [AutomatePlist readPlistForKey:@"ScreenSize"];
+    NSString *MobileClass = [AutomatePlist readPlistForKey:@"MobileClass"];
+    NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
+    NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
+    
+    if ([uid isEqualToString:@"0"]||[uid isEqualToString:@""]) {
+        
+        NSDictionary *parameters;
+        
+        if ([ContentFavorite isEqualToString:@"0"] || ContentFavorite == nil) {
+            
+            parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",ContentId,@"ContentId",uid,@"UserId",@"1",@"Flag",  nil];
+            
+        }else {
+            
+            parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",ContentId,@"ContentId",uid,@"UserId",@"0",@"Flag",  nil];
+        }
+        
+        
+        NSString *login_Str = WoTing_DingYue;
+        
+        [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
+            
+            NSDictionary *resultDict = (NSDictionary *)response;
+            
+            NSString  *ReturnType = [resultDict objectForKey:@"ReturnType"];
+            if ([ReturnType isEqualToString:@"1001"]) {
+                
+                [WKProgressHUD popMessage:@"订阅成功" inView:nil duration:0.5 animated:YES];
+                
+                
+            }else if ([ReturnType isEqualToString:@"T"]){
+                
+                [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
+            }else if ([ReturnType isEqualToString:@"200"]){
+                
+                [AutomatePlist writePlistForkey:@"Uid" value:@""];
+                [WKProgressHUD popMessage:@"请先登录后再试" inView:nil duration:0.5 animated:YES];
+            }
+            
+        } fail:^(NSError *error) {
+            
+            
+        }];
+    }else{
+        
+        [WKProgressHUD popMessage:@"需要登录" inView:nil duration:0.5 animated:YES];
+    }
+
 }
 - (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType
 {
@@ -347,4 +463,13 @@
     
 }
 
+- (IBAction)JuBaoBtnClick:(id)sender {
+    
+    WTJuBaoViewController *juBaoVC = [[WTJuBaoViewController alloc] init];
+    
+    juBaoVC.MediaType = dataZJDict[@"MediaType"];
+    juBaoVC.ContentId = dataZJDict[@"ContentId"];
+    
+    [self.navigationController pushViewController:juBaoVC animated:YES];
+}
 @end
