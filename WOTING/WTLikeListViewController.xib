@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2659" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -24,10 +24,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lgP-d5-ddA">
-                            <rect key="frame" x="7" y="29" width="24" height="24"/>
+                            <rect key="frame" x="1" y="27" width="44" height="33"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="24" id="lSO-i1-ika"/>
-                                <constraint firstAttribute="height" constant="24" id="ysY-pZ-QqN"/>
+                                <constraint firstAttribute="width" constant="44" id="lSO-i1-ika"/>
+                                <constraint firstAttribute="height" constant="33" id="ysY-pZ-QqN"/>
                             </constraints>
                             <state key="normal" image="back.png"/>
                             <connections>
@@ -45,10 +45,10 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="InQ-Jz-IMX">
-                            <rect key="frame" x="321" y="29" width="46" height="30"/>
+                            <rect key="frame" x="307" y="24" width="68" height="36"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="46" id="hDW-Uc-L39"/>
-                                <constraint firstAttribute="height" constant="30" id="lXu-7U-F8b"/>
+                                <constraint firstAttribute="width" constant="68" id="hDW-Uc-L39"/>
+                                <constraint firstAttribute="height" constant="36" id="lXu-7U-F8b"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                             <state key="normal" title="清空">
@@ -62,11 +62,11 @@
                     <color key="backgroundColor" red="1" green="0.38915392440000002" blue="0.1089368786" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="ZBK-YP-Xsh" firstAttribute="top" secondItem="HJh-Z7-895" secondAttribute="top" constant="32" id="N0z-X0-1sF"/>
-                        <constraint firstItem="lgP-d5-ddA" firstAttribute="top" secondItem="HJh-Z7-895" secondAttribute="top" constant="29" id="OEd-vm-v4f"/>
-                        <constraint firstAttribute="bottom" secondItem="InQ-Jz-IMX" secondAttribute="bottom" constant="5" id="Oph-VF-zsF"/>
-                        <constraint firstAttribute="trailing" secondItem="InQ-Jz-IMX" secondAttribute="trailing" constant="8" id="Ppa-FM-4On"/>
+                        <constraint firstItem="lgP-d5-ddA" firstAttribute="top" secondItem="HJh-Z7-895" secondAttribute="top" constant="27" id="OEd-vm-v4f"/>
+                        <constraint firstAttribute="bottom" secondItem="InQ-Jz-IMX" secondAttribute="bottom" constant="4" id="Oph-VF-zsF"/>
+                        <constraint firstAttribute="trailing" secondItem="InQ-Jz-IMX" secondAttribute="trailing" id="Ppa-FM-4On"/>
                         <constraint firstItem="ZBK-YP-Xsh" firstAttribute="centerX" secondItem="HJh-Z7-895" secondAttribute="centerX" id="Qzs-B9-e2s"/>
-                        <constraint firstItem="lgP-d5-ddA" firstAttribute="leading" secondItem="HJh-Z7-895" secondAttribute="leading" constant="7" id="cfI-fo-CI2"/>
+                        <constraint firstItem="lgP-d5-ddA" firstAttribute="leading" secondItem="HJh-Z7-895" secondAttribute="leading" constant="1" id="cfI-fo-CI2"/>
                         <constraint firstAttribute="height" constant="64" id="jtX-G9-sql"/>
                     </constraints>
                 </view>

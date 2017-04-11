@@ -10,6 +10,7 @@
 
 @interface WTJieMuViewController : UIViewController
 - (IBAction)backBtnClick:(id)sender;
+
 @property (weak, nonatomic) IBOutlet UITableView *JMXQTabV;
 
 @property (nonatomic, strong) NSDictionary   *dataDictJM;

@@ -38,7 +38,7 @@
     
     dataZJArr = [NSMutableArray arrayWithCapacity:0];
     dataZJDict = [NSMutableDictionary dictionaryWithCapacity:0];
-    
+
     [self loadDataZJ];
     [self creattitleView];
     
@@ -101,6 +101,14 @@
     _NameLab.text = [NSString NULLToString:dataZJDict[@"ContentName"]];
     
     [_contentImg sd_setImageWithURL:[NSURL URLWithString:[NSString NULLToString:dataZJDict[@"ContentImg"]]] placeholderImage:[UIImage imageNamed:@""]];
+    
+    if ([[NSString NULLToString:dataZJDict[@"ContentFavorite"]] isEqualToString:@"0"] || [NSString NULLToString:dataZJDict[@"ContentFavorite"]] == nil) {
+        
+        _ZJlikeBtn.selected = NO;
+    }else{
+        
+        _ZJlikeBtn.selected = YES;
+    }
 }
 
 //创建导航条
@@ -242,13 +250,13 @@
 
     /** 首先切换标识条 */
     [barLineImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-//        [UIView animateWithDuration:0.5 animations:^{
 
-        make.width.equalTo(_titleView.mas_width).with.multipliedBy(1.0/3);
+
+        make.width.equalTo(_titleView.mas_width).with.multipliedBy(1.0/2);
         make.height.mas_equalTo(POINT_Y(6));
         make.centerX.equalTo(aBtn);
         make.bottom.equalTo(_titleView.mas_bottom);
-//    }];
+
     }];
     aBtn.selected = YES;
     

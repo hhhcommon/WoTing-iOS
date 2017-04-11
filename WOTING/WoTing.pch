@@ -9,6 +9,11 @@
 #ifndef WoTing_pch
 #define WoTing_pch
 
+//定时器设置
+#define KEYHYC_______HYCKEY @"HYCHYCHYHYCSDFGHJKLERTYUCVBNMRTHJ"
+#define KEYHYCBOOL_______HYCKEY @"HHHHHYCHYCHYHYCSDFGHJKLERTYUCVBNMRTHJ"
+
+
 // 获取本地保存路径
 #define kDocumentPath  [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask,YES) firstObject]
 
@@ -56,7 +61,10 @@
 #define SKInterFaceServer @"http://123.56.254.75:808/wt/"
 //#define SKInterFaceServer @"http://182.92.175.134:808/wt/"
 
-#pragma mark 各个接口
+#pragma mark 各类接口
+
+/** 判断登录状态(每次启动app必须调用的接口) */
+#define WoTing_EntryApp         (SKInterFaceServer@"common/entryApp.do")
 
 /** 登录 */
 #define WoTing_Login      (SKInterFaceServer@"passport/user/mlogin.do")
@@ -80,7 +88,10 @@
 #define WoTing_YanZhengbangDing     (SKInterFaceServer@"passport/user/checkPhoneCheckCode.do")
 
 /** 修改密码 */
-#define WoTing_ChangePwd    (SKInterFaceServer@"/passport/user/updatePwd.do")
+#define WoTing_ChangePwd    (SKInterFaceServer@"passport/user/updatePwd.do")
+
+/** 修改用户信息 */
+#define WoTing_UserInfo     (SKInterFaceServer@"passport/user/updateUserInfo.do")
 
 /** 享听 - 播放*/
 #define WoTing_MainPage     (SKInterFaceServer@"mainPage.do")
@@ -135,6 +146,17 @@
 
 /** 订阅节目列表 */
 #define WoTing_DingYueList  (SKInterFaceServer@"content/getSubscribeList.do")
+
+/** 得到主播信息 */
+#define WoTing_ZhuBo    (SKInterFaceServer@"person/getPersonInfo.do")
+
+/** 得到主播内容 */
+#define WoTing_ZhuBoList    (SKInterFaceServer@"person/getPersonContents.do")
+
+/** 获取群组通讯录 */
+#define WoTing_GroupsAndFriends     (SKInterFaceServer@"passport/getGroupsAndFriends.do")
+
+#define WoTing_Groups   (SKInterFaceServer@"passport/group/getGroupList.do")
 
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.

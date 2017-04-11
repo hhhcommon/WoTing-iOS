@@ -12,6 +12,7 @@
 
 @interface WTFLDetailTitleController : YPTabBarController
 - (IBAction)backBtnClick:(id)sender;
+
 @property (weak, nonatomic) IBOutlet UILabel *contentName;
 
 

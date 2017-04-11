@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -11,6 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WTXiangTingViewController">
             <connections>
+                <outlet property="TongXunLuBtn" destination="YEh-xT-Jq2" id="MWK-Vd-zd5"/>
+                <outlet property="charBtn" destination="l3O-T2-XtU" id="1wi-Cb-zhw"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -33,31 +35,38 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="94p-pb-k8T">
-                            <rect key="frame" x="17" y="23" width="25" height="25"/>
+                            <rect key="frame" x="5" y="15" width="48" height="41"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="25" id="BPL-6z-TIo"/>
-                                <constraint firstAttribute="height" constant="25" id="ud7-IT-9xr"/>
+                                <constraint firstAttribute="width" constant="48" id="BPL-6z-TIo"/>
+                                <constraint firstAttribute="height" constant="41" id="ud7-IT-9xr"/>
                             </constraints>
                             <state key="normal" image="nav_btn_message.png"/>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y2h-kc-n4m">
-                            <rect key="frame" x="330" y="23" width="25" height="25"/>
+                            <rect key="frame" x="312" y="19" width="59" height="35"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="25" id="CnA-cY-sjE"/>
-                                <constraint firstAttribute="height" constant="25" id="d5t-Cu-0Ig"/>
+                                <constraint firstAttribute="width" constant="59" id="CnA-cY-sjE"/>
+                                <constraint firstAttribute="height" constant="35" id="d5t-Cu-0Ig"/>
                             </constraints>
                             <state key="normal" image="menu.png"/>
+                            <connections>
+                                <action selector="MoveBtnClick:" destination="-1" eventType="touchUpInside" id="z6Q-bA-jPN"/>
+                            </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l3O-T2-XtU">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l3O-T2-XtU">
                             <rect key="frame" x="91" y="21" width="90" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="90" id="hH8-pd-MsD"/>
                                 <constraint firstAttribute="height" constant="30" id="mVS-mQ-LEg"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                            <state key="normal" title="聊天" backgroundImage="nav_background_selected.png">
-                                <color key="titleColor" red="1" green="0.25076781660000003" blue="0.019189018320000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="聊天" backgroundImage="nav_background_normal.png"/>
+                            <state key="selected" backgroundImage="nav_background_selected.png">
+                                <color key="titleColor" red="1" green="0.38915392440000002" blue="0.1089368786" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
+                            <connections>
+                                <action selector="charBtnClick:" destination="-1" eventType="touchUpInside" id="T07-tm-LRd"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YEh-xT-Jq2">
                             <rect key="frame" x="198" y="21" width="90" height="30"/>
@@ -69,21 +78,27 @@
                             <state key="normal" title="通讯录" backgroundImage="nav_background_normal.png">
                                 <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <state key="selected" backgroundImage="nav_background_selected.png">
+                                <color key="titleColor" red="1" green="0.38915392440000002" blue="0.1089368786" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="TongXunLuBtnClick:" destination="-1" eventType="touchUpInside" id="JIm-bC-d2q"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="1" green="0.25076781660000003" blue="0.019189018320000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="YEh-xT-Jq2" firstAttribute="top" secondItem="mf3-en-pbM" secondAttribute="top" constant="21" id="4hi-o4-HAx"/>
-                        <constraint firstItem="94p-pb-k8T" firstAttribute="leading" secondItem="mf3-en-pbM" secondAttribute="leading" constant="17" id="CaT-H9-89k"/>
+                        <constraint firstItem="94p-pb-k8T" firstAttribute="leading" secondItem="mf3-en-pbM" secondAttribute="leading" constant="5" id="CaT-H9-89k"/>
                         <constraint firstAttribute="height" constant="64" id="DqI-a3-X4S"/>
                         <constraint firstItem="ejb-m3-5Ag" firstAttribute="leading" secondItem="l3O-T2-XtU" secondAttribute="trailing" constant="6" id="PUY-KL-Jbe"/>
                         <constraint firstItem="l3O-T2-XtU" firstAttribute="top" secondItem="mf3-en-pbM" secondAttribute="top" constant="21" id="Zl7-e6-fja"/>
                         <constraint firstItem="YEh-xT-Jq2" firstAttribute="leading" secondItem="ejb-m3-5Ag" secondAttribute="trailing" constant="9" id="aey-up-ncW"/>
                         <constraint firstAttribute="width" constant="375" id="fD2-j3-rK4"/>
-                        <constraint firstAttribute="trailing" secondItem="Y2h-kc-n4m" secondAttribute="trailing" constant="20" id="hlg-Sj-mld"/>
-                        <constraint firstItem="94p-pb-k8T" firstAttribute="top" secondItem="mf3-en-pbM" secondAttribute="top" constant="23" id="ioT-O1-EV1"/>
+                        <constraint firstAttribute="trailing" secondItem="Y2h-kc-n4m" secondAttribute="trailing" constant="4" id="hlg-Sj-mld"/>
+                        <constraint firstItem="94p-pb-k8T" firstAttribute="top" secondItem="mf3-en-pbM" secondAttribute="top" constant="15" id="ioT-O1-EV1"/>
                         <constraint firstItem="ejb-m3-5Ag" firstAttribute="centerX" secondItem="mf3-en-pbM" secondAttribute="centerX" id="pMw-O6-yYo"/>
-                        <constraint firstItem="Y2h-kc-n4m" firstAttribute="top" secondItem="mf3-en-pbM" secondAttribute="top" constant="23" id="si7-wT-393"/>
+                        <constraint firstItem="Y2h-kc-n4m" firstAttribute="top" secondItem="mf3-en-pbM" secondAttribute="top" constant="19" id="si7-wT-393"/>
                         <constraint firstAttribute="bottom" secondItem="ejb-m3-5Ag" secondAttribute="bottom" constant="15" id="zOP-cz-t0e"/>
                     </constraints>
                 </view>
@@ -94,11 +109,11 @@
                 <constraint firstItem="mf3-en-pbM" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="pAb-Vf-ElS"/>
                 <constraint firstItem="mf3-en-pbM" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="yhW-oX-rmh"/>
             </constraints>
-            <point key="canvasLocation" x="-20" y="72"/>
+            <point key="canvasLocation" x="-244.5" y="51.5"/>
         </view>
     </objects>
     <resources>
-        <image name="menu.png" width="48" height="48"/>
+        <image name="menu.png" width="24" height="24"/>
         <image name="nav_background_normal.png" width="86" height="28"/>
         <image name="nav_background_selected.png" width="86" height="28"/>
         <image name="nav_btn_message.png" width="21" height="21"/>

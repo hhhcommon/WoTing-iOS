@@ -10,6 +10,7 @@
 
 @interface WTDownLoadViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIView *backView;
 
 - (IBAction)backBtnClick:(id)sender;
 

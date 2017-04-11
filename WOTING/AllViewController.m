@@ -277,7 +277,10 @@
                 cell = [[WTLikeCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
             }
             
-            NSDictionary *dict = _dataAllArray[indexPath.section][@"List"][indexPath.row];;
+            NSMutableArray *dataDereverArr = _dataAllArray[indexPath.section][@"List"];
+            NSArray* reversedArray = [[dataDereverArr reverseObjectEnumerator] allObjects];
+            NSMutableArray *datareverArr = [NSMutableArray arrayWithArray:reversedArray];
+            NSDictionary *dict = datareverArr[indexPath.section][@"List"][indexPath.row];
             [cell setCellWithDict:dict];
             
             
@@ -292,7 +295,11 @@
                 cell = [[WTBoFangTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
             }
             cell.WTBoFangImgV.hidden = YES;
-            NSDictionary *dict = _dataAllArray[indexPath.section][@"List"][indexPath.row];
+
+            NSMutableArray *dataDereverArr = _dataAllArray[indexPath.section][@"List"];
+            NSArray* reversedArray = [[dataDereverArr reverseObjectEnumerator] allObjects];
+            NSMutableArray *datareverArr = [NSMutableArray arrayWithArray:reversedArray];
+            NSDictionary *dict = datareverArr[indexPath.row];
             [cell setCellWithDict:dict];
             
             

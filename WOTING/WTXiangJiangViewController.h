@@ -12,6 +12,7 @@
 
 - (IBAction)XiaoXibtnClick:(id)sender;
 
+
 - (IBAction)SearchBtnClick:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UIView *NavView;

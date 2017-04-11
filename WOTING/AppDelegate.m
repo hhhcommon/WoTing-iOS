@@ -6,6 +6,7 @@
 //  Copyright © 2016年 jq. All rights reserved.
 //
 //23456789的撒旦撒倒萨大
+
 #import "AppDelegate.h"
 
 #import <CoreLocation/CoreLocation.h>
@@ -19,9 +20,9 @@
 
 #import "MainViewController.h"
 
+#import "WTGuidanceViewController.h"
 
-
-@interface AppDelegate ()<AMapLocationManagerDelegate>
+@interface AppDelegate ()<AMapLocationManagerDelegate, GuidanceViewDelegate>
 @property (nonatomic, strong) UINavigationController *BFNavC;
 @property (nonatomic, strong) UINavigationController *XTNavC;
 @property (nonatomic, strong) UINavigationController *XJNavC;
@@ -62,9 +63,6 @@
     
     //设置音乐后台播放的会话类型
     AVAudioSession *session = [AVAudioSession sharedInstance];
-//    [session setCategory:AVAudioSessionCategoryPlayAndRecord
-//             withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker
-//                   error:nil];
     [session setCategory:AVAudioSessionCategoryPlayback error:nil];
     [session setActive:YES error:nil];
     
@@ -127,6 +125,10 @@
 //    [self.locationManager startUpdatingLocation];
     [self.locationManager setLocatingWithReGeocode:YES];
     
+    
+    //判断用户是否处于登录状态
+    [self YESorNOAppLogin];
+    
     //设置window
     _window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
@@ -135,7 +137,33 @@
     //修改状态栏颜色
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
     
-    self.window.rootViewController = [self crateTabBarControllerView];
+//    self.window.rootViewController = [self crateTabBarControllerView];
+    //设置根控制器
+    //通过读取用户偏好设置 判断app是否是第一次安装设置
+    NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+    
+    BOOL isUsed = [userDef integerForKey:@"ISUSED"];
+    
+    
+    if (isUsed == YES) {
+        //根控制器设置为分栏控制器
+        
+        self.window.rootViewController = [self crateTabBarControllerView];
+        //需要判断用户是否需要登录
+        
+        [self.window makeKeyAndVisible];
+        
+        //通过用户偏好设置中的标记 来判断是否需要登录
+       // [self showLogin];
+        
+        
+        
+    }else{
+        //根控制器设置为引导页
+        
+        self.window.rootViewController = [self createGuidanceViewController];
+    }
+
     
     [self.window makeKeyAndVisible];
     
@@ -201,6 +229,84 @@
     return result;
 }
 
+#pragma mark -- 引导页
+
+- (UIViewController *)createGuidanceViewController{
+    
+    WTGuidanceViewController *guidanceView = [[WTGuidanceViewController alloc] init];
+    
+    //点击开始体验 应该切换根控制器为分栏
+    
+    //加一个delegate回调 回到appDelegate中 切换根控制器
+    guidanceView.delegate = self;
+    
+    return guidanceView;
+    
+}
+
+#pragma mark -- 引导页的delegate
+
+- (void)changeRootViewController{
+    
+    //引导页显示结束 将根控制器改为分栏控制器
+    self.window.rootViewController = [self crateTabBarControllerView];
+    
+  //  [self showLogin];
+    //如果先显示引导页再显示分栏 依然需要检查是否需要登录
+}
+
+- (void)YESorNOAppLogin{
+    
+    NSString *uid = [AutomatePlist readPlistForKey:@"Uid"];
+        
+    NSString *IMEI = [AutomatePlist readPlistForKey:@"IMEI"];
+    NSString *ScreenSize = [AutomatePlist readPlistForKey:@"ScreenSize"];
+    NSString *MobileClass = [AutomatePlist readPlistForKey:@"MobileClass"];
+    NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
+    NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
+    
+    NSDictionary *parameters ;
+    
+    if ([uid isEqualToString:@"0"]||[uid isEqualToString:@""]) {
+        
+        parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",nil];
+    }else {
+        
+        parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",uid,@"UserId",nil];
+    }
+    
+        NSString *login_Str = WoTing_EntryApp;
+
+        [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
+            
+            NSDictionary *resultDict = (NSDictionary *)response;
+            
+            NSString  *ReturnType = [resultDict objectForKey:@"ReturnType"];
+            if ([ReturnType isEqualToString:@"1001"]) {
+                
+                
+                
+                
+            }else if ([ReturnType isEqualToString:@"T"]){
+                
+                [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
+            }else if ([ReturnType isEqualToString:@"2003"]){
+                
+                [AutomatePlist writePlistForkey:@"Uid" value:@""];
+                
+            }
+            
+        } fail:^(NSError *error) {
+            
+            
+            [WKProgressHUD popMessage:@"服务器连接失败" inView:nil duration:0.5 animated:YES];
+            [AutomatePlist writePlistForkey:@"Uid" value:@""];
+        }];
+        
+}
+
+
+
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
@@ -218,6 +324,8 @@
 
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
+    
+    
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
 }
 
@@ -236,6 +344,12 @@
     [AutomatePlist writePlistForkey:@"transformbegin" value:@"0"];
     
     [AutomatePlist writePlistForkey:@"ImgV" value:@"img_radio_default"];
+    
+    [[NSUserDefaults standardUserDefaults] setInteger:6 forKey:KEYHYCBOOL_______HYCKEY];
+
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:KEYHYC_______HYCKEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
 }
 
 

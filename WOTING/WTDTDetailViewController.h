@@ -10,6 +10,7 @@
 
 @interface WTDTDetailViewController : UIViewController
 - (IBAction)blackBtnClick:(id)sender;
+
 @property (weak, nonatomic) IBOutlet UILabel *NameLab;
 @property (weak, nonatomic) IBOutlet UITableView *jqTabView;
 

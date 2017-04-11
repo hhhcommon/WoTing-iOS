@@ -37,10 +37,10 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1KA-hC-M9P">
-                            <rect key="frame" x="8" y="26" width="21" height="30"/>
+                            <rect key="frame" x="1" y="24" width="52" height="34"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="30" id="M3f-zq-Wwj"/>
-                                <constraint firstAttribute="width" constant="21" id="ZzS-9R-Ci6"/>
+                                <constraint firstAttribute="height" constant="34" id="M3f-zq-Wwj"/>
+                                <constraint firstAttribute="width" constant="52" id="ZzS-9R-Ci6"/>
                             </constraints>
                             <state key="normal" image="back.png"/>
                             <connections>
@@ -53,8 +53,8 @@
                         <constraint firstItem="fQ3-vW-V1q" firstAttribute="centerX" secondItem="ZEV-6k-hu3" secondAttribute="centerX" id="K5T-g6-83D"/>
                         <constraint firstAttribute="height" constant="64" id="W45-BM-jMh"/>
                         <constraint firstItem="fQ3-vW-V1q" firstAttribute="top" secondItem="ZEV-6k-hu3" secondAttribute="top" constant="33" id="cVs-jl-kS1"/>
-                        <constraint firstItem="1KA-hC-M9P" firstAttribute="top" secondItem="ZEV-6k-hu3" secondAttribute="top" constant="26" id="vzC-CB-EVd"/>
-                        <constraint firstItem="1KA-hC-M9P" firstAttribute="leading" secondItem="ZEV-6k-hu3" secondAttribute="leading" constant="8" id="wDh-Wj-X7e"/>
+                        <constraint firstItem="1KA-hC-M9P" firstAttribute="top" secondItem="ZEV-6k-hu3" secondAttribute="top" constant="24" id="vzC-CB-EVd"/>
+                        <constraint firstItem="1KA-hC-M9P" firstAttribute="leading" secondItem="ZEV-6k-hu3" secondAttribute="leading" constant="1" id="wDh-Wj-X7e"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rra-LK-Hm9">

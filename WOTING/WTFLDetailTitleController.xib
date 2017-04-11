@@ -24,10 +24,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DId-xS-eJK">
-                            <rect key="frame" x="8" y="26" width="25" height="30"/>
+                            <rect key="frame" x="0.0" y="21" width="49" height="42"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="30" id="9Is-Vp-hUe"/>
-                                <constraint firstAttribute="width" constant="25" id="LmH-3I-XKe"/>
+                                <constraint firstAttribute="height" constant="42" id="9Is-Vp-hUe"/>
+                                <constraint firstAttribute="width" constant="49" id="LmH-3I-XKe"/>
                             </constraints>
                             <state key="normal" image="back.png"/>
                             <connections>
@@ -47,10 +47,10 @@
                     </subviews>
                     <color key="backgroundColor" red="1" green="0.38915392440000002" blue="0.1089368786" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="DId-xS-eJK" firstAttribute="leading" secondItem="eA1-QC-iub" secondAttribute="leading" constant="8" id="0nW-kV-zuQ"/>
+                        <constraint firstItem="DId-xS-eJK" firstAttribute="leading" secondItem="eA1-QC-iub" secondAttribute="leading" id="0nW-kV-zuQ"/>
                         <constraint firstItem="8zU-aJ-Bct" firstAttribute="centerX" secondItem="eA1-QC-iub" secondAttribute="centerX" id="ImO-DQ-6Oa"/>
                         <constraint firstItem="8zU-aJ-Bct" firstAttribute="top" secondItem="eA1-QC-iub" secondAttribute="top" constant="31" id="P1a-pI-BxO"/>
-                        <constraint firstItem="DId-xS-eJK" firstAttribute="top" secondItem="eA1-QC-iub" secondAttribute="top" constant="26" id="PgA-PI-ZFi"/>
+                        <constraint firstItem="DId-xS-eJK" firstAttribute="top" secondItem="eA1-QC-iub" secondAttribute="top" constant="21" id="PgA-PI-ZFi"/>
                         <constraint firstAttribute="height" constant="64" id="mNG-Dk-cxA"/>
                     </constraints>
                 </view>

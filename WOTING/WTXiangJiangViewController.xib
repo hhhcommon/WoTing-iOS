@@ -25,11 +25,11 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1B6-ha-PR8">
-                            <rect key="frame" x="17" y="23" width="25" height="25"/>
+                            <rect key="frame" x="0.0" y="7" width="59" height="58"/>
                             <constraints>
-                                <constraint firstAttribute="width" secondItem="1B6-ha-PR8" secondAttribute="height" multiplier="1:1" id="1Zg-v5-JFI"/>
-                                <constraint firstAttribute="height" constant="25" id="Ocq-E9-8W0"/>
-                                <constraint firstAttribute="width" constant="25" id="m6A-Yr-mjZ"/>
+                                <constraint firstAttribute="width" secondItem="1B6-ha-PR8" secondAttribute="height" multiplier="1:1" constant="1" id="1Zg-v5-JFI"/>
+                                <constraint firstAttribute="height" constant="58" id="Ocq-E9-8W0"/>
+                                <constraint firstAttribute="width" constant="59" id="m6A-Yr-mjZ"/>
                             </constraints>
                             <state key="normal" image="nav_btn_message.png"/>
                             <connections>
@@ -37,11 +37,11 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xAK-jk-aEs">
-                            <rect key="frame" x="330" y="23" width="25" height="25"/>
+                            <rect key="frame" x="312" y="8" width="62" height="55"/>
                             <constraints>
-                                <constraint firstAttribute="width" secondItem="xAK-jk-aEs" secondAttribute="height" multiplier="1:1" id="80z-Yp-Csm"/>
-                                <constraint firstAttribute="height" constant="25" id="KFg-w6-tJh"/>
-                                <constraint firstAttribute="width" constant="25" id="o9d-ap-AYo"/>
+                                <constraint firstAttribute="width" secondItem="xAK-jk-aEs" secondAttribute="height" multiplier="1:1" constant="7" id="80z-Yp-Csm"/>
+                                <constraint firstAttribute="height" constant="55" id="KFg-w6-tJh"/>
+                                <constraint firstAttribute="width" constant="62" id="o9d-ap-AYo"/>
                             </constraints>
                             <state key="normal" image="nav_btn_search.png"/>
                             <connections>
@@ -49,14 +49,14 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="1" green="0.25076781660000003" blue="0.019189018320000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="1" green="0.38915392440000002" blue="0.1089368786" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="1B6-ha-PR8" firstAttribute="leading" secondItem="abk-sa-HuF" secondAttribute="leading" constant="17" id="EsL-Yt-vd2"/>
-                        <constraint firstAttribute="trailing" secondItem="xAK-jk-aEs" secondAttribute="trailing" constant="20" id="QTl-7u-dh5"/>
-                        <constraint firstItem="1B6-ha-PR8" firstAttribute="top" secondItem="abk-sa-HuF" secondAttribute="top" constant="23" id="cDb-CU-czh"/>
+                        <constraint firstItem="1B6-ha-PR8" firstAttribute="leading" secondItem="abk-sa-HuF" secondAttribute="leading" id="EsL-Yt-vd2"/>
+                        <constraint firstAttribute="trailing" secondItem="xAK-jk-aEs" secondAttribute="trailing" constant="1" id="QTl-7u-dh5"/>
+                        <constraint firstItem="1B6-ha-PR8" firstAttribute="top" secondItem="abk-sa-HuF" secondAttribute="top" constant="7" id="cDb-CU-czh"/>
                         <constraint firstAttribute="height" constant="64" id="frC-v8-YSE"/>
                         <constraint firstAttribute="width" constant="375" id="jbj-AU-NsL"/>
-                        <constraint firstItem="xAK-jk-aEs" firstAttribute="top" secondItem="abk-sa-HuF" secondAttribute="top" constant="23" id="qEP-eY-df3"/>
+                        <constraint firstItem="xAK-jk-aEs" firstAttribute="top" secondItem="abk-sa-HuF" secondAttribute="top" constant="8" id="qEP-eY-df3"/>
                     </constraints>
                 </view>
             </subviews>

@@ -11,6 +11,9 @@
 
 @interface MainViewController : UITabBarController
 
+- (void)startTimer;
+@property (nonatomic, strong) void (^cellSelectedBlock)(NSString *ID);
+
 + (MainViewController *)sharedManager;
 
 - (void)firstVCClick;

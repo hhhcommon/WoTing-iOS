@@ -13,8 +13,9 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *XiHuanBtn;
 @property (weak, nonatomic) IBOutlet UIButton *XiaZaiBtn;
-@property (weak, nonatomic) IBOutlet UILabel *XiHuanLab;
-@property (weak, nonatomic) IBOutlet UILabel *downLoadLab;
+@property (weak, nonatomic) IBOutlet UIButton *DingYueBtn;
+@property (weak, nonatomic) IBOutlet UIButton *WDXiHuan;
+
 
 - (IBAction)XiHuanBtnClick:(id)sender;
 - (IBAction)XiaZaiBtnClick:(id)sender;

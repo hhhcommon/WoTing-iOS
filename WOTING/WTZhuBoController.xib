@@ -5,12 +5,15 @@
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11542"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WTZhuBoController">
             <connections>
+                <outlet property="contentImgV" destination="I4b-gs-Z0C" id="unh-cw-5Ap"/>
+                <outlet property="contentName" destination="cLu-8N-66b" id="qZy-ST-4Da"/>
+                <outlet property="numLab" destination="5Yb-i5-NZp" id="qBB-xG-dhX"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,21 +22,94 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wzo-bK-fhP">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ZhuBo_Backgroud.png" translatesAutoresizingMaskIntoConstraints="NO" id="mjF-ut-zIM">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="185"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="185" id="Nz9-nN-sGG"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jjs-z1-5r3">
+                    <rect key="frame" x="3" y="24" width="53" height="46"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="53" id="ZOi-c8-ZUu"/>
+                        <constraint firstAttribute="height" constant="46" id="fG8-IW-PJL"/>
+                    </constraints>
+                    <state key="normal" image="back.png"/>
+                    <connections>
+                        <action selector="backBtnClick:" destination="-1" eventType="touchUpInside" id="9UD-Xe-dAG"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cLu-8N-66b">
+                    <rect key="frame" x="93" y="36" width="189" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="189" id="8no-LB-q6D"/>
+                        <constraint firstAttribute="height" constant="21" id="sPO-eA-QLt"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                    <color key="textColor" red="1" green="0.96111267810000001" blue="0.93566572670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="I4b-gs-Z0C">
+                    <rect key="frame" x="153" y="67" width="70" height="70"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="70" id="Azo-QT-rCr"/>
+                        <constraint firstAttribute="width" constant="70" id="p7R-u7-HGK"/>
+                    </constraints>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W1d-8S-jvM">
+                    <rect key="frame" x="187" y="145" width="2" height="30"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="200" id="i9R-vD-uGP"/>
+                        <constraint firstAttribute="height" constant="30" id="Xew-d4-Wtm"/>
+                        <constraint firstAttribute="width" constant="2" id="t2S-IU-2m4"/>
                     </constraints>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Yb-i5-NZp">
+                    <rect key="frame" x="112" y="150" width="55" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="2VB-Li-KJk"/>
+                        <constraint firstAttribute="width" constant="55" id="E6I-0i-8Lb"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="1" green="0.96111267810000001" blue="0.93566572670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ezq-ha-BvZ">
+                    <rect key="frame" x="209" y="150" width="59" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="59" id="5gf-Hf-HPb"/>
+                        <constraint firstAttribute="height" constant="21" id="64p-aI-x4O"/>
+                    </constraints>
+                    <state key="normal" image="ZhuBo_Guanzhu.png"/>
+                    <connections>
+                        <action selector="GuanZhuBtnClick:" destination="-1" eventType="touchUpInside" id="hxy-ai-yWA"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="Wzo-bK-fhP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Ban-cK-uuU"/>
-                <constraint firstItem="Wzo-bK-fhP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="CyJ-S1-HKv"/>
-                <constraint firstAttribute="trailing" secondItem="Wzo-bK-fhP" secondAttribute="trailing" id="mWW-VE-Bun"/>
+                <constraint firstItem="W1d-8S-jvM" firstAttribute="centerX" secondItem="mjF-ut-zIM" secondAttribute="centerX" id="3Ei-CI-9pJ"/>
+                <constraint firstItem="cLu-8N-66b" firstAttribute="centerX" secondItem="mjF-ut-zIM" secondAttribute="centerX" id="3PV-Fw-tHV"/>
+                <constraint firstItem="jjs-z1-5r3" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="24" id="535-RK-EFK"/>
+                <constraint firstItem="W1d-8S-jvM" firstAttribute="leading" secondItem="5Yb-i5-NZp" secondAttribute="trailing" constant="20" id="5Jb-8q-DLb"/>
+                <constraint firstItem="mjF-ut-zIM" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="MFR-b9-92l"/>
+                <constraint firstItem="W1d-8S-jvM" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="145" id="VDw-1S-lgS"/>
+                <constraint firstItem="cLu-8N-66b" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="36" id="Vvb-kw-7gO"/>
+                <constraint firstAttribute="trailing" secondItem="mjF-ut-zIM" secondAttribute="trailing" id="afk-ZM-V0l"/>
+                <constraint firstItem="mjF-ut-zIM" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="aqa-mI-Af2"/>
+                <constraint firstItem="ezq-ha-BvZ" firstAttribute="leading" secondItem="W1d-8S-jvM" secondAttribute="trailing" constant="20" id="eyK-km-BIa"/>
+                <constraint firstItem="ezq-ha-BvZ" firstAttribute="top" secondItem="I4b-gs-Z0C" secondAttribute="bottom" constant="13" id="l0D-wX-o3P"/>
+                <constraint firstItem="I4b-gs-Z0C" firstAttribute="centerX" secondItem="mjF-ut-zIM" secondAttribute="centerX" id="qop-q3-4qm"/>
+                <constraint firstItem="I4b-gs-Z0C" firstAttribute="top" secondItem="cLu-8N-66b" secondAttribute="bottom" constant="10" id="siL-8m-qYl"/>
+                <constraint firstItem="5Yb-i5-NZp" firstAttribute="top" secondItem="I4b-gs-Z0C" secondAttribute="bottom" constant="13" id="vzt-jV-9lV"/>
+                <constraint firstItem="jjs-z1-5r3" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="3" id="xBA-BO-o3B"/>
             </constraints>
             <point key="canvasLocation" x="33.5" y="53.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="ZhuBo_Backgroud.png" width="720" height="352"/>
+        <image name="ZhuBo_Guanzhu.png" width="124" height="44"/>
+        <image name="back.png" width="24" height="24"/>
+    </resources>
 </document>

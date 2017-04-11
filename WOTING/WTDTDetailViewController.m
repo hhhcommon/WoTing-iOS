@@ -47,6 +47,7 @@
     _jqTabView.delegate = self;
     _jqTabView.dataSource = self;
     
+    
     [self loadDataGD];
     [self createrRegisterCell];
 }
@@ -434,7 +435,7 @@
     }
     
     [cell setCellWithDict:dict];
-    
+    cell.BoFangImgV.hidden = YES;
     
     return cell;
 }

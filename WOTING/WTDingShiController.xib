@@ -24,13 +24,13 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mLf-XJ-AR1">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FSY-4t-Afh">
-                            <rect key="frame" x="8" y="26" width="25" height="30"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FSY-4t-Afh">
+                            <rect key="frame" x="8" y="26" width="22" height="30"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="25" id="ZZt-Hp-sFA"/>
+                                <constraint firstAttribute="width" constant="22" id="ZZt-Hp-sFA"/>
                                 <constraint firstAttribute="height" constant="30" id="wMH-SL-8It"/>
                             </constraints>
-                            <state key="normal" backgroundImage="back.png"/>
+                            <state key="normal" image="back.png"/>
                             <connections>
                                 <action selector="backBtnClick:" destination="-1" eventType="touchUpInside" id="k2W-oX-az0"/>
                             </connections>
@@ -71,18 +71,16 @@
                     <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                     <subviews>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tG6-1e-ZR4">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="385"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="385" id="emo-yi-tLa"/>
-                            </constraints>
                         </tableView>
                     </subviews>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="tG6-1e-ZR4" secondAttribute="trailing" id="LXn-jn-YLe"/>
-                        <constraint firstItem="tG6-1e-ZR4" firstAttribute="leading" secondItem="DSA-OL-A45" secondAttribute="leading" id="lrl-XL-fQL"/>
-                        <constraint firstItem="tG6-1e-ZR4" firstAttribute="top" secondItem="DSA-OL-A45" secondAttribute="top" id="myO-ff-Kzm"/>
+                        <constraint firstItem="tG6-1e-ZR4" firstAttribute="leading" secondItem="DSA-OL-A45" secondAttribute="leading" id="4rg-kS-9rp"/>
+                        <constraint firstItem="tG6-1e-ZR4" firstAttribute="top" secondItem="DSA-OL-A45" secondAttribute="top" id="QXX-uR-xRs"/>
+                        <constraint firstAttribute="trailing" secondItem="tG6-1e-ZR4" secondAttribute="trailing" id="gM0-4c-Jm6"/>
+                        <constraint firstAttribute="bottom" secondItem="tG6-1e-ZR4" secondAttribute="bottom" id="uPw-gh-gKl"/>
                     </constraints>
                 </view>
             </subviews>
@@ -96,7 +94,7 @@
                 <constraint firstItem="DSA-OL-A45" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="vu5-PX-N5E"/>
                 <constraint firstAttribute="bottom" secondItem="DSA-OL-A45" secondAttribute="bottom" id="wGb-7g-GOd"/>
             </constraints>
-            <point key="canvasLocation" x="25.5" y="52.5"/>
+            <point key="canvasLocation" x="25" y="52"/>
         </view>
     </objects>
     <resources>

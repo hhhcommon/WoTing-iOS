@@ -24,10 +24,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cjE-Za-Mgv">
-                            <rect key="frame" x="8" y="26" width="23" height="30"/>
+                            <rect key="frame" x="0.0" y="22" width="47" height="39"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="23" id="7al-ou-kvb"/>
-                                <constraint firstAttribute="height" constant="30" id="8qm-2i-Sbr"/>
+                                <constraint firstAttribute="width" constant="47" id="7al-ou-kvb"/>
+                                <constraint firstAttribute="height" constant="39" id="8qm-2i-Sbr"/>
                             </constraints>
                             <state key="normal" image="back.png"/>
                             <connections>
@@ -50,8 +50,8 @@
                         <constraint firstItem="AEJ-ma-cDT" firstAttribute="top" secondItem="Oip-Wr-HMX" secondAttribute="top" constant="31" id="3ZO-gt-cDK"/>
                         <constraint firstItem="AEJ-ma-cDT" firstAttribute="centerX" secondItem="Oip-Wr-HMX" secondAttribute="centerX" id="Bcx-g3-494"/>
                         <constraint firstAttribute="height" constant="64" id="Hvv-aV-ywN"/>
-                        <constraint firstItem="cjE-Za-Mgv" firstAttribute="leading" secondItem="Oip-Wr-HMX" secondAttribute="leading" constant="8" id="JSZ-Vm-3ss"/>
-                        <constraint firstItem="cjE-Za-Mgv" firstAttribute="top" secondItem="Oip-Wr-HMX" secondAttribute="top" constant="26" id="wKP-h0-x0e"/>
+                        <constraint firstItem="cjE-Za-Mgv" firstAttribute="leading" secondItem="Oip-Wr-HMX" secondAttribute="leading" id="JSZ-Vm-3ss"/>
+                        <constraint firstItem="cjE-Za-Mgv" firstAttribute="top" secondItem="Oip-Wr-HMX" secondAttribute="top" constant="22" id="wKP-h0-x0e"/>
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gco-c5-9tq">

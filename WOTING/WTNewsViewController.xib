@@ -23,10 +23,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tAG-ck-ant">
-                            <rect key="frame" x="7" y="29" width="24" height="24"/>
+                            <rect key="frame" x="0.0" y="25" width="54" height="31"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="24" id="IaL-kJ-jBj"/>
-                                <constraint firstAttribute="width" constant="24" id="yHV-PM-Zd3"/>
+                                <constraint firstAttribute="height" constant="31" id="IaL-kJ-jBj"/>
+                                <constraint firstAttribute="width" constant="54" id="yHV-PM-Zd3"/>
                             </constraints>
                             <state key="normal" image="back.png"/>
                             <connections>
@@ -46,10 +46,10 @@
                     </subviews>
                     <color key="backgroundColor" red="1" green="0.38915392440000002" blue="0.1089368786" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="tAG-ck-ant" firstAttribute="top" secondItem="IDY-Nf-dgZ" secondAttribute="top" constant="29" id="7O3-4M-rlQ"/>
+                        <constraint firstItem="tAG-ck-ant" firstAttribute="top" secondItem="IDY-Nf-dgZ" secondAttribute="top" constant="25" id="7O3-4M-rlQ"/>
                         <constraint firstItem="5ko-Zg-d4Q" firstAttribute="centerX" secondItem="IDY-Nf-dgZ" secondAttribute="centerX" id="Wzx-hH-MHg"/>
                         <constraint firstAttribute="height" constant="64" id="cIG-hC-89J"/>
-                        <constraint firstItem="tAG-ck-ant" firstAttribute="leading" secondItem="IDY-Nf-dgZ" secondAttribute="leading" constant="7" id="oMs-hy-vob"/>
+                        <constraint firstItem="tAG-ck-ant" firstAttribute="leading" secondItem="IDY-Nf-dgZ" secondAttribute="leading" id="oMs-hy-vob"/>
                         <constraint firstItem="5ko-Zg-d4Q" firstAttribute="top" secondItem="IDY-Nf-dgZ" secondAttribute="top" constant="32" id="w52-6g-qHS"/>
                     </constraints>
                 </view>

@@ -15,6 +15,7 @@
 #import "WTPingLunViewController.h"     //评论页
 #import "WTZhuanJiViewController.h"     //专辑页
 #import "WTGengDuoController.h"         //更多页
+#import "WTGengDuoDianTaiController.h"  //更多电台页
 
 #import "WTLikeListViewController.h"    //喜欢或播放历史界面
 #import "WTDingShiController.h"         //定时关闭
@@ -22,6 +23,7 @@
 
 #import "WTBoFangTableViewCell.h"   //节目, 电台格式cell
 #import "WTLikeCell.h"      //专辑格式cell
+#import "WTDianTaiTableViewCell.h"  //电台样式cell
 #import "WTBoFangCell.h"
 #import "WTBoFangJMCell.h"
 #import "WTBoFangXQCell.h"
@@ -58,7 +60,8 @@
     
     WTBoFangCell    *bofangCell;
     
-    
+    NSInteger       page;       //数据加载更多请求&
+    NSInteger       pageSearch; //数据Search加载更多
 }
 
 @property (nonatomic ,strong) AVPlayer   *player;
@@ -83,7 +86,8 @@
     _musicIndex = 0;
     BoFangXQ = 0;
     BoFangDH = 0;
-   
+    page = 2;
+    pageSearch = 3;
     //跳转过来的新数据
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableViewAndData:) name:@"TABLEVIEWCLICK" object:nil];
     
@@ -112,6 +116,8 @@
     
     
     _JQtableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoveData)];
+    _JQtableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadDataMove)];
+    
 }
 
 //语音搜索结束
@@ -136,7 +142,7 @@
 - (void)reloadTableViewAndData:(NSNotification *)nt {
     self.musicIndex = 0;
     BoFangDH = 0;
-    [self beginbtnYes];
+    [self beginbtnYes]; //保存播放历史
     
     NSDictionary *dataDict = nt.userInfo;
     [dataBFArray removeAllObjects];
@@ -144,6 +150,26 @@
     if (dataDict[@"ContentName"]) {
         
         [dataBFArray addObject:dataDict];
+        [_musics removeAllObjects];
+        for (NSDictionary *dict in dataBFArray) {
+            
+            WTBoFangModel *model = [[WTBoFangModel alloc] initWithDictionary:dict error:nil];
+            [_musics addObject:model];
+        }
+        
+        bofangCell.playing = YES;
+        bofangCell.beginBtn.selected = YES;
+        changPag = 1;
+        [_JQtableView reloadData];
+        [self playMusic];
+        [[JQMusicTool sharedJQMusicTool] play];
+        //改变图片
+        NSDictionary *dataDict = dataBFArray[_musicIndex];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"CHANGEIMAGEVIEW" object:nil userInfo:dataDict];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"BENGINTIME" object:nil];   //开始旋转
+        //还原动画
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"RESTORETIME" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"BOFANGDONGHUA" object:nil];    //播放动画
         
         SearchStr = dataDict[@"ContentName"];
     }else {     //语音搜索传过来的字典
@@ -174,57 +200,45 @@
             [_musics removeAllObjects];
             [dataBFArray addObjectsFromArray: ResultList[@"List"]];
             
-            for (NSDictionary *dict in dataBFArray) {
-                
-                WTBoFangModel *model = [[WTBoFangModel alloc] initWithDictionary:dict error:nil];
-                [_musics addObject:model];
-            }
-            
-            changPag = 1;
-            [_JQtableView.mj_footer resetNoMoreData];
-            
-            [_JQtableView reloadData];
-            [self playMusic];
-            
-            //改变图片
-            NSDictionary *dataDict = dataBFArray[_musicIndex];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"CHANGEIMAGEVIEW" object:nil userInfo:dataDict];
+//            for (NSDictionary *dict in dataBFArray) {
+//                
+//                WTBoFangModel *model = [[WTBoFangModel alloc] initWithDictionary:dict error:nil];
+//                [_musics addObject:model];
+//            }
+//            
+//            changPag = 1;
+//            [_JQtableView.mj_footer resetNoMoreData];
+//            
+//            [_JQtableView reloadData];
+//            [self playMusic];
+//            
+//            //改变图片
+//            NSDictionary *dataDict = dataBFArray[_musicIndex];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"CHANGEIMAGEVIEW" object:nil userInfo:dataDict];
             
         }else if ([ReturnType isEqualToString:@"T"]){
             
             [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
         }else if ([ReturnType isEqualToString:@"1011"]) {
             
-            [_musics removeAllObjects];
-            
-            for (NSDictionary *dict in dataBFArray) {
-                
-                WTBoFangModel *model = [[WTBoFangModel alloc] initWithDictionary:dict error:nil];
-                [_musics addObject:model];
-            }
-            [_JQtableView reloadData];
-            [self playMusic];
-            
-            //改变图片
-            NSDictionary *dataDict = dataBFArray[self.musicIndex];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"CHANGEIMAGEVIEW" object:nil userInfo:dataDict];
+//            [_musics removeAllObjects];
+//            
+//            for (NSDictionary *dict in dataBFArray) {
+//                
+//                WTBoFangModel *model = [[WTBoFangModel alloc] initWithDictionary:dict error:nil];
+//                [_musics addObject:model];
+//            }
+//            [_JQtableView reloadData];
+//            [self playMusic];
+//            
+//            //改变图片
+//            NSDictionary *dataDict = dataBFArray[self.musicIndex];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"CHANGEIMAGEVIEW" object:nil userInfo:dataDict];
         }
         
     } fail:^(NSError *error) {
         
-        [_musics removeAllObjects];
-        for (NSDictionary *dict in dataBFArray) {
-            
-            WTBoFangModel *model = [[WTBoFangModel alloc] initWithDictionary:dict error:nil];
-            [_musics addObject:model];
-        }
         
-        changPag = 1;
-        [_JQtableView reloadData];
-        [self playMusic];
-        //改变图片
-        NSDictionary *dataDict = dataBFArray[_musicIndex];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"CHANGEIMAGEVIEW" object:nil userInfo:dataDict];
     }];
     
     
@@ -245,13 +259,9 @@
     
     [_JQtableView registerNib:BoFangNib forCellReuseIdentifier:@"cellIDB"];
     
-    UINib *BoFangJMNib = [UINib nibWithNibName:@"WTBoFangJMCell" bundle:nil];
+    UINib *BoFangDTNib = [UINib nibWithNibName:@"WTDianTaiTableViewCell" bundle:nil];
     
-    [_JQtableView registerNib:BoFangJMNib forCellReuseIdentifier:@"cellIDJM"];
-    
-    UINib *BoFangXQNib = [UINib nibWithNibName:@"WTBoFangXQCell" bundle:nil];
-    
-    [_JQtableView registerNib:BoFangXQNib forCellReuseIdentifier:@"cellIDXQ"];
+    [_JQtableView registerNib:BoFangDTNib forCellReuseIdentifier:@"cellIDT"];
 }
 
 //网络请求
@@ -305,12 +315,13 @@
     
 }
 
-//加载更多数据
-- (void)loadMoveData {
+//加载更多数据(下拉)
+
+- (void)loadDataMove {
     
     if (changPag == 0) {
         
-        static NSInteger page = 2;
+        
         NSString *pageStr = [NSString stringWithFormat:@"%ld",page];
         
         NSString *IMEI = [AutomatePlist readPlistForKey:@"IMEI"];
@@ -322,6 +333,130 @@
         NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",pageStr,@"Page",@"0",@"PageType",@"10",@"PageSize",  nil];
         
         NSString *login_Str = WoTing_MainPage;
+        
+        [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
+            
+            [_JQtableView.mj_header endRefreshing];
+            
+            NSDictionary *resultDict = (NSDictionary *)response;
+            
+            NSString  *ReturnType = [resultDict objectForKey:@"ReturnType"];
+            if ([ReturnType isEqualToString:@"1001"]) {
+                
+                NSDictionary *ResultList = resultDict[@"ResultList"];
+                
+                for (NSDictionary *dict in ResultList[@"List"]) {
+                    
+                    [dataBFArray insertObject:dict atIndex:0];
+                    
+                }
+                [_musics removeAllObjects];
+                
+                for (NSDictionary *dict in dataBFArray) {
+                    
+                    WTBoFangModel *model = [[WTBoFangModel alloc] initWithDictionary:dict error:nil];
+                    
+                    [_musics addObject:model];
+                }
+                
+                [_JQtableView reloadData];
+                
+                
+            }else if ([ReturnType isEqualToString:@"T"]){
+                
+                [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
+            }else if ([ReturnType isEqualToString:@"1011"]){
+                
+                [_JQtableView.mj_footer endRefreshingWithNoMoreData];   //显示全部加载
+            }
+            
+        } fail:^(NSError *error) {
+            
+            [_JQtableView.mj_header endRefreshing];
+            
+        }];
+        
+        page++;
+    }else {
+        
+        NSString *pageStr = [NSString stringWithFormat:@"%ld",pageSearch];
+        
+        NSString *uid = [AutomatePlist readPlistForKey:@"Uid"];
+        NSString *IMEI = [AutomatePlist readPlistForKey:@"IMEI"];
+        NSString *ScreenSize = [AutomatePlist readPlistForKey:@"ScreenSize"];
+        NSString *MobileClass = [AutomatePlist readPlistForKey:@"MobileClass"];
+        NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
+        NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
+        
+        NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",pageStr,@"Page",uid,@"UserId",SearchStr,@"SearchStr",@"0",@"PageType",  nil];
+        
+        NSString *login_Str = WoTing_searchBy;
+        
+        [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
+            
+            [_JQtableView.mj_header endRefreshing];
+            
+            NSDictionary *resultDict = (NSDictionary *)response;
+            
+            NSString  *ReturnType = [resultDict objectForKey:@"ReturnType"];
+            if ([ReturnType isEqualToString:@"1001"]) {
+                
+                NSDictionary *ResultList = resultDict[@"ResultList"];
+                
+                for (NSDictionary *dict in ResultList[@"List"]) {
+                    
+                    [dataBFArray insertObject:dict atIndex:0];
+                    
+                }
+                [_musics removeAllObjects];
+                
+                for (NSDictionary *dict in dataBFArray) {
+                    
+                    WTBoFangModel *model = [[WTBoFangModel alloc] initWithDictionary:dict error:nil];
+                    
+                    [_musics addObject:model];
+                }
+                
+                [_JQtableView reloadData];
+                
+            }else if ([ReturnType isEqualToString:@"T"]){
+                
+                [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
+            }else if ([ReturnType isEqualToString:@"1011"]){
+                
+                [_JQtableView.mj_footer endRefreshingWithNoMoreData];
+            }
+            
+        } fail:^(NSError *error) {
+            
+            [_JQtableView.mj_header endRefreshing];
+            
+        }];
+        
+        pageSearch++;
+        
+    }
+
+}
+
+//加载更多数据(上拉)
+- (void)loadMoveData {
+    
+    if (changPag == 0) {
+        
+        
+        NSString *pageStr = [NSString stringWithFormat:@"%ld",page];
+        
+        NSString *IMEI = [AutomatePlist readPlistForKey:@"IMEI"];
+        NSString *ScreenSize = [AutomatePlist readPlistForKey:@"ScreenSize"];
+        NSString *MobileClass = [AutomatePlist readPlistForKey:@"MobileClass"];
+        NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
+        NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
+        
+        NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",pageStr,@"Page",@"0",@"PageType",@"10",@"PageSize",  nil];
+        
+        NSString *login_Str = WoTing_MainPage;
+        NSLog(@"%@", parameters);
         
         [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
             
@@ -363,9 +498,8 @@
 
         page++;
     }else {
-        
-        static NSInteger page = 3;
-        NSString *pageStr = [NSString stringWithFormat:@"%ld",page];
+
+        NSString *pageStr = [NSString stringWithFormat:@"%ld",pageSearch];
         
         NSString *uid = [AutomatePlist readPlistForKey:@"Uid"];
         NSString *IMEI = [AutomatePlist readPlistForKey:@"IMEI"];
@@ -416,7 +550,7 @@
             
         }];
         
-        page++;
+        pageSearch++;
         
     }
 }
@@ -486,23 +620,14 @@
         
         BOOL isRept = NO;
         FMResultSet *resultSet = [db executeQuery:@"SELECT * FROM BFLS"];
-        // 遍历结果，如果重复就删除数据
+        // 遍历结果，如果重复就不进行保存
         while ([resultSet next]) {
             
             NSData *ID = [resultSet dataForColumn:@"BFLS"];
             NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:ID options:NSJSONReadingMutableLeaves error:nil];
             if ([dict[@"ContentId"] isEqualToString:jsonDict[@"ContentId"]]) {
                 
-                //            NSString *deleteSql = [NSString stringWithFormat:@"delete from BFLS where BFLS='%@'",ID];
-                //            NSLog(@"%@", deleteSql);
-                //            //    NSString *deleteSql = @"delete from BFLS where MusicDict";
-                //            BOOL isOk = [db executeUpdate:deleteSql];
-                //
-                //            if (isOk) {
-                //                NSLog(@"删除数据成功! 😄");
-                //            }else{
-                //                NSLog(@"删除数据失败! 💔");
-                //            }
+                
                 isRept = YES;
             }
         }
@@ -514,7 +639,7 @@
             if (isOk) {
                 NSLog(@"添加数据成功");
             }
-            //dict = nil;
+          
         }
  
     }
@@ -579,15 +704,25 @@
 
 #pragma mark 点击更多
 - (void)MoveBtn {
-    
-    WTGengDuoController *gengDVC = [[WTGengDuoController alloc] init];
     if (dataBFArray.count != 0) {
+        if ([dataBFArray[_musicIndex][@"MediaType"] isEqualToString:@"RADIO"]) {
+            
+            WTGengDuoDianTaiController *gengDTVC = [[WTGengDuoDianTaiController alloc] init];
+            
+            gengDTVC.dataDict = dataBFArray[_musicIndex];
+
+            gengDTVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:gengDTVC animated:YES];
+        }else{
         
-        gengDVC.dataDict = dataBFArray[_musicIndex];
+            WTGengDuoController *gengDVC = [[WTGengDuoController alloc] init];
+        
+            gengDVC.dataDict = dataBFArray[_musicIndex];
+            
+            gengDVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:gengDVC animated:YES];
+        }
     }
-    
-    gengDVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:gengDVC animated:YES];
 }
 - (void)Viewtap {
 }
@@ -642,6 +777,9 @@
     [_JQtableView reloadData];
     [self playMusic];
     [[JQMusicTool sharedJQMusicTool] play];
+    
+    //改变更多页
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"GENGDUOCHANGER" object:nil userInfo:dataDict];
 }
 
 #pragma mark 播放下一首
@@ -661,6 +799,9 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
     [self playMusic];
     [[JQMusicTool sharedJQMusicTool] play];
+    
+    //改变更多页
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"GENGDUOCHANGER" object:nil userInfo:dataDict];
 }
 
 - (void)HYCNext{
@@ -775,6 +916,44 @@
             
             
             return cell;
+        }else if ([dataBFArray[indexPath.row][@"MediaType"] isEqualToString:@"RADIO"]){
+            
+            static NSString *cellID = @"cellIDT";
+            
+            WTDianTaiTableViewCell *cell = (WTDianTaiTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+            
+            
+            NSDictionary *dict = dataBFArray[indexPath.row];
+            [cell setCellWithDict:dict];
+            
+            // 加载所有的动画图片
+            NSMutableArray *images = [NSMutableArray array];
+            for (int i = 1; i <= 18; i++) {
+                NSString *filename = [NSString stringWithFormat:@"%@_%d", @"play_flag_wave", i];
+                NSString *file = [[NSBundle mainBundle] pathForResource:filename ofType:@"png"];
+                UIImage *image = [UIImage imageWithContentsOfFile:file];
+                [images addObject:image];
+            }
+            
+            
+            cell.BoFangImgV.hidden = YES;
+            
+            if (BoFangDH == (long)indexPath.row) {
+                
+                cell.BoFangImgV.hidden = NO;
+                cell.BoFangImgV.animationImages = images;
+                BoFangimgV = cell.BoFangImgV;
+                
+                if (isBegin) {  //判断播放状态
+                    
+                    [BoFangimgV startAnimating];
+                }
+            }
+            
+            
+            
+            return cell;
+    
         }else {
         
             static NSString *cellID = @"cellID";
@@ -867,13 +1046,6 @@
             
             return 180;
         }
-//        else if (indexPath.row == 1){
-//            
-//            return 44;
-//        }else{
-//            
-//            return BoFangXQ;
-//        }
         
     }else {
     

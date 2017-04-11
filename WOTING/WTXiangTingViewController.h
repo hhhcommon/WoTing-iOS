@@ -9,5 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @interface WTXiangTingViewController : UIViewController
+- (IBAction)MoveBtnClick:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *charBtn;
+@property (weak, nonatomic) IBOutlet UIButton *TongXunLuBtn;
+- (IBAction)charBtnClick:(id)sender;
+- (IBAction)TongXunLuBtnClick:(id)sender;
+
+
+
 
 @end

@@ -24,6 +24,9 @@
 
 @property (nonatomic,assign)CGAffineTransform startTransform; //记录最开始contentImg的旋转位置
 @property (nonatomic,strong)NSTimer *timer;
+@property (nonatomic,strong)NSTimer *HYCOFFAPPtimer;
+//定时器属性
+
 
 @end
 
@@ -41,6 +44,86 @@
     // Do any additional setup after loading the view.
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(firstVCClick) name:@"TABBARSELECATE" object:nil];
+    
+     _HYCOFFAPPtimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(actionHYC) userInfo:nil repeats:YES];
+}
+
+#define mark --timer
+- (void)actionHYC {
+    
+    
+    
+    
+    NSUserDefaults *udf = [NSUserDefaults standardUserDefaults];
+    
+    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
+    
+    dateFormatter.dateFormat=@"dd:HH:mm:ss";//指定转date得日期格式化形式
+    
+    
+    
+    
+    
+    NSArray *arrayHYCTime = [
+                             
+                             [self dateTimeDifferenceWithStartTime:[dateFormatter stringFromDate:[NSDate date]] endTime:[udf objectForKey:KEYHYC_______HYCKEY]]
+                             
+                             componentsSeparatedByString:@":"];
+    
+    
+    
+    if ([[arrayHYCTime lastObject]intValue] <= 0 && [[arrayHYCTime firstObject]intValue] <= 0 ) {
+        
+        if (self.cellSelectedBlock) {
+            self.cellSelectedBlock(@"00:00");
+        }
+        
+        [_HYCOFFAPPtimer setFireDate:[NSDate distantFuture]];
+        [[NSUserDefaults standardUserDefaults] setInteger:6 forKey:KEYHYCBOOL_______HYCKEY];
+        
+        if ([udf objectForKey:KEYHYC_______HYCKEY]) {
+            [[NSUserDefaults standardUserDefaults] setObject:nil forKey:KEYHYC_______HYCKEY];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            exit(1);
+            
+        }
+        
+    }else{
+        
+        
+        if (self.cellSelectedBlock) {
+            self.cellSelectedBlock([self dateTimeDifferenceWithStartTime:[dateFormatter stringFromDate:[NSDate date]] endTime:[udf objectForKey:KEYHYC_______HYCKEY]]);
+        }
+    }
+}
+
+- (void)startTimer{
+    
+    [_HYCOFFAPPtimer setFireDate:[NSDate distantPast]];
+    
+}
+
+
+- (NSString *)dateTimeDifferenceWithStartTime:(NSString *)startTime endTime:(NSString *)endTime{
+    NSDateFormatter *date = [[NSDateFormatter alloc]init];
+    [date setDateFormat:@"dd:HH:mm:ss"];
+    NSDate *startD =[date dateFromString:startTime];
+    NSDate *endD = [date dateFromString:endTime];
+    NSTimeInterval start = [startD timeIntervalSince1970];
+    NSTimeInterval end = [endD timeIntervalSince1970];
+    NSTimeInterval value = end - start;
+    int second = (int)value %60;//秒
+    int minute = (int)value /60;
+    //int house = (int)value /60/60%60;
+    
+    
+    
+    NSString *str;
+    
+    str = [NSString stringWithFormat:@"%02d:%02d",minute,second];
+    NSLog(@"%@",str);
+    return str;
 }
 
 - (UIImage *)imageWithColor:(UIColor *)color {

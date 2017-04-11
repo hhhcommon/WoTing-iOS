@@ -9,5 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @interface WTZhuBoController : UIViewController
+@property (weak, nonatomic) IBOutlet UIImageView *backView;
+@property (weak, nonatomic) IBOutlet UILabel *contentName;
+@property (weak, nonatomic) IBOutlet UIImageView *contentImgV;
+@property (weak, nonatomic) IBOutlet UILabel *numLab;
+- (IBAction)backBtnClick:(id)sender;
+- (IBAction)GuanZhuBtnClick:(id)sender;
+
+@property (nonatomic, strong) NSDictionary *dataDefDict;
 
 @end

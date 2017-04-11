@@ -212,16 +212,21 @@
 #pragma mark - 按钮选中
 - (void)XuanZhongDownLoadBtnClick:(UIButton *)btn{
     
-    if (btn.selected) {
+    if (isQXuan) {
         
-        btn.selected = NO;
-        
+        if (btn.selected) {
+            
+            btn.selected = NO;
+            isQXuan = NO;
+        }
     }else{
         
         [dataZJJMCellArr addObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - 300]];
         
         btn.selected = YES;
+       
     }
+ 
 }
 
 //点击开始下载

@@ -78,7 +78,7 @@
     NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
     NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
     
-    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",uid,@"UserId",@"cn10",@"CatalogId", @"4",@"Size",nil];
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",@"cn17",@"CatalogId", @"4",@"Size",uid,@"UserId",nil];
     
     NSString *login_Str = WoTing_LunBo;
     
@@ -92,8 +92,11 @@
         if ([ReturnType isEqualToString:@"1001"]) {
             
             [imageNameArray removeAllObjects];
-            NSDictionary *ResultList = resultDict[@"ResultList"];
-            [imageNameArray addObjectsFromArray: ResultList[@"List"]];
+            NSArray *ResultArr = resultDict[@"LoopImgs"];
+            for (NSDictionary *dict in ResultArr) {
+                
+                [imageNameArray addObject:dict[@"LoopImg"]];
+            }
             
             scrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, POINT_Y(320)) delegate:self placeholderImage:[UIImage imageNamed:@"liangYan.png"]];
             scrollView.backgroundColor = [UIColor groupTableViewBackgroundColor];

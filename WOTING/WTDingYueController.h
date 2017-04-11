@@ -10,6 +10,7 @@
 
 @interface WTDingYueController : UIViewController
 - (IBAction)backBtnClick:(id)sender;
+
 @property (weak, nonatomic) IBOutlet UITableView *DingYueTabV;
 
 @end

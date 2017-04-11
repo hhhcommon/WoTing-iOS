@@ -8,54 +8,79 @@
 
 #import "WTDingShiController.h"
 #import "WTDingShiCell.h"
+#import "MainViewController.h"
+
+
 
 @interface WTDingShiController ()<UITableViewDelegate, UITableViewDataSource>{
     
     NSArray  *dataTimeArr;
     long number;
-    NSInteger timefirst;    //0为第一次
+    
 }
-
-@property (nonatomic,assign)NSInteger Timenumber;   //倒计时
-@property (nonatomic,strong)NSTimer *timer;
-//定时器属性
 
 @end
 
 @implementation WTDingShiController
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    timefirst = 0;
-    number = 6;
+    self.navigationController.navigationBar.hidden = YES;
+    
+    
+    
+    number = [[NSUserDefaults standardUserDefaults] integerForKey:KEYHYCBOOL_______HYCKEY];
+    
+    
+    
+    
     _TimeLab.text = @"00:00";
+    
+    
+    
     _TimeTab.delegate = self;
     _TimeTab.dataSource = self;
     
     dataTimeArr = @[@"10分钟",@"20分钟",@"30分钟",@"40分钟",@"50分钟",@"60分钟",@"不启动"];
     
+    
+    [[MainViewController sharedManager]  setCellSelectedBlock:^(NSString *timeLabel) {
+        
+        
+        _TimeLab.text = timeLabel;
+        
+        if ([timeLabel isEqualToString:@"00:00"]) {
+            
+            number = 6;
+            
+            [self.TimeTab reloadData];
+            
+        }
+        
+        
+        
+    }];
+    
+    
+    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.TimeTab.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    [self hideTableViewExtraLine];
     [self registerCell];
 }
 
-- (void)createTime {
-    timefirst = 1;
+- (void)viewWillAppear:(BOOL)animated{
     
-    NSDictionary *userInfo = @{@"key":@"value"};
-    _timer = [NSTimer scheduledTimerWithTimeInterval:1.f target:self selector:@selector(runTime:) userInfo:userInfo repeats:YES];
+    [super viewWillAppear:animated];
+    
+    
+    
+    
 }
 
-- (void)runTime:(NSTimer *)time {
-    
-    _Timenumber--;
-    
-    _TimeLab.text = [WKProgressHUD timeFormatted:_Timenumber];
-    
-    if (_Timenumber == -1) {
-        
-        exit(0);
-    }
-}
+
 
 - (void)registerCell {
     
@@ -95,39 +120,43 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (timefirst == 0) {
-        
-        [self createTime];
-    }
+    NSUserDefaults *udf = [NSUserDefaults standardUserDefaults];
     
-    if (indexPath.row == 0) {
+    [udf setInteger:indexPath.row forKey:KEYHYCBOOL_______HYCKEY];
+    
+    if (indexPath.row == 6) {
         
-        _Timenumber = 10*60 -1;
-    }else if (indexPath.row == 1) {
+        // [_timer setFireDate:[NSDate distantFuture]];
         
-        _Timenumber = 20*60 -1;
-    }else if (indexPath.row == 2) {
+        [udf setObject:nil
+                forKey:KEYHYC_______HYCKEY];
         
-        _Timenumber = 30*60 -1;
-    }else if (indexPath.row == 3) {
-        
-        _Timenumber = 40*60 -1;
-    }else if (indexPath.row == 4) {
-        
-        _Timenumber = 50*60 -1;
-    }else if (indexPath.row == 5) {
-        
-        _Timenumber = 60*60 -1;
-    }else if (indexPath.row == 6) {
-        
-        [_timer invalidate];
-        timefirst = 0;
         _TimeLab.text = @"00:00";
+        
+    }else{
+        
+        NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
+        
+        dateFormatter.dateFormat=@"dd:HH:mm:ss";//指定转date得日期格式化形式
+        
+        [udf setObject:
+         
+         [dateFormatter stringFromDate:
+          
+          [NSDate dateWithTimeInterval:(indexPath.row+1)*600 sinceDate:[NSDate date]]
+          
+          ]
+         
+                forKey:KEYHYC_______HYCKEY];
+        
+        [[MainViewController sharedManager] startTimer];
+        
+        //  [_timer setFireDate:[NSDate distantPast]];
+        //  [_timer setFireDate:[NSDate distantFuture]];
     }
-    
-    
     number = indexPath.row;
     [_TimeTab reloadData];
+    [udf synchronize];
     
 }
 
@@ -136,21 +165,22 @@
     return 55;
 }
 
+
+
+
+
+//隐藏多余的行
+-(void)hideTableViewExtraLine
+{
+    UIView *view=[[UIView alloc]initWithFrame:CGRectZero];
+    self.TimeTab.tableFooterView=view;
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (IBAction)backBtnClick:(id)sender {
     

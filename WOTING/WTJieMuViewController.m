@@ -29,6 +29,8 @@
     _JMXQTabV.dataSource = self;
     
     [self registerTabJMCell];
+    
+    
 }
 
 - (void)registerTabJMCell{

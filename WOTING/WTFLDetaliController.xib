@@ -25,10 +25,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KiX-iR-ztG">
-                            <rect key="frame" x="7" y="29" width="24" height="24"/>
+                            <rect key="frame" x="0.0" y="22" width="47" height="40"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="24" id="EwD-5h-bzl"/>
-                                <constraint firstAttribute="height" constant="24" id="tfy-iP-CAU"/>
+                                <constraint firstAttribute="width" constant="47" id="EwD-5h-bzl"/>
+                                <constraint firstAttribute="height" constant="40" id="tfy-iP-CAU"/>
                             </constraints>
                             <state key="normal" image="back.png"/>
                             <connections>
@@ -49,10 +49,10 @@
                     <color key="backgroundColor" red="1" green="0.38915392440000002" blue="0.1089368786" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="wYn-RE-bUk" firstAttribute="top" secondItem="zse-nB-gJz" secondAttribute="top" constant="32" id="FIj-Ol-DlY"/>
-                        <constraint firstItem="KiX-iR-ztG" firstAttribute="top" secondItem="zse-nB-gJz" secondAttribute="top" constant="29" id="SQv-yy-Lqz"/>
+                        <constraint firstItem="KiX-iR-ztG" firstAttribute="top" secondItem="zse-nB-gJz" secondAttribute="top" constant="22" id="SQv-yy-Lqz"/>
                         <constraint firstItem="wYn-RE-bUk" firstAttribute="centerX" secondItem="zse-nB-gJz" secondAttribute="centerX" id="e8i-kC-jHa"/>
                         <constraint firstAttribute="height" constant="64" id="h7L-UO-pUn"/>
-                        <constraint firstItem="KiX-iR-ztG" firstAttribute="leading" secondItem="zse-nB-gJz" secondAttribute="leading" constant="7" id="ptz-es-qUi"/>
+                        <constraint firstItem="KiX-iR-ztG" firstAttribute="leading" secondItem="zse-nB-gJz" secondAttribute="leading" id="ptz-es-qUi"/>
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GEf-GL-2X6">

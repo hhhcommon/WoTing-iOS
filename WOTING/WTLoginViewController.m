@@ -100,9 +100,9 @@
 
             [AutomatePlist writePlistForkey:@"LoginDict" valueDict:heheDict];
             [AutomatePlist writePlistForkey:@"Uid" value:heheDict[@"UserId"]];
-            [AutomatePlist writePlistForkey:@"UName" value:heheDict[@"UserName"]];
             [AutomatePlist writePlistForkey:@"Region" value:heheDict[@"Region"]];
             [AutomatePlist writePlistForkey:@"NickName" value:heheDict[@"NickName"]];
+            [AutomatePlist writePlistForkey:@"UserSign" value:@"UserSign"];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginChangeNotification" object:nil userInfo:heheDict];
             

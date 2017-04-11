@@ -8,10 +8,14 @@
 
 #import "WTBoFangCell.h"
 #import "JQMusicTool.h"
+#import "CBAutoScrollLabel.h"
 
 #import "UCloudMediaPlayer.h"
 
-@interface WTBoFangCell()
+@interface WTBoFangCell(){
+    
+    CBAutoScrollLabel *labelName;   //滚动lab
+}
 
 @property(assign,nonatomic,getter=isDragging)BOOL dragging;//是否正在拖拽
 
@@ -82,7 +86,31 @@
     
     //歌曲名
     self.nameLab.text = playingMusic.ContentName;
-
+    self.nameLab.hidden = YES;
+    __weak WTBoFangCell *weakSelf = self;
+    if (!labelName) {
+        
+        labelName = [[CBAutoScrollLabel alloc] init];
+        //19 14 8 26
+        [self addSubview:labelName];
+        [labelName mas_makeConstraints:^(MASConstraintMaker *make) {
+           
+            make.left.equalTo(_LuKuangBtn.mas_right).with.offset(19);
+            make.top.equalTo(weakSelf.mas_top).with.offset(14);
+            make.right.equalTo(_YuYinBtn.mas_left).with.offset(-8);
+            make.height.mas_equalTo(26);
+        }];
+    }
+    
+    labelName.text = playingMusic.ContentName;
+    
+    labelName.textColor = [UIColor blackColor];
+    labelName.labelSpacing = 35; // distance between start and end labels
+    labelName.pauseInterval = 2; // seconds of pause before scrolling starts again
+    labelName.scrollSpeed = 30; // pixels per second
+    labelName.textAlignment = NSTextAlignmentCenter; // centers text when no auto-scrolling is applied
+    labelName.fadeLength = 12.f;
+    
     
     //歌曲图片
     [self.ContentImgV sd_setImageWithURL:[NSURL URLWithString:[NSString NULLToString:playingMusic.ContentImg]] placeholderImage:[UIImage imageNamed:@"img_radio_default"]];
@@ -198,6 +226,9 @@
 //下一首
 - (IBAction)nextBtnClick:(id)sender {
     
+    //切换之前, 存当前播放时间
+    
+    
     [self notifyDelegateWithBtnType:BtnTypeNext];
     //还原动画
     [[NSNotificationCenter defaultCenter] postNotificationName:@"RESTORETIME" object:nil];
@@ -211,14 +242,14 @@
 //播放.暂停
 - (IBAction)beginBtnClick:(id)sender {
     
-    UIButton  *button = (UIButton*)sender;
-    //更改播放状态
-    self.playing = !self.playing;
-    if (self.playing) {//播放音乐
+ //   UIButton  *button = (UIButton*)sender;
+    
+    
+    if (_beginBtn.selected == NO) {//播放音乐
         NSLog(@"播放音乐");
         //1.如果是播放的状态，按钮的图片更改为暂停的状态
         
-        button.selected = YES;
+        _beginBtn.selected = YES;
 //        [self notifyDelegateWithBtnType:BtnTypePlay];
         [[JQMusicTool sharedJQMusicTool].player play];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"BRGINBTNYES" object:nil];      //入库
@@ -228,7 +259,7 @@
         NSLog(@"暂停音乐");
         //2.如果当前是暂停的状态，按钮的图片更改为播放的状态
         
-        button.selected = NO;
+        _beginBtn.selected = NO;
 //        [self notifyDelegateWithBtnType:BtnTypePause];
         [[JQMusicTool sharedJQMusicTool].player pause];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ZANTINGDONGHUA" object:nil];   //暂停动画
@@ -249,9 +280,13 @@
 -(void)awakeFromNib{
     //设置slider 按钮的图片
     [super awakeFromNib];
-    [self.wtSlider setThumbImage:[UIImage imageNamed:@"progressbar_circular.png"] forState:UIControlStateNormal];
+    [self.wtSlider setThumbImage:[UIImage imageNamed:@"progressLJQ.png"] forState:UIControlStateNormal];
+    [self.wtSlider setThumbImage:[UIImage imageNamed:@"progressLJQ.png"] forState:UIControlStateHighlighted];
+    
     
 }
+
+
 
 
 
@@ -290,6 +325,9 @@
     [[JQMusicTool sharedJQMusicTool].player seekToTime:currentTime];
     
     _beginBtn.selected = YES;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"BRGINBTNYES" object:nil];      //入库
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"BOFANGDONGHUA" object:nil];    //播放动画
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"BENGINTIME" object:nil];     //旋转动画开始
 }
 
 - (void)dealloc {

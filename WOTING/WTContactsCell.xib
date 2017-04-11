@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="80" id="KGk-i7-Jjw" customClass="WTContactsCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4iL-uy-Jys">
+                        <rect key="frame" x="21" y="16" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="L1B-Qv-NRq"/>
+                            <constraint firstAttribute="width" constant="50" id="jAS-p3-WZU"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WT_BoFang_Kuang.png" translatesAutoresizingMaskIntoConstraints="NO" id="F7h-tK-roB">
+                        <rect key="frame" x="21" y="16" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="9Zi-h2-kCb"/>
+                            <constraint firstAttribute="height" constant="50" id="CKR-aB-nEd"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ifb-90-FzJ">
+                        <rect key="frame" x="84" y="7" width="163" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="163" id="RPA-Bu-Rfr"/>
+                            <constraint firstAttribute="height" constant="21" id="Rlm-nu-L2S"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                        <color key="textColor" red="1" green="0.38915392440000002" blue="0.1089368786" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Asu-Mq-zJg">
+                        <rect key="frame" x="84" y="31" width="163" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="163" id="a9z-qV-fGZ"/>
+                            <constraint firstAttribute="height" constant="21" id="lKH-9t-d38"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tu8-Uu-AOw">
+                        <rect key="frame" x="84" y="53" width="163" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="5XT-bc-Rf9"/>
+                            <constraint firstAttribute="width" constant="163" id="Beu-eA-bYw"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dVs-CX-NpG">
+                        <rect key="frame" x="259" y="19" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="a4i-eE-L5s"/>
+                            <constraint firstAttribute="height" constant="40" id="atH-Vk-Upm"/>
+                        </constraints>
+                        <state key="normal" image="Contacts_Jiang.png"/>
+                    </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uir-ix-gAt">
+                        <rect key="frame" x="0.0" y="78" width="320" height="1"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="Dmx-jP-L9T"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="ifb-90-FzJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-1" id="2Hk-tb-txw"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="dVs-CX-NpG" secondAttribute="trailing" constant="13" id="2vY-Of-AqS"/>
+                    <constraint firstAttribute="bottom" secondItem="uir-ix-gAt" secondAttribute="bottom" constant="0.5" id="Ax4-aJ-Mos"/>
+                    <constraint firstItem="F7h-tK-roB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="13" id="Bjz-p0-9WF"/>
+                    <constraint firstItem="uir-ix-gAt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="GuL-93-b3F"/>
+                    <constraint firstItem="Asu-Mq-zJg" firstAttribute="leading" secondItem="F7h-tK-roB" secondAttribute="trailing" constant="13" id="IBI-rD-i4q"/>
+                    <constraint firstItem="dVs-CX-NpG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="11" id="YPP-BS-64x"/>
+                    <constraint firstItem="ifb-90-FzJ" firstAttribute="leading" secondItem="F7h-tK-roB" secondAttribute="trailing" constant="13" id="esg-2z-oO5"/>
+                    <constraint firstItem="4iL-uy-Jys" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="fLn-rE-ZZ9"/>
+                    <constraint firstItem="4iL-uy-Jys" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="13" id="k7B-Fx-Lwt"/>
+                    <constraint firstItem="F7h-tK-roB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="kBi-a9-dry"/>
+                    <constraint firstAttribute="trailing" secondItem="uir-ix-gAt" secondAttribute="trailing" id="nvW-ob-lwE"/>
+                    <constraint firstItem="tu8-Uu-AOw" firstAttribute="top" secondItem="Asu-Mq-zJg" secondAttribute="bottom" constant="1" id="o10-Zi-xsP"/>
+                    <constraint firstItem="Asu-Mq-zJg" firstAttribute="top" secondItem="ifb-90-FzJ" secondAttribute="bottom" constant="3" id="pQc-Dg-dVf"/>
+                    <constraint firstItem="tu8-Uu-AOw" firstAttribute="leading" secondItem="F7h-tK-roB" secondAttribute="trailing" constant="13" id="yVK-3z-AFi"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="HuJiaobtn" destination="dVs-CX-NpG" id="Dw5-aJ-Nob"/>
+                <outlet property="QunBeiZhu" destination="tu8-Uu-AOw" id="Ysc-LZ-Aef"/>
+                <outlet property="QunNumber" destination="Asu-Mq-zJg" id="x8j-aH-gjU"/>
+                <outlet property="contentImgv" destination="4iL-uy-Jys" id="FFH-9X-Ztn"/>
+                <outlet property="contentName" destination="ifb-90-FzJ" id="16L-MP-oRq"/>
+            </connections>
+            <point key="canvasLocation" x="34" y="72"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Contacts_Jiang.png" width="35" height="35"/>
+        <image name="WT_BoFang_Kuang.png" width="130" height="130"/>
+    </resources>
+</document>

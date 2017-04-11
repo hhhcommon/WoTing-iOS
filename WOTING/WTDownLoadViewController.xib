@@ -33,10 +33,10 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ei-ZV-e6F">
-                            <rect key="frame" x="8" y="26" width="22" height="30"/>
+                            <rect key="frame" x="0.0" y="24" width="51" height="39"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="22" id="3E6-57-Nqu"/>
-                                <constraint firstAttribute="height" constant="30" id="wMT-o2-IQ1"/>
+                                <constraint firstAttribute="width" constant="51" id="3E6-57-Nqu"/>
+                                <constraint firstAttribute="height" constant="39" id="wMT-o2-IQ1"/>
                             </constraints>
                             <state key="normal" image="back.png"/>
                             <connections>
@@ -44,14 +44,14 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="1" green="0.25076781660000003" blue="0.019189018320000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="1" green="0.38915392440000002" blue="0.1089368786" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="375" id="1Yt-dd-Q5e"/>
                         <constraint firstItem="RIt-3K-xSw" firstAttribute="top" secondItem="kou-V1-zaO" secondAttribute="top" constant="33" id="7po-m0-LfZ"/>
                         <constraint firstAttribute="height" constant="64" id="CJR-Zh-fe6"/>
-                        <constraint firstItem="4ei-ZV-e6F" firstAttribute="top" secondItem="kou-V1-zaO" secondAttribute="top" constant="26" id="YcO-LU-qNM"/>
+                        <constraint firstItem="4ei-ZV-e6F" firstAttribute="top" secondItem="kou-V1-zaO" secondAttribute="top" constant="24" id="YcO-LU-qNM"/>
                         <constraint firstItem="RIt-3K-xSw" firstAttribute="centerX" secondItem="kou-V1-zaO" secondAttribute="centerX" id="fdN-cu-e7J"/>
-                        <constraint firstItem="4ei-ZV-e6F" firstAttribute="leading" secondItem="kou-V1-zaO" secondAttribute="leading" constant="8" id="v30-sM-FJv"/>
+                        <constraint firstItem="4ei-ZV-e6F" firstAttribute="leading" secondItem="kou-V1-zaO" secondAttribute="leading" id="v30-sM-FJv"/>
                     </constraints>
                 </view>
             </subviews>

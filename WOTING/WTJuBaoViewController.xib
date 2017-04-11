@@ -25,10 +25,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mx8-Ut-CNW">
-                            <rect key="frame" x="8" y="26" width="22" height="30"/>
+                            <rect key="frame" x="1" y="22" width="45" height="38"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="22" id="IUk-fi-rao"/>
-                                <constraint firstAttribute="height" constant="30" id="g8L-PX-f4w"/>
+                                <constraint firstAttribute="width" constant="45" id="IUk-fi-rao"/>
+                                <constraint firstAttribute="height" constant="38" id="g8L-PX-f4w"/>
                             </constraints>
                             <state key="normal" image="back.png"/>
                             <connections>
@@ -36,10 +36,10 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m9P-6j-HXN">
-                            <rect key="frame" x="321" y="26" width="46" height="30"/>
+                            <rect key="frame" x="305" y="26" width="69" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="b1N-tj-H8x"/>
-                                <constraint firstAttribute="width" constant="46" id="e5D-tk-RMj"/>
+                                <constraint firstAttribute="width" constant="69" id="e5D-tk-RMj"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal" title="提交">
@@ -63,12 +63,12 @@
                     <color key="backgroundColor" red="1" green="0.38915392440000002" blue="0.1089368786" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="64" id="4je-PG-0p0"/>
-                        <constraint firstAttribute="trailing" secondItem="m9P-6j-HXN" secondAttribute="trailing" constant="8" id="EGb-d3-FOg"/>
-                        <constraint firstItem="mx8-Ut-CNW" firstAttribute="top" secondItem="vLG-1E-6uj" secondAttribute="top" constant="26" id="PiK-Ga-dnK"/>
+                        <constraint firstAttribute="trailing" secondItem="m9P-6j-HXN" secondAttribute="trailing" constant="1" id="EGb-d3-FOg"/>
+                        <constraint firstItem="mx8-Ut-CNW" firstAttribute="top" secondItem="vLG-1E-6uj" secondAttribute="top" constant="22" id="PiK-Ga-dnK"/>
                         <constraint firstItem="XBz-5k-mwS" firstAttribute="top" secondItem="vLG-1E-6uj" secondAttribute="top" constant="31" id="Wpf-0y-WVX"/>
                         <constraint firstItem="m9P-6j-HXN" firstAttribute="top" secondItem="vLG-1E-6uj" secondAttribute="top" constant="26" id="mLL-WM-Prt"/>
                         <constraint firstItem="XBz-5k-mwS" firstAttribute="centerX" secondItem="vLG-1E-6uj" secondAttribute="centerX" id="sPb-bf-asv"/>
-                        <constraint firstItem="mx8-Ut-CNW" firstAttribute="leading" secondItem="vLG-1E-6uj" secondAttribute="leading" constant="8" id="yVs-Af-nrf"/>
+                        <constraint firstItem="mx8-Ut-CNW" firstAttribute="leading" secondItem="vLG-1E-6uj" secondAttribute="leading" constant="1" id="yVs-Af-nrf"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pe3-D7-O6z">

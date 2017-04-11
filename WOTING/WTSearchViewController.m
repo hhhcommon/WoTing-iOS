@@ -89,7 +89,12 @@
     UITapGestureRecognizer *tapGesturRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(LJQbtnClick:)];
     [firstBarV.HYCKuangImageName addGestureRecognizer:tapGesturRecognizer];
     
-    _timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(runTimeXUAN) userInfo:nil repeats:YES];
+    if (_timer) {
+        
+        
+    }else{
+        _timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(runTimeXUANS) userInfo:nil repeats:YES];
+    }
     if ([transformbegin isEqualToString:@"0"]) {
         
         [_timer setFireDate:[NSDate distantFuture]];    //暂停
@@ -121,7 +126,7 @@
     
 }
 
-- (void)runTimeXUAN{
+- (void)runTimeXUANS{
     
     count+=1;
     
@@ -240,6 +245,7 @@
         [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [btn setBackgroundImage:[UIImage imageNamed:@"search_kuang.png"] forState:UIControlStateNormal];
         btn.titleLabel.font = [UIFont systemFontOfSize:13];
+        btn.contentEdgeInsets = UIEdgeInsetsMake(0,10, 0, 10);
         
         [view addSubview:btn];
         
@@ -286,7 +292,7 @@
     
     for (int i = 0; i < arraySear.count; i++) {
         
-        NSString *title = [arraySear objectAtIndex:i];
+        NSString *title = [NSString NULLToString:[arraySear objectAtIndex:i]];
         
         if (!(i%4)) {
             
@@ -301,7 +307,7 @@
         [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [btn setBackgroundImage:[UIImage imageNamed:@"search_kuang.png"] forState:UIControlStateNormal];
         btn.titleLabel.font = [UIFont systemFontOfSize:13];
-        
+        btn.contentEdgeInsets = UIEdgeInsetsMake(0,10, 0, 10);
         [view addSubview:btn];
         
         XXSear += widthSe +10;
@@ -355,6 +361,7 @@
     [self.view addSubview:view];
     
     searchTab = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, K_Screen_Width, K_Screen_Height - 64) style:UITableViewStylePlain];
+    searchTab.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     searchTab.dataSource = self;
     searchTab.delegate = self;
     [view addSubview:searchTab];

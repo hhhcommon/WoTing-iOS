@@ -17,6 +17,7 @@
 #import "WTDingYueController.h"         //订阅页
 #import "WTJuBaoViewController.h"       //举报页
 #import "WTDownLoadViewController.h"    //我的下载页
+#import "WTZhuBoController.h"           //主播页
 
 #import <UShareUI/UShareUI.h>   //分享
 
@@ -30,36 +31,63 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    NSString *uid = [AutomatePlist readPlistForKey:@"Uid"];
+    if ([uid isEqualToString:@"0"]||[uid isEqualToString:@""]) {
+        
+        _DingYueBtn.hidden = YES;
+        _WDXiHuan.hidden = YES;
+    }else {
+        
+        _DingYueBtn.hidden = NO;
+        _WDXiHuan.hidden = NO;
+    }
+    
     _contentName.text = _dataDict[@"ContentName"];
+    
     if ([[NSString NULLToString:_dataDict[@"ContentFavorite"]] isEqualToString:@"1"]) {
         
         _XiHuanBtn.selected = YES;
-        _XiHuanLab.text = @"已喜欢";
+        
     }else {
         
         _XiHuanBtn.selected = NO;
-        _XiHuanLab.text = @"喜欢";
-    }
-    
-    //判断是节目单还是去下载界面
-    NSString *MediaType = _dataDict[@"MediaType"];
-    if ([MediaType isEqualToString:@"AUDIO"]) {
-        
-        _downLoadLab.text = @"下载";
-        _XiaZaiBtn.selected = NO;
-        
-    }else if ([MediaType isEqualToString:@"RADIO"]) {
-        
-        _downLoadLab.text = @"节目单";
-        _XiaZaiBtn.selected = YES;
         
     }
-    
+
     //判断本地数据库里是否下载该节目
+    [self selectXiaZai];
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
+    float constant = (K_Screen_Width -(65*4) - 20)/3.0;
+    _PaiXuone.constant = 10;
+    _PaiXutwo.constant = constant;
+    _Paixuthere.constant = constant;
+    _PaiXufour.constant = constant;
+    _PaiXufive.constant = 10;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectXiaZaiChange) name:@"LJQXIAZAIWANCHENG" object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"LJQXIAZAIWANCHENG" object:nil];
+
+}
+
+- (void)selectXiaZai{
+    
     FMDatabase *fm = [FMDBTool createDatabaseAndTable:@"XIAZAI"];
     // 1.执行查询语句
     FMResultSet *resultSet = [fm executeQuery:@"SELECT * FROM XIAZAI"];
     // 2.遍历结果
+    BOOL isXIAZAI = NO;
     while ([resultSet next]) {
         
         NSData *ID = [resultSet dataForColumn:@"XIAZAI"];
@@ -67,25 +95,24 @@
         
         if ([[NSString NULLToString:_dataDict[@"ContentId"]] isEqualToString:jsonDict[@"ContentId"]]) {
             
-            _XiaZaiBtn.enabled = NO;
-        }else {
+            isXIAZAI = YES;
             
-            _XiaZaiBtn.enabled = YES;
         }
     }
+    if (isXIAZAI) {
+        
+        _XiaZaiBtn.enabled = NO;
+    }else{
+        
+        _XiaZaiBtn.enabled = YES;
+    }
+
+    
 }
 
-- (void)viewWillAppear:(BOOL)animated{
+- (void)selectXiaZaiChange{
     
-    [super viewWillAppear:animated];
-    
-    float constant = (K_Screen_Width - (24 *2)-(30*4))/3.0;
-    _PaiXuone.constant = 24;
-    _PaiXutwo.constant = constant;
-    _Paixuthere.constant = constant;
-    _PaiXufour.constant = constant;
-    _PaiXufive.constant = 24;
-    
+    _XiaZaiBtn.enabled = NO;
 }
 
 - (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType
@@ -191,50 +218,42 @@
 //点击下载
 - (IBAction)XiaZaiBtnClick:(id)sender {
     
-    if (_XiaZaiBtn.selected) {
-        
-        WTJMDViewController *WTJieMuVC = [[WTJMDViewController alloc] init];
-        
-        WTJieMuVC.hidesBottomBarWhenPushed = YES;
-        WTJieMuVC.contentID = _dataDict[@"ContentId"];
-        [self.navigationController pushViewController:WTJieMuVC animated:YES];
-        
-    }else {
+    [WKProgressHUD popMessage:@"节目进入下载任务列表" inView:nil duration:0.5 animated:YES];
     
-        FMDatabase *db = [FMDBTool createDatabaseAndTable:@"XIAZAI"];
+    FMDatabase *db = [FMDBTool createDatabaseAndTable:@"XIAZAI"];
+    
+    BOOL isRept = NO;
+    FMResultSet *resultSet = [db executeQuery:@"SELECT * FROM XIAZAI"];
+    // 遍历结果，如果重复就不下载
+    while ([resultSet next]) {
         
-        BOOL isRept = NO;
-        FMResultSet *resultSet = [db executeQuery:@"SELECT * FROM XIAZAI"];
-        // 遍历结果，如果重复就不下载
-        while ([resultSet next]) {
+        NSData *ID = [resultSet dataForColumn:@"XIAZAI"];
+        NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:ID options:NSJSONReadingMutableLeaves error:nil];
+        if ([_dataDict[@"ContentId"] isEqualToString:jsonDict[@"ContentId"]]){
             
-            NSData *ID = [resultSet dataForColumn:@"XIAZAI"];
-            NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:ID options:NSJSONReadingMutableLeaves error:nil];
-            if ([_dataDict[@"ContentId"] isEqualToString:jsonDict[@"ContentId"]]){
-                
-                isRept = YES;
-            }
-        }
-        
-        if (!isRept) {
-            
-            if (_dataDict.count) {
-                
-                NSData *data = [NSJSONSerialization dataWithJSONObject:_dataDict options:NSJSONWritingPrettyPrinted error:nil];
-                NSString *sqlInsert = @"insert into XIAZAI values(?,?,?)";
-                BOOL isOk = [db executeUpdate:sqlInsert, _dataDict[@"ContentId"],data ,@"0"];
-                if (isOk) {
-                    NSLog(@"添加数据成功");
-                    //通知下载中
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"XIAZAIWEIWANCHENG" object:nil];
-                    
-                    [self downLoad]; //开始下载
-                }
-                
-            }
-            
+            isRept = YES;
         }
     }
+    
+    if (!isRept) {
+        
+        if (_dataDict.count) {
+            
+            NSData *data = [NSJSONSerialization dataWithJSONObject:_dataDict options:NSJSONWritingPrettyPrinted error:nil];
+            NSString *sqlInsert = @"insert into XIAZAI values(?,?,?)";
+            BOOL isOk = [db executeUpdate:sqlInsert, _dataDict[@"ContentId"],data ,@"0"];
+            if (isOk) {
+                NSLog(@"添加数据成功");
+                //通知下载中
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"XIAZAIWEIWANCHENG" object:nil];
+                
+                [self downLoad]; //开始下载
+            }
+            
+        }
+        
+    }
+    
 }
 
 - (void)downLoad{
@@ -267,6 +286,8 @@
                                                              BOOL isOk = [db executeUpdate:@"UPDATE XIAZAI SET XIAZAIBOOL = ? WHERE XIAZAINum =?",@"1",_dataDict[@"ContentId"]];
                                                              if (isOk) {
                                                                  NSLog(@"更改数据成功! 😄");
+                                                        //通知下载按钮
+                                                                [[NSNotificationCenter defaultCenter] postNotificationName:@"LJQXIAZAIWANCHENG" object:nil];
                                                                  
                                                                  [db close];  //关闭数据库
                                                                  
@@ -334,6 +355,51 @@
 
 //点击查看主播
 - (IBAction)ZhuBoBtnClick:(id)sender {
+    //[12]	(null)	@"ContentPersons" : @"1 element" [1]	(null)	@"PerId" : (no summary)
+    
+    if ([_dataDict[@"ContentPersons"][0][@"PerId"] isKindOfClass:[NSNull class]]) {
+        
+        [WKProgressHUD popMessage:@"该节目暂无主播信息" inView:nil duration:0.5 animated:YES];
+    }else{
+        WTZhuBoController *wtZBVC = [[WTZhuBoController alloc] init];
+        wtZBVC.dataDefDict = _dataDict;
+        [self.navigationController pushViewController:wtZBVC animated:YES];
+    
+//        NSString *PersonId = _dataDict[@"ContentPersons"][0][@"PerId"];
+//    
+//        NSString *uid = [AutomatePlist readPlistForKey:@"Uid"];
+//        NSString *IMEI = [AutomatePlist readPlistForKey:@"IMEI"];
+//        NSString *ScreenSize = [AutomatePlist readPlistForKey:@"ScreenSize"];
+//        NSString *MobileClass = [AutomatePlist readPlistForKey:@"MobileClass"];
+//        NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
+//        NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
+//        
+//        NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",PersonId,@"PersonId",@"3",@"SeqMediaSize",@"10",@"MediaAssetSize",uid,@"UserId", nil];
+//        
+//        
+//        NSString *login_Str = WoTing_ZhuBo;
+//        
+//        [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
+//            
+//            NSDictionary *resultDict = (NSDictionary *)response;
+//            
+//            NSString  *ReturnType = [resultDict objectForKey:@"ReturnType"];
+//            if ([ReturnType isEqualToString:@"1001"]) {
+//                
+//                WTZhuBoController *wtZBVC = [[WTZhuBoController alloc] init];
+//               // wtZBVC.dataDict =
+//                [self.navigationController pushViewController:wtZBVC animated:YES];
+//                
+//            }else if ([ReturnType isEqualToString:@"T"]){
+//                
+//                [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
+//            }
+//            
+//        } fail:^(NSError *error) {
+//            
+//            
+//        }];
+    }
     
 }
 

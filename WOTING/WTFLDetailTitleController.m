@@ -40,6 +40,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+
     
     _contentName.text = _nameL;
     dataFLTArr = [NSMutableArray arrayWithCapacity:0];
@@ -129,9 +130,7 @@
 }
 
 - (void)runTimeXUAN{
-    
-//    count ++;
-//    firstBarV.HYCContentImageName.transform = CGAffineTransformRotate(_startTransform, (M_PI / 800)*count);
+ 
     count+=1;
     
     if (count == 360) {
@@ -139,7 +138,6 @@
         count = 0;
     }
     
-    //    firstBarV.HYCContentImageName.transform = CGAffineTransformRotate(_startTransform, (M_PI / 800)*count);
     firstBarV.HYCContentImageName.transform = CGAffineTransformMakeRotation((M_PI / 180.0f)*count);
 }
 
@@ -260,7 +258,7 @@
     
     NSString *login_Str = WoTing_GetContents;
     
-    
+    NSLog(@"%@", parameters);
     [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
         
         [FLTableView.mj_header endRefreshing];

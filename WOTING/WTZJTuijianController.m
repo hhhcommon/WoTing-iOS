@@ -7,6 +7,7 @@
 //
 
 #import "WTZJTuijianController.h"
+#import "WTZhuBoController.h"           //主播页
 
 #import "WTZhanJiTJCell.h"
 
@@ -23,15 +24,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-//    _contentimgXQ.layer.masksToBounds = YES;
-//    _contentimgXQ.layer.cornerRadius = _contentimgXQ.size.width/2;
-//    [_contentimgXQ sd_setImageWithURL:[NSURL URLWithString:[NSString NULLToString:_dataXQDict[@"ContentImg"]]] placeholderImage:[UIImage imageNamed:@""]];
-//    
-//    _nameLabXQ.text = [NSString NULLToString:_dataXQDict[@"ContentName"]];
-//    
-//    _contentLab.text = [NSString NULLToString:_dataXQDict[@"ContentDescn"]];
-//    CGFloat previewH = [_contentLab.text boundingRectWithSize:CGSizeMake(_contentLab.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size.height;
-//    _ContLabHeight.constant = previewH; //高度
     
     _ZJTuiJianTab.delegate = self;
     _ZJTuiJianTab.dataSource = self;
@@ -63,6 +55,9 @@
     cell.contentImgV.layer.masksToBounds = YES;
     cell.contentImgV.layer.cornerRadius = cell.contentImgV.size.width/2;
     [cell.contentImgV sd_setImageWithURL:[NSURL URLWithString:[NSString NULLToString:_dataXQDict[@"ContentImg"]]] placeholderImage:[UIImage imageNamed:@""]];
+    cell.contentImgV.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapImgV = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ContentImgVLClick)];
+    [cell.contentImgV addGestureRecognizer:tapImgV];
     
     //标题
     cell.nameLab.text = [NSString NULLToString:_dataXQDict[@"ContentName"]];
@@ -82,6 +77,20 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     return 265 + previewH -21;
+}
+
+- (void)ContentImgVLClick{
+    
+    if ([_dataXQDict[@"ContentPersons"][0][@"PerId"] isKindOfClass:[NSNull class]]) {
+        
+        [WKProgressHUD popMessage:@"该节目暂无主播信息" inView:nil duration:0.5 animated:YES];
+    }else{
+        
+        WTZhuBoController *wtZBVC = [[WTZhuBoController alloc] init];
+        wtZBVC.dataDefDict = _dataXQDict;
+        [self.navigationController pushViewController:wtZBVC animated:YES];
+        
+    }
 }
 
 

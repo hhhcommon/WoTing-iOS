@@ -17,7 +17,8 @@
     
     UILabel         *labName;
     UIButton        *LuYinBtn;
-    UITextField     *textFid;
+    UIView          *backbarView;
+    NSMutableString  *targetString;     //搜索结果
     
     //标记
     NSInteger       *LabInteger;
@@ -54,7 +55,7 @@
         
         make.top.mas_equalTo(10);
         make.left.mas_equalTo(20);
-        make.height.mas_equalTo(15);
+        make.height.mas_equalTo(21);
         make.width.mas_equalTo(200);
     }];
     
@@ -70,21 +71,21 @@
     [LuYinBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.centerX.equalTo(weakSelf);
-        make.top.equalTo(labName.mas_bottom).with.offset(20);
-        make.width.mas_equalTo(80);
-        make.height.mas_equalTo(80);
+        make.centerY.equalTo(weakSelf);
+        make.width.mas_equalTo(100);
+        make.height.mas_equalTo(100);
     }];
     
     //显示textfiled
-    textFid = [[UITextField alloc] init];
-    textFid.font = [UIFont systemFontOfSize:15];
-    [self addSubview:textFid];
-    [textFid mas_makeConstraints:^(MASConstraintMaker *make) {
+    backbarView = [[UIView alloc] init];
+    backbarView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    [self addSubview:backbarView];
+    [backbarView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.mas_equalTo(10);
-        make.left.equalTo(labName.mas_right).with.offset(20);
-        make.height.mas_equalTo(15);
-        make.width.mas_equalTo(200);
+        make.top.equalTo(labName.mas_bottom).with.offset(10);
+        make.left.mas_equalTo(0);
+        make.height.mas_equalTo(1);
+        make.right.mas_equalTo(0);
     }];
 }
 
@@ -110,8 +111,12 @@
  */
 - (void)endRecord:(UIButton *)btn {
     
-    labName.text = @"请按住讲话";
-    
+//    if (targetString.length) {
+//        
+//        
+//    }else{
+//        labName.text = @"请按住讲话";
+//    }
     //停止录音
     [self.recorder stop];
     __weak typeof(self) weakSelf = self;
@@ -129,6 +134,8 @@
  touch down 手指按下会触发
  */
 - (void)startRecord:(UIButton *)btn {
+    
+    targetString = nil;
     
     labName.text = @"开始语音转换";
     //设置当前为录音模式
@@ -196,7 +203,7 @@
 // Called only for final recognitions of utterances. No more about the utterance will be reported
 - (void)speechRecognitionTask:(SFSpeechRecognitionTask *)task didFinishRecognition:(SFSpeechRecognitionResult *)recognitionResult {
     NSLog(@"完成录音转换   %@",recognitionResult.bestTranscription);
-    NSMutableString  *targetString = [[NSMutableString alloc]init];
+    targetString = [[NSMutableString alloc]init];
     
     for (int i = 0 ; i < recognitionResult.bestTranscription.segments.count; i ++) {
         SFTranscriptionSegment *currentSeg = recognitionResult.bestTranscription.segments[i];
@@ -208,8 +215,8 @@
         [targetString appendString:[self appendStringWithTwoTime:currentSeg andEndSegment:nextSeg]];
     }
     
-    textFid.text = targetString;
-    NSLog(@"%@", targetString);
+    labName.text = [NSString stringWithFormat:@"正在搜索:%@", targetString];
+    
 }
 
 - (NSString *)appendStringWithTwoTime:(SFTranscriptionSegment *)startSegment andEndSegment:(SFTranscriptionSegment *)endSegment {
@@ -249,18 +256,28 @@
     
     NSLog(@"转换完成的时候");
     
-    if (![textFid.text  isEqual: @""]) {
+    if (targetString.length) {
         
-        NSMutableDictionary  *dict = [[NSMutableDictionary alloc] init];
-        [dict setValue:textFid.text forKey:@"Search"];
+        [self performSelector:@selector(delayMethod) withObject:nil afterDelay:2.0];
+    }else{
         
-        NSDictionary *dictT = [NSDictionary dictionaryWithDictionary:dict];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:dictT];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"YUYINNOTIFICATION" object:nil];    //关闭蒙板
+        labName.text = @"请按住讲话";
     }
     
     
+}
+
+- (void)delayMethod{
+    
+    NSMutableDictionary  *dict = [[NSMutableDictionary alloc] init];
+    [dict setValue:targetString forKey:@"Search"];
+    
+    NSDictionary *dictT = [NSDictionary dictionaryWithDictionary:dict];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"TABLEVIEWCLICK" object:nil userInfo:dictT];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"YUYINNOTIFICATION" object:nil];    //关闭蒙板
+    
+    labName.text = @"请按住讲话";
 }
 
 

@@ -11,6 +11,7 @@
 #import "WTLikeListViewController.h"
 #import "WTSheZhiViewController.h"
 #import "WTLoginViewController.h"
+#import "WTBianJiZiLiaoController.h"    //编辑资料
 
 #import "SGGenerateQRCodeVC.h"  //二维码生成器
 
@@ -56,7 +57,8 @@
         
         Login = 1;
         Region = [AutomatePlist readPlistForKey:@"Region"];
-        userName = [AutomatePlist readPlistForKey:@"UName"];
+        userName = [AutomatePlist readPlistForKey:@"NickName"];
+        
     }else{
         Login = 0;
     }
@@ -71,6 +73,10 @@
     
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
   //
+    
+    _contentImgV.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(GoToLogin)];
+    [_contentImgV addGestureRecognizer:tap];
    
 }
 
@@ -97,149 +103,31 @@
     if (Login == 0) {
         
         _contentName.text = @"我的";
-        _LoginBtn.hidden = NO;
         _IntroduceLab.text = @"点击登录";
         _erWeiMaBtn.hidden = YES;
         _BianJiBtn.hidden = YES;
-        _contentImgV.hidden = YES;
         _ImgKuang.hidden = YES;
     }else{
         
         _contentName.text = userName;
-        _LoginBtn.hidden = YES;
         _IntroduceLab.text = Region;
         _erWeiMaBtn.hidden = NO;
         _BianJiBtn.hidden = NO;
-        _contentImgV.hidden = NO;
+        
         if ([[NSString NULLToString:loginDict[@"PortraitBig"]] hasPrefix:@"http"]) {
             
             [_contentImgV sd_setImageWithURL:[NSURL URLWithString:[NSString NULLToString:loginDict[@"PortraitBig"]]]];
-        }else{
+        }else if(loginDict[@"PortraitBig"]){
             
             [_contentImgV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",SKInterFaceServer,[NSString NULLToString:loginDict[@"PortraitBig"]]]]];
+        }else{
+            
+           _contentImgV.image = [UIImage imageNamed:@"mine_default avatar_male.png"];
         }
         _ImgKuang.hidden = NO;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(PostHeaderImageView)];
         [_ImgKuang addGestureRecognizer:tap];
     }
-    
-//    UIImageView *headerView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, K_Screen_Width, POINT_Y(375))];
-//    headerView.userInteractionEnabled = YES;
-//    headerView.image = [UIImage imageNamed:@"mine_bg.png"];
-//    self.JQMainTV.tableHeaderView = headerView;
-//    
-//    //二维码
-//    UIButton *erwBtn = [[UIButton alloc] init];
-//    [erwBtn setImage:[UIImage imageNamed:@"mine_icon_codes.png"] forState:UIControlStateNormal];
-//    [erwBtn addTarget:self action:@selector(erweimaBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-//    [headerView addSubview:erwBtn];
-//    [erwBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        
-//        make.top.mas_equalTo(POINT_Y(80));
-//        make.left.mas_equalTo(40);
-//        make.width.mas_equalTo(25);
-//        make.height.mas_equalTo(25);
-//    }];
-//    
-//    //编辑资料
-//    UIButton *ZLBtn = [[UIButton alloc] init];
-//    [ZLBtn setImage:[UIImage imageNamed:@"mine_icon_edit profile.png"] forState:UIControlStateNormal];
-//    [ZLBtn addTarget:self action:@selector(ziliaoBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-//    [headerView addSubview:ZLBtn];
-//    [ZLBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        
-//        make.top.mas_equalTo(POINT_Y(80));
-//        make.right.mas_equalTo(-40);
-//        make.width.mas_equalTo(25);
-//        make.height.mas_equalTo(25);
-//    }];
-//    
-//    //姓名
-//    UILabel *NameLb = [[UILabel alloc] init];
-//    
-//    if (Login == 0) {
-//        NameLb.text = @"我的";
-//    }else{
-//        NameLb.text = userName;
-//    }
-//    
-//    NameLb.textAlignment = NSTextAlignmentCenter;
-//    NameLb.font = [UIFont boldSystemFontOfSize:15];
-//    NameLb.textColor = [UIColor whiteColor];
-//    [headerView addSubview:NameLb];
-//    [NameLb mas_makeConstraints:^(MASConstraintMaker *make) {
-//        
-//        make.centerX.equalTo(headerView.mas_centerX);
-//        make.top.mas_equalTo(POINT_Y(80));
-//        make.width.mas_equalTo(POINT_X(220));
-//        make.height.mas_equalTo(POINT_Y(40));
-//    }];
-//    
-//    //透明的btn
-//    UIButton *LoginBtn = [[UIButton alloc] init];
-//    LoginBtn.backgroundColor = [UIColor clearColor];
-//    [LoginBtn addTarget:self action:@selector(LoginBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-//    [headerView addSubview:LoginBtn];
-//    [LoginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        
-//        make.centerX.equalTo(headerView.mas_centerX);
-//        make.top.mas_equalTo(NameLb.mas_bottom).with.offset(POINT_Y(10));
-//        make.width.mas_equalTo(POINT_X(120));
-//        make.height.mas_equalTo(POINT_Y(120));
-//    }];
-//    
-//    //登陆ID
-//    UILabel *LogID = [[UILabel alloc] init];
-//    LogID.text = @"点击登陆";
-//    LogID.textAlignment = NSTextAlignmentCenter;
-//    LogID.font = [UIFont systemFontOfSize:13];
-//    [headerView addSubview:LogID];
-//    [LogID mas_makeConstraints:^(MASConstraintMaker *make) {
-//        
-//        make.centerX.equalTo(headerView.mas_centerX);
-//        make.top.equalTo(LoginBtn.mas_bottom).with.offset(POINT_Y(25));
-//        make.width.mas_equalTo(POINT_X(220));
-//        make.height.mas_equalTo(POINT_Y(25));
-//    }];
-//    if (Login == 0) {
-//        
-//        LogID.hidden = NO;
-//        LoginBtn.hidden = NO;
-//        erwBtn.hidden = YES;
-//        ZLBtn.hidden = YES;
-//    }else{
-//        
-//        LogID.hidden = YES;
-//        LoginBtn.hidden = YES;
-//        erwBtn.hidden = NO;
-//        ZLBtn.hidden = NO;
-//    }
-//    
-//    //一句话介绍自己
-//    UILabel *MainID = [[UILabel alloc] init];
-//    if (Login == 0) {
-//        
-//        MainID.text = @"用我听,听我想听,说我想说！";
-//    }else{
-//        
-//        if (Region) {
-//            
-//            MainID.text = Region;
-//        }else{
-//            MainID.text = @"您还没有添写地址";
-//        }
-//    }
-//    
-//    MainID.textAlignment = NSTextAlignmentCenter;
-//    MainID.font = [UIFont systemFontOfSize:13];
-//    [headerView addSubview:MainID];
-//    [MainID mas_makeConstraints:^(MASConstraintMaker *make) {
-//        
-//        make.centerX.equalTo(headerView.mas_centerX);
-//        make.top.equalTo(LogID.mas_bottom).with.offset(POINT_Y(20));
-//        make.width.mas_equalTo(POINT_Y(450));
-//        make.height.mas_equalTo(POINT_Y(30));
-//    }];
     
 }
 
@@ -252,7 +140,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 20;
+    return 10;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -353,7 +241,7 @@
     }else {
     
         Login = 1;
-        userName = [nt.userInfo objectForKey:@"UserName"];
+        userName = [nt.userInfo objectForKey:@"NickName"];
         Region = [nt.userInfo objectForKey:@"Region"];
         [self creterNSArray];
         [self initContents];
@@ -361,32 +249,6 @@
     }
 }
 
-////跳转到登录页
-//- (void)LoginBtnClick:(UIButton *)btn{
-//    
-//    WTLoginViewController *loginVC = [[WTLoginViewController alloc] init];
-//    
-//    loginVC.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:loginVC animated:YES];
-//
-//}
-//
-////查看二维码
-//- (void)erweimaBtnClick:(UIButton *)btn {
-//    
-//    SGGenerateQRCodeVC *VC = [[SGGenerateQRCodeVC alloc] init];
-//    VC.dict = loginDict;
-//    
-//    VC.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:VC animated:YES];
-//}
-//
-////编辑资料
-//- (void)ziliaoBtnClick:(UIButton *)btn {
-//    
-//    
-//    
-//}
 
 - (void)PostHeaderImageView{
     
@@ -493,11 +355,7 @@
     
     _contentImgV.image = resultImage;
     
-    NSString *ImageStrURL = [info objectForKey:@"UIImagePickerControllerReferenceURL"];
-    NSArray *lrcArray = [ImageStrURL componentsSeparatedByString:@"="];
-    NSMutableArray *mLrcArray = [[NSMutableArray alloc] initWithArray:lrcArray];
     
-    NSString *ExtName = [mLrcArray lastObject];
     
     imageData = UIImageJPEGRepresentation(resultImage, 0.5);
     
@@ -536,7 +394,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (IBAction)TuoLoginBtnClick:(id)sender {
+- (void)GoToLogin{
     
     WTLoginViewController *loginVC = [[WTLoginViewController alloc] init];
     
@@ -551,7 +409,13 @@
     VC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:VC animated:YES];
 }
+//编辑资料
 - (IBAction)BianJiBtnClick:(id)sender {
     
+    WTBianJiZiLiaoController *wtBJZLVC = [[WTBianJiZiLiaoController alloc] init];
+    
+    wtBJZLVC.dataZLDict = loginDict;
+    wtBJZLVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:wtBJZLVC animated:YES];
 }
 @end

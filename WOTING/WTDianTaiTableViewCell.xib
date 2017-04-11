@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -36,9 +36,9 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KwB-nq-5Cq">
-                        <rect key="frame" x="109" y="53" width="27" height="13"/>
+                        <rect key="frame" x="109" y="53" width="55" height="13"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="27" id="6vh-Ma-xaI"/>
+                            <constraint firstAttribute="width" constant="55" id="6vh-Ma-xaI"/>
                             <constraint firstAttribute="height" constant="13" id="WYQ-P7-TuW"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="9"/>
@@ -75,15 +75,24 @@
                             <constraint firstAttribute="height" constant="60" id="SCB-hb-dW7"/>
                         </constraints>
                     </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play_flag_wave_1.png" translatesAutoresizingMaskIntoConstraints="NO" id="zFz-VC-U2g">
+                        <rect key="frame" x="280" y="25" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="PdE-bq-ohZ"/>
+                            <constraint firstAttribute="height" constant="20" id="ZnY-SI-Pkd"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="eJP-Wc-ctA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="0Gl-Ju-iM7"/>
                     <constraint firstAttribute="trailingMargin" secondItem="7Rq-tx-ybJ" secondAttribute="trailing" constant="47" id="0hv-AD-HAU"/>
+                    <constraint firstItem="zFz-VC-U2g" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="17" id="5yb-Se-Mwa"/>
                     <constraint firstItem="eJP-Wc-ctA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="AWJ-aM-6v4"/>
                     <constraint firstItem="tmb-8E-5I9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="CSl-Oh-Fir"/>
                     <constraint firstItem="tmb-8E-5I9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="GEP-3y-0if"/>
                     <constraint firstItem="KwB-nq-5Cq" firstAttribute="leading" secondItem="BgQ-ic-dJI" secondAttribute="trailing" constant="6" id="Hfp-3d-QFO"/>
                     <constraint firstAttribute="trailing" secondItem="fUN-n7-L9i" secondAttribute="trailing" constant="55" id="Nly-C2-jt5"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="zFz-VC-U2g" secondAttribute="trailing" constant="12" id="Z4U-j4-r0H"/>
                     <constraint firstItem="BgQ-ic-dJI" firstAttribute="leading" secondItem="eJP-Wc-ctA" secondAttribute="trailing" constant="17" id="ahi-F6-XZK"/>
                     <constraint firstItem="K0y-fI-1IV" firstAttribute="leading" secondItem="eJP-Wc-ctA" secondAttribute="trailing" constant="17" id="ftY-k3-rM5"/>
                     <constraint firstItem="7Rq-tx-ybJ" firstAttribute="top" secondItem="fUN-n7-L9i" secondAttribute="bottom" constant="5" id="gsw-ea-cpV"/>
@@ -96,6 +105,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="BoFangImgV" destination="zFz-VC-U2g" id="SNm-Ee-dbD"/>
                 <outlet property="ContentImg" destination="tmb-8E-5I9" id="giz-Jc-nBm"/>
                 <outlet property="ContentName" destination="fUN-n7-L9i" id="DUz-BO-3cW"/>
                 <outlet property="PlayCount" destination="KwB-nq-5Cq" id="Wlh-lD-leg"/>
@@ -105,6 +115,7 @@
     </objects>
     <resources>
         <image name="WT_BoFang_Kuang.png" width="130" height="130"/>
+        <image name="play_flag_wave_1.png" width="36" height="36"/>
         <image name="upload_icon_album.png" width="40" height="40"/>
         <image name="upload_icon_play amount.png" width="40" height="40"/>
     </resources>

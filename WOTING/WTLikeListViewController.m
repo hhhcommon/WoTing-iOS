@@ -26,11 +26,89 @@
     SKMainScrollView    *contentScrollView;
     UIView              *titleView;//标识栏
     UIImageView         *barLineImageView;//标识条
+    
+    BoFangTabbarView *firstBarV;
+    
+    int  count; //旋转角度
 }
+@property (nonatomic,assign)CGAffineTransform startTransform; //记录最开始contentImg的旋转位置
+@property (nonatomic,strong)NSTimer *timer;
 
 @end
 
+
+
 @implementation WTLikeListViewController
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    NSString *Imgv = [AutomatePlist readPlistForKey:@"ImgV"];
+    NSString *transformbegin = [AutomatePlist readPlistForKey:@"transformbegin"];
+    NSString *transform = [AutomatePlist readPlistForKey:@"transform"];
+    count = [transform intValue];
+    
+    firstBarV = [[BoFangTabbarView alloc] init];
+    
+    [firstBarV.HYCContentImageName sd_setImageWithURL:[NSURL URLWithString:[NSString NULLToString:Imgv]] placeholderImage:[UIImage imageNamed:@"img_radio_default"]];
+    //记录一开始的旋转位置
+    _startTransform = firstBarV.HYCContentImageName.transform;
+    
+    firstBarV.HYCKuangImageName.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapGesturRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(btnClick:)];
+    [firstBarV.HYCKuangImageName addGestureRecognizer:tapGesturRecognizer];
+    
+    if (_timer) {
+        
+        
+    }else{
+        
+        _timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(runTimeXUAN) userInfo:nil repeats:YES];
+        
+    }
+    if ([transformbegin isEqualToString:@"0"]) {
+        
+        [_timer setFireDate:[NSDate distantFuture]];    //暂停
+        firstBarV.LJQStopImage.hidden = NO;
+    }else{
+        
+        [_timer setFireDate:[NSDate distantPast]];
+        firstBarV.LJQStopImage.hidden = YES;
+    }
+    
+    
+    
+    
+    [self.view addSubview:firstBarV];
+    [firstBarV mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.mas_equalTo(0);
+        make.bottom.mas_equalTo(0);
+        make.width.mas_equalTo(K_Screen_Width/4.0);
+        make.height.mas_equalTo(49);
+    }];
+}
+
+- (void)btnClick:(UITapGestureRecognizer *)tap{
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"TABBARSELECATE" object:nil];
+    
+    self.tabBarController.selectedIndex = 0;
+    
+}
+
+- (void)runTimeXUAN{
+    
+    count+=1;
+    
+    if (count == 360) {
+        
+        count = 0;
+    }
+    
+    firstBarV.HYCContentImageName.transform = CGAffineTransformMakeRotation((M_PI / 180.0f)*count);
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -76,7 +154,8 @@
                 
                 [Rarray addObject:dict];
                 [_DataDianTaiArr removeAllObjects];
-                [_DataDianTaiArr addObjectsFromArray:Rarray];
+                NSArray* reversedArray = [[Rarray reverseObjectEnumerator] allObjects];
+                [_DataDianTaiArr addObjectsFromArray:reversedArray];
                 [dictR setObject:Rarray forKey:@"List"];
                 
                 
@@ -84,7 +163,8 @@
                 
                 [Aarray addObject:dict];
                 [_DataShengYinArr removeAllObjects];
-                [_DataShengYinArr addObjectsFromArray:Aarray];
+                NSArray* reversedArray = [[Aarray reverseObjectEnumerator] allObjects];
+                [_DataShengYinArr addObjectsFromArray:reversedArray];
                 [dictA setObject:Aarray forKey:@"List"];
                 
             }else if ([dict[@"MediaType"] isEqualToString: @"SEQU"]){
@@ -95,7 +175,9 @@
             }else if ([dict[@"MediaType"] isEqualToString: @"TTS"]){
                 
                 [Tarray addObject:dict];
-                [_DataTTSArr addObjectsFromArray:Tarray];
+                [_DataTTSArr removeAllObjects];
+                NSArray* reversedArray = [[Tarray reverseObjectEnumerator] allObjects];
+                [_DataTTSArr addObjectsFromArray:reversedArray];
                 [dictT setObject:Tarray forKey:@"List"];
                 
             }
@@ -122,6 +204,8 @@
 
     [self initTiteBarView];
     [self initScrollerView];
+    
+    
     
 }
 

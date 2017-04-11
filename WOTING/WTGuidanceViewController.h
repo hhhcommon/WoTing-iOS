@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@protocol GuidanceViewDelegate<NSObject>
+- (void)changeRootViewController;
+@end
 @interface WTGuidanceViewController : UIViewController
+
+@property (nonatomic,weak)id<GuidanceViewDelegate>delegate;
 
 @end

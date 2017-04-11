@@ -14,10 +14,10 @@
          contextName = "__35-[WTDianTaiViewController loadData]_block_invoke:WTDianTaiViewController.m">
       </ContextState>
       <ContextState
-         contextName = "__33-[AllViewController loadDAtaLike]_block_invoke:AllViewController.m">
+         contextName = "-[WTLikeCell setCellWithDict:]:WTLikeCell.m">
       </ContextState>
       <ContextState
-         contextName = "-[WTDTController loadData]:WTDTController.m">
+         contextName = "__33-[AllViewController loadDAtaLike]_block_invoke:AllViewController.m">
       </ContextState>
       <ContextState
          contextName = "__26-[WTDTController loadData]_block_invoke:WTDTController.m">
@@ -26,10 +26,18 @@
          contextName = "-[WTDTDetailViewController loadMoveData]:WTDTDetailViewController.m">
       </ContextState>
       <ContextState
+         contextName = "-[WTDTController loadData]:WTDTController.m">
+      </ContextState>
+      <ContextState
          contextName = "__41-[WTSearchViewController loadDataSearch:]_block_invoke:WTSearchViewController.m">
       </ContextState>
       <ContextState
-         contextName = "-[WTLikeCell setCellWithDict:]:WTLikeCell.m">
+         contextName = "-[WTBianJiZiLiaoController viewDidLoad]:WTBianJiZiLiaoController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_dataZLDict">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "-[WTBoFangCell setPlayingMusic:]:WTBoFangCell.m">
@@ -243,6 +251,12 @@
                value = "self.musicIndex">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[WTZJTuijianController ContentImgVLClick]:WTZJTuijianController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__42-[WTZJTuijianController ContentImgVLClick]_block_invoke:WTZJTuijianController.m">
       </ContextState>
       <ContextState
          contextName = "__39-[WTLoginViewController LoginBtnClick:]_block_invoke_2:WTLoginViewController.m">

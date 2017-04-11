@@ -11,6 +11,7 @@
 @interface WTJuBaoViewController : UIViewController
 - (IBAction)backBtnClick:(id)sender;
 - (IBAction)TiJiaoBtnClick:(id)sender;
+
 @property (weak, nonatomic) IBOutlet UITableView *JuBaoTableV;
 @property (weak, nonatomic) IBOutlet UITextView *JuBaoTextV;
 

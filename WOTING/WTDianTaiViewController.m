@@ -345,11 +345,15 @@
     if (!cell) {
         cell = [[WTDianTaiTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     }
+    if(!(indexPath.section > dataListArr.count)){
+        
+        NSDictionary *dict = dataListArr[indexPath.section][@"List"][indexPath.row];
+        [cell setCellWithDict:dict];
+    }
     
-    NSDictionary *dict = dataListArr[indexPath.section][@"List"][indexPath.row];
     
-    [cell setCellWithDict:dict];
     
+    cell.BoFangImgV.hidden = YES;
     
     return cell;
 }

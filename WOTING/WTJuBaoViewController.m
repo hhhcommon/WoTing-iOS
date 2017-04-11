@@ -35,6 +35,7 @@
     
     [self registerJBTableViewCell];
     [self loadDataJuBao];
+    
 }
 
 - (void)registerJBTableViewCell{

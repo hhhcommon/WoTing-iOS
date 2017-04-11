@@ -34,10 +34,10 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mlj-5n-VNP">
-                            <rect key="frame" x="17" y="23" width="25" height="25"/>
+                            <rect key="frame" x="-1" y="8" width="68" height="56"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="25" id="I6h-Ck-RQ4"/>
-                                <constraint firstAttribute="width" constant="25" id="ZlY-V4-FfA"/>
+                                <constraint firstAttribute="height" constant="56" id="I6h-Ck-RQ4"/>
+                                <constraint firstAttribute="width" constant="68" id="ZlY-V4-FfA"/>
                             </constraints>
                             <state key="normal" image="nav_btn_message.png"/>
                             <connections>
@@ -45,10 +45,10 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8An-sf-Hc1">
-                            <rect key="frame" x="330" y="23" width="25" height="25"/>
+                            <rect key="frame" x="310" y="16" width="65" height="40"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="25" id="1uL-bY-uQt"/>
-                                <constraint firstAttribute="width" constant="25" id="z6c-Dq-9Am"/>
+                                <constraint firstAttribute="height" constant="40" id="1uL-bY-uQt"/>
+                                <constraint firstAttribute="width" constant="65" id="z6c-Dq-9Am"/>
                             </constraints>
                             <state key="normal" image="nav_btn_search.png"/>
                             <connections>
@@ -60,11 +60,11 @@
                     <constraints>
                         <constraint firstItem="TIE-GR-OZM" firstAttribute="centerX" secondItem="LEU-Sh-x6Q" secondAttribute="centerX" id="4Pd-jo-Fk4"/>
                         <constraint firstAttribute="height" constant="64" id="83d-rh-l6b"/>
-                        <constraint firstItem="8An-sf-Hc1" firstAttribute="top" secondItem="LEU-Sh-x6Q" secondAttribute="top" constant="23" id="QcF-ON-gsG"/>
-                        <constraint firstItem="mlj-5n-VNP" firstAttribute="leading" secondItem="LEU-Sh-x6Q" secondAttribute="leading" constant="17" id="SnQ-cs-a2e"/>
-                        <constraint firstItem="mlj-5n-VNP" firstAttribute="top" secondItem="LEU-Sh-x6Q" secondAttribute="top" constant="23" id="bBJ-1P-eBs"/>
+                        <constraint firstItem="8An-sf-Hc1" firstAttribute="top" secondItem="LEU-Sh-x6Q" secondAttribute="top" constant="16" id="QcF-ON-gsG"/>
+                        <constraint firstItem="mlj-5n-VNP" firstAttribute="leading" secondItem="LEU-Sh-x6Q" secondAttribute="leading" constant="-1" id="SnQ-cs-a2e"/>
+                        <constraint firstItem="mlj-5n-VNP" firstAttribute="top" secondItem="LEU-Sh-x6Q" secondAttribute="top" constant="8" id="bBJ-1P-eBs"/>
                         <constraint firstItem="TIE-GR-OZM" firstAttribute="top" secondItem="LEU-Sh-x6Q" secondAttribute="top" constant="29" id="dku-O2-eqM"/>
-                        <constraint firstAttribute="trailing" secondItem="8An-sf-Hc1" secondAttribute="trailing" constant="20" id="lKE-cd-mlJ"/>
+                        <constraint firstAttribute="trailing" secondItem="8An-sf-Hc1" secondAttribute="trailing" id="lKE-cd-mlJ"/>
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="cSq-RL-dhH">

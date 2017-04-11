@@ -37,6 +37,9 @@
     [self initTiteBarView];
     [self initScrollerView];
     
+    UITapGestureRecognizer *tapBack = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backBtnClick:)];
+    [_backView addGestureRecognizer:tapBack];
+    
 }
 
 - (void)initTiteBarView{

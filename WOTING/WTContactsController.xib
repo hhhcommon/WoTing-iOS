@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WTContactsController">
+            <connections>
+                <outlet property="ContactsTabV" destination="J65-RK-INc" id="sYg-gI-rea"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <searchBar contentMode="redraw" placeholder="搜索" translatesAutoresizingMaskIntoConstraints="NO" id="ugk-5E-Dbt">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="GxB-OK-J91"/>
+                    </constraints>
+                    <color key="barTintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <textInputTraits key="textInputTraits"/>
+                </searchBar>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="J65-RK-INc">
+                    <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="ugk-5E-Dbt" secondAttribute="trailing" id="LkA-2R-yxO"/>
+                <constraint firstItem="J65-RK-INc" firstAttribute="top" secondItem="ugk-5E-Dbt" secondAttribute="bottom" id="P82-Wk-Wph"/>
+                <constraint firstItem="ugk-5E-Dbt" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="dc2-87-hHj"/>
+                <constraint firstItem="ugk-5E-Dbt" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="lO8-wv-WK3"/>
+                <constraint firstAttribute="trailing" secondItem="J65-RK-INc" secondAttribute="trailing" id="rSD-mi-x5L"/>
+                <constraint firstAttribute="bottom" secondItem="J65-RK-INc" secondAttribute="bottom" id="rXx-pG-NQI"/>
+                <constraint firstItem="J65-RK-INc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="zvw-4g-Nia"/>
+            </constraints>
+            <point key="canvasLocation" x="33.5" y="53.5"/>
+        </view>
+    </objects>
+</document>

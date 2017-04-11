@@ -37,6 +37,11 @@ typedef enum {
 - (IBAction)LuKBtnClick:(id)sender;
 - (IBAction)YuYinBtnClick:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UIImageView *BoFangKuangView;
+
+@property (weak, nonatomic) IBOutlet UIButton *LuKuangBtn;
+@property (weak, nonatomic) IBOutlet UIButton *YuYinBtn;
+
 @property (weak, nonatomic) IBOutlet UIButton *beginBtn;
 @property (weak, nonatomic) IBOutlet UIButton *nextBtn;
 @property (weak, nonatomic) IBOutlet UIButton *beforeBtn;

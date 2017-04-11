@@ -10,10 +10,12 @@
 
 #import "WTBoFangModel.h"
 
+#import "SUResourceLoader.h"
 
-@interface WTBoFangModel()
+@interface JQMusicTool()<SULoaderDelegate>
 
-
+@property (nonatomic, strong)AVPlayerItem *currentItem;
+@property (nonatomic, strong)SUResourceLoader * resourceLoader;
 
 @end
 
@@ -36,7 +38,7 @@ singleton_implementation(JQMusicTool)
                 view.frame = CGRectMake(0, 0, 100, 100);
             }
         }];
-
+        
         
     }else {
         
@@ -45,8 +47,6 @@ singleton_implementation(JQMusicTool)
             [self.mediaPlayer.player shutdown];
             self.mediaPlayer = nil;
         }
-    
-        AVPlayerItem *songItem;
         
         FMDatabase *db = [FMDBTool createDatabaseAndTable:@"XIAZAI"];
         
@@ -65,8 +65,25 @@ singleton_implementation(JQMusicTool)
         if (!isRept) {  //播网络
             
             NSURL *musicURL = [NSURL URLWithString:_musicStr];
-            songItem = [[AVPlayerItem alloc] initWithURL:musicURL];
-        }else {         //播本地
+
+            //有缓存播放缓存文件
+            NSString * cacheFilePath = [SUFileHandle cacheFileExistsWithURL:musicURL];
+            if (cacheFilePath) {
+                
+                NSURL * url = [NSURL fileURLWithPath:cacheFilePath];
+                self.currentItem = [AVPlayerItem playerItemWithURL:url];
+                NSLog(@"有缓存，播放缓存文件");
+            }else {
+                
+                self.resourceLoader = [[SUResourceLoader alloc] init];
+                self.resourceLoader.delegate = self;
+                
+                AVURLAsset * asset = [AVURLAsset URLAssetWithURL:musicURL options:nil];
+                [asset.resourceLoader setDelegate:self.resourceLoader queue:dispatch_get_main_queue()];
+                self.currentItem = [AVPlayerItem playerItemWithAsset:asset];
+            }
+
+        }else {  //播本地
             //遍历文件夹
             NSString *appDocDir = [[[[NSFileManager defaultManager] URLsForDirectory: NSDocumentDirectory inDomains:NSUserDomainMask] lastObject] relativePath];
             NSString *appDocDir1 = [NSString stringWithFormat:@"%@/MCDownloadCache",appDocDir];
@@ -79,7 +96,7 @@ singleton_implementation(JQMusicTool)
                     
                     if ([_musicStr hasSuffix:aPath]) {
                         
-                      songItem = [[AVPlayerItem alloc] initWithURL:[NSURL fileURLWithPath:fullPath]];
+                      self.currentItem = [[AVPlayerItem alloc] initWithURL:[NSURL fileURLWithPath:fullPath]];
                     }
                     
                 }
@@ -91,10 +108,11 @@ singleton_implementation(JQMusicTool)
         if (self.player==nil) {
             
             
-            self.player = [[AVPlayer alloc] initWithPlayerItem:songItem];
+            self.player = [[AVPlayer alloc] initWithPlayerItem:self.currentItem];
         } else{
             
-            [self.player replaceCurrentItemWithPlayerItem:songItem];
+                
+            [self.player replaceCurrentItemWithPlayerItem:self.currentItem];
             
         }
     }
