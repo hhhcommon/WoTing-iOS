@@ -3,39 +3,13 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "-[WTFenLeiTableViewCell btnClick:]:WTFenLeiTableViewCell.m">
+         contextName = "-[WTQunManageController DistinctList:]:WTQunManageController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[WTMainViewController LoginNotification:]:WTMainViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "btn.titleLabel.text">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "__35-[WTDianTaiViewController loadData]_block_invoke:WTDianTaiViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[WTLikeCell setCellWithDict:]:WTLikeCell.m">
-      </ContextState>
-      <ContextState
-         contextName = "__33-[AllViewController loadDAtaLike]_block_invoke:AllViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "__26-[WTDTController loadData]_block_invoke:WTDTController.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[WTDTDetailViewController loadMoveData]:WTDTDetailViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[WTDTController loadData]:WTDTController.m">
-      </ContextState>
-      <ContextState
-         contextName = "__41-[WTSearchViewController loadDataSearch:]_block_invoke:WTSearchViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[WTBianJiZiLiaoController viewDidLoad]:WTBianJiZiLiaoController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "_dataZLDict">
+               value = "nt.userInfo">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -48,57 +22,7 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[WTDTController createrCSList]:WTDTController.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[WTJieMuXQViewController tableView:cellForRowAtIndexPath:]:WTJieMuXQViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "indexPath.row">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[WTDianTaiViewController tableView:cellForRowAtIndexPath:]:WTDianTaiViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "indexPath.section">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "-[WTSearchViewController createrWithHotkey:]:WTSearchViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[WTMainViewController LoginNotification:]:WTMainViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "nt.userInfo">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[WTDTController Get_FirstCity]:WTDTController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "cityModel.Cityletter">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "__37-[WTZhuanJiViewController loadDataZJ]_block_invoke:WTZhuanJiViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[ZhuanJiViewController loadZJLike]:ZhuanJiViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "__34-[WTBoFangViewController loadData]_block_invoke:WTBoFangViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "__38-[WTDTDetailViewController loadDataGD]_block_invoke:WTDTDetailViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[WTBoFangTableViewCell setCellWithDict:]:WTBoFangTableViewCell.m">
       </ContextState>
       <ContextState
          contextName = "-[WTMainViewController erweimaBtnClick:]:WTMainViewController.m">
@@ -109,102 +33,36 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "__35-[ZhuanJiViewController loadZJLike]_block_invoke:ZhuanJiViewController.m">
+         contextName = "-[WTContactsCell setCellWithDict:]:WTContactsCell.m">
       </ContextState>
       <ContextState
-         contextName = "-[WTBoFangViewController tableView:cellForRowAtIndexPath:]:WTBoFangViewController.m">
+         contextName = "__39-[WTLoginViewController LoginBtnClick:]_block_invoke_2:WTLoginViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__38-[WTDTDetailViewController loadDataGD]_block_invoke:WTDTDetailViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__37-[WTZhuanJiViewController loadDataZJ]_block_invoke:WTZhuanJiViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[WTDTController loadData]:WTDTController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__38-[WTQunManageController SureBtnClick:]_block_invoke:WTQunManageController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[WTQunManageController viewDidLoad]:WTQunManageController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[WTQunDetailsController createHeader]:WTQunDetailsController.m">
          <PersistentStrings>
             <PersistentString
-               value = "indexPath.row">
-            </PersistentString>
-            <PersistentString
-               value = "indexPath.section">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[WTDianTaiViewController loadData]:WTDianTaiViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[WTLikeView MoveClick:]:WTLikeView.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "_NameLab.text">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[AllViewController loadDAtaLike]:AllViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[WTDTDetailViewController tableView:cellForRowAtIndexPath:]:WTDTDetailViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "indexPath.row">
-            </PersistentString>
-            <PersistentString
-               value = "indexPath.section">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[WTZhuanJiViewController loadDataZJ]:WTZhuanJiViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[WTPingLunViewController FSBtnClick:]:WTPingLunViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "__39-[WTLoginViewController LoginBtnClick:]_block_invoke:WTLoginViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[WTBoFangViewController tableView:didSelectRowAtIndexPath:]:WTBoFangViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.musicIndex">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[WTYiXiaZaiController tableView:cellForRowAtIndexPath:]:WTYiXiaZaiController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "indexPath.row">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[WTXJHeaderView MoveClick:]:WTXJHeaderView.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "_NameLab.text">
+               value = "_dataQunDict">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "__48-[WTDTDetailViewController loadDataBeijingDetil]_block_invoke:WTDTDetailViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "__38-[WTPingLunViewController FSBtnClick:]_block_invoke:WTPingLunViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[WTBoFangViewController playMusic]:WTBoFangViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.musics">
-            </PersistentString>
-            <PersistentString
-               value = "self.musicIndex">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "__39-[WTSheZhiViewController blockBtnClick]_block_invoke:WTSheZhiViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[AllViewController tableView:didSelectRowAtIndexPath:]:AllViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "__49-[WTBoFangViewController reloadTableViewAndData:]_block_invoke:WTBoFangViewController.m">
       </ContextState>
       <ContextState
          contextName = "__64-[AppDelegate locationManager:didUpdateToLocation:fromLocation:]_block_invoke:AppDelegate.m">
@@ -223,45 +81,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[WTDianTaiTableViewCell setCellWithDict:]:WTDianTaiTableViewCell.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[WTLoginViewController LoginBtnClick:]:WTLoginViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[WTBoFangViewController beginbtnYes]:WTBoFangViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.musicIndex">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[WTBoFangXQCell setDictWithCell:]:WTBoFangXQCell.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "_ContentHeight.constant">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[WTBoFangViewController next]:WTBoFangViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.musicIndex">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[WTZJTuijianController ContentImgVLClick]:WTZJTuijianController.m">
-      </ContextState>
-      <ContextState
-         contextName = "__42-[WTZJTuijianController ContentImgVLClick]_block_invoke:WTZJTuijianController.m">
-      </ContextState>
-      <ContextState
-         contextName = "__39-[WTLoginViewController LoginBtnClick:]_block_invoke_2:WTLoginViewController.m">
-      </ContextState>
-      <ContextState
          contextName = "-[AllViewController tableView:cellForRowAtIndexPath:]:AllViewController.m">
          <PersistentStrings>
             <PersistentString
@@ -274,6 +93,256 @@
       </ContextState>
       <ContextState
          contextName = "-[WTDTDetailViewController loadDataGD]:WTDTDetailViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[WTQunManageController XuanZhongBtnClick:]:WTQunManageController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "section">
+            </PersistentString>
+            <PersistentString
+               value = "_letterArr">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[WTBoFangXQCell setDictWithCell:]:WTBoFangXQCell.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_ContentHeight.constant">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[WTYiXiaZaiController tableView:cellForRowAtIndexPath:]:WTYiXiaZaiController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexPath.row">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__41-[WTSearchViewController loadDataSearch:]_block_invoke:WTSearchViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[WTBoFangViewController tableView:cellForRowAtIndexPath:]:WTBoFangViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexPath.row">
+            </PersistentString>
+            <PersistentString
+               value = "indexPath.section">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[WTDTDetailViewController loadMoveData]:WTDTDetailViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[ZhuanJiViewController loadZJLike]:ZhuanJiViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__39-[WTQunMessageController SureBtnClick:]_block_invoke_3:WTQunMessageController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__40-[WTQunDetailsController loadMemberData]_block_invoke:WTQunDetailsController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[WTZhuanJiViewController loadDataZJ]:WTZhuanJiViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[WTXJHeaderView MoveClick:]:WTXJHeaderView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_NameLab.text">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__35-[ZhuanJiViewController loadZJLike]_block_invoke:ZhuanJiViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__38-[WTPingLunViewController FSBtnClick:]_block_invoke:WTPingLunViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[WTQunManageController tableView:cellForRowAtIndexPath:]:WTQunManageController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_dataManageArr">
+            </PersistentString>
+            <PersistentString
+               value = "indexPath.row">
+            </PersistentString>
+            <PersistentString
+               value = "indexPath.section">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__49-[WTBoFangViewController reloadTableViewAndData:]_block_invoke:WTBoFangViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[WTZJTuijianController ContentImgVLClick]:WTZJTuijianController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[WTNewFriendController loadNewFriendData]:WTNewFriendController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[AllViewController loadDAtaLike]:AllViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[WTLikeView MoveClick:]:WTLikeView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_NameLab.text">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[WTDianTaiViewController loadData]:WTDianTaiViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[WTQunManageController SureBtnClick:]:WTQunManageController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__39-[WTSheZhiViewController blockBtnClick]_block_invoke:WTSheZhiViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[WTLikeCell setCellWithDict:]:WTLikeCell.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[WTDianTaiTableViewCell setCellWithDict:]:WTDianTaiTableViewCell.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[WTBoFangViewController next]:WTBoFangViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.musicIndex">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[WTFenLeiTableViewCell btnClick:]:WTFenLeiTableViewCell.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "btn.titleLabel.text">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__42-[WTNewFriendController loadNewFriendData]_block_invoke:WTNewFriendController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[WTDTController Get_FirstCity]:WTDTController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "cityModel.Cityletter">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__33-[AllViewController loadDAtaLike]_block_invoke:AllViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__30-[AppDelegate YESorNOAppLogin]_block_invoke:AppDelegate.m">
+      </ContextState>
+      <ContextState
+         contextName = "__35-[WTDianTaiViewController loadData]_block_invoke:WTDianTaiViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__39-[WTLoginViewController LoginBtnClick:]_block_invoke:WTLoginViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[WTPingLunViewController FSBtnClick:]:WTPingLunViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[WTBoFangViewController beginbtnYes]:WTBoFangViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.musicIndex">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[WTLoginViewController LoginBtnClick:]:WTLoginViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[WTDianTaiViewController tableView:cellForRowAtIndexPath:]:WTDianTaiViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexPath.section">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__26-[WTDTController loadData]_block_invoke:WTDTController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[WTBianJiZiLiaoController viewDidLoad]:WTBianJiZiLiaoController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_dataZLDict">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[WTBoFangTableViewCell setCellWithDict:]:WTBoFangTableViewCell.m">
+      </ContextState>
+      <ContextState
+         contextName = "__42-[WTZJTuijianController ContentImgVLClick]_block_invoke:WTZJTuijianController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[WTDTDetailViewController tableView:cellForRowAtIndexPath:]:WTDTDetailViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexPath.row">
+            </PersistentString>
+            <PersistentString
+               value = "indexPath.section">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[WTBoFangViewController tableView:didSelectRowAtIndexPath:]:WTBoFangViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.musicIndex">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[WTJieMuXQViewController tableView:cellForRowAtIndexPath:]:WTJieMuXQViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexPath.row">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__46-[WTMainViewController UploadHeaderImageView:]_block_invoke_2:WTMainViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[AllViewController tableView:didSelectRowAtIndexPath:]:AllViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__39-[WTQunMessageController SureBtnClick:]_block_invoke:WTQunMessageController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[WTDTController createrCSList]:WTDTController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[WTBoFangViewController playMusic]:WTBoFangViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.musics">
+            </PersistentString>
+            <PersistentString
+               value = "self.musicIndex">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__34-[WTBoFangViewController loadData]_block_invoke:WTBoFangViewController.m">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

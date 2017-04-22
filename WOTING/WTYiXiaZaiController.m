@@ -460,6 +460,7 @@
 #pragma mark -选中事件
 - (void)XuanZhongBtnClick:(UIButton *)btn{
     
+    
     if (btn.selected) {
         
         [dataXuanZhongCellArr removeObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - 100]];

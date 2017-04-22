@@ -10,5 +10,6 @@
 
 @interface WTContactsController : UIViewController
 @property (weak, nonatomic) IBOutlet UITableView *ContactsTabV;
+@property (weak, nonatomic) IBOutlet UISearchBar *ContactsSearch;
 
 @end

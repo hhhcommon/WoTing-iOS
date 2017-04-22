@@ -39,6 +39,7 @@
     _detableView.showsHorizontalScrollIndicator = NO;
     
     _detableView.sectionIndexBackgroundColor = [UIColor clearColor];
+    _detableView.sectionIndexColor = [UIColor lightGrayColor];
     [self hideTableViewExtraLine];
     [self loadData];
 }

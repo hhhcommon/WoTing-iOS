@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="WTQunCYCell">
+            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xrB-nH-elK">
+                        <rect key="frame" x="15" y="5" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="Fl4-JR-jUM"/>
+                            <constraint firstAttribute="height" constant="50" id="gXs-jN-qAo"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PSZ-c9-GDG">
+                        <rect key="frame" x="8" y="59" width="64" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="YSF-Ua-jgN"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                        <color key="textColor" red="1" green="0.38915392440000002" blue="0.1089368786" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WT_BoFang_Kuang.png" translatesAutoresizingMaskIntoConstraints="NO" id="6Mp-fF-gZC">
+                        <rect key="frame" x="15" y="5" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="6pC-f1-RbB"/>
+                            <constraint firstAttribute="width" constant="50" id="q3u-x3-9Gs"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="xrB-nH-elK" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Ecz-fH-TAu"/>
+                <constraint firstItem="PSZ-c9-GDG" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="J2m-Ic-zQt"/>
+                <constraint firstItem="xrB-nH-elK" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="L8i-BA-93Z"/>
+                <constraint firstItem="6Mp-fF-gZC" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="OIT-VY-E66"/>
+                <constraint firstAttribute="trailing" secondItem="PSZ-c9-GDG" secondAttribute="trailing" constant="8" id="Tov-Q9-lHG"/>
+                <constraint firstItem="6Mp-fF-gZC" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="xjs-Yh-OQE"/>
+                <constraint firstItem="PSZ-c9-GDG" firstAttribute="top" secondItem="6Mp-fF-gZC" secondAttribute="bottom" constant="4" id="yry-bo-g2h"/>
+            </constraints>
+            <connections>
+                <outlet property="KuangImgV" destination="6Mp-fF-gZC" id="y7v-T5-zja"/>
+                <outlet property="contentImgV" destination="xrB-nH-elK" id="G9W-px-0gl"/>
+                <outlet property="contentLab" destination="PSZ-c9-GDG" id="3jH-1o-ncL"/>
+            </connections>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="WT_BoFang_Kuang.png" width="130" height="130"/>
+    </resources>
+</document>

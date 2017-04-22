@@ -76,6 +76,8 @@
     }
     
     _contentName.text = dataGengDict[@"ContentName"];
+    [_contentName reloadInputViews];
+    
     _XiaZaiBtn.enabled = NO;
     
     if ([[NSString NULLToString:dataGengDict[@"ContentFavorite"]] isEqualToString:@"1"]) {

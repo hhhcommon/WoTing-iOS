@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WTContactsController">
             <connections>
+                <outlet property="ContactsSearch" destination="ugk-5E-Dbt" id="QA0-GQ-oag"/>
                 <outlet property="ContactsTabV" destination="J65-RK-INc" id="sYg-gI-rea"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

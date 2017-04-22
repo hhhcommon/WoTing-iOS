@@ -60,6 +60,7 @@
                                 <constraint firstAttribute="height" constant="30" id="mVS-mQ-LEg"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <state key="normal" title="聊天" backgroundImage="nav_background_normal.png"/>
                             <state key="selected" backgroundImage="nav_background_selected.png">
                                 <color key="titleColor" red="1" green="0.38915392440000002" blue="0.1089368786" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -75,6 +76,7 @@
                                 <constraint firstAttribute="width" constant="90" id="aYx-J4-Vz3"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <state key="normal" title="通讯录" backgroundImage="nav_background_normal.png">
                                 <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                             </state>

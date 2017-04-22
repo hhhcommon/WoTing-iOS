@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="WTQunManageCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7Gn-GL-GnS">
+                        <rect key="frame" x="10" y="10" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="6Ld-H2-rEr"/>
+                            <constraint firstAttribute="height" constant="40" id="sSi-EN-NWt"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WT_BoFang_Kuang.png" translatesAutoresizingMaskIntoConstraints="NO" id="Rpz-9l-dOd">
+                        <rect key="frame" x="10" y="10" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="3sS-Oz-i71"/>
+                            <constraint firstAttribute="width" constant="40" id="oUb-c3-hNG"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H7G-fs-6oG">
+                        <rect key="frame" x="65" y="19" width="153" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="153" id="Xye-KN-2bV"/>
+                            <constraint firstAttribute="height" constant="21" id="oLm-E9-NdW"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="1" green="0.38915392440000002" blue="0.1089368786" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NMK-zB-q21">
+                        <rect key="frame" x="274" y="8" width="45" height="45"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="45" id="Pa7-Vo-fwy"/>
+                            <constraint firstAttribute="width" constant="45" id="XXq-kA-U81"/>
+                        </constraints>
+                        <state key="normal" image="Chat_wei.png"/>
+                        <state key="selected" image="chat_Xuan.png"/>
+                    </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h0i-kj-Sdc">
+                        <rect key="frame" x="0.0" y="58" width="320" height="1"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="rtb-bX-PWE"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="NMK-zB-q21" secondAttribute="trailing" constant="-7" id="1RH-aV-DTz"/>
+                    <constraint firstItem="H7G-fs-6oG" firstAttribute="leading" secondItem="Rpz-9l-dOd" secondAttribute="trailing" constant="15" id="23i-T2-KAI"/>
+                    <constraint firstItem="Rpz-9l-dOd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="ANR-kA-O7h"/>
+                    <constraint firstAttribute="trailing" secondItem="h0i-kj-Sdc" secondAttribute="trailing" id="EM3-Jc-9p5"/>
+                    <constraint firstItem="7Gn-GL-GnS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="Gx6-dM-INS"/>
+                    <constraint firstItem="NMK-zB-q21" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="MwD-6H-GS5"/>
+                    <constraint firstItem="h0i-kj-Sdc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="T2y-Qo-JjA"/>
+                    <constraint firstItem="7Gn-GL-GnS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="aFf-I6-yED"/>
+                    <constraint firstAttribute="bottom" secondItem="h0i-kj-Sdc" secondAttribute="bottom" id="eLv-hg-Mqk"/>
+                    <constraint firstItem="Rpz-9l-dOd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="faS-mx-U8V"/>
+                    <constraint firstItem="H7G-fs-6oG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="11" id="xiH-qS-sJh"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="XuanZhongBtn" destination="NMK-zB-q21" id="Ocp-9X-11F"/>
+                <outlet property="contentImgV" destination="7Gn-GL-GnS" id="S8F-Zl-e8o"/>
+                <outlet property="contentLab" destination="H7G-fs-6oG" id="oWN-Jy-tF7"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Chat_wei.png" width="24" height="24"/>
+        <image name="WT_BoFang_Kuang.png" width="130" height="130"/>
+        <image name="chat_Xuan.png" width="24" height="24"/>
+    </resources>
+</document>

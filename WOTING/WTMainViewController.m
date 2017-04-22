@@ -107,13 +107,14 @@
         _erWeiMaBtn.hidden = YES;
         _BianJiBtn.hidden = YES;
         _ImgKuang.hidden = YES;
+        _contentImgV.image = [UIImage imageNamed:@"main_MoRen.png"];
     }else{
         
         _contentName.text = userName;
         _IntroduceLab.text = Region;
         _erWeiMaBtn.hidden = NO;
         _BianJiBtn.hidden = NO;
-        
+        _contentImgV.hidden = NO;
         if ([[NSString NULLToString:loginDict[@"PortraitBig"]] hasPrefix:@"http"]) {
             
             [_contentImgV sd_setImageWithURL:[NSURL URLWithString:[NSString NULLToString:loginDict[@"PortraitBig"]]]];
@@ -357,9 +358,10 @@
     
     
     
-    imageData = UIImageJPEGRepresentation(resultImage, 0.5);
+   // imageData = UIImageJPEGRepresentation(resultImage, 0.5);
     
-    
+    //上传头像
+    [self UploadHeaderImageView:resultImage];
     
     //使用模态返回到软件界面
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -372,6 +374,41 @@
     
     [self dismissViewControllerAnimated:YES completion:nil];
     
+}
+
+
+- (void)UploadHeaderImageView:(UIImage *)image{
+    
+    NSString *uid = [AutomatePlist readPlistForKey:@"Uid"];
+    
+    NSString *IMEI = [AutomatePlist readPlistForKey:@"IMEI"];
+    NSString *ScreenSize = [AutomatePlist readPlistForKey:@"ScreenSize"];
+    NSString *MobileClass = [AutomatePlist readPlistForKey:@"MobileClass"];
+    NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
+    NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
+    
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",@"UserP",@"FType",@"jpg",@"ExtName",uid,@"UserId",nil];
+    
+    NSString *login_Str = WoTing_Upload4App;
+    
+    [ZCBNetworking uploadWithImage:image url:login_Str filename:nil name:@"liangYan" mimeType:@"image/jpg" parameters:parameters progress:^(int64_t bytesWritten, int64_t totalBytesWritten) {
+    } success:^(id response) {
+        
+        
+        NSDictionary *resultDict = (NSDictionary *)response;
+        
+        NSString  *ReturnType = resultDict[@"ful"][0][@"ReturnType"];
+        
+        if ([ReturnType isEqualToString:@"1001"]) {
+            
+            [WKProgressHUD popMessage:@"修改头像成功" inView:nil duration:0.5 animated:YES];
+            
+        }
+        
+        
+    } fail:^(NSError *error) {
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

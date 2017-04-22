@@ -237,6 +237,20 @@
 		0B22E1F81E83B34E00060029 /* WTDingYueCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B22E1F61E83B34E00060029 /* WTDingYueCell.xib */; };
 		0B22E1FC1E83BDEB00060029 /* WTZhuBoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B22E1FA1E83BDEB00060029 /* WTZhuBoController.m */; };
 		0B22E1FD1E83BDEB00060029 /* WTZhuBoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B22E1FB1E83BDEB00060029 /* WTZhuBoController.xib */; };
+		0B2689BE1EA4B9E60034C5D4 /* WTQunNewsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B2689BC1EA4B9E60034C5D4 /* WTQunNewsController.m */; };
+		0B2689BF1EA4B9E60034C5D4 /* WTQunNewsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B2689BD1EA4B9E60034C5D4 /* WTQunNewsController.xib */; };
+		0B2689C31EA4BBCA0034C5D4 /* WTJoinQunCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B2689C11EA4BBCA0034C5D4 /* WTJoinQunCell.m */; };
+		0B2689C41EA4BBCA0034C5D4 /* WTJoinQunCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B2689C21EA4BBCA0034C5D4 /* WTJoinQunCell.xib */; };
+		0B2689C81EA4D2260034C5D4 /* WTQunPsdController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B2689C61EA4D2260034C5D4 /* WTQunPsdController.m */; };
+		0B2689C91EA4D2260034C5D4 /* WTQunPsdController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B2689C71EA4D2260034C5D4 /* WTQunPsdController.xib */; };
+		0B2689CD1EA61EE70034C5D4 /* WTQunZhuManageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B2689CB1EA61EE70034C5D4 /* WTQunZhuManageCell.m */; };
+		0B2689CE1EA61EE70034C5D4 /* WTQunZhuManageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B2689CC1EA61EE70034C5D4 /* WTQunZhuManageCell.xib */; };
+		0B2689D11EA622A20034C5D4 /* WT_Manage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B2689CF1EA622A20034C5D4 /* WT_Manage@2x.png */; };
+		0B2689D21EA622A20034C5D4 /* WT_QunZhu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B2689D01EA622A20034C5D4 /* WT_QunZhu@2x.png */; };
+		0B2689D61EA710480034C5D4 /* WTQunMessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B2689D41EA710480034C5D4 /* WTQunMessageController.m */; };
+		0B2689D71EA710480034C5D4 /* WTQunMessageController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B2689D51EA710480034C5D4 /* WTQunMessageController.xib */; };
+		0B2689DA1EA77AE20034C5D4 /* createQun@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B2689D81EA77AE20034C5D4 /* createQun@2x.png */; };
+		0B2689DB1EA77AE20034C5D4 /* QunName@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B2689D91EA77AE20034C5D4 /* QunName@2x.png */; };
 		0B30BA701DF1524E000A75E2 /* more.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B30BA6F1DF1524E000A75E2 /* more.png */; };
 		0B4282761E1B543000FAC2BA /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4282751E1B543000FAC2BA /* AsyncSocket.m */; };
 		0B42827F1E1B86A300FAC2BA /* WTBoFangCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B42827D1E1B86A300FAC2BA /* WTBoFangCell.m */; };
@@ -717,10 +731,74 @@
 		0BCC39971E9CB25C00BFCF00 /* WTQunDetailsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BCC39951E9CB25C00BFCF00 /* WTQunDetailsCell.xib */; };
 		0BCC399B1E9CBC7300BFCF00 /* WTContactsNewFriCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BCC39991E9CBC7300BFCF00 /* WTContactsNewFriCell.m */; };
 		0BCC399C1E9CBC7300BFCF00 /* WTContactsNewFriCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BCC399A1E9CBC7300BFCF00 /* WTContactsNewFriCell.xib */; };
+		0BCC39A11E9CD1D700BFCF00 /* DuiJiang@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BCC399D1E9CD1D700BFCF00 /* DuiJiang@2x.png */; };
+		0BCC39A21E9CD1D700BFCF00 /* Qunwancheng@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BCC399E1E9CD1D700BFCF00 /* Qunwancheng@2x.png */; };
+		0BCC39A31E9CD1D700BFCF00 /* Qunxiugai@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BCC399F1E9CD1D700BFCF00 /* Qunxiugai@2x.png */; };
+		0BCC39A41E9CD1D700BFCF00 /* QunZu_Kuang.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BCC39A01E9CD1D700BFCF00 /* QunZu_Kuang.png */; };
+		0BCC39A81E9CEE0300BFCF00 /* WTQunQianMingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BCC39A61E9CEE0300BFCF00 /* WTQunQianMingCell.m */; };
+		0BCC39A91E9CEE0300BFCF00 /* WTQunQianMingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BCC39A71E9CEE0300BFCF00 /* WTQunQianMingCell.xib */; };
+		0BCC39AD1E9DCB4D00BFCF00 /* WTQunQMContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BCC39AB1E9DCB4D00BFCF00 /* WTQunQMContentCell.m */; };
+		0BCC39AE1E9DCB4D00BFCF00 /* WTQunQMContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BCC39AC1E9DCB4D00BFCF00 /* WTQunQMContentCell.xib */; };
+		0BCC39B21E9DDADF00BFCF00 /* WTQuitQunCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BCC39B01E9DDADF00BFCF00 /* WTQuitQunCell.m */; };
+		0BCC39B31E9DDADF00BFCF00 /* WTQuitQunCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BCC39B11E9DDADF00BFCF00 /* WTQuitQunCell.xib */; };
+		0BCC39B71E9E3BB800BFCF00 /* WTFriendDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BCC39B51E9E3BB800BFCF00 /* WTFriendDetailsController.m */; };
+		0BCC39B81E9E3BB800BFCF00 /* WTFriendDetailsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BCC39B61E9E3BB800BFCF00 /* WTFriendDetailsController.xib */; };
+		0BCC39BC1E9F565C00BFCF00 /* WTQunMemberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BCC39BA1E9F565C00BFCF00 /* WTQunMemberCell.m */; };
+		0BCC39BD1E9F565C00BFCF00 /* WTQunMemberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BCC39BB1E9F565C00BFCF00 /* WTQunMemberCell.xib */; };
+		0BCC39C01E9F5FCC00BFCF00 /* MLKMenuPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BCC39BF1E9F5FCC00BFCF00 /* MLKMenuPopover.m */; };
+		0BCC39C61E9F64B000BFCF00 /* DefaultLine.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BCC39C11E9F64B000BFCF00 /* DefaultLine.png */; };
+		0BCC39C71E9F64B000BFCF00 /* Menu_PopOver_BG.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BCC39C21E9F64B000BFCF00 /* Menu_PopOver_BG.png */; };
+		0BCC39C81E9F64B000BFCF00 /* Menu_PopOver_BG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BCC39C31E9F64B000BFCF00 /* Menu_PopOver_BG@2x.png */; };
+		0BCC39C91E9F64B000BFCF00 /* options_pointer.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BCC39C41E9F64B000BFCF00 /* options_pointer.png */; };
+		0BCC39CA1E9F64B000BFCF00 /* options_pointer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BCC39C51E9F64B000BFCF00 /* options_pointer@2x.png */; };
+		0BCC39CF1E9F70F100BFCF00 /* AddFriend@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BCC39CB1E9F70F100BFCF00 /* AddFriend@2x.png */; };
+		0BCC39D01E9F70F100BFCF00 /* CreatQun@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BCC39CC1E9F70F100BFCF00 /* CreatQun@2x.png */; };
+		0BCC39D11E9F70F100BFCF00 /* JoinQun@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BCC39CD1E9F70F100BFCF00 /* JoinQun@2x.png */; };
+		0BCC39D21E9F70F100BFCF00 /* SaoYiSao@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BCC39CE1E9F70F100BFCF00 /* SaoYiSao@2x.png */; };
+		0BCC39D71E9F74B100BFCF00 /* WTCreateQunController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BCC39D51E9F74B100BFCF00 /* WTCreateQunController.m */; };
+		0BCC39D81E9F74B100BFCF00 /* WTCreateQunController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BCC39D61E9F74B100BFCF00 /* WTCreateQunController.xib */; };
+		0BCC39E21E9F819600BFCF00 /* WTCreateQunCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BCC39E11E9F819600BFCF00 /* WTCreateQunCell.m */; };
+		0BCC39E61E9F992E00BFCF00 /* WTQunCYCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BCC39E41E9F992E00BFCF00 /* WTQunCYCell.m */; };
+		0BCC39E71E9F992E00BFCF00 /* WTQunCYCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BCC39E51E9F992E00BFCF00 /* WTQunCYCell.xib */; };
+		0BCC39EB1EA07ABE00BFCF00 /* WTQunCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BCC39E91EA07ABE00BFCF00 /* WTQunCell.m */; };
+		0BCC39EC1EA07ABE00BFCF00 /* WTQunCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BCC39EA1EA07ABE00BFCF00 /* WTQunCell.xib */; };
+		0BCC39EF1EA07C7100BFCF00 /* QunErweima@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BCC39ED1EA07C7100BFCF00 /* QunErweima@2x.png */; };
+		0BCC39F01EA07C7100BFCF00 /* QunMore@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BCC39EE1EA07C7100BFCF00 /* QunMore@2x.png */; };
+		0BCC39F51EA0860E00BFCF00 /* WTQunManageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BCC39F31EA0860E00BFCF00 /* WTQunManageController.m */; };
+		0BCC39F61EA0860E00BFCF00 /* WTQunManageController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BCC39F41EA0860E00BFCF00 /* WTQunManageController.xib */; };
+		0BCC39FB1EA0936D00BFCF00 /* WTQunManageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BCC39F91EA0936D00BFCF00 /* WTQunManageCell.m */; };
+		0BCC39FC1EA0936D00BFCF00 /* WTQunManageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BCC39FA1EA0936D00BFCF00 /* WTQunManageCell.xib */; };
+		0BCC3A001EA0C35E00BFCF00 /* WTQunShouQiCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BCC39FE1EA0C35E00BFCF00 /* WTQunShouQiCell.m */; };
+		0BCC3A011EA0C35E00BFCF00 /* WTQunShouQiCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BCC39FF1EA0C35E00BFCF00 /* WTQunShouQiCell.xib */; };
+		0BCC3A071EA1DCE300BFCF00 /* AddMember@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BCC3A021EA1DCE300BFCF00 /* AddMember@2x.png */; };
+		0BCC3A081EA1DCE300BFCF00 /* kickMember@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BCC3A031EA1DCE300BFCF00 /* kickMember@2x.png */; };
+		0BCC3A091EA1DCE300BFCF00 /* OpenQun@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BCC3A041EA1DCE300BFCF00 /* OpenQun@2x.png */; };
+		0BCC3A0A1EA1DCE300BFCF00 /* PsdQun@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BCC3A051EA1DCE300BFCF00 /* PsdQun@2x.png */; };
+		0BCC3A0B1EA1DCE300BFCF00 /* YanZhengQun@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BCC3A061EA1DCE300BFCF00 /* YanZhengQun@2x.png */; };
 		0BD6B5441E15FC0C0039B88D /* DownLoad.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0BD6B5431E15FC0C0039B88D /* DownLoad.plist */; };
 		0BD6B5481E1609550039B88D /* WTXiaZaiDoneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BD6B5461E1609550039B88D /* WTXiaZaiDoneCell.m */; };
 		0BD6B5491E1609550039B88D /* WTXiaZaiDoneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BD6B5471E1609550039B88D /* WTXiaZaiDoneCell.xib */; };
 		0BD6B54C1E160E6F0039B88D /* ProgressCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BD6B54B1E160E6F0039B88D /* ProgressCircleView.m */; };
+		0BEDB1D61EA8687F00549B12 /* WTAddQunFriendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BEDB1D41EA8687F00549B12 /* WTAddQunFriendController.m */; };
+		0BEDB1D71EA8687F00549B12 /* WTAddQunFriendController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BEDB1D51EA8687F00549B12 /* WTAddQunFriendController.xib */; };
+		0BEDB1DC1EA8885800549B12 /* AddQunFriend_sao@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BEDB1D81EA8885800549B12 /* AddQunFriend_sao@2x.png */; };
+		0BEDB1DD1EA8885800549B12 /* AddQunFriend_search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BEDB1D91EA8885800549B12 /* AddQunFriend_search@2x.png */; };
+		0BEDB1DE1EA8885800549B12 /* AddQunTo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BEDB1DA1EA8885800549B12 /* AddQunTo@2x.png */; };
+		0BEDB1DF1EA8885800549B12 /* YuYin_sear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BEDB1DB1EA8885800549B12 /* YuYin_sear@2x.png */; };
+		0BEDB1E31EA8A91400549B12 /* WTAddResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BEDB1E11EA8A91400549B12 /* WTAddResultViewController.m */; };
+		0BEDB1E41EA8A91400549B12 /* WTAddResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BEDB1E21EA8A91400549B12 /* WTAddResultViewController.xib */; };
+		0BEDB1E81EA8D07800549B12 /* WTQunSetManageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BEDB1E61EA8D07800549B12 /* WTQunSetManageController.m */; };
+		0BEDB1E91EA8D07800549B12 /* WTQunSetManageController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BEDB1E71EA8D07800549B12 /* WTQunSetManageController.xib */; };
+		0BEDB1ED1EA9E5E300549B12 /* WTSetManTabCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BEDB1EB1EA9E5E300549B12 /* WTSetManTabCell.m */; };
+		0BEDB1EE1EA9E5E300549B12 /* WTSetManTabCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BEDB1EC1EA9E5E300549B12 /* WTSetManTabCell.xib */; };
+		0BEDB1F31EAA00D600549B12 /* WTAddResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BEDB1F11EAA00D600549B12 /* WTAddResultCell.m */; };
+		0BEDB1F41EAA00D600549B12 /* WTAddResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BEDB1F21EAA00D600549B12 /* WTAddResultCell.xib */; };
+		0BEDB1F81EAB0B1D00549B12 /* WTQunAndFriendDetailsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BEDB1F61EAB0B1D00549B12 /* WTQunAndFriendDetailsCell.m */; };
+		0BEDB1F91EAB0B1D00549B12 /* WTQunAndFriendDetailsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BEDB1F71EAB0B1D00549B12 /* WTQunAndFriendDetailsCell.xib */; };
+		0BEDB1FD1EAB183B00549B12 /* WTFriDetailQMingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BEDB1FB1EAB183B00549B12 /* WTFriDetailQMingCell.m */; };
+		0BEDB1FE1EAB183B00549B12 /* WTFriDetailQMingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BEDB1FC1EAB183B00549B12 /* WTFriDetailQMingCell.xib */; };
+		0BEDB2021EAB1A9B00549B12 /* WTFriAddFCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BEDB2001EAB1A9B00549B12 /* WTFriAddFCell.m */; };
+		0BEDB2031EAB1A9B00549B12 /* WTFriAddFCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BEDB2011EAB1A9B00549B12 /* WTFriAddFCell.xib */; };
 		0BF2C4F01DE2A36200A42B3D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF2C4EF1DE2A36200A42B3D /* main.m */; };
 		0BF2C4F31DE2A36200A42B3D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF2C4F21DE2A36200A42B3D /* AppDelegate.m */; };
 		0BF2C4F61DE2A36200A42B3D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF2C4F51DE2A36200A42B3D /* ViewController.m */; };
@@ -1175,6 +1253,25 @@
 		0B22E1F91E83BDEB00060029 /* WTZhuBoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTZhuBoController.h; sourceTree = "<group>"; };
 		0B22E1FA1E83BDEB00060029 /* WTZhuBoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTZhuBoController.m; sourceTree = "<group>"; };
 		0B22E1FB1E83BDEB00060029 /* WTZhuBoController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTZhuBoController.xib; sourceTree = "<group>"; };
+		0B2689BB1EA4B9E60034C5D4 /* WTQunNewsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTQunNewsController.h; sourceTree = "<group>"; };
+		0B2689BC1EA4B9E60034C5D4 /* WTQunNewsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTQunNewsController.m; sourceTree = "<group>"; };
+		0B2689BD1EA4B9E60034C5D4 /* WTQunNewsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTQunNewsController.xib; sourceTree = "<group>"; };
+		0B2689C01EA4BBCA0034C5D4 /* WTJoinQunCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTJoinQunCell.h; sourceTree = "<group>"; };
+		0B2689C11EA4BBCA0034C5D4 /* WTJoinQunCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTJoinQunCell.m; sourceTree = "<group>"; };
+		0B2689C21EA4BBCA0034C5D4 /* WTJoinQunCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTJoinQunCell.xib; sourceTree = "<group>"; };
+		0B2689C51EA4D2260034C5D4 /* WTQunPsdController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTQunPsdController.h; sourceTree = "<group>"; };
+		0B2689C61EA4D2260034C5D4 /* WTQunPsdController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTQunPsdController.m; sourceTree = "<group>"; };
+		0B2689C71EA4D2260034C5D4 /* WTQunPsdController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTQunPsdController.xib; sourceTree = "<group>"; };
+		0B2689CA1EA61EE70034C5D4 /* WTQunZhuManageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTQunZhuManageCell.h; sourceTree = "<group>"; };
+		0B2689CB1EA61EE70034C5D4 /* WTQunZhuManageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTQunZhuManageCell.m; sourceTree = "<group>"; };
+		0B2689CC1EA61EE70034C5D4 /* WTQunZhuManageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTQunZhuManageCell.xib; sourceTree = "<group>"; };
+		0B2689CF1EA622A20034C5D4 /* WT_Manage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "WT_Manage@2x.png"; sourceTree = "<group>"; };
+		0B2689D01EA622A20034C5D4 /* WT_QunZhu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "WT_QunZhu@2x.png"; sourceTree = "<group>"; };
+		0B2689D31EA710480034C5D4 /* WTQunMessageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTQunMessageController.h; sourceTree = "<group>"; };
+		0B2689D41EA710480034C5D4 /* WTQunMessageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTQunMessageController.m; sourceTree = "<group>"; };
+		0B2689D51EA710480034C5D4 /* WTQunMessageController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTQunMessageController.xib; sourceTree = "<group>"; };
+		0B2689D81EA77AE20034C5D4 /* createQun@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "createQun@2x.png"; sourceTree = "<group>"; };
+		0B2689D91EA77AE20034C5D4 /* QunName@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QunName@2x.png"; sourceTree = "<group>"; };
 		0B30BA6F1DF1524E000A75E2 /* more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more.png; sourceTree = "<group>"; };
 		0B4282741E1B543000FAC2BA /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncSocket.h; sourceTree = "<group>"; };
 		0B4282751E1B543000FAC2BA /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncSocket.m; sourceTree = "<group>"; };
@@ -2006,12 +2103,97 @@
 		0BCC39981E9CBC7300BFCF00 /* WTContactsNewFriCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTContactsNewFriCell.h; sourceTree = "<group>"; };
 		0BCC39991E9CBC7300BFCF00 /* WTContactsNewFriCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTContactsNewFriCell.m; sourceTree = "<group>"; };
 		0BCC399A1E9CBC7300BFCF00 /* WTContactsNewFriCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTContactsNewFriCell.xib; sourceTree = "<group>"; };
+		0BCC399D1E9CD1D700BFCF00 /* DuiJiang@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DuiJiang@2x.png"; sourceTree = "<group>"; };
+		0BCC399E1E9CD1D700BFCF00 /* Qunwancheng@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Qunwancheng@2x.png"; sourceTree = "<group>"; };
+		0BCC399F1E9CD1D700BFCF00 /* Qunxiugai@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Qunxiugai@2x.png"; sourceTree = "<group>"; };
+		0BCC39A01E9CD1D700BFCF00 /* QunZu_Kuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = QunZu_Kuang.png; sourceTree = "<group>"; };
+		0BCC39A51E9CEE0300BFCF00 /* WTQunQianMingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTQunQianMingCell.h; sourceTree = "<group>"; };
+		0BCC39A61E9CEE0300BFCF00 /* WTQunQianMingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTQunQianMingCell.m; sourceTree = "<group>"; };
+		0BCC39A71E9CEE0300BFCF00 /* WTQunQianMingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTQunQianMingCell.xib; sourceTree = "<group>"; };
+		0BCC39AA1E9DCB4D00BFCF00 /* WTQunQMContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTQunQMContentCell.h; sourceTree = "<group>"; };
+		0BCC39AB1E9DCB4D00BFCF00 /* WTQunQMContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTQunQMContentCell.m; sourceTree = "<group>"; };
+		0BCC39AC1E9DCB4D00BFCF00 /* WTQunQMContentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTQunQMContentCell.xib; sourceTree = "<group>"; };
+		0BCC39AF1E9DDADF00BFCF00 /* WTQuitQunCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTQuitQunCell.h; sourceTree = "<group>"; };
+		0BCC39B01E9DDADF00BFCF00 /* WTQuitQunCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTQuitQunCell.m; sourceTree = "<group>"; };
+		0BCC39B11E9DDADF00BFCF00 /* WTQuitQunCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTQuitQunCell.xib; sourceTree = "<group>"; };
+		0BCC39B41E9E3BB800BFCF00 /* WTFriendDetailsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTFriendDetailsController.h; sourceTree = "<group>"; };
+		0BCC39B51E9E3BB800BFCF00 /* WTFriendDetailsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTFriendDetailsController.m; sourceTree = "<group>"; };
+		0BCC39B61E9E3BB800BFCF00 /* WTFriendDetailsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTFriendDetailsController.xib; sourceTree = "<group>"; };
+		0BCC39B91E9F565C00BFCF00 /* WTQunMemberCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTQunMemberCell.h; sourceTree = "<group>"; };
+		0BCC39BA1E9F565C00BFCF00 /* WTQunMemberCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTQunMemberCell.m; sourceTree = "<group>"; };
+		0BCC39BB1E9F565C00BFCF00 /* WTQunMemberCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTQunMemberCell.xib; sourceTree = "<group>"; };
+		0BCC39BE1E9F5FCC00BFCF00 /* MLKMenuPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLKMenuPopover.h; sourceTree = "<group>"; };
+		0BCC39BF1E9F5FCC00BFCF00 /* MLKMenuPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLKMenuPopover.m; sourceTree = "<group>"; };
+		0BCC39C11E9F64B000BFCF00 /* DefaultLine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultLine.png; sourceTree = "<group>"; };
+		0BCC39C21E9F64B000BFCF00 /* Menu_PopOver_BG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Menu_PopOver_BG.png; sourceTree = "<group>"; };
+		0BCC39C31E9F64B000BFCF00 /* Menu_PopOver_BG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Menu_PopOver_BG@2x.png"; sourceTree = "<group>"; };
+		0BCC39C41E9F64B000BFCF00 /* options_pointer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = options_pointer.png; sourceTree = "<group>"; };
+		0BCC39C51E9F64B000BFCF00 /* options_pointer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "options_pointer@2x.png"; sourceTree = "<group>"; };
+		0BCC39CB1E9F70F100BFCF00 /* AddFriend@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AddFriend@2x.png"; sourceTree = "<group>"; };
+		0BCC39CC1E9F70F100BFCF00 /* CreatQun@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CreatQun@2x.png"; sourceTree = "<group>"; };
+		0BCC39CD1E9F70F100BFCF00 /* JoinQun@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JoinQun@2x.png"; sourceTree = "<group>"; };
+		0BCC39CE1E9F70F100BFCF00 /* SaoYiSao@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SaoYiSao@2x.png"; sourceTree = "<group>"; };
+		0BCC39D41E9F74B100BFCF00 /* WTCreateQunController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTCreateQunController.h; sourceTree = "<group>"; };
+		0BCC39D51E9F74B100BFCF00 /* WTCreateQunController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTCreateQunController.m; sourceTree = "<group>"; };
+		0BCC39D61E9F74B100BFCF00 /* WTCreateQunController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTCreateQunController.xib; sourceTree = "<group>"; };
+		0BCC39E01E9F819600BFCF00 /* WTCreateQunCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTCreateQunCell.h; sourceTree = "<group>"; };
+		0BCC39E11E9F819600BFCF00 /* WTCreateQunCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTCreateQunCell.m; sourceTree = "<group>"; };
+		0BCC39E31E9F992E00BFCF00 /* WTQunCYCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTQunCYCell.h; sourceTree = "<group>"; };
+		0BCC39E41E9F992E00BFCF00 /* WTQunCYCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTQunCYCell.m; sourceTree = "<group>"; };
+		0BCC39E51E9F992E00BFCF00 /* WTQunCYCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTQunCYCell.xib; sourceTree = "<group>"; };
+		0BCC39E81EA07ABE00BFCF00 /* WTQunCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTQunCell.h; sourceTree = "<group>"; };
+		0BCC39E91EA07ABE00BFCF00 /* WTQunCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTQunCell.m; sourceTree = "<group>"; };
+		0BCC39EA1EA07ABE00BFCF00 /* WTQunCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTQunCell.xib; sourceTree = "<group>"; };
+		0BCC39ED1EA07C7100BFCF00 /* QunErweima@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QunErweima@2x.png"; sourceTree = "<group>"; };
+		0BCC39EE1EA07C7100BFCF00 /* QunMore@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QunMore@2x.png"; sourceTree = "<group>"; };
+		0BCC39F21EA0860E00BFCF00 /* WTQunManageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTQunManageController.h; sourceTree = "<group>"; };
+		0BCC39F31EA0860E00BFCF00 /* WTQunManageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTQunManageController.m; sourceTree = "<group>"; };
+		0BCC39F41EA0860E00BFCF00 /* WTQunManageController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTQunManageController.xib; sourceTree = "<group>"; };
+		0BCC39F81EA0936D00BFCF00 /* WTQunManageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTQunManageCell.h; sourceTree = "<group>"; };
+		0BCC39F91EA0936D00BFCF00 /* WTQunManageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTQunManageCell.m; sourceTree = "<group>"; };
+		0BCC39FA1EA0936D00BFCF00 /* WTQunManageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTQunManageCell.xib; sourceTree = "<group>"; };
+		0BCC39FD1EA0C35E00BFCF00 /* WTQunShouQiCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTQunShouQiCell.h; sourceTree = "<group>"; };
+		0BCC39FE1EA0C35E00BFCF00 /* WTQunShouQiCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTQunShouQiCell.m; sourceTree = "<group>"; };
+		0BCC39FF1EA0C35E00BFCF00 /* WTQunShouQiCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTQunShouQiCell.xib; sourceTree = "<group>"; };
+		0BCC3A021EA1DCE300BFCF00 /* AddMember@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AddMember@2x.png"; sourceTree = "<group>"; };
+		0BCC3A031EA1DCE300BFCF00 /* kickMember@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "kickMember@2x.png"; sourceTree = "<group>"; };
+		0BCC3A041EA1DCE300BFCF00 /* OpenQun@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "OpenQun@2x.png"; sourceTree = "<group>"; };
+		0BCC3A051EA1DCE300BFCF00 /* PsdQun@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PsdQun@2x.png"; sourceTree = "<group>"; };
+		0BCC3A061EA1DCE300BFCF00 /* YanZhengQun@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "YanZhengQun@2x.png"; sourceTree = "<group>"; };
 		0BD6B5431E15FC0C0039B88D /* DownLoad.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DownLoad.plist; sourceTree = "<group>"; };
 		0BD6B5451E1609550039B88D /* WTXiaZaiDoneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTXiaZaiDoneCell.h; sourceTree = "<group>"; };
 		0BD6B5461E1609550039B88D /* WTXiaZaiDoneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTXiaZaiDoneCell.m; sourceTree = "<group>"; };
 		0BD6B5471E1609550039B88D /* WTXiaZaiDoneCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTXiaZaiDoneCell.xib; sourceTree = "<group>"; };
 		0BD6B54A1E160E6F0039B88D /* ProgressCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressCircleView.h; sourceTree = "<group>"; };
 		0BD6B54B1E160E6F0039B88D /* ProgressCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressCircleView.m; sourceTree = "<group>"; };
+		0BEDB1D31EA8687F00549B12 /* WTAddQunFriendController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTAddQunFriendController.h; sourceTree = "<group>"; };
+		0BEDB1D41EA8687F00549B12 /* WTAddQunFriendController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTAddQunFriendController.m; sourceTree = "<group>"; };
+		0BEDB1D51EA8687F00549B12 /* WTAddQunFriendController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTAddQunFriendController.xib; sourceTree = "<group>"; };
+		0BEDB1D81EA8885800549B12 /* AddQunFriend_sao@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AddQunFriend_sao@2x.png"; sourceTree = "<group>"; };
+		0BEDB1D91EA8885800549B12 /* AddQunFriend_search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AddQunFriend_search@2x.png"; sourceTree = "<group>"; };
+		0BEDB1DA1EA8885800549B12 /* AddQunTo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AddQunTo@2x.png"; sourceTree = "<group>"; };
+		0BEDB1DB1EA8885800549B12 /* YuYin_sear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "YuYin_sear@2x.png"; sourceTree = "<group>"; };
+		0BEDB1E01EA8A91400549B12 /* WTAddResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTAddResultViewController.h; sourceTree = "<group>"; };
+		0BEDB1E11EA8A91400549B12 /* WTAddResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTAddResultViewController.m; sourceTree = "<group>"; };
+		0BEDB1E21EA8A91400549B12 /* WTAddResultViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTAddResultViewController.xib; sourceTree = "<group>"; };
+		0BEDB1E51EA8D07800549B12 /* WTQunSetManageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTQunSetManageController.h; sourceTree = "<group>"; };
+		0BEDB1E61EA8D07800549B12 /* WTQunSetManageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTQunSetManageController.m; sourceTree = "<group>"; };
+		0BEDB1E71EA8D07800549B12 /* WTQunSetManageController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTQunSetManageController.xib; sourceTree = "<group>"; };
+		0BEDB1EA1EA9E5E300549B12 /* WTSetManTabCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTSetManTabCell.h; sourceTree = "<group>"; };
+		0BEDB1EB1EA9E5E300549B12 /* WTSetManTabCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTSetManTabCell.m; sourceTree = "<group>"; };
+		0BEDB1EC1EA9E5E300549B12 /* WTSetManTabCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTSetManTabCell.xib; sourceTree = "<group>"; };
+		0BEDB1F01EAA00D600549B12 /* WTAddResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTAddResultCell.h; sourceTree = "<group>"; };
+		0BEDB1F11EAA00D600549B12 /* WTAddResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTAddResultCell.m; sourceTree = "<group>"; };
+		0BEDB1F21EAA00D600549B12 /* WTAddResultCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTAddResultCell.xib; sourceTree = "<group>"; };
+		0BEDB1F51EAB0B1D00549B12 /* WTQunAndFriendDetailsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTQunAndFriendDetailsCell.h; sourceTree = "<group>"; };
+		0BEDB1F61EAB0B1D00549B12 /* WTQunAndFriendDetailsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTQunAndFriendDetailsCell.m; sourceTree = "<group>"; };
+		0BEDB1F71EAB0B1D00549B12 /* WTQunAndFriendDetailsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTQunAndFriendDetailsCell.xib; sourceTree = "<group>"; };
+		0BEDB1FA1EAB183B00549B12 /* WTFriDetailQMingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTFriDetailQMingCell.h; sourceTree = "<group>"; };
+		0BEDB1FB1EAB183B00549B12 /* WTFriDetailQMingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTFriDetailQMingCell.m; sourceTree = "<group>"; };
+		0BEDB1FC1EAB183B00549B12 /* WTFriDetailQMingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTFriDetailQMingCell.xib; sourceTree = "<group>"; };
+		0BEDB1FF1EAB1A9B00549B12 /* WTFriAddFCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTFriAddFCell.h; sourceTree = "<group>"; };
+		0BEDB2001EAB1A9B00549B12 /* WTFriAddFCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTFriAddFCell.m; sourceTree = "<group>"; };
+		0BEDB2011EAB1A9B00549B12 /* WTFriAddFCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTFriAddFCell.xib; sourceTree = "<group>"; };
 		0BF2C4EB1DE2A36200A42B3D /* WOTING.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WOTING.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BF2C4EF1DE2A36200A42B3D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0BF2C4F11DE2A36200A42B3D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -2868,6 +3050,27 @@
 				0BA47CC11DF553DC0000B322 /* WTXian.png */,
 			);
 			path = icon_Diantai;
+			sourceTree = "<group>";
+		};
+		0B2689B91EA4B9A20034C5D4 /* QunNews */ = {
+			isa = PBXGroup;
+			children = (
+				0B2689BA1EA4B9C50034C5D4 /* View */,
+				0B2689BB1EA4B9E60034C5D4 /* WTQunNewsController.h */,
+				0B2689BC1EA4B9E60034C5D4 /* WTQunNewsController.m */,
+				0B2689BD1EA4B9E60034C5D4 /* WTQunNewsController.xib */,
+			);
+			name = QunNews;
+			sourceTree = "<group>";
+		};
+		0B2689BA1EA4B9C50034C5D4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0B2689C01EA4BBCA0034C5D4 /* WTJoinQunCell.h */,
+				0B2689C11EA4BBCA0034C5D4 /* WTJoinQunCell.m */,
+				0B2689C21EA4BBCA0034C5D4 /* WTJoinQunCell.xib */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		0B4282731E1B543000FAC2BA /* socket */ = {
@@ -4027,6 +4230,27 @@
 		0BCC39771E9C89EA00BFCF00 /* Char */ = {
 			isa = PBXGroup;
 			children = (
+				0BEDB1D81EA8885800549B12 /* AddQunFriend_sao@2x.png */,
+				0BEDB1D91EA8885800549B12 /* AddQunFriend_search@2x.png */,
+				0BEDB1DA1EA8885800549B12 /* AddQunTo@2x.png */,
+				0BEDB1DB1EA8885800549B12 /* YuYin_sear@2x.png */,
+				0B2689D81EA77AE20034C5D4 /* createQun@2x.png */,
+				0B2689D91EA77AE20034C5D4 /* QunName@2x.png */,
+				0B2689CF1EA622A20034C5D4 /* WT_Manage@2x.png */,
+				0B2689D01EA622A20034C5D4 /* WT_QunZhu@2x.png */,
+				0BCC399D1E9CD1D700BFCF00 /* DuiJiang@2x.png */,
+				0BCC399E1E9CD1D700BFCF00 /* Qunwancheng@2x.png */,
+				0BCC399F1E9CD1D700BFCF00 /* Qunxiugai@2x.png */,
+				0BCC39A01E9CD1D700BFCF00 /* QunZu_Kuang.png */,
+				0BCC39CB1E9F70F100BFCF00 /* AddFriend@2x.png */,
+				0BCC39CC1E9F70F100BFCF00 /* CreatQun@2x.png */,
+				0BCC39CD1E9F70F100BFCF00 /* JoinQun@2x.png */,
+				0BCC39CE1E9F70F100BFCF00 /* SaoYiSao@2x.png */,
+				0BCC3A021EA1DCE300BFCF00 /* AddMember@2x.png */,
+				0BCC3A031EA1DCE300BFCF00 /* kickMember@2x.png */,
+				0BCC3A041EA1DCE300BFCF00 /* OpenQun@2x.png */,
+				0BCC3A051EA1DCE300BFCF00 /* PsdQun@2x.png */,
+				0BCC3A061EA1DCE300BFCF00 /* YanZhengQun@2x.png */,
 				0BCC39781E9C89EA00BFCF00 /* Chat_wei@2x.png */,
 				0BCC39791E9C89EA00BFCF00 /* chat_Xuan@2x.png */,
 				0BCC397A1E9C89EA00BFCF00 /* Contacts_Jiang@2x.png */,
@@ -4034,6 +4258,8 @@
 				0BCC397C1E9C89EA00BFCF00 /* Friend_header@2x.png */,
 				0BCC397D1E9C89EA00BFCF00 /* NewFriend@2x.png */,
 				0BCC397E1E9C89EA00BFCF00 /* Qun_header@2x.png */,
+				0BCC39ED1EA07C7100BFCF00 /* QunErweima@2x.png */,
+				0BCC39EE1EA07C7100BFCF00 /* QunMore@2x.png */,
 				0BCC397F1E9C89EA00BFCF00 /* talking-1.png */,
 				0BCC39801E9C89EA00BFCF00 /* talking-2.png */,
 				0BCC39811E9C89EA00BFCF00 /* talking.png */,
@@ -4048,6 +4274,9 @@
 				0BCC398D1E9CA4EC00BFCF00 /* WTQunDetailsController.h */,
 				0BCC398E1E9CA4EC00BFCF00 /* WTQunDetailsController.m */,
 				0BCC398F1E9CA4EC00BFCF00 /* WTQunDetailsController.xib */,
+				0BCC39B41E9E3BB800BFCF00 /* WTFriendDetailsController.h */,
+				0BCC39B51E9E3BB800BFCF00 /* WTFriendDetailsController.m */,
+				0BCC39B61E9E3BB800BFCF00 /* WTFriendDetailsController.xib */,
 			);
 			name = QunDetails;
 			sourceTree = "<group>";
@@ -4055,11 +4284,120 @@
 		0BCC39921E9CB23800BFCF00 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0BCC39E31E9F992E00BFCF00 /* WTQunCYCell.h */,
+				0BCC39E41E9F992E00BFCF00 /* WTQunCYCell.m */,
+				0BCC39E51E9F992E00BFCF00 /* WTQunCYCell.xib */,
 				0BCC39931E9CB25C00BFCF00 /* WTQunDetailsCell.h */,
 				0BCC39941E9CB25C00BFCF00 /* WTQunDetailsCell.m */,
 				0BCC39951E9CB25C00BFCF00 /* WTQunDetailsCell.xib */,
+				0BCC39A51E9CEE0300BFCF00 /* WTQunQianMingCell.h */,
+				0BCC39A61E9CEE0300BFCF00 /* WTQunQianMingCell.m */,
+				0BCC39A71E9CEE0300BFCF00 /* WTQunQianMingCell.xib */,
+				0BCC39AA1E9DCB4D00BFCF00 /* WTQunQMContentCell.h */,
+				0BCC39AB1E9DCB4D00BFCF00 /* WTQunQMContentCell.m */,
+				0BCC39AC1E9DCB4D00BFCF00 /* WTQunQMContentCell.xib */,
+				0BCC39B91E9F565C00BFCF00 /* WTQunMemberCell.h */,
+				0BCC39BA1E9F565C00BFCF00 /* WTQunMemberCell.m */,
+				0BCC39BB1E9F565C00BFCF00 /* WTQunMemberCell.xib */,
+				0BCC39FD1EA0C35E00BFCF00 /* WTQunShouQiCell.h */,
+				0BCC39FE1EA0C35E00BFCF00 /* WTQunShouQiCell.m */,
+				0BCC39FF1EA0C35E00BFCF00 /* WTQunShouQiCell.xib */,
+				0BCC39E81EA07ABE00BFCF00 /* WTQunCell.h */,
+				0BCC39E91EA07ABE00BFCF00 /* WTQunCell.m */,
+				0BCC39EA1EA07ABE00BFCF00 /* WTQunCell.xib */,
+				0BCC39AF1E9DDADF00BFCF00 /* WTQuitQunCell.h */,
+				0BCC39B01E9DDADF00BFCF00 /* WTQuitQunCell.m */,
+				0BCC39B11E9DDADF00BFCF00 /* WTQuitQunCell.xib */,
+				0BEDB1F51EAB0B1D00549B12 /* WTQunAndFriendDetailsCell.h */,
+				0BEDB1F61EAB0B1D00549B12 /* WTQunAndFriendDetailsCell.m */,
+				0BEDB1F71EAB0B1D00549B12 /* WTQunAndFriendDetailsCell.xib */,
+				0BEDB1FA1EAB183B00549B12 /* WTFriDetailQMingCell.h */,
+				0BEDB1FB1EAB183B00549B12 /* WTFriDetailQMingCell.m */,
+				0BEDB1FC1EAB183B00549B12 /* WTFriDetailQMingCell.xib */,
+				0BEDB1FF1EAB1A9B00549B12 /* WTFriAddFCell.h */,
+				0BEDB2001EAB1A9B00549B12 /* WTFriAddFCell.m */,
+				0BEDB2011EAB1A9B00549B12 /* WTFriAddFCell.xib */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		0BCC39D31E9F746400BFCF00 /* CreateQun */ = {
+			isa = PBXGroup;
+			children = (
+				0BCC39DC1E9F790100BFCF00 /* View */,
+				0BCC39D41E9F74B100BFCF00 /* WTCreateQunController.h */,
+				0BCC39D51E9F74B100BFCF00 /* WTCreateQunController.m */,
+				0BCC39D61E9F74B100BFCF00 /* WTCreateQunController.xib */,
+				0B2689D31EA710480034C5D4 /* WTQunMessageController.h */,
+				0B2689D41EA710480034C5D4 /* WTQunMessageController.m */,
+				0B2689D51EA710480034C5D4 /* WTQunMessageController.xib */,
+			);
+			name = CreateQun;
+			sourceTree = "<group>";
+		};
+		0BCC39DC1E9F790100BFCF00 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0BCC39E01E9F819600BFCF00 /* WTCreateQunCell.h */,
+				0BCC39E11E9F819600BFCF00 /* WTCreateQunCell.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		0BCC39F11EA085B800BFCF00 /* QunManage */ = {
+			isa = PBXGroup;
+			children = (
+				0BCC39F71EA0861700BFCF00 /* View */,
+				0BCC39F21EA0860E00BFCF00 /* WTQunManageController.h */,
+				0BCC39F31EA0860E00BFCF00 /* WTQunManageController.m */,
+				0BCC39F41EA0860E00BFCF00 /* WTQunManageController.xib */,
+				0B2689C51EA4D2260034C5D4 /* WTQunPsdController.h */,
+				0B2689C61EA4D2260034C5D4 /* WTQunPsdController.m */,
+				0B2689C71EA4D2260034C5D4 /* WTQunPsdController.xib */,
+				0BEDB1E51EA8D07800549B12 /* WTQunSetManageController.h */,
+				0BEDB1E61EA8D07800549B12 /* WTQunSetManageController.m */,
+				0BEDB1E71EA8D07800549B12 /* WTQunSetManageController.xib */,
+			);
+			name = QunManage;
+			sourceTree = "<group>";
+		};
+		0BCC39F71EA0861700BFCF00 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0BCC39F81EA0936D00BFCF00 /* WTQunManageCell.h */,
+				0BCC39F91EA0936D00BFCF00 /* WTQunManageCell.m */,
+				0BCC39FA1EA0936D00BFCF00 /* WTQunManageCell.xib */,
+				0B2689CA1EA61EE70034C5D4 /* WTQunZhuManageCell.h */,
+				0B2689CB1EA61EE70034C5D4 /* WTQunZhuManageCell.m */,
+				0B2689CC1EA61EE70034C5D4 /* WTQunZhuManageCell.xib */,
+				0BEDB1EA1EA9E5E300549B12 /* WTSetManTabCell.h */,
+				0BEDB1EB1EA9E5E300549B12 /* WTSetManTabCell.m */,
+				0BEDB1EC1EA9E5E300549B12 /* WTSetManTabCell.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		0BEDB1D21EA8684500549B12 /* AddQunOrFriend */ = {
+			isa = PBXGroup;
+			children = (
+				0BEDB1D31EA8687F00549B12 /* WTAddQunFriendController.h */,
+				0BEDB1D41EA8687F00549B12 /* WTAddQunFriendController.m */,
+				0BEDB1D51EA8687F00549B12 /* WTAddQunFriendController.xib */,
+				0BEDB1E01EA8A91400549B12 /* WTAddResultViewController.h */,
+				0BEDB1E11EA8A91400549B12 /* WTAddResultViewController.m */,
+				0BEDB1E21EA8A91400549B12 /* WTAddResultViewController.xib */,
+			);
+			name = AddQunOrFriend;
+			sourceTree = "<group>";
+		};
+		0BEDB1EF1EAA00BD00549B12 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				0BEDB1F01EAA00D600549B12 /* WTAddResultCell.h */,
+				0BEDB1F11EAA00D600549B12 /* WTAddResultCell.m */,
+				0BEDB1F21EAA00D600549B12 /* WTAddResultCell.xib */,
+			);
+			name = view;
 			sourceTree = "<group>";
 		};
 		0BF2C4E21DE2A36200A42B3D = {
@@ -4143,6 +4481,11 @@
 				0B71CC791E98D1D6004F7566 /* appIntroduce_1@2x.jpg */,
 				0B71CC7A1E98D1D6004F7566 /* appIntroduce_2@2x.jpg */,
 				0B71CC7B1E98D1D6004F7566 /* appIntroduce_3@2x.jpg */,
+				0BCC39C11E9F64B000BFCF00 /* DefaultLine.png */,
+				0BCC39C21E9F64B000BFCF00 /* Menu_PopOver_BG.png */,
+				0BCC39C31E9F64B000BFCF00 /* Menu_PopOver_BG@2x.png */,
+				0BCC39C41E9F64B000BFCF00 /* options_pointer.png */,
+				0BCC39C51E9F64B000BFCF00 /* options_pointer@2x.png */,
 				0B9C5FB21E727880007D10B6 /* WTNewTabbar */,
 				0B554C021E51A5370030B196 /* play_flag_wave_01 */,
 				0B09A85E1E07E58500D60AC8 /* ZhuanJi */,
@@ -4221,6 +4564,8 @@
 				0BF2C56A1DE2EEEA00A42B3D /* Factory.m */,
 				0B7584121DEC7BDD00E3D117 /* E_HUDView.h */,
 				0B7584131DEC7BDD00E3D117 /* E_HUDView.m */,
+				0BCC39BE1E9F5FCC00BFCF00 /* MLKMenuPopover.h */,
+				0BCC39BF1E9F5FCC00BFCF00 /* MLKMenuPopover.m */,
 				0B1DF2821DE5708800EE5FF2 /* SKMainScrollView.h */,
 				0B1DF2831DE5708800EE5FF2 /* SKMainScrollView.m */,
 				0BC8C0AF1E7A3C0500A9C058 /* HMSegmentedControl.h */,
@@ -4464,6 +4809,11 @@
 		0BF2C5731DE2F5CA00A42B3D /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				0BEDB1EF1EAA00BD00549B12 /* view */,
+				0BEDB1D21EA8684500549B12 /* AddQunOrFriend */,
+				0B2689B91EA4B9A20034C5D4 /* QunNews */,
+				0BCC39F11EA085B800BFCF00 /* QunManage */,
+				0BCC39D31E9F746400BFCF00 /* CreateQun */,
 				0BCC398C1E9CA44900BFCF00 /* QunDetails */,
 				0BCC39711E9C826300BFCF00 /* NewFriend */,
 				0BF2C5751DE2F5F500A42B3D /* WTXiangTingViewController.h */,
@@ -4791,12 +5141,14 @@
 				0B4E927E1E67CE8F001DE73F /* icon_delete.png in Resources */,
 				0BFEFDAB1DE44346001FFD82 /* nav_background_normal@2x.png in Resources */,
 				0B08C4541E124050002851CC /* userNum.png in Resources */,
+				0BCC39D21E9F70F100BFCF00 /* SaoYiSao@2x.png in Resources */,
 				0B1210741E76B49B009455F2 /* icon_ZhuBo@2x.png in Resources */,
 				0B554C231E51A5370030B196 /* play_flag_wave_15.png in Resources */,
 				0B1DF2C81DE6AD2D00EE5FF2 /* mine_icon_234G@2x.png in Resources */,
 				0BCC396B1E9B5A5F00BFCF00 /* WTContactsCell.xib in Resources */,
 				0B0D30A81E569AC20063193A /* WTZhanJiTJCell.xib in Resources */,
 				0B71C94D1E97AC4E004F7566 /* boyBtn_d@2x.png in Resources */,
+				0B2689DB1EA77AE20034C5D4 /* QunName@2x.png in Resources */,
 				0B71CC711E98AF24004F7566 /* ScanResultViewController.xib in Resources */,
 				0BFEFDA81DE44346001FFD82 /* home_btn_program details.png in Resources */,
 				0B0AEF911E0A2BAC00C58084 /* WTZhuanJiCell.xib in Resources */,
@@ -4815,6 +5167,10 @@
 				0B71C9461E97977C004F7566 /* GirlBtn@2x.png in Resources */,
 				0B05BDB61E03AB6600CD4BEE /* WTLikeListViewController.xib in Resources */,
 				0B0BD4471DFFD72A00C4E236 /* WTDTController.xib in Resources */,
+				0B2689DA1EA77AE20034C5D4 /* createQun@2x.png in Resources */,
+				0BCC39A31E9CD1D700BFCF00 /* Qunxiugai@2x.png in Resources */,
+				0BEDB1F91EAB0B1D00549B12 /* WTQunAndFriendDetailsCell.xib in Resources */,
+				0BCC39A91E9CEE0300BFCF00 /* WTQunQianMingCell.xib in Resources */,
 				0B12107D1E778EC7009455F2 /* icon_JuBao@2x.png in Resources */,
 				0B554C1B1E51A5370030B196 /* play_flag_wave_7.png in Resources */,
 				0B7584661DEECA0800E3D117 /* icon_more.png in Resources */,
@@ -4822,29 +5178,39 @@
 				0B9DF0E81E82267E000B5CEA /* WTDingYueController.xib in Resources */,
 				0BF2C4FE1DE2A36200A42B3D /* LaunchScreen.storyboard in Resources */,
 				0B554BB31E51555E0030B196 /* WuShuJu.png in Resources */,
+				0BEDB2031EAB1A9B00549B12 /* WTFriAddFCell.xib in Resources */,
 				0BCC39761E9C829900BFCF00 /* WTNewFriendController.xib in Resources */,
 				0B08D2DB1E2B486F005A2D6B /* AppIcon80.png in Resources */,
 				0B9C5FC21E727880007D10B6 /* WTting.png in Resources */,
 				0B08D2D91E2B44F6005A2D6B /* AppIcon60x60@2x.png in Resources */,
+				0BCC39A11E9CD1D700BFCF00 /* DuiJiang@2x.png in Resources */,
 				0B1EFED81DF01E1A0047CE75 /* WTDianTaiTableViewCell.xib in Resources */,
 				0C8B76681E759F4400645F48 /* BoFangTabbarView.xib in Resources */,
+				0BEDB1F41EAA00D600549B12 /* WTAddResultCell.xib in Resources */,
 				0B7584531DED82C800E3D117 /* WT_BoFang_Kuang.png in Resources */,
+				0BCC39A21E9CD1D700BFCF00 /* Qunwancheng@2x.png in Resources */,
+				0BCC39C91E9F64B000BFCF00 /* options_pointer.png in Resources */,
 				0B1DF2A91DE6942C00EE5FF2 /* mine_avatar bg.png in Resources */,
 				0B7583FA1DE938ED00E3D117 /* login_icon_phone@2x.png in Resources */,
+				0BEDB1DE1EA8885800549B12 /* AddQunTo@2x.png in Resources */,
 				0B8117A11DE80905007DE05D /* mine_set_icon_password@2x.png in Resources */,
 				0B554BB41E51555E0030B196 /* WuWangLuo.png in Resources */,
 				0B1210721E76B49B009455F2 /* icon_XiHuan@2x.png in Resources */,
 				0B7584671DEECA0800E3D117 /* icon_share.png in Resources */,
 				0BCC398A1E9C89EA00BFCF00 /* talking-2.png in Resources */,
 				0B7584041DE98DF200E3D117 /* back@2x.png in Resources */,
+				0BCC3A0A1EA1DCE300BFCF00 /* PsdQun@2x.png in Resources */,
 				0BFEFDA61DE44346001FFD82 /* home_btn_last@2x.png in Resources */,
+				0BCC3A011EA0C35E00BFCF00 /* WTQunShouQiCell.xib in Resources */,
 				0B4E927C1E67BBCE001DE73F /* WTXiaZaiXuanZhongCell.xib in Resources */,
+				0BCC39B81E9E3BB800BFCF00 /* WTFriendDetailsController.xib in Resources */,
 				0B7583FB1DE938ED00E3D117 /* login_icon_QQ@2x.png in Resources */,
 				0B554C251E51A5370030B196 /* play_flag_wave_17.png in Resources */,
 				0B12106F1E76B49A009455F2 /* icon_BoFang@2x.png in Resources */,
 				0B71C9341E9639E0004F7566 /* WTGengDuoDianTaiController.xib in Resources */,
 				0B71C9671E988D73004F7566 /* SGLocationPickerCenterView.xib in Resources */,
 				0BF2C5A71DE3019B00A42B3D /* WTXiangTing_der@2x.png in Resources */,
+				0BCC39EC1EA07ABE00BFCF00 /* WTQunCell.xib in Resources */,
 				0B1210711E76B49B009455F2 /* icon_DingYue@2x.png in Resources */,
 				0B22E1F81E83B34E00060029 /* WTDingYueCell.xib in Resources */,
 				0BCC39821E9C89EA00BFCF00 /* Chat_wei@2x.png in Resources */,
@@ -4857,18 +5223,25 @@
 				0BF3A5A61E7155BB00202539 /* WTBoFangJMCell.xib in Resources */,
 				0B1DF2D01DE6AD2D00EE5FF2 /* mine_icon_set@2x.png in Resources */,
 				0B81179E1DE80905007DE05D /* mine_set_icon_download@2x.png in Resources */,
+				0BEDB1DC1EA8885800549B12 /* AddQunFriend_sao@2x.png in Resources */,
 				0B09A8601E07E59B00D60AC8 /* WT_ZJ_Kuang.png in Resources */,
 				0BF2C5991DE3019B00A42B3D /* WTDownLoad@2x.png in Resources */,
 				0B0AEF571E0551AB007E9B64 /* WTPingLunCell.xib in Resources */,
 				0B1210811E778EC7009455F2 /* icon_XiangQing@2x.png in Resources */,
 				0BC0DC211E02317800A19F64 /* WTSearchViewController.xib in Resources */,
 				0B71C9471E97977C004F7566 /* main_bg@2x.png in Resources */,
+				0BCC39F61EA0860E00BFCF00 /* WTQunManageController.xib in Resources */,
 				0B548BF21E603EB000F131D7 /* icon_delike.png in Resources */,
 				0B75845C1DEE9C5C00E3D117 /* progressbar_bg.png in Resources */,
+				0BEDB1E91EA8D07800549B12 /* WTQunSetManageController.xib in Resources */,
 				0B13B0C61E4B333F001963B3 /* WTDingShiCell.xib in Resources */,
 				0B05BDCA1E03B55600CD4BEE /* DianTaiViewController.xib in Resources */,
+				0BCC39AE1E9DCB4D00BFCF00 /* WTQunQMContentCell.xib in Resources */,
 				0B0858C01DFE52A800EA8DAD /* WTHelpViewController.xib in Resources */,
 				0B0B705F1E8524C6008EB680 /* WTBegin-1136.png in Resources */,
+				0BCC39C81E9F64B000BFCF00 /* Menu_PopOver_BG@2x.png in Resources */,
+				0BCC39EF1EA07C7100BFCF00 /* QunErweima@2x.png in Resources */,
+				0B2689D21EA622A20034C5D4 /* WT_QunZhu@2x.png in Resources */,
 				0B9DF0D81E7D32AB000B5CEA /* titleImgV.png in Resources */,
 				0B4282801E1B86A300FAC2BA /* WTBoFangCell.xib in Resources */,
 				0B7583FC1DE938ED00E3D117 /* login_icon_verification code@2x.png in Resources */,
@@ -4878,6 +5251,7 @@
 				0B05BDC51E03B54500CD4BEE /* ShengYinViewController.xib in Resources */,
 				0B75844B1DED76AD00E3D117 /* WTBoFangTableViewCell.xib in Resources */,
 				0B1EFEDD1DF031230047CE75 /* icon_central_station.png in Resources */,
+				0B2689C41EA4BBCA0034C5D4 /* WTJoinQunCell.xib in Resources */,
 				0B076C621E8E9BB7000B45D7 /* menu@2x.png in Resources */,
 				0B12107C1E778EC7009455F2 /* icon_FenXiang@2x.png in Resources */,
 				0B8117A41DE80905007DE05D /* mine_set_icon_update@2x.png in Resources */,
@@ -4903,7 +5277,9 @@
 				0B0C06171E24CDB200505CE4 /* WTDingShiController.xib in Resources */,
 				0BCC398B1E9C89EA00BFCF00 /* talking.png in Resources */,
 				0B1DF27C1DE56BD100EE5FF2 /* WTBoFangViewController.xib in Resources */,
+				0BEDB1E41EA8A91400549B12 /* WTAddResultViewController.xib in Resources */,
 				0B1210821E778EC7009455F2 /* icon_XiaZai@2x.png in Resources */,
+				0BCC3A071EA1DCE300BFCF00 /* AddMember@2x.png in Resources */,
 				0BF2C5801DE2F65400A42B3D /* WTDownLoadViewController.xib in Resources */,
 				0BA47CC21DF553DC0000B322 /* WTKou@2x.png in Resources */,
 				0BF2C5791DE2F5F500A42B3D /* WTXiangTingViewController.xib in Resources */,
@@ -4916,13 +5292,16 @@
 				0B0782A71E8A326E000E0D47 /* ZhuBo_Backgroud.png in Resources */,
 				0BCC39851E9C89EA00BFCF00 /* Contacts_News@2x.png in Resources */,
 				0B0C5DD11E25E9ED0033157D /* Intercom.png in Resources */,
+				0B2689D71EA710480034C5D4 /* WTQunMessageController.xib in Resources */,
 				0B0858D61DFE6C7900EA8DAD /* WTPingLunViewController.xib in Resources */,
 				0BCC39971E9CB25C00BFCF00 /* WTQunDetailsCell.xib in Resources */,
 				0B12979D1E08C9E6009027BC /* icon_zj_likeer.png in Resources */,
 				0BC8C0A61E79306500A9C058 /* WTJuBaoViewController.xib in Resources */,
 				0BF2C59F1DE3019B00A42B3D /* WTMain_der@2x.png in Resources */,
+				0B2689CE1EA61EE70034C5D4 /* WTQunZhuManageCell.xib in Resources */,
 				0B076C651E8F91CA000B45D7 /* WTGengDuoController.xib in Resources */,
 				0B554C181E51A5370030B196 /* play_flag_wave_4.png in Resources */,
+				0BEDB1D71EA8687F00549B12 /* WTAddQunFriendController.xib in Resources */,
 				0B75845F1DEE9C5C00E3D117 /* progressbar_play.png in Resources */,
 				0BF2C5A41DE3019B00A42B3D /* WTXiangJiang_der@3x.png in Resources */,
 				0B0858B61DFE509900EA8DAD /* WTGuanYuViewController.xib in Resources */,
@@ -4942,12 +5321,14 @@
 				0B05BDC01E03B52E00CD4BEE /* ZhuanJiViewController.xib in Resources */,
 				0BCC34FD1E6D3C1B00055B38 /* WTZhuanJiDownloadCell.xib in Resources */,
 				0B71CC7E1E98D1D6004F7566 /* appIntroduce_3@2x.jpg in Resources */,
+				0BCC39C71E9F64B000BFCF00 /* Menu_PopOver_BG.png in Resources */,
 				0B0DC1C01E0BBC9200CA584C /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				0B05BDCF1E03B56700CD4BEE /* TTSViewController.xib in Resources */,
 				0BF2C5721DE2F5B700A42B3D /* WTXiangJiangViewController.xib in Resources */,
 				0BCC39861E9C89EA00BFCF00 /* Friend_header@2x.png in Resources */,
 				0B8117A21DE80905007DE05D /* mine_set_icon_phone@2x.png in Resources */,
 				0B71C96C1E98910A004F7566 /* Address.plist in Resources */,
+				0BCC39FC1EA0936D00BFCF00 /* WTQunManageCell.xib in Resources */,
 				0B4ED6871E52A16200EC4995 /* WTJMDCell.xib in Resources */,
 				0BF2C59C1DE3019B00A42B3D /* WTDownLoad_der@3x.png in Resources */,
 				0B09A8561E07B6A100D60AC8 /* PL_biaoQ.png in Resources */,
@@ -4960,6 +5341,8 @@
 				0B71C94E1E97AC4E004F7566 /* GirlBtn_d@2x.png in Resources */,
 				0B1DF2991DE68DF800EE5FF2 /* mine_bg.png in Resources */,
 				0B1EFEBC1DEFF13B0047CE75 /* WTTuiJianViewController.xib in Resources */,
+				0BCC39BD1E9F565C00BFCF00 /* WTQunMemberCell.xib in Resources */,
+				0BCC3A0B1EA1DCE300BFCF00 /* YanZhengQun@2x.png in Resources */,
 				0BA47CC31DF553DC0000B322 /* WTXian.png in Resources */,
 				0B7583FD1DE938ED00E3D117 /* login_icon_wechat@2x.png in Resources */,
 				0B7583F71DE938ED00E3D117 /* login_icon_microblog@2x.png in Resources */,
@@ -4967,32 +5350,44 @@
 				0B7584651DEECA0800E3D117 /* icon_download.png in Resources */,
 				0B1DF2D91DE6E52C00EE5FF2 /* WTLoginViewController.xib in Resources */,
 				0B9DF0EE1E837E56000B5CEA /* ZhuBo_Guanzhu.png in Resources */,
+				0BEDB1DF1EA8885800549B12 /* YuYin_sear@2x.png in Resources */,
 				0B0858C71DFE54A000EA8DAD /* WTUserNubController.xib in Resources */,
 				0B0782A51E89FE0E000E0D47 /* WTGuidanceViewController.xib in Resources */,
 				0B1EFEDF1DF031230047CE75 /* icon_network_station.png in Resources */,
+				0BEDB1FE1EAB183B00549B12 /* WTFriDetailQMingCell.xib in Resources */,
 				0BCC39871E9C89EA00BFCF00 /* NewFriend@2x.png in Resources */,
+				0BCC39CA1E9F64B000BFCF00 /* options_pointer@2x.png in Resources */,
 				0B1DF2D11DE6AD2D00EE5FF2 /* mine_icon_subscribe@2x.png in Resources */,
 				0B9DF0ED1E837E56000B5CEA /* ZhuanJi_Guanzhu.png in Resources */,
+				0B2689D11EA622A20034C5D4 /* WT_Manage@2x.png in Resources */,
 				0B0CCAA31E0CDE410044C235 /* WTXiaZaiCell.xib in Resources */,
 				0B7583F91DE938ED00E3D117 /* login_icon_password@2x.png in Resources */,
 				0B1DF29B1DE68E0600EE5FF2 /* tab_bg.png in Resources */,
 				0BC8C0D71E7BD28000A9C058 /* WTFLDetailTitleController.xib in Resources */,
+				0B2689BF1EA4B9E60034C5D4 /* WTQunNewsController.xib in Resources */,
 				0B0DC1C71E0BBC9200CA584C /* read_me.txt in Resources */,
+				0BCC39E71E9F992E00BFCF00 /* WTQunCYCell.xib in Resources */,
 				0B554C221E51A5370030B196 /* play_flag_wave_14.png in Resources */,
 				0B1EFEDE1DF031230047CE75 /* icon_local_station.png in Resources */,
+				0BCC39D81E9F74B100BFCF00 /* WTCreateQunController.xib in Resources */,
 				0B6D74C41E5D9D86006FAF49 /* mine_set_icon_delete.png in Resources */,
 				0B554C1E1E51A5370030B196 /* play_flag_wave_10.png in Resources */,
 				0B0DC1C41E0BBC9200CA584C /* WeiboSDK.bundle in Resources */,
+				0BCC39A41E9CD1D700BFCF00 /* QunZu_Kuang.png in Resources */,
+				0BEDB1DD1EA8885800549B12 /* AddQunFriend_search@2x.png in Resources */,
 				0B554C311E51AFDE0030B196 /* WTJieMuXQViewController.xib in Resources */,
 				0B9C5FC31E727880007D10B6 /* WTting_der.png in Resources */,
 				0BCC399C1E9CBC7300BFCF00 /* WTContactsNewFriCell.xib in Resources */,
 				0BF2C5A21DE3019B00A42B3D /* WTXiangJiang@3x.png in Resources */,
 				0BF2C4FB1DE2A36200A42B3D /* Assets.xcassets in Resources */,
 				0B9C5FC41E727880007D10B6 /* WTwode.png in Resources */,
+				0BCC3A091EA1DCE300BFCF00 /* OpenQun@2x.png in Resources */,
 				0B7584461DED51E100E3D117 /* wt_play_stop@2x.png in Resources */,
 				0BD6B5491E1609550039B88D /* WTXiaZaiDoneCell.xib in Resources */,
 				0B09A8581E07C6B600D60AC8 /* upload_JS.png in Resources */,
+				0BCC39CF1E9F70F100BFCF00 /* AddFriend@2x.png in Resources */,
 				0B7583F81DE938ED00E3D117 /* login_icon_name@2x.png in Resources */,
+				0BCC39B31E9DDADF00BFCF00 /* WTQuitQunCell.xib in Resources */,
 				0BF2C5A11DE3019B00A42B3D /* WTXiangJiang@2x.png in Resources */,
 				0B7584571DEE9C4D00E3D117 /* img_radio_default.png in Resources */,
 				0BF2C5A51DE3019B00A42B3D /* WTXiangTing@2x.png in Resources */,
@@ -5018,6 +5413,7 @@
 				0B9C5FB11E724B47007D10B6 /* WTBFBackgroupRed.png in Resources */,
 				0B71C9631E988D73004F7566 /* SGDatePickerCenterView.xib in Resources */,
 				0BF2C5551DE2B19100A42B3D /* LICENSE in Resources */,
+				0BCC3A081EA1DCE300BFCF00 /* kickMember@2x.png in Resources */,
 				0B60237F1E55749B004FCE5D /* ZhiBo.png in Resources */,
 				0BFEFDAD1DE44346001FFD82 /* nav_btn_message@2x.png in Resources */,
 				0B554C211E51A5370030B196 /* play_flag_wave_13.png in Resources */,
@@ -5026,13 +5422,16 @@
 				0BF2C5A81DE3019B00A42B3D /* WTXiangTing_der@3x.png in Resources */,
 				0BF2C5A01DE3019B00A42B3D /* WTMain_der@3x.png in Resources */,
 				0B554BB11E51555E0030B196 /* ChuCuoLe.png in Resources */,
+				0BCC39F01EA07C7100BFCF00 /* QunMore@2x.png in Resources */,
 				0B0CCA991E0CD69A0044C235 /* WTYiXiaZaiController.xib in Resources */,
 				0B81179F1DE80905007DE05D /* mine_set_icon_feedback@2x.png in Resources */,
 				0B8117A01DE80905007DE05D /* mine_set_icon_help@2x.png in Resources */,
+				0BCC39D11E9F70F100BFCF00 /* JoinQun@2x.png in Resources */,
 				0B1DF2D31DE6AD5D00EE5FF2 /* mine_icon_yingjian@2x.png in Resources */,
 				0B0858CC1DFE54F800EA8DAD /* WTBoundPhoneController.xib in Resources */,
 				0B8117A31DE80905007DE05D /* mine_set_icon_preference@2x.png in Resources */,
 				0B1DF28E1DE5721100EE5FF2 /* WTFenLeiViewController.xib in Resources */,
+				0BCC39D01E9F70F100BFCF00 /* CreatQun@2x.png in Resources */,
 				0BFEFDA91DE44346001FFD82 /* home_btn_traffic.png in Resources */,
 				0B30BA701DF1524E000A75E2 /* more.png in Resources */,
 				0B22E1FD1E83BDEB00060029 /* WTZhuBoController.xib in Resources */,
@@ -5051,6 +5450,7 @@
 				0B1DF2CA1DE6AD2D00EE5FF2 /* mine_icon_codes@2x.png in Resources */,
 				0BFEFDA51DE44346001FFD82 /* home_btn_background@2x.png in Resources */,
 				0B1DF2891DE571DC00EE5FF2 /* WTDianTaiViewController.xib in Resources */,
+				0BEDB1EE1EA9E5E300549B12 /* WTSetManTabCell.xib in Resources */,
 				0B554C191E51A5370030B196 /* play_flag_wave_5.png in Resources */,
 				0B9C5FAF1E724A83007D10B6 /* WTBFBackgroup.png in Resources */,
 				0BCC39831E9C89EA00BFCF00 /* chat_Xuan@2x.png in Resources */,
@@ -5065,9 +5465,11 @@
 				0BF2C59E1DE3019B00A42B3D /* WTMain@3x.png in Resources */,
 				0B7584641DEECA0800E3D117 /* icon_comment.png in Resources */,
 				0B0858AB1DFE3D6100EA8DAD /* MJRefresh.bundle in Resources */,
+				0BCC39C61E9F64B000BFCF00 /* DefaultLine.png in Resources */,
 				0B0C5DD01E25E9ED0033157D /* Intercom_der.png in Resources */,
 				0BF2C5A61DE3019B00A42B3D /* WTXiangTing@3x.png in Resources */,
 				0B12107F1E778EC7009455F2 /* icon_LikeNewDe@2x.png in Resources */,
+				0B2689C91EA4D2260034C5D4 /* WTQunPsdController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5123,6 +5525,8 @@
 				0B71CB831E98AB83004F7566 /* ZXAztecDetectorResult.m in Sources */,
 				0B71C98F1E98AA41004F7566 /* ZXingWrapper.m in Sources */,
 				0B71CC301E98AB83004F7566 /* ZXPDF417.m in Sources */,
+				0BCC39D71E9F74B100BFCF00 /* WTCreateQunController.m in Sources */,
+				0BCC39BC1E9F565C00BFCF00 /* WTQunMemberCell.m in Sources */,
 				0B71CB811E98AB83004F7566 /* ZXAztecState.m in Sources */,
 				0B71CC0D1E98AB83004F7566 /* ZXCode93Reader.m in Sources */,
 				0B71CC201E98AB83004F7566 /* ZXUPCEReader.m in Sources */,
@@ -5132,6 +5536,7 @@
 				0B71CC261E98AB83004F7566 /* ZXPDF417BoundingBox.m in Sources */,
 				0B71CBD71E98AB83004F7566 /* ZXDataMatrixBase256Encoder.m in Sources */,
 				0B71CC431E98AB84004F7566 /* ZXQRCodeVersion.m in Sources */,
+				0BEDB2021EAB1A9B00549B12 /* WTFriAddFCell.m in Sources */,
 				0B71CBE71E98AB83004F7566 /* ZXMaxiCodeReader.m in Sources */,
 				0B0918001E2A0C5D00ADBFE1 /* ScanSuccessJumpVC.m in Sources */,
 				0B71CBA51E98AB83004F7566 /* ZXVEventResultParser.m in Sources */,
@@ -5158,6 +5563,7 @@
 				0B71CBF11E98AB83004F7566 /* ZXAI01AndOtherAIs.m in Sources */,
 				0B0858A41DFE3D6100EA8DAD /* MJRefreshAutoStateFooter.m in Sources */,
 				0B71CC501E98AB84004F7566 /* ZXMultiFinderPatternFinder.m in Sources */,
+				0BCC39EB1EA07ABE00BFCF00 /* WTQunCell.m in Sources */,
 				0B0C061A1E24EBD500505CE4 /* WTSearchView.m in Sources */,
 				0B71CBF31E98AB83004F7566 /* ZXAI01weightDecoder.m in Sources */,
 				0BFEFD721DE41B43001FFD82 /* WTXJHeaderView.m in Sources */,
@@ -5202,6 +5608,7 @@
 				0BF2C5571DE2B19100A42B3D /* AFAutoPurgingImageCache.m in Sources */,
 				0B0858A11DFE3D6100EA8DAD /* MJRefreshHeader.m in Sources */,
 				0B71CB7A1E98AB83004F7566 /* ZXAztecDecoder.m in Sources */,
+				0BCC39E21E9F819600BFCF00 /* WTCreateQunCell.m in Sources */,
 				0B71CC531E98AB84004F7566 /* ZXQRCodeWriter.m in Sources */,
 				0B71C9891E98AA41004F7566 /* LBXScanVideoZoomView.m in Sources */,
 				0B71CBCF1E98AB83004F7566 /* ZXRGBLuminanceSource.m in Sources */,
@@ -5249,10 +5656,12 @@
 				0B71CBC61E98AB83004F7566 /* ZXDecodeHints.m in Sources */,
 				0B71CBF91E98AB83004F7566 /* ZXRSSExpandedDecodedNumeric.m in Sources */,
 				0B71CBBD1E98AB83004F7566 /* ZXGlobalHistogramBinarizer.m in Sources */,
+				0B2689BE1EA4B9E60034C5D4 /* WTQunNewsController.m in Sources */,
 				0B71CB8B1E98AB83004F7566 /* ZXBookmarkDoCoMoResultParser.m in Sources */,
 				0B71CB8F1E98AB83004F7566 /* ZXEmailDoCoMoResultParser.m in Sources */,
 				0BD6B54C1E160E6F0039B88D /* ProgressCircleView.m in Sources */,
 				0B71CC3D1E98AB84004F7566 /* ZXQRCodeDecodedBitStreamParser.m in Sources */,
+				0B2689CD1EA61EE70034C5D4 /* WTQunZhuManageCell.m in Sources */,
 				0BF2C55B1DE2B19100A42B3D /* UIButton+AFNetworking.m in Sources */,
 				0B0CCA981E0CD69A0044C235 /* WTYiXiaZaiController.m in Sources */,
 				0B7584011DE942FB00E3D117 /* WTRegisterViewController.m in Sources */,
@@ -5284,6 +5693,8 @@
 				0B1EFECD1DF002880047CE75 /* TAAbstractDotView.m in Sources */,
 				0B71CC401E98AB84004F7566 /* ZXQRCodeErrorCorrectionLevel.m in Sources */,
 				0B0782CE1E8D12F2000E0D47 /* SURequestTask.m in Sources */,
+				0BCC39F51EA0860E00BFCF00 /* WTQunManageController.m in Sources */,
+				0BCC39E61E9F992E00BFCF00 /* WTQunCYCell.m in Sources */,
 				0BF2C55F1DE2B19100A42B3D /* UIWebView+AFNetworking.m in Sources */,
 				0B71CC451E98AB84004F7566 /* ZXQRCodeAlignmentPatternFinder.m in Sources */,
 				0B71C9681E988D73004F7566 /* SGLocationPickerSheetView.m in Sources */,
@@ -5332,6 +5743,7 @@
 				0B0918051E2A0C5D00ADBFE1 /* SGQRCodeTool.m in Sources */,
 				0B1EFECF1DF002880047CE75 /* TADotView.m in Sources */,
 				0B0AB65A1DF801710065D36F /* JSONHTTPClient.m in Sources */,
+				0BEDB1F81EAB0B1D00549B12 /* WTQunAndFriendDetailsCell.m in Sources */,
 				0B1DF2801DE56C1000EE5FF2 /* WTJieMuViewController.m in Sources */,
 				0B7584351DED4B1900E3D117 /* SDWebImageCompat.m in Sources */,
 				0B71CC241E98AB83004F7566 /* ZXPDF417BarcodeMetadata.m in Sources */,
@@ -5340,6 +5752,7 @@
 				0B71CBC11E98AB83004F7566 /* ZXPerspectiveTransform.m in Sources */,
 				0B4E927B1E67BBCE001DE73F /* WTXiaZaiXuanZhongCell.m in Sources */,
 				0B71CC001E98AB83004F7566 /* ZXRSSExpandedRow.m in Sources */,
+				0B2689D61EA710480034C5D4 /* WTQunMessageController.m in Sources */,
 				0B71CBD51E98AB83004F7566 /* ZXDataMatrixDetector.m in Sources */,
 				0B71CBAF1E98AB83004F7566 /* ZXWhiteRectangleDetector.m in Sources */,
 				0B71CBBE1E98AB83004F7566 /* ZXGridSampler.m in Sources */,
@@ -5354,7 +5767,9 @@
 				0BF2C5541DE2B19100A42B3D /* AFURLSessionManager.m in Sources */,
 				0B0858BF1DFE52A800EA8DAD /* WTHelpViewController.m in Sources */,
 				0B42827F1E1B86A300FAC2BA /* WTBoFangCell.m in Sources */,
+				0BEDB1F31EAA00D600549B12 /* WTAddResultCell.m in Sources */,
 				0BC8C0D61E7BD28000A9C058 /* WTFLDetailTitleController.m in Sources */,
+				0BEDB1ED1EA9E5E300549B12 /* WTSetManTabCell.m in Sources */,
 				0B0858A61DFE3D6100EA8DAD /* MJRefreshBackNormalFooter.m in Sources */,
 				0B71CBC81E98AB83004F7566 /* ZXEncodeHints.m in Sources */,
 				0B75843E1DED4B1900E3D117 /* UIImageView+HighlightedWebCache.m in Sources */,
@@ -5364,7 +5779,10 @@
 				0B0858A71DFE3D6100EA8DAD /* MJRefreshBackStateFooter.m in Sources */,
 				0BFEFD941DE420E8001FFD82 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				0B7584111DEBFB1600E3D117 /* AutomatePlist.m in Sources */,
+				0BEDB1FD1EAB183B00549B12 /* WTFriDetailQMingCell.m in Sources */,
 				0B0858A51DFE3D6100EA8DAD /* MJRefreshBackGifFooter.m in Sources */,
+				0BCC39A81E9CEE0300BFCF00 /* WTQunQianMingCell.m in Sources */,
+				0BCC39AD1E9DCB4D00BFCF00 /* WTQunQMContentCell.m in Sources */,
 				0B0858A91DFE3D6100EA8DAD /* MJRefreshNormalHeader.m in Sources */,
 				0B71CC2F1E98AB83004F7566 /* ZXPDF417DetectorResult.m in Sources */,
 				0B0AB6581DF801710065D36F /* NSArray+JSONModel.m in Sources */,
@@ -5375,6 +5793,7 @@
 				0BC8C0F81E7D14CB00A9C058 /* MCURLResponse.m in Sources */,
 				0B71CBB61E98AB83004F7566 /* ZXBitSource.m in Sources */,
 				0B71CBAA1E98AB83004F7566 /* ZXCapture.m in Sources */,
+				0B2689C81EA4D2260034C5D4 /* WTQunPsdController.m in Sources */,
 				0B0AB6561DF801710065D36F /* JSONModelClassProperty.m in Sources */,
 				0B71CBBF1E98AB83004F7566 /* ZXHybridBinarizer.m in Sources */,
 				0B71CC341E98AB83004F7566 /* ZXPDF417ErrorCorrection.m in Sources */,
@@ -5390,6 +5809,7 @@
 				0B71CBD61E98AB83004F7566 /* ZXDataMatrixASCIIEncoder.m in Sources */,
 				0B71C96A1E988D73004F7566 /* SGPickerView.m in Sources */,
 				0B08589F1DFE3D6100EA8DAD /* MJRefreshComponent.m in Sources */,
+				0BEDB1E31EA8A91400549B12 /* WTAddResultViewController.m in Sources */,
 				0B71CC381E98AB83004F7566 /* ZXPDF417ResultMetadata.m in Sources */,
 				0B71CB881E98AB83004F7566 /* ZXAddressBookDoCoMoResultParser.m in Sources */,
 				0B71CBEF1E98AB83004F7566 /* ZXAI013x0x1xDecoder.m in Sources */,
@@ -5408,13 +5828,16 @@
 				0B71CC231E98AB83004F7566 /* ZXPDF417ECErrorCorrection.m in Sources */,
 				0B0918021E2A0C5D00ADBFE1 /* SGScanningQRCodeVC.m in Sources */,
 				0B71CBCB1E98AB83004F7566 /* ZXLuminanceSource.m in Sources */,
+				0BCC39B71E9E3BB800BFCF00 /* WTFriendDetailsController.m in Sources */,
 				0B0918061E2A0C5D00ADBFE1 /* SGScanningQRCodeView.m in Sources */,
 				0B71CC661E98AE43004F7566 /* LBXAlertAction.m in Sources */,
 				0B71CBDF1E98AB83004F7566 /* ZXDataMatrixSymbolInfo144.m in Sources */,
 				0B71CBC01E98AB83004F7566 /* ZXIntArray.m in Sources */,
 				0B75840D1DEBDA6500E3D117 /* WKProgressHUD.m in Sources */,
 				0B0BD4461DFFD72A00C4E236 /* WTDTController.m in Sources */,
+				0BCC39B21E9DDADF00BFCF00 /* WTQuitQunCell.m in Sources */,
 				0B4E92821E682AEB001DE73F /* WTXiaZaiDetilController.m in Sources */,
+				0BCC39FB1EA0936D00BFCF00 /* WTQunManageCell.m in Sources */,
 				0B71CC1F1E98AB83004F7566 /* ZXUPCEANWriter.m in Sources */,
 				0B71CC4D1E98AB84004F7566 /* ZXQRCodeMaskUtil.m in Sources */,
 				0B71CC371E98AB83004F7566 /* ZXPDF417Reader.m in Sources */,
@@ -5426,12 +5849,14 @@
 				0BF2C5781DE2F5F500A42B3D /* WTXiangTingViewController.m in Sources */,
 				0B0858AF1DFE3D6100EA8DAD /* UIScrollView+MJRefresh.m in Sources */,
 				0B71CBD21E98AB83004F7566 /* ZXDataMatrixDecodedBitStreamParser.m in Sources */,
+				0BEDB1D61EA8687F00549B12 /* WTAddQunFriendController.m in Sources */,
 				0B71CB861E98AB83004F7566 /* ZXAbstractDoCoMoResultParser.m in Sources */,
 				0B71CC2C1E98AB83004F7566 /* ZXPDF417DetectionResultRowIndicatorColumn.m in Sources */,
 				0B05BDCE1E03B56700CD4BEE /* TTSViewController.m in Sources */,
 				0B71CC4A1E98AB84004F7566 /* ZXQRCode.m in Sources */,
 				0B75843B1DED4B1900E3D117 /* UIButton+WebCache.m in Sources */,
 				0B71CBD91E98AB83004F7566 /* ZXDataMatrixDefaultPlacement.m in Sources */,
+				0BEDB1E81EA8D07800549B12 /* WTQunSetManageController.m in Sources */,
 				0B71CB851E98AB83004F7566 /* ZXAztecWriter.m in Sources */,
 				0BCC39751E9C829900BFCF00 /* WTNewFriendController.m in Sources */,
 				0B1EFED01DF002880047CE75 /* TAPageControl.m in Sources */,
@@ -5513,12 +5938,14 @@
 				0BFEFD8D1DE420E8001FFD82 /* MASCompositeConstraint.m in Sources */,
 				0B0858C61DFE54A000EA8DAD /* WTUserNubController.m in Sources */,
 				0B612D301E4D5E24000D8FE9 /* FMDatabase.m in Sources */,
+				0BCC3A001EA0C35E00BFCF00 /* WTQunShouQiCell.m in Sources */,
 				0B9C5FC91E72A1D2007D10B6 /* BoFangTabbarView.m in Sources */,
 				0B71C9861E98AA41004F7566 /* LBXScanNative.m in Sources */,
 				0B71CB7C1E98AB83004F7566 /* ZXAztecBinaryShiftToken.m in Sources */,
 				0B09A8531E07B05D00D60AC8 /* WTLikeCell.m in Sources */,
 				0BF2C5561DE2B19100A42B3D /* README.md in Sources */,
 				0B0782CA1E8D12F2000E0D47 /* NSString+SULoader.m in Sources */,
+				0BCC39C01E9F5FCC00BFCF00 /* MLKMenuPopover.m in Sources */,
 				0BFEFD911DE420E8001FFD82 /* MASViewAttribute.m in Sources */,
 				0B71CBC91E98AB83004F7566 /* ZXErrors.m in Sources */,
 				0B71CC321E98AB83004F7566 /* ZXPDF417BarcodeRow.m in Sources */,
@@ -5541,6 +5968,7 @@
 				0B71CBCC1E98AB83004F7566 /* ZXPlanarYUVLuminanceSource.m in Sources */,
 				0BF2C5591DE2B19100A42B3D /* AFNetworkActivityIndicatorManager.m in Sources */,
 				0B71CB7B1E98AB83004F7566 /* ZXAztecDetector.m in Sources */,
+				0B2689C31EA4BBCA0034C5D4 /* WTJoinQunCell.m in Sources */,
 				0B71CC031E98AB83004F7566 /* ZXRSSDataCharacter.m in Sources */,
 				0B71CC3C1E98AB84004F7566 /* ZXQRCodeDataMask.m in Sources */,
 				0B71CBFB1E98AB83004F7566 /* ZXRSSExpandedFieldParser.m in Sources */,

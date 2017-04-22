@@ -284,7 +284,13 @@
             NSString  *ReturnType = [resultDict objectForKey:@"ReturnType"];
             if ([ReturnType isEqualToString:@"1001"]) {
                 
+                NSDictionary *UserId = resultDict[@"UserInfo"];
+                NSDictionary *heheDict = [[NSDictionary alloc] initWithDictionary:UserId];
                 
+                [AutomatePlist writePlistForkey:@"LoginDict" valueDict:heheDict];
+                [AutomatePlist writePlistForkey:@"Uid" value:heheDict[@"UserId"]];
+                [AutomatePlist writePlistForkey:@"UName" value:heheDict[@"UserName"]];
+                [AutomatePlist writePlistForkey:@"Region" value:heheDict[@"Region"]];
                 
                 
             }else if ([ReturnType isEqualToString:@"T"]){

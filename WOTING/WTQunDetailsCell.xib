@@ -29,7 +29,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lVe-Dh-zjH">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="QunErweima.png" translatesAutoresizingMaskIntoConstraints="NO" id="lVe-Dh-zjH">
                         <rect key="frame" x="140" y="10" width="40" height="40"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="0m3-kB-t3R"/>
@@ -47,4 +47,7 @@
             <point key="canvasLocation" x="32" y="133"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="QunErweima.png" width="32" height="32"/>
+    </resources>
 </document>

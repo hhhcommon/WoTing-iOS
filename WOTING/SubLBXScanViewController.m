@@ -35,7 +35,7 @@
     self.isNeedScanImage = YES;
     
     UIView *JQview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, K_Screen_Width, 64)];
-    JQview.backgroundColor = [UIColor JQTColor];
+    JQview.backgroundColor = [UIColor blackColor];
     [self.view addSubview:JQview];
     
     UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 10, 60, 54)];

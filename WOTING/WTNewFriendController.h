@@ -10,5 +10,9 @@
 
 @interface WTNewFriendController : UIViewController
 - (IBAction)backBtnClick:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *NewFriendLab;
+@property (weak, nonatomic) IBOutlet UITableView *NewFriendTabV;
+
+@property (nonatomic, copy) NSString *ConText;
 
 @end

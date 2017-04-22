@@ -59,7 +59,7 @@
                             <constraint firstAttribute="height" constant="21" id="5XT-bc-Rf9"/>
                             <constraint firstAttribute="width" constant="163" id="Beu-eA-bYw"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
