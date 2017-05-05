@@ -216,7 +216,7 @@
     
     NSString *login_Str = WoTing_GetContents;
     
-    [WKProgressHUD showInView:self.view withText:@"加载中..." animated:YES];
+  //  [WKProgressHUD showInView:self.view withText:@"加载中..." animated:YES];
     
     [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
         
@@ -233,7 +233,7 @@
             BeginCatalogId = ResultList[@"BeginCatalogId"];
             
             [jqTableView reloadData];
-            [WKProgressHUD dismissAll:YES];
+        //    [WKProgressHUD dismissAll:YES];
             
         }else if ([ReturnType isEqualToString:@"T"]){
             
@@ -266,10 +266,6 @@
     NSMutableDictionary *Mdict = [[NSMutableDictionary alloc] init];
     [Mdict setObject:City forKey:@"CatalogId"];
     [Mdict setObject:@"2" forKey:@"CatalogType"];
-    
-//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:Mdict options:NSJSONWritingPrettyPrinted error:nil];
-//    
-//    NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",pageStr,@"Page",@"RADIO",@"MediaType", Mdict,@"FilterData",@"1",@"CatalogType",@"1",@"ResultType",@"3",@"PerSize",BeginCatalogId,@"BeginCatalogId", nil];
     

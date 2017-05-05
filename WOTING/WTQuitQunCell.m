@@ -14,7 +14,7 @@
     [super awakeFromNib];
     // Initialization code
     
-    _QuitBtn.layer.cornerRadius = 10;
+    _QuitBtn.layer.cornerRadius = 5;
     _QuitBtn.layer.masksToBounds = YES;
 }
 

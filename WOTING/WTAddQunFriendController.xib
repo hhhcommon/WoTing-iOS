@@ -56,12 +56,13 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="14q-Rz-EDG">
                             <rect key="frame" x="63" y="22" width="250" height="34"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DFH-Yf-Wbq">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DFH-Yf-Wbq">
                                     <rect key="frame" x="0.0" y="0.0" width="34" height="34"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="34" id="0Yr-38-unJ"/>
                                         <constraint firstAttribute="width" constant="34" id="HhH-KQ-8dt"/>
                                     </constraints>
+                                    <state key="normal" image="SearchFDJ.png"/>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ofw-Md-JTg">
                                     <rect key="frame" x="216" y="0.0" width="34" height="34"/>
@@ -114,7 +115,7 @@
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mIR-v6-v6n">
                             <rect key="frame" x="0.0" y="60" width="375" height="1"/>
-                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="q9F-Fn-MOc"/>
                             </constraints>
@@ -202,6 +203,7 @@
         <image name="AddQunFriend_sao.png" width="48" height="48"/>
         <image name="AddQunFriend_search.png" width="48" height="48"/>
         <image name="AddQunTo.png" width="24" height="24"/>
+        <image name="SearchFDJ.png" width="24" height="24"/>
         <image name="YuYin_sear.png" width="24" height="24"/>
         <image name="back.png" width="24" height="24"/>
     </resources>

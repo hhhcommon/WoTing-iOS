@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void (^JQComplete)(BOOL succ);
+
 @interface WTFriendDetailsController : UIViewController
 @property (weak, nonatomic) IBOutlet UILabel *contentLab;
 @property (weak, nonatomic) IBOutlet UITableView *FriendTabV;
@@ -16,10 +18,6 @@
 
 @property (nonatomic, strong) NSDictionary *dataFriDict;    //好友资料
 
-@property (nonatomic, assign) NSInteger FriendDetailType;   //好友样式
-/** 
- FriendDetailType == 0;  是好友
- FriendDetailType == 1;  不是好友
- */
+
 
 @end

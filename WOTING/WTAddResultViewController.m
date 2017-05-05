@@ -8,6 +8,10 @@
 
 #import "WTAddResultViewController.h"
 
+#import "WTFriendDetailsController.h"   //好友详情
+#import "WTQunDetailsController.h"      //群详情
+
+
 #import "WTAddResultCell.h" //数据源cell
 
 @interface WTAddResultViewController ()<UITableViewDelegate, UITableViewDataSource>{
@@ -30,7 +34,10 @@
     _AddResultTabV.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     _AddResultTabV.separatorStyle = UITableViewCellSelectionStyleNone;
     
-    [self loadDataAddResult];
+    
+    [self loadDataAddResult];    //获取数据
+    
+    
     [self reigterAddReultTabCell];
 }
 
@@ -53,7 +60,15 @@
     
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",_SearchStr,@"SearchStr",uid,@"UserId",nil];
     
-    NSString *login_Str = WoTing_SearchGroup;
+    NSString *login_Str;
+    
+    if (_AddResultType == 0) {
+        
+        login_Str = WoTing_SearchStranger;
+    }else{
+        
+        login_Str = WoTing_SearchGroup;
+    }
     
     NSLog(@"%@", parameters);
     [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
@@ -64,7 +79,14 @@
         if ([ReturnType isEqualToString:@"1001"]) {
             
             [dataAddResultArr removeAllObjects];
-            [dataAddResultArr addObjectsFromArray:resultDict[@"GroupList"]];
+            
+            if (_AddResultType == 0) {
+                
+                [dataAddResultArr addObjectsFromArray:resultDict[@"UserList"]];
+            }else{
+            
+                [dataAddResultArr addObjectsFromArray:resultDict[@"GroupList"]];
+            }
             
             [_AddResultTabV reloadData];
             
@@ -104,24 +126,69 @@
         cell = [[WTAddResultCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     }
     
-    cell.contentLab.text = [NSString NULLToString:dataAddResultArr[indexPath.row][@"GroupName"]];
-    cell.DeiltLab.text =[NSString stringWithFormat:@"群号: %@",[NSString NULLToString:dataAddResultArr[indexPath.row][@"GroupNum"]]];
-    
-    if ([[NSString NULLToString:dataAddResultArr[indexPath.row][@"PortraitBig"]] hasPrefix:@"http"]) {
-        [cell.contentImgV sd_setImageWithURL:[NSURL URLWithString:[NSString NULLToString:dataAddResultArr[indexPath.row][@"PortraitBig"]]] placeholderImage:[UIImage imageNamed:@"Qun_header.png"]];
-    }else if ([NSString NULLToString:dataAddResultArr[indexPath.row][@"PortraitBig"]].length){
+    if (_AddResultType == 0) {
         
-        [cell.contentImgV sd_setImageWithURL:[NSURL URLWithString:[NSString NULLToString:[NSString stringWithFormat:@"%@%@", SKInterFaceServer,dataAddResultArr[indexPath.row][@"PortraitBig"]]]] placeholderImage:[UIImage imageNamed:@"Qun_header.png"]];
+        cell.contentLab.text = [NSString NULLToString:dataAddResultArr[indexPath.row][@"NickName"]];
+        NSString *PhoneNum = [NSString NULLToString:dataAddResultArr[indexPath.row][@"PhoneNum"]];
         
+        if (PhoneNum.length > 0) {
+            
+            cell.DeiltLab.text =[NSString stringWithFormat:@"用户号: %@",PhoneNum];
+        }else{
+            
+            cell.DeiltLab.hidden = YES;
+        }
+        
+        
+        if ([[NSString NULLToString:dataAddResultArr[indexPath.row][@"PortraitBig"]] hasPrefix:@"http"]) {
+            [cell.contentImgV sd_setImageWithURL:[NSURL URLWithString:[NSString NULLToString:dataAddResultArr[indexPath.row][@"PortraitBig"]]] placeholderImage:[UIImage imageNamed:@"Friend_header.png"]];
+        }else if ([NSString NULLToString:dataAddResultArr[indexPath.row][@"PortraitBig"]].length){
+            
+            [cell.contentImgV sd_setImageWithURL:[NSURL URLWithString:[NSString NULLToString:[NSString stringWithFormat:@"%@%@", SKInterFaceServer,dataAddResultArr[indexPath.row][@"PortraitBig"]]]] placeholderImage:[UIImage imageNamed:@"Friend_header.png"]];
+            
+        }else{
+            
+            cell.contentImgV.image = [UIImage imageNamed:@"Friend_header.png"];
+        }
     }else{
+    
+        cell.contentLab.text = [NSString NULLToString:dataAddResultArr[indexPath.row][@"GroupName"]];
+        cell.DeiltLab.text =[NSString stringWithFormat:@"群号: %@",[NSString NULLToString:dataAddResultArr[indexPath.row][@"GroupNum"]]];
         
-        cell.contentImgV.image = [UIImage imageNamed:@"Qun_header.png"];
+        if ([[NSString NULLToString:dataAddResultArr[indexPath.row][@"PortraitBig"]] hasPrefix:@"http"]) {
+            [cell.contentImgV sd_setImageWithURL:[NSURL URLWithString:[NSString NULLToString:dataAddResultArr[indexPath.row][@"PortraitBig"]]] placeholderImage:[UIImage imageNamed:@"Qun_header.png"]];
+        }else if ([NSString NULLToString:dataAddResultArr[indexPath.row][@"PortraitBig"]].length){
+            
+            [cell.contentImgV sd_setImageWithURL:[NSURL URLWithString:[NSString NULLToString:[NSString stringWithFormat:@"%@%@", SKInterFaceServer,dataAddResultArr[indexPath.row][@"PortraitBig"]]]] placeholderImage:[UIImage imageNamed:@"Qun_header.png"]];
+            
+        }else{
+            
+            cell.contentImgV.image = [UIImage imageNamed:@"Qun_header.png"];
+        }
     }
-
     
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    if (_AddResultType == 0) {
+        
+        WTFriendDetailsController *wtFriDVC = [[WTFriendDetailsController alloc] init];
+        wtFriDVC.dataFriDict = dataAddResultArr[indexPath.row];
+        wtFriDVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:wtFriDVC animated:YES];
+    }else{
+        
+        WTQunDetailsController *wtQunDVC = [[WTQunDetailsController alloc] init];
+        wtQunDVC.hidesBottomBarWhenPushed = YES;
+        wtQunDVC.dataQunDict = dataAddResultArr[indexPath.row];
+        wtQunDVC.QunDetailsType = [dataAddResultArr[indexPath.row][@"GroupType"] integerValue];
+        [self.navigationController pushViewController:wtQunDVC animated:YES];
+    }
+}
 
 
 - (void)didReceiveMemoryWarning {

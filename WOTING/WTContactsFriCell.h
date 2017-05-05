@@ -11,6 +11,9 @@
 @interface WTContactsFriCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *contentImgV;
 @property (weak, nonatomic) IBOutlet UILabel *contentName;
+@property (weak, nonatomic) IBOutlet UILabel *FriNumLab;
+@property (weak, nonatomic) IBOutlet UILabel *FriBeiZLab;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ConetNameHe;
 
 
 @end

@@ -75,12 +75,19 @@ singleton_implementation(JQMusicTool)
                 NSLog(@"有缓存，播放缓存文件");
             }else {
                 
-                self.resourceLoader = [[SUResourceLoader alloc] init];
-                self.resourceLoader.delegate = self;
+                if ([_musicStr containsString:@"m3u8"]) { //电台
+                    
+                    self.currentItem = [AVPlayerItem playerItemWithURL:musicURL];
+                    
+                }else{  //节目
                 
-                AVURLAsset * asset = [AVURLAsset URLAssetWithURL:musicURL options:nil];
-                [asset.resourceLoader setDelegate:self.resourceLoader queue:dispatch_get_main_queue()];
-                self.currentItem = [AVPlayerItem playerItemWithAsset:asset];
+                    self.resourceLoader = [[SUResourceLoader alloc] init];
+                    self.resourceLoader.delegate = self;
+                    
+                    AVURLAsset * asset = [AVURLAsset URLAssetWithURL:musicURL options:nil];
+                    [asset.resourceLoader setDelegate:self.resourceLoader queue:dispatch_get_main_queue()];
+                    self.currentItem = [AVPlayerItem playerItemWithAsset:asset];
+                }
             }
 
         }else {  //播本地

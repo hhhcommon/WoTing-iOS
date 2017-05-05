@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLab;
 @property (weak, nonatomic) IBOutlet UILabel *timeLab;
 @property (weak, nonatomic) IBOutlet UILabel *contentLab;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contetnLabHeight;
 
 
 - (void)setCellWithDict:(NSDictionary *)dict;

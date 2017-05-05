@@ -56,6 +56,10 @@
                     <constraint firstItem="5cy-0r-w3X" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="uBL-yz-foG"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="JTImgV" destination="hdr-lA-znE" id="Giv-gJ-NTY"/>
+                <outlet property="contentLab" destination="Bdx-Y9-mpU" id="N8H-CZ-uMk"/>
+            </connections>
         </tableViewCell>
     </objects>
     <resources>

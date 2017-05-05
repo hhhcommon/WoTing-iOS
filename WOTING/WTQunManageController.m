@@ -53,7 +53,6 @@
     _ManageTabV.sectionIndexBackgroundColor =[UIColor clearColor];
     _ManageTabV.sectionIndexColor = [UIColor lightGrayColor];
     
-    
     //设置页面样式
     if (_QunType == 1 || _QunType == 0 || _QunType == 4 || _QunType == 2) {    //移交群主  or 查看群成员  4:删除群成员    2:设置管理
         [dataQunZhuArr removeAllObjects];
@@ -62,19 +61,50 @@
         //判断群主还是管理还是等等[7]	(null)	@"GroupManager" : @"a855e41850b9"[8]	(null)	@"GroupMasterId" : @"4de8a79b26c1"
         NSString *QunZhu = [_dataQunDeDict objectForKey:@"GroupMasterId"];
         NSString *Manage = [_dataQunDeDict objectForKey:@"GroupManager"];
+        BOOL  isManages;    //是否是多个群管理
+        NSArray *ManageArr; //多管理
+        if ([Manage containsString:@","]) {
+            
+            isManages = YES;
+            ManageArr = [Manage componentsSeparatedByString:@","];
+            ManageArr = [self ManageArr:ManageArr andQunStrId:QunZhu];  //去重群主
+        }else{
+            
+            isManages = NO;
+        }
         
         NSMutableArray * Marray = [NSMutableArray arrayWithCapacity:0];
         [Marray addObjectsFromArray:_dataManageArr];
         NSArray *TArr = [NSArray arrayWithArray:Marray];
         for (NSDictionary *dict in TArr) {
             
-            if ([dict[@"UserId"] isEqualToString:QunZhu] || [dict[@"UserId"] isEqualToString:Manage]) {
+            if (isManages) {
                 
-                [dataQunZhuArr addObject:dict];
-                [Marray removeObject:dict];
+                for (NSString *ManStr in ManageArr) {
+                    
+                    if ([dict[@"UserId"] isEqualToString:ManStr]) {
+                        
+                        [dataQunZhuArr addObject:dict];
+                        [Marray removeObject:dict];
+                    }
+                }
                 
-            }
+                if ([dict[@"UserId"] isEqualToString:QunZhu]) {
+                    
+                    [dataQunZhuArr addObject:dict];
+                    [Marray removeObject:dict];
+                    
+                }
+                
+            }else{
             
+                if ([dict[@"UserId"] isEqualToString:QunZhu] || [dict[@"UserId"] isEqualToString:Manage]) {
+                    
+                    [dataQunZhuArr addObject:dict];
+                    [Marray removeObject:dict];
+                    
+                }
+            }
         }
         
         _letterArr = [self createrCSList:Marray];
@@ -265,7 +295,7 @@
                 objc_setAssociatedObject(cell.XuanZBtn, @"UserId", userId, OBJC_ASSOCIATION_RETAIN_NONATOMIC);//实际上就是KVC
                 [cell.XuanZBtn addTarget:self action:@selector(XuanZhongBtnClick:) forControlEvents:UIControlEventTouchUpInside];
                 
-                if (_QunType == 1) {
+                if (_QunType == 1) {    //移交群主(单选)
                     
                     if (dataQunX.count >0) {
                         
@@ -293,7 +323,7 @@
                 NSString *uid = [AutomatePlist readPlistForKey:@"Uid"];
                 NSString *QunZhu = [_dataQunDeDict objectForKey:@"GroupMasterId"];
                 
-                if ([dataQunZhuArr[indexPath.row][@"UserId"] isEqualToString:QunZhu]) {
+                if ([dataQunZhuArr[indexPath.row][@"UserId"] isEqualToString:QunZhu]) { //群主
                     
                     cell.QunZhuBtn.selected = NO;
                     cell.XuanZBtn.hidden = YES;
@@ -304,7 +334,7 @@
                         
                         cell.MeLab.hidden = YES;
                     }
-                }else{
+                }else{  //管理
                     
                     cell.QunZhuBtn.selected = YES;
                     if ([dataQunZhuArr[indexPath.row][@"UserId"] isEqualToString:uid]) {
@@ -315,6 +345,11 @@
                         
                         cell.MeLab.hidden = YES;
                         cell.XuanZBtn.hidden = NO;
+                    }
+                    
+                    if (_QunType == 2) {    //设置管理员..将管理的选择框隐藏
+                        
+                        cell.XuanZBtn.hidden = YES;
                     }
                 }
                 
@@ -351,13 +386,15 @@
                     
                     if (dataQunX.count >0) {
                         
-                        if ([dataQunX[indexPath.row] isEqualToString:_letterArr[indexPath.section -1][@"cityS"][indexPath.row][@"UserId"]]) {
+                        if ([dataQunX[0] isEqualToString:_letterArr[indexPath.section -1][@"cityS"][indexPath.row][@"UserId"]]) {
                             
                             cell.XuanZhongBtn.selected = YES;
                         }else{
                             
                             cell.XuanZhongBtn.selected = NO;
                         }
+                        
+                        
                     }
                     
                 }
@@ -533,16 +570,7 @@
                 
                 [_ManageTabV reloadData];
             }
-//            NSMutableArray *XuanArr;
-//            if (isManageSearch) {
-//                
-//                [XuanArr addObject:SearchManageResults[section][@"cityS"][row][@"UserId"]];
-//
-//            }else{
-//                
-//                [XuanArr addObject:_letterArr[section][@"cityS"][row][@"UserId"]];
-//                
-//            }
+
         }
         
         
@@ -836,6 +864,24 @@
             parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",GroupId,@"GroupId",uid,@"UserId",ToUserId,@"ToUserId",nil];
             
             login_Str = WoTing_ChangGuoupMaster;
+        }else if (_QunType == 2) {    //设置管理员(增加)
+            
+            NSString *AddAdminUserIds;
+            NSMutableString *Mstr;
+            
+            if (dataQunX.count > 0) {
+                Mstr = [NSMutableString stringWithString:dataQunX[0]];
+                for (int i = 1; i < dataQunX.count; i++) {
+                    NSString *str = dataQunX[i];
+                    [Mstr appendFormat:@",%@",str];
+                }
+            }
+            
+            AddAdminUserIds = Mstr;
+            
+            parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",GroupId,@"GroupId",uid,@"UserId",AddAdminUserIds,@"AddAdminUserIds",nil];
+            
+            login_Str = WoTing_SetGroupAdmin;
         }else if (_QunType == 3) {    //邀请用户成为群成员
             
             NSString *BeInvitedUserIds;
@@ -856,13 +902,24 @@
             login_Str = WoTing_GroupInvite;
         }else if (_QunType == 4) {    //删除群成员
             
-            NSString *BeInvitedUserIds = QunZhuStr;
+            NSString *BeInvitedUserIds;
+            NSMutableString *Mstr;
             
+            if (dataQunX.count > 0) {
+                Mstr = [NSMutableString stringWithString:dataQunX[0]];
+                for (int i = 1; i < dataQunX.count; i++) {
+                    NSString *str = dataQunX[i];
+                    [Mstr appendFormat:@",%@",str];
+                }
+            }
+            
+            BeInvitedUserIds = Mstr;
             
             parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",GroupId,@"GroupId",uid,@"UserId",BeInvitedUserIds,@"UserIds",nil];
             
             login_Str = WoTing_KickoutGroup;
         }
+        NSLog(@"%@", parameters);
         
         [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
             
@@ -876,6 +933,9 @@
                 if (_QunType == 1) {
                     
                     [WKProgressHUD popMessage:@"群主移交成功" inView:nil duration:0.5 animated:YES];
+                }else if (_QunType == 2){
+                    
+                    [WKProgressHUD popMessage:@"设置管理成功" inView:nil duration:0.5 animated:YES];
                 }else if (_QunType == 3){
                     
                     [WKProgressHUD popMessage:@"邀请发送成功" inView:nil duration:0.5 animated:YES];
@@ -903,4 +963,27 @@
         
     }
 }
+
+//管理去群主
+- (NSArray *)ManageArr:(NSArray *)Array andQunStrId:(NSString *)QunId{
+    
+    NSArray *Tarr = [NSArray arrayWithArray:Array];
+    NSMutableArray *Marr = [NSMutableArray arrayWithCapacity:0];
+    [Marr addObjectsFromArray:Array];
+    for (NSString *Str in Tarr) {
+        
+        if ([Str isEqualToString:QunId]) {
+            
+            [Marr removeObject:Str];
+        }
+    }
+    
+    return [NSArray arrayWithArray:Marr];
+}
+
+
+
+
+
+
 @end

@@ -30,6 +30,7 @@
     _DingYueTabV.dataSource = self;
     
     _DingYueTabV.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    _DingYueTabV.separatorStyle = UITableViewCellSelectionStyleNone;
     
     [self registerDingYueTabCell];
     [self loadDataDingYue];
@@ -67,9 +68,10 @@
             NSString  *ReturnType = [resultDict objectForKey:@"ReturnType"];
             if ([ReturnType isEqualToString:@"1001"]) {
                 
-                NSDictionary *ResultList = resultDict[@"ResultList"];
+                [dataDingYueArr removeAllObjects];
+                [dataDingYueArr addObjectsFromArray:resultDict[@"ResultList"]];
                 
-                
+                [_DingYueTabV reloadData];
             }else if ([ReturnType isEqualToString:@"T"]){
                 
                 [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
@@ -86,9 +88,15 @@
 }
 
 
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     return dataDingYueArr.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return 70;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -99,8 +107,21 @@
     
     WTDingYueCell *cell = (WTDingYueCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
     
+    //[5]	(null)	@"ContentSeqImg" : @"http://ac.wotingfm.com/contentimg/474584400b1449199e11a5528acd7a94.png"
+    [cell.contentImage sd_setImageWithURL:[NSURL URLWithString:[NSString NULLToString:dataDingYueArr[indexPath.row][@"ContentSeqImg"]]] placeholderImage:[UIImage imageNamed:@"img_radio_default"]];
     
-    [cell.contentImage sd_setImageWithURL:[NSURL URLWithString:[NSString NULLToString:dataDingYueArr[indexPath.row]]] placeholderImage:[UIImage imageNamed:@""]];
+    cell.contentName.text = [NSString NULLToString:dataDingYueArr[indexPath.row][@"ContentMediaName"]];
+    cell.contentNameLab.text = [NSString NULLToString:dataDingYueArr[indexPath.row][@"ContentSeqName"]];
+    
+    //时间
+    NSString *timeStr = [dataDingYueArr[indexPath.row][@"ContentPubTime"] stringValue];
+    NSTimeInterval timeT=[timeStr doubleValue];
+    NSDate *detaildateT=[NSDate dateWithTimeIntervalSince1970:timeT/1000.0];
+    NSDateFormatter *dateFormatterT = [[NSDateFormatter alloc] init];
+    [dateFormatterT setDateFormat:@"yyyy-MM-dd"];
+    NSString *currentDateStr = [dateFormatterT stringFromDate: detaildateT];
+    
+    cell.contentTime.text = currentDateStr;
     
     return cell;
 

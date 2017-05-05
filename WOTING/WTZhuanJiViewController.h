@@ -18,6 +18,9 @@
 - (IBAction)commitBtnClick:(id)sender;
 - (IBAction)shareBtnClick:(id)sender;
 - (IBAction)dingYueBtnClick:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *ZJLikeText;
+@property (weak, nonatomic) IBOutlet UIButton *ZJDingYueText;
+
 @property (weak, nonatomic) IBOutlet UIButton *ZJlikeBtn;
 @property (weak, nonatomic) IBOutlet UIButton *ZJDingYueBtn;
 

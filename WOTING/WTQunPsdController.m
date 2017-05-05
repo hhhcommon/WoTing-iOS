@@ -26,7 +26,7 @@
     _SureBtn.layer.cornerRadius = 5;
     _SureBtn.layer.masksToBounds = YES;
     
-   // _YuanPadLab.text = [NSString stringWithFormat:@"当前群密码为: %@",];
+    _YuanPadLab.text = [NSString stringWithFormat:@"当前群密码为: %@",[NSString NULLToString:_dataQunDict[@"GroupPassword"]]];
     
     [_SurepsdTextFile addTarget:self action:@selector(SurePsdChange:) forControlEvents:UIControlEventEditingChanged];
     [_psdTextFile addTarget:self action:@selector(PsdChange:) forControlEvents:UIControlEventEditingChanged];
@@ -103,8 +103,9 @@
         NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
         
         NSString *GroupId = [NSString NULLToString:_dataQunDict[@"GroupId"]];
+        NSString *OldPassword = [NSString NULLToString:_dataQunDict[@"GroupPassword"]];
         
-        NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",GroupId,@"GroupId",uid,@"UserId",_SurepsdTextFile.text,@"NewPassword",nil];
+        NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",GroupId,@"GroupId",uid,@"UserId",_SurepsdTextFile.text,@"NewPassword",OldPassword,@"OldPassword",nil];
         
         NSString *login_Str = WoTing_UpdatePwd;
         
@@ -116,6 +117,8 @@
             if ([ReturnType isEqualToString:@"1001"]) {
                 
                 [WKProgressHUD popMessage:@"密码修改成功" inView:nil duration:0.5 animated:YES];
+                
+                self.PsdChange(_SurepsdTextFile.text);
                 [self.navigationController popViewControllerAnimated:YES];
             }else if ([ReturnType isEqualToString:@"T"]){
                 

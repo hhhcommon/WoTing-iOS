@@ -74,6 +74,10 @@
         if (_dataQunMemArr.count > 6) {
             
             return 8;
+        }else if (_dataQunMemArr.count == 1){
+            
+            return _dataQunMemArr.count + 1;
+            
         }else{
             
             return _dataQunMemArr.count + 2;
@@ -147,10 +151,19 @@
 // 点击图片的方法
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
+    NSString *uid = [AutomatePlist readPlistForKey:@"Uid"];
+    
     if (isCY) {
         
         WTFriendDetailsController *wtfriDVC = [[WTFriendDetailsController alloc] init];
-        [self.delegateQunMem.navigationController pushViewController:wtfriDVC animated:YES];
+        wtfriDVC.dataFriDict = _dataQunMemArr[indexPath.row];
+        
+        if ([uid isEqualToString:[NSString NULLToString:_dataQunMemArr[indexPath.row][@"UserId"]]]) {
+            
+            [WKProgressHUD popMessage:@"点击的本人" inView:nil duration:0.5 animated:YES];
+        }else{
+            [self.delegateQunMem.navigationController pushViewController:wtfriDVC animated:YES];
+        }
     }else{
     
         if (_dataQunMemArr.count != 0) {
@@ -158,7 +171,14 @@
             if (indexPath.row < _dataQunMemArr.count ) {
                 
                 WTFriendDetailsController *wtfriDVC = [[WTFriendDetailsController alloc] init];
-                [self.delegateQunMem.navigationController pushViewController:wtfriDVC animated:YES];
+                wtfriDVC.dataFriDict = _dataQunMemArr[indexPath.row];
+                
+                if ([uid isEqualToString:[NSString NULLToString:_dataQunMemArr[indexPath.row][@"UserId"]]]) {
+                    
+                    [WKProgressHUD popMessage:@"点击的本人" inView:nil duration:0.5 animated:YES];
+                }else{
+                    [self.delegateQunMem.navigationController pushViewController:wtfriDVC animated:YES];
+                }
                 
             }else if (indexPath.row == _dataQunMemArr.count){
                 

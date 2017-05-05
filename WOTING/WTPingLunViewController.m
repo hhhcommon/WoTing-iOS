@@ -13,6 +13,7 @@
 @interface WTPingLunViewController ()<UITableViewDataSource, UITableViewDelegate> {
     
     NSMutableArray      *dataPLArr;
+    NSInteger       PLCellInteger;  //cell高度
 }
 
 @end
@@ -24,11 +25,13 @@
     // Do any additional setup after loading the view from its nib.
     
     dataPLArr = [NSMutableArray arrayWithCapacity:0];
+    PLCellInteger = 0;
     
     _PLTabV.dataSource = self;
     _PLTabV.delegate = self;
     
     _PLTabV.tableFooterView = [[UIView alloc] init];
+    _PLTabV.separatorStyle = UITableViewCellSelectionStyleNone;
     
     //监听键盘弹起
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -113,13 +116,19 @@
     NSDictionary *dict = dataPLArr[indexPath.row];
     [cell setCellWithDict:dict];
     
+    NSString *Discuss = dataPLArr[indexPath.row][@"Discuss"];
+    CGFloat previewH = [Discuss boundingRectWithSize:CGSizeMake(cell.contentLab.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size.height;
+    cell.contetnLabHeight.constant = previewH;
+    
+    PLCellInteger = previewH - 21;
     
     return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 70;
+    
+    return 70 + PLCellInteger;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
@@ -127,6 +136,8 @@
     
     return 0.000000000000001;
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

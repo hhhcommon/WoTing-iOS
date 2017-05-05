@@ -81,6 +81,8 @@
         }else if ([ReturnType isEqualToString:@"1011"]){
             
             [WKProgressHUD popMessage:@"暂无申请列表" inView:nil duration:0.5 animated:YES];
+            [dataJoinArr removeAllObjects];
+            [_QunNewsTabV reloadData];
         }else if ([ReturnType isEqualToString:@"T"]){
             
             [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
@@ -166,7 +168,132 @@
         cell = [[WTJoinQunCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     }
     
+    if (_JoinType == 0) {
+        
+        cell.contentName.text = [NSString NULLToString:dataJoinArr[indexPath.row][@"NickName"]];
+        cell.auditLab.text = [NSString stringWithFormat:@"我是%@",dataJoinArr[indexPath.row][@"NickName"]];
+    }else{
+        
+        //申请
+    }
+    
+    cell.contentImgV.image = [UIImage imageNamed:@"Friend_header.png"];
+    
+    //传值
+    objc_setAssociatedObject(cell.agreeBtn, @"ApplyUserId", [NSString NULLToString:dataJoinArr[indexPath.row][@"UserId"]], OBJC_ASSOCIATION_RETAIN_NONATOMIC);//邀请人id
+    objc_setAssociatedObject(cell.JuJueBtn, @"ApplyUserId", [NSString NULLToString:dataJoinArr[indexPath.row][@"UserId"]], OBJC_ASSOCIATION_RETAIN_NONATOMIC);//邀请人id
+    [cell.agreeBtn addTarget:self action:@selector(agreeBtnJoinQunClick:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.JuJueBtn addTarget:self action:@selector(JuJueBtnJoinQunClick:) forControlEvents:UIControlEventTouchUpInside];
+    
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+}
+
+//同意
+- (void)agreeBtnJoinQunClick:(UIButton *)btn{
+    
+    NSString *ApplyUserId = objc_getAssociatedObject(btn, @"ApplyUserId");
+    NSString *GroupId = [NSString NULLToString:_dataQunDesDict[@"GroupId"]];
+    
+    NSString *uid = [AutomatePlist readPlistForKey:@"Uid"];
+    
+    NSString *IMEI = [AutomatePlist readPlistForKey:@"IMEI"];
+    NSString *ScreenSize = [AutomatePlist readPlistForKey:@"ScreenSize"];
+    NSString *MobileClass = [AutomatePlist readPlistForKey:@"MobileClass"];
+    NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
+    NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
+    
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",ApplyUserId,@"ApplyUserId",@"1",@"DealType",GroupId,@"GroupId",uid,@"UserId",nil];
+    
+    NSString *login_Str = WoTing_ApplyDeal;
+    NSLog(@"%@", parameters);
+    
+    [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
+        
+        NSDictionary *resultDict = (NSDictionary *)response;
+        
+        NSString  *ReturnType = [resultDict objectForKey:@"ReturnType"];
+        if ([ReturnType isEqualToString:@"1001"]) {
+            
+            if (_JoinType == 0) {
+                
+                [self loadQunNewsData];
+            }else{
+                
+                [self loadQunNewsDataShenHe];
+            }
+            
+            
+        }else if ([ReturnType isEqualToString:@"T"]){
+            
+            [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
+        }else if ([ReturnType isEqualToString:@"200"]){
+            
+            [AutomatePlist writePlistForkey:@"Uid" value:@""];
+            [WKProgressHUD popMessage:@"需要登录" inView:nil duration:0.5 animated:YES];
+        }
+        
+    } fail:^(NSError *error) {
+        
+        
+    }];
+    
+    
+}
+
+//拒绝
+- (void)JuJueBtnJoinQunClick:(UIButton *)btn{
+    
+    NSString *ApplyUserId = objc_getAssociatedObject(btn, @"ApplyUserId");
+    NSString *GroupId = [NSString NULLToString:_dataQunDesDict[@"GroupId"]];
+    
+    NSString *uid = [AutomatePlist readPlistForKey:@"Uid"];
+    
+    NSString *IMEI = [AutomatePlist readPlistForKey:@"IMEI"];
+    NSString *ScreenSize = [AutomatePlist readPlistForKey:@"ScreenSize"];
+    NSString *MobileClass = [AutomatePlist readPlistForKey:@"MobileClass"];
+    NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
+    NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
+    
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",ApplyUserId,@"ApplyUserId",@"2",@"DealType",GroupId,@"GroupId",uid,@"UserId",nil];
+    
+    NSString *login_Str = WoTing_ApplyDeal;
+    
+    [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
+        
+        NSDictionary *resultDict = (NSDictionary *)response;
+        
+        NSString  *ReturnType = [resultDict objectForKey:@"ReturnType"];
+        if ([ReturnType isEqualToString:@"1001"]) {
+            
+            if (_JoinType == 0) {
+                
+                [self loadQunNewsData];
+            }else{
+                
+                [self loadQunNewsDataShenHe];
+            }
+            
+        }else if ([ReturnType isEqualToString:@"T"]){
+            
+            [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
+        }else if ([ReturnType isEqualToString:@"200"]){
+            
+            [AutomatePlist writePlistForkey:@"Uid" value:@""];
+            [WKProgressHUD popMessage:@"需要登录" inView:nil duration:0.5 animated:YES];
+        }
+        
+    } fail:^(NSError *error) {
+        
+        
+    }];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {

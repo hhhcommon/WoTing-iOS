@@ -72,8 +72,8 @@
                         <state key="normal" image="Contacts_Jiang.png"/>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uir-ix-gAt">
-                        <rect key="frame" x="0.0" y="78" width="320" height="1"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <rect key="frame" x="8" y="78" width="312" height="1"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="Dmx-jP-L9T"/>
                         </constraints>
@@ -84,7 +84,7 @@
                     <constraint firstAttribute="trailingMargin" secondItem="dVs-CX-NpG" secondAttribute="trailing" constant="13" id="2vY-Of-AqS"/>
                     <constraint firstAttribute="bottom" secondItem="uir-ix-gAt" secondAttribute="bottom" constant="0.5" id="Ax4-aJ-Mos"/>
                     <constraint firstItem="F7h-tK-roB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="13" id="Bjz-p0-9WF"/>
-                    <constraint firstItem="uir-ix-gAt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="GuL-93-b3F"/>
+                    <constraint firstItem="uir-ix-gAt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="GuL-93-b3F"/>
                     <constraint firstItem="Asu-Mq-zJg" firstAttribute="leading" secondItem="F7h-tK-roB" secondAttribute="trailing" constant="13" id="IBI-rD-i4q"/>
                     <constraint firstItem="dVs-CX-NpG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="11" id="YPP-BS-64x"/>
                     <constraint firstItem="ifb-90-FzJ" firstAttribute="leading" secondItem="F7h-tK-roB" secondAttribute="trailing" constant="13" id="esg-2z-oO5"/>

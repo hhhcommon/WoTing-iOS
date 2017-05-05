@@ -13,6 +13,8 @@
             <connections>
                 <outlet property="NameLab" destination="mGD-lQ-JMJ" id="t7U-HM-rcH"/>
                 <outlet property="ZJDingYueBtn" destination="KPY-TS-3CF" id="sa9-sv-Dsh"/>
+                <outlet property="ZJDingYueText" destination="3Yk-gR-tcj" id="QP0-eN-hPL"/>
+                <outlet property="ZJLikeText" destination="cEJ-3J-63U" id="Twa-ly-X6g"/>
                 <outlet property="ZJlikeBtn" destination="F4S-hv-4kV" id="mja-zU-GKg"/>
                 <outlet property="contentImg" destination="odN-ea-Yy7" id="66H-sy-Oad"/>
                 <outlet property="titleView" destination="YJQ-EV-zqq" id="eO5-4P-mA7"/>
@@ -69,13 +71,17 @@
                             </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cEJ-3J-63U">
-                            <rect key="frame" x="66" y="170" width="29" height="18"/>
+                            <rect key="frame" x="55" y="170" width="50" height="18"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="29" id="17A-N4-Agr"/>
+                                <constraint firstAttribute="width" constant="50" id="17A-N4-Agr"/>
                                 <constraint firstAttribute="height" constant="18" id="iV7-FQ-ZcC"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <state key="normal" title="喜欢">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" title="已喜欢">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -173,14 +179,18 @@
                             </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Yk-gR-tcj">
-                            <rect key="frame" x="137" y="170" width="29" height="18"/>
+                            <rect key="frame" x="124" y="170" width="55" height="18"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="29" id="4xQ-F9-xLK"/>
+                                <constraint firstAttribute="width" constant="55" id="4xQ-F9-xLK"/>
                                 <constraint firstAttribute="height" constant="18" id="naE-px-TdA"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <state key="normal" title="订阅">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" title="已订阅">
+                                <color key="titleColor" red="0.99194461107254028" green="0.99615627527236938" blue="0.99600595235824585" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
                                 <action selector="dingYueBtnClick:" destination="-1" eventType="touchUpInside" id="HlJ-FE-eCX"/>
@@ -207,7 +217,7 @@
                         <constraint firstItem="TVd-l4-QBW" firstAttribute="leading" secondItem="aas-OW-Wb1" secondAttribute="trailing" constant="22" id="5Xt-4N-IH5"/>
                         <constraint firstItem="KPY-TS-3CF" firstAttribute="top" secondItem="ove-nb-yFg" secondAttribute="bottom" constant="20" id="6zO-3X-swR"/>
                         <constraint firstItem="mGD-lQ-JMJ" firstAttribute="top" secondItem="qr7-b4-Mkf" secondAttribute="top" constant="41" id="7XS-Ob-QsH"/>
-                        <constraint firstItem="Btt-t5-fHs" firstAttribute="leading" secondItem="3Yk-gR-tcj" secondAttribute="trailing" constant="21" id="9Cb-4R-yAd"/>
+                        <constraint firstItem="Btt-t5-fHs" firstAttribute="leading" secondItem="3Yk-gR-tcj" secondAttribute="trailing" constant="8" id="9Cb-4R-yAd"/>
                         <constraint firstItem="F4S-hv-4kV" firstAttribute="top" secondItem="qr7-b4-Mkf" secondAttribute="top" constant="186" id="BXa-Rc-v59"/>
                         <constraint firstItem="cEJ-3J-63U" firstAttribute="top" secondItem="qr7-b4-Mkf" secondAttribute="top" constant="170" id="JbM-WC-ZBu"/>
                         <constraint firstItem="aas-OW-Wb1" firstAttribute="leading" secondItem="0uz-dA-ejm" secondAttribute="trailing" constant="21" id="QKR-bo-gkJ"/>
@@ -221,7 +231,7 @@
                         <constraint firstAttribute="height" constant="225" id="j2K-0Q-h70"/>
                         <constraint firstAttribute="trailing" secondItem="mGD-lQ-JMJ" secondAttribute="trailing" constant="96" id="jdf-LG-k8r"/>
                         <constraint firstItem="ove-nb-yFg" firstAttribute="top" secondItem="mGD-lQ-JMJ" secondAttribute="bottom" constant="24" id="k4O-J1-jSY"/>
-                        <constraint firstItem="9Fz-go-cnL" firstAttribute="leading" secondItem="cEJ-3J-63U" secondAttribute="trailing" constant="20" id="mIT-gO-UbX"/>
+                        <constraint firstItem="9Fz-go-cnL" firstAttribute="leading" secondItem="cEJ-3J-63U" secondAttribute="trailing" constant="10" id="mIT-gO-UbX"/>
                         <constraint firstItem="aas-OW-Wb1" firstAttribute="top" secondItem="qr7-b4-Mkf" secondAttribute="top" constant="174" id="nGK-My-bvk"/>
                         <constraint firstItem="ove-nb-yFg" firstAttribute="centerX" secondItem="qr7-b4-Mkf" secondAttribute="centerX" id="ned-xU-EuY"/>
                         <constraint firstItem="3Yk-gR-tcj" firstAttribute="top" secondItem="ove-nb-yFg" secondAttribute="bottom" constant="4" id="nwz-jO-LRP"/>
@@ -230,7 +240,7 @@
                         <constraint firstItem="9Fz-go-cnL" firstAttribute="top" secondItem="qr7-b4-Mkf" secondAttribute="top" constant="174" id="sXN-CA-MwP"/>
                         <constraint firstItem="EO4-j2-7OS" firstAttribute="top" secondItem="qr7-b4-Mkf" secondAttribute="top" constant="170" id="vi6-Mz-UT2"/>
                         <constraint firstItem="odN-ea-Yy7" firstAttribute="centerX" secondItem="qr7-b4-Mkf" secondAttribute="centerX" id="xfG-qv-Xbt"/>
-                        <constraint firstItem="3Yk-gR-tcj" firstAttribute="leading" secondItem="9Fz-go-cnL" secondAttribute="trailing" constant="21" id="yDD-Ub-qwB"/>
+                        <constraint firstItem="3Yk-gR-tcj" firstAttribute="leading" secondItem="9Fz-go-cnL" secondAttribute="trailing" constant="8" id="yDD-Ub-qwB"/>
                         <constraint firstItem="9Fz-go-cnL" firstAttribute="leading" secondItem="F4S-hv-4kV" secondAttribute="trailing" constant="22" id="ylt-WL-g7h"/>
                         <constraint firstItem="EO4-j2-7OS" firstAttribute="leading" secondItem="aas-OW-Wb1" secondAttribute="trailing" constant="21" id="yq8-eR-dr8"/>
                         <constraint firstItem="hOZ-hu-CZm" firstAttribute="top" secondItem="qr7-b4-Mkf" secondAttribute="top" constant="33" id="zxR-EC-slr"/>

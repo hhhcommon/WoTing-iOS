@@ -18,8 +18,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *JuJueBtn;
 @property (weak, nonatomic) IBOutlet UIButton *agreeBtn;
 
-@property (nonatomic, copy) NSString *GroupId; //用户组id
-@property (nonatomic, copy) NSString *InviteUserId; //邀请人id
 
 
 @end

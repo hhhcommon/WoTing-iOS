@@ -140,29 +140,28 @@
 //    self.window.rootViewController = [self crateTabBarControllerView];
     //设置根控制器
     //通过读取用户偏好设置 判断app是否是第一次安装设置
-    NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-    
-    BOOL isUsed = [userDef integerForKey:@"ISUSED"];
-    
-    
-    if (isUsed == YES) {
+//    NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+//    
+//    BOOL isUsed = [userDef integerForKey:@"ISUSED"];
+//    
+//    
+//    if (isUsed == YES) {
         //根控制器设置为分栏控制器
         
         self.window.rootViewController = [self crateTabBarControllerView];
-        //需要判断用户是否需要登录
         
-        [self.window makeKeyAndVisible];
-        
-        //通过用户偏好设置中的标记 来判断是否需要登录
-       // [self showLogin];
-        
-        
-        
-    }else{
-        //根控制器设置为引导页
-        
-        self.window.rootViewController = [self createGuidanceViewController];
-    }
+//        [self.window makeKeyAndVisible];
+//        
+//        //通过用户偏好设置中的标记 来判断是否需要登录
+//       // [self showLogin];
+//        
+//        
+//        
+//    }else{
+//        //根控制器设置为引导页
+//        
+//        self.window.rootViewController = [self createGuidanceViewController];
+//    }
 
     
     [self.window makeKeyAndVisible];

@@ -25,9 +25,9 @@
     
     _contentName.text = [NSString NULLToString:dict[@"GroupName"]];
     
-    _QunNumber.text = [NSString stringWithFormat:@"群号: %@" , [NSString NULLToString:dict[@"GroupNum"]]];
+    _QunNumber.text = [NSString stringWithFormat:@"ID: %@" , [NSString NULLToString:dict[@"GroupNum"]]];
     
-    _QunBeiZhu.text = [NSString NULLToString:dict[@"GroupMyDescn"]];
+    _QunBeiZhu.text = [NSString NULLToString:dict[@"GroupMyAlias"]];
     
     if ([[NSString NULLToString:dict[@"PortraitBig"]] hasPrefix:@"http"]) {
         [_contentImgv sd_setImageWithURL:[NSURL URLWithString:[NSString NULLToString:dict[@"PortraitBig"]]] placeholderImage:[UIImage imageNamed:@"Friend_header.png"]];

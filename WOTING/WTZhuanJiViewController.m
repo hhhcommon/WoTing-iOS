@@ -38,7 +38,7 @@
     
     dataZJArr = [NSMutableArray arrayWithCapacity:0];
     dataZJDict = [NSMutableDictionary dictionaryWithCapacity:0];
-
+    
     [self loadDataZJ];
     [self creattitleView];
     
@@ -105,10 +105,25 @@
     if ([[NSString NULLToString:dataZJDict[@"ContentFavorite"]] isEqualToString:@"0"] || [NSString NULLToString:dataZJDict[@"ContentFavorite"]] == nil) {
         
         _ZJlikeBtn.selected = NO;
+        _ZJLikeText.selected = NO;
+        
     }else{
         
         _ZJlikeBtn.selected = YES;
+        _ZJLikeText.selected = YES;
     }
+    
+    if ([[NSString NULLToString:dataZJDict[@"ContentSubscribe"]] isEqualToString:@"0"] || [NSString NULLToString:dataZJDict[@"ContentSubscribe"]] == nil) {
+        
+        _ZJDingYueBtn.selected = NO;
+        _ZJDingYueText.selected = NO;
+    }else{
+        
+        _ZJDingYueBtn.selected = YES;
+        _ZJDingYueText.selected = YES;
+        
+    }
+    
 }
 
 //创建导航条
@@ -196,6 +211,7 @@
         }else{
             
             WTZJJMController *wtFenLeiVC = [[WTZJJMController alloc] init];
+            wtFenLeiVC.contentId = _contentID;
             wtFenLeiVC.dataZJArr = dataZJArr;
             [self addChildViewController:wtFenLeiVC];
             [contentScrollView addSubview:wtFenLeiVC.view];
@@ -312,7 +328,7 @@
     NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
     NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
     
-    if ([uid isEqualToString:@"0"]||[uid isEqualToString:@""]) {
+    if (![uid isEqualToString:@"0"]||![uid isEqualToString:@""]) {
         
         NSDictionary *parameters;
         
@@ -335,8 +351,19 @@
             NSString  *ReturnType = [resultDict objectForKey:@"ReturnType"];
             if ([ReturnType isEqualToString:@"1001"]) {
                 
-                [WKProgressHUD popMessage:@"添加喜欢成功" inView:nil duration:0.5 animated:YES];
+                if (_ZJlikeBtn.selected) {
+                    
+                    _ZJlikeBtn.selected = NO;
+                    _ZJLikeText.selected = NO;
+                    [dataZJDict setObject:@"0" forKey:@"ContentFavorite"];
+                    [WKProgressHUD popMessage:@"取消喜欢成功" inView:nil duration:0.5 animated:YES];
+                }else{
                 
+                    _ZJlikeBtn.selected = YES;
+                    _ZJLikeText.selected = YES;
+                    [dataZJDict setObject:@"1" forKey:@"ContentFavorite"];
+                    [WKProgressHUD popMessage:@"添加喜欢成功" inView:nil duration:0.5 animated:YES];
+                }
                 
             }else if ([ReturnType isEqualToString:@"T"]){
                 
@@ -365,7 +392,8 @@
     
     wtPLVC.hidesBottomBarWhenPushed = YES;
     
-    wtPLVC.ContentID = dataZJDict[@"ContentID"];
+    wtPLVC.ContentID = dataZJDict[@"ContentId"];
+    
     wtPLVC.Metype = dataZJDict[@"MediaType"];
     
     [self.navigationController pushViewController:wtPLVC animated:YES];
@@ -385,7 +413,7 @@
 - (IBAction)dingYueBtnClick:(id)sender {
     
     NSString *ContentId = dataZJDict[@"ContentId"];
-    NSString *ContentFavorite = dataZJDict[@"ContentFavorite"];
+    NSString *ContentSubscribe = dataZJDict[@"ContentSubscribe"];
     
     NSString *uid = [AutomatePlist readPlistForKey:@"Uid"];
     NSString *IMEI = [AutomatePlist readPlistForKey:@"IMEI"];
@@ -394,11 +422,11 @@
     NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
     NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
     
-    if ([uid isEqualToString:@"0"]||[uid isEqualToString:@""]) {
+    if (![uid isEqualToString:@"0"]||![uid isEqualToString:@""]) {
         
         NSDictionary *parameters;
-        
-        if ([ContentFavorite isEqualToString:@"0"] || ContentFavorite == nil) {
+        //[10]	(null)	@"ContentSubscribe" : @"1"
+        if ([ContentSubscribe isEqualToString:@"0"] || ContentSubscribe == nil) {
             
             parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",ContentId,@"ContentId",uid,@"UserId",@"1",@"Flag",  nil];
             
@@ -417,7 +445,19 @@
             NSString  *ReturnType = [resultDict objectForKey:@"ReturnType"];
             if ([ReturnType isEqualToString:@"1001"]) {
                 
-                [WKProgressHUD popMessage:@"订阅成功" inView:nil duration:0.5 animated:YES];
+                if (_ZJDingYueBtn.selected) {
+                    
+                    _ZJDingYueBtn.selected = NO;
+                    _ZJDingYueText.selected = NO;
+                    [dataZJDict setObject:@"0" forKey:@"ContentSubscribe"];
+                    [WKProgressHUD popMessage:@"取消订阅成功" inView:nil duration:0.5 animated:YES];
+                }else{
+                    
+                    _ZJDingYueBtn.selected = YES;
+                    _ZJDingYueText.selected = YES;
+                    [dataZJDict setObject:@"1" forKey:@"ContentSubscribe"];
+                    [WKProgressHUD popMessage:@"添加订阅成功" inView:nil duration:0.5 animated:YES];
+                }
                 
                 
             }else if ([ReturnType isEqualToString:@"T"]){

@@ -17,6 +17,9 @@
 - (IBAction)SureBtnClick:(id)sender;
 - (IBAction)backBtnClick:(id)sender;
 
+@property (nonatomic , strong)void (^PsdChange)(NSString *NewPsd);
+@property (nonatomic, copy) NSString *NewPsd;
+
 @property (nonatomic, strong) NSDictionary *dataQunDict;    //当前群内容
 
 @end

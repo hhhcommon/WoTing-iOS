@@ -221,11 +221,15 @@
         
     }else if (selectedIndex == 1){
         
-
+        WTAddQunFriendController *wtaddQFVC = [[WTAddQunFriendController alloc] init];
+        wtaddQFVC.AddQunFriendType = 1;
+        wtaddQFVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:wtaddQFVC animated:YES];
         
     }else{
         
         WTAddQunFriendController *wtaddQFVC = [[WTAddQunFriendController alloc] init];
+        wtaddQFVC.AddQunFriendType = 0;
         wtaddQFVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:wtaddQFVC animated:YES];
     }

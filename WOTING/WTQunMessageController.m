@@ -387,7 +387,7 @@
                 
                 [dataQunDetilDict removeAllObjects];
                 [dataQunDetilDict addEntriesFromDictionary:resultDict[@"GroupInfo"]];
-                
+#warning 这里要将前面两个页面都退掉
                 [self.navigationController popViewControllerAnimated:YES];
                 WTQunDetailsController *QunDVC = [[WTQunDetailsController alloc] init];
                 QunDVC.hidesBottomBarWhenPushed = YES;

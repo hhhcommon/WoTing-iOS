@@ -23,10 +23,6 @@ typedef void (^JQComplete)(BOOL succ);
 @property (weak, nonatomic) IBOutlet UITextField *ContentTextfield;
 @property (weak, nonatomic) IBOutlet UITextField *QunNameTextfield;
 
-
-
-- (IBAction)DuiJiangBtnClick:(id)sender;
-
 - (IBAction)BianJiBtnClick:(id)sender;
 
 @property (nonatomic, assign) NSInteger QunDetailsType;     //群样式
@@ -40,6 +36,6 @@ typedef void (^JQComplete)(BOOL succ);
 @property (weak, nonatomic) IBOutlet UITableView *QunDetailsTabV;
 
 @property (nonatomic, strong) NSDictionary *dataQunDict;    //群数据资料
-@property (nonatomic, strong) NSMutableDictionary    *dataUserInfo;  //当前用户信息
+
 
 @end

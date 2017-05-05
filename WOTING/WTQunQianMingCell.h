@@ -10,4 +10,8 @@
 
 @interface WTQunQianMingCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *contentLab;
+
+@property (weak, nonatomic) IBOutlet UIImageView *JTImgV;
+
 @end

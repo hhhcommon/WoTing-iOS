@@ -312,15 +312,6 @@
                 return 0;
             }else if (section == 1){
                 
-                
-//                if (Searchresults.count > 0) {
-//                    
-//                    return Searchresults[section - 2][@"char"];
-//                }else{
-//                    
-//                    return 0;
-//                }
-                
                 return 0;
                 
             }else{
@@ -669,6 +660,29 @@
                 if (dataFriContaArr.count) {
                     
                     cell.contentName.text = [NSString NULLToString:Searchresults[indexPath.section -2 ][@"cityS"][indexPath.row][@"NickName"]];
+                    
+                    cell.ConetNameHe.constant = 21;
+                    cell.FriNumLab.hidden = YES;
+                    cell.FriBeiZLab.hidden = YES;
+                    
+                    NSString *UserNum = [NSString NULLToString:Searchresults[indexPath.section -2 ][@"cityS"][indexPath.row][@"UserNum"]];
+                    NSString *UserAliasName = [NSString NULLToString:Searchresults[indexPath.section -2 ][@"cityS"][indexPath.row][@"UserAliasName"]];
+                    
+                    if (UserNum.length >0) {
+                        
+                        cell.FriNumLab.hidden = NO;
+                        cell.ConetNameHe.constant = 7;
+                        cell.FriNumLab.text = [NSString stringWithFormat:@"ID: %@",UserNum];
+                    }
+                    
+                    if (UserAliasName.length >0) {
+                        
+                        cell.FriBeiZLab.hidden = NO;
+                        cell.ConetNameHe.constant = 7;
+                        cell.FriBeiZLab.text = UserAliasName;
+                    }
+                    
+                    
                     if ([[NSString NULLToString:Searchresults[indexPath.section -2 ][@"cityS"][indexPath.row][@"PortraitBig"]] hasPrefix:@"http"]) {
                         [cell.contentImgV sd_setImageWithURL:[NSURL URLWithString:[NSString NULLToString:Searchresults[indexPath.section -2 ][@"cityS"][indexPath.row][@"PortraitBig"]]] placeholderImage:[UIImage imageNamed:@"Friend_header.png"]];
                     }else if ([NSString NULLToString:Searchresults[indexPath.section -2 ][@"cityS"][indexPath.row][@"PortraitBig"]].length){
@@ -714,6 +728,28 @@
                 if (dataFriContaArr.count) {
                     
                     cell.contentName.text = [NSString NULLToString:Searchresults[indexPath.section -1 ][@"cityS"][indexPath.row][@"NickName"]];
+                    
+                    cell.ConetNameHe.constant = 21;
+                    cell.FriNumLab.hidden = YES;
+                    cell.FriBeiZLab.hidden = YES;
+                    
+                    NSString *UserNum = [NSString NULLToString:Searchresults[indexPath.section -1 ][@"cityS"][indexPath.row][@"UserNum"]];
+                    NSString *UserAliasName = [NSString NULLToString:Searchresults[indexPath.section -1 ][@"cityS"][indexPath.row][@"UserAliasName"]];
+                    
+                    if (UserNum.length >0) {
+                        
+                        cell.FriNumLab.hidden = NO;
+                        cell.ConetNameHe.constant = 7;
+                        cell.FriNumLab.text = [NSString stringWithFormat:@"ID: %@",UserNum];
+                    }
+                    
+                    if (UserAliasName.length >0) {
+                        
+                        cell.FriBeiZLab.hidden = NO;
+                        cell.ConetNameHe.constant = 7;
+                        cell.FriBeiZLab.text = UserAliasName;
+                    }
+                    
                     if ([[NSString NULLToString:Searchresults[indexPath.section -1 ][@"cityS"][indexPath.row][@"PortraitBig"]] hasPrefix:@"http"]) {
                         [cell.contentImgV sd_setImageWithURL:[NSURL URLWithString:[NSString NULLToString:Searchresults[indexPath.section -1 ][@"cityS"][indexPath.row][@"PortraitBig"]]] placeholderImage:[UIImage imageNamed:@"Friend_header.png"]];
                     }else if ([NSString NULLToString:Searchresults[indexPath.section -1 ][@"cityS"][indexPath.row][@"PortraitBig"]].length){
@@ -776,10 +812,31 @@
                 cell = [[WTContactsFriCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
             }
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            //[0]	(null)	@"PortraitBig" : @"http://www.wotingfm.com/dataCenter/userimg/user_462f.png"
+            //[0]	(null)	@"PortraitBig" : @"http://www.wotingfm.com/dataCenter/userimg/user_462f.png" [8]	(null)	@"UserNum" : @"666666"	[2]	(null)	@"UserAliasName" : @"01"
             if (dataFriContaArr.count) {
                 
-               cell.contentName.text = [NSString NULLToString:_letterArr[indexPath.section - 2][@"cityS"][indexPath.row][@"NickName"]];
+                cell.contentName.text = [NSString NULLToString:_letterArr[indexPath.section - 2][@"cityS"][indexPath.row][@"NickName"]];
+                
+                cell.ConetNameHe.constant = 21;
+                cell.FriNumLab.hidden = YES;
+                cell.FriBeiZLab.hidden = YES;
+                
+                NSString *UserNum = [NSString NULLToString:_letterArr[indexPath.section - 2][@"cityS"][indexPath.row][@"UserNum"]];
+                NSString *UserAliasName = [NSString NULLToString:_letterArr[indexPath.section - 2][@"cityS"][indexPath.row][@"UserAliasName"]];
+                
+                if (UserNum.length >0) {
+                    
+                    cell.FriNumLab.hidden = NO;
+                    cell.ConetNameHe.constant = 7;
+                    cell.FriNumLab.text = [NSString stringWithFormat:@"ID: %@",UserNum];
+                }
+                
+                if (UserAliasName.length >0) {
+                    
+                    cell.FriBeiZLab.hidden = NO;
+                    cell.ConetNameHe.constant = 7;
+                    cell.FriBeiZLab.text = UserAliasName;
+                }
                 
                 if ([[NSString NULLToString:_letterArr[indexPath.section - 2][@"cityS"][indexPath.row][@"PortraitBig"]] hasPrefix:@"http"]) {
                    [cell.contentImgV sd_setImageWithURL:[NSURL URLWithString:[NSString NULLToString:_letterArr[indexPath.section - 2][@"cityS"][indexPath.row][@"PortraitBig"]]] placeholderImage:[UIImage imageNamed:@"Friend_header.png"]];
@@ -807,7 +864,7 @@
     
     if (isSearch) {
         
-        if (SearchQunresults > 0) {
+        if (SearchQunresults.count > 0) {
             
             if (indexPath.section == 0 && indexPath.row == 0) {
                 
@@ -825,8 +882,7 @@
             }else {
                 
                 WTFriendDetailsController *friDVC = [[WTFriendDetailsController alloc] init];
-                friDVC.FriendDetailType = 0;
-                friDVC.dataFriDict = dataFriContaArr[indexPath.row];
+                friDVC.dataFriDict = Searchresults[indexPath.section - 2][@"cityS"][indexPath.row];
                 friDVC.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:friDVC animated:YES];
             }
@@ -840,8 +896,8 @@
             }else {
                 
                 WTFriendDetailsController *friDVC = [[WTFriendDetailsController alloc] init];
-                friDVC.FriendDetailType = 0;
-                friDVC.dataFriDict = dataFriContaArr[indexPath.row];
+                
+                friDVC.dataFriDict = Searchresults[indexPath.section - 1][@"cityS"][indexPath.row];
                 friDVC.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:friDVC animated:YES];
             }
@@ -864,8 +920,8 @@
         }else{
             
             WTFriendDetailsController *friDVC = [[WTFriendDetailsController alloc] init];
-            friDVC.FriendDetailType = 0;
-            friDVC.dataFriDict = dataFriContaArr[indexPath.row];
+            
+            friDVC.dataFriDict = _letterArr[indexPath.section - 2][@"cityS"][indexPath.row];
             friDVC.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:friDVC animated:YES];
         }
@@ -913,7 +969,7 @@
             
             [btn setTitle:@"取消" forState:UIControlStateNormal];
             [btn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-            btn.titleLabel.font = [UIFont systemFontOfSize:14];
+            btn.titleLabel.font = [UIFont systemFontOfSize:13];
         }
         
     }

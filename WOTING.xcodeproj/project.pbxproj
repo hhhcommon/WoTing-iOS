@@ -149,6 +149,8 @@
 		0B0DC1CC1E0BBC9200CA584C /* UShareUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B0DC1BC1E0BBC9200CA584C /* UShareUI.framework */; };
 		0B0DD9ED1E13B95E00FBEFB6 /* WTGengDuoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B0DD9EB1E13B95E00FBEFB6 /* WTGengDuoController.m */; };
 		0B0F618B1E10B8C8008FC8B1 /* WTZhuanJiView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B0F618A1E10B8C8008FC8B1 /* WTZhuanJiView.m */; };
+		0B0FF54F1EBC1A4F00B6E175 /* WeiXuanZhong@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B0FF54D1EBC1A4F00B6E175 /* WeiXuanZhong@2x.png */; };
+		0B0FF5501EBC1A4F00B6E175 /* XuanZhong@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B0FF54E1EBC1A4F00B6E175 /* XuanZhong@2x.png */; };
 		0B106EED1DF8F7700000E031 /* JQMusicTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B106EEC1DF8F7700000E031 /* JQMusicTool.m */; };
 		0B1077731E1F47A5005AA9F3 /* WTLikeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B1077721E1F47A5005AA9F3 /* WTLikeView.m */; };
 		0B12106F1E76B49A009455F2 /* icon_BoFang@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B1210691E76B49A009455F2 /* icon_BoFang@2x.png */; };
@@ -256,7 +258,6 @@
 		0B42827F1E1B86A300FAC2BA /* WTBoFangCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B42827D1E1B86A300FAC2BA /* WTBoFangCell.m */; };
 		0B4282801E1B86A300FAC2BA /* WTBoFangCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B42827E1E1B86A300FAC2BA /* WTBoFangCell.xib */; };
 		0B4E92751E66DE3C001DE73F /* upload_NeiCun.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B4E92741E66DE3C001DE73F /* upload_NeiCun.png */; };
-		0B4E92771E66E41F001DE73F /* WeiXuanZhong.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B4E92761E66E41F001DE73F /* WeiXuanZhong.png */; };
 		0B4E927B1E67BBCE001DE73F /* WTXiaZaiXuanZhongCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4E92791E67BBCE001DE73F /* WTXiaZaiXuanZhongCell.m */; };
 		0B4E927C1E67BBCE001DE73F /* WTXiaZaiXuanZhongCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B4E927A1E67BBCE001DE73F /* WTXiaZaiXuanZhongCell.xib */; };
 		0B4E927E1E67CE8F001DE73F /* icon_delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B4E927D1E67CE8F001DE73F /* icon_delete.png */; };
@@ -271,7 +272,6 @@
 		0B554BB21E51555E0030B196 /* WeiDengLu.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B554BAE1E51555E0030B196 /* WeiDengLu.png */; };
 		0B554BB31E51555E0030B196 /* WuShuJu.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B554BAF1E51555E0030B196 /* WuShuJu.png */; };
 		0B554BB41E51555E0030B196 /* WuWangLuo.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B554BB01E51555E0030B196 /* WuWangLuo.png */; };
-		0B554C011E5185520030B196 /* XuanZhong.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B554C001E5185520030B196 /* XuanZhong.png */; };
 		0B554C151E51A5370030B196 /* play_flag_wave_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B554C031E51A5370030B196 /* play_flag_wave_1.png */; };
 		0B554C161E51A5370030B196 /* play_flag_wave_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B554C041E51A5370030B196 /* play_flag_wave_2.png */; };
 		0B554C171E51A5370030B196 /* play_flag_wave_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B554C051E51A5370030B196 /* play_flag_wave_3.png */; };
@@ -304,6 +304,9 @@
 		0B612D321E4D5E24000D8FE9 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B612D2A1E4D5E24000D8FE9 /* FMDatabasePool.m */; };
 		0B612D331E4D5E24000D8FE9 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B612D2C1E4D5E24000D8FE9 /* FMDatabaseQueue.m */; };
 		0B612D341E4D5E24000D8FE9 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B612D2F1E4D5E24000D8FE9 /* FMResultSet.m */; };
+		0B6D30591EB1FC9500E629FE /* WTQunSignChangeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6D30571EB1FC9500E629FE /* WTQunSignChangeController.m */; };
+		0B6D305A1EB1FC9500E629FE /* WTQunSignChangeController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B6D30581EB1FC9500E629FE /* WTQunSignChangeController.xib */; };
+		0B6D305C1EB35A7F00E629FE /* SearchFDJ@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B6D305B1EB35A7F00E629FE /* SearchFDJ@2x.png */; };
 		0B6D74BA1E5C1B18006FAF49 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B6D74B91E5C1B18006FAF49 /* CoreLocation.framework */; };
 		0B6D74BC1E5C1B28006FAF49 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B6D74BB1E5C1B28006FAF49 /* MapKit.framework */; };
 		0B6D74BF1E5C9132006FAF49 /* MessageContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6D74BE1E5C9132006FAF49 /* MessageContent.m */; };
@@ -1132,6 +1135,8 @@
 		0B0DD9EB1E13B95E00FBEFB6 /* WTGengDuoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTGengDuoController.m; sourceTree = "<group>"; };
 		0B0F61891E10B8C8008FC8B1 /* WTZhuanJiView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTZhuanJiView.h; sourceTree = "<group>"; };
 		0B0F618A1E10B8C8008FC8B1 /* WTZhuanJiView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTZhuanJiView.m; sourceTree = "<group>"; };
+		0B0FF54D1EBC1A4F00B6E175 /* WeiXuanZhong@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "WeiXuanZhong@2x.png"; sourceTree = "<group>"; };
+		0B0FF54E1EBC1A4F00B6E175 /* XuanZhong@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "XuanZhong@2x.png"; sourceTree = "<group>"; };
 		0B106EEB1DF8F7700000E031 /* JQMusicTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQMusicTool.h; sourceTree = "<group>"; };
 		0B106EEC1DF8F7700000E031 /* JQMusicTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQMusicTool.m; sourceTree = "<group>"; };
 		0B106EEE1DF8F7A30000E031 /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Singleton.h; sourceTree = "<group>"; };
@@ -1279,7 +1284,6 @@
 		0B42827D1E1B86A300FAC2BA /* WTBoFangCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTBoFangCell.m; sourceTree = "<group>"; };
 		0B42827E1E1B86A300FAC2BA /* WTBoFangCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTBoFangCell.xib; sourceTree = "<group>"; };
 		0B4E92741E66DE3C001DE73F /* upload_NeiCun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upload_NeiCun.png; sourceTree = "<group>"; };
-		0B4E92761E66E41F001DE73F /* WeiXuanZhong.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WeiXuanZhong.png; sourceTree = "<group>"; };
 		0B4E92781E67BBCE001DE73F /* WTXiaZaiXuanZhongCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTXiaZaiXuanZhongCell.h; sourceTree = "<group>"; };
 		0B4E92791E67BBCE001DE73F /* WTXiaZaiXuanZhongCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTXiaZaiXuanZhongCell.m; sourceTree = "<group>"; };
 		0B4E927A1E67BBCE001DE73F /* WTXiaZaiXuanZhongCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTXiaZaiXuanZhongCell.xib; sourceTree = "<group>"; };
@@ -1298,7 +1302,6 @@
 		0B554BAE1E51555E0030B196 /* WeiDengLu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WeiDengLu.png; sourceTree = "<group>"; };
 		0B554BAF1E51555E0030B196 /* WuShuJu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WuShuJu.png; sourceTree = "<group>"; };
 		0B554BB01E51555E0030B196 /* WuWangLuo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WuWangLuo.png; sourceTree = "<group>"; };
-		0B554C001E5185520030B196 /* XuanZhong.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = XuanZhong.png; sourceTree = "<group>"; };
 		0B554C031E51A5370030B196 /* play_flag_wave_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_flag_wave_1.png; sourceTree = "<group>"; };
 		0B554C041E51A5370030B196 /* play_flag_wave_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_flag_wave_2.png; sourceTree = "<group>"; };
 		0B554C051E51A5370030B196 /* play_flag_wave_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_flag_wave_3.png; sourceTree = "<group>"; };
@@ -1340,6 +1343,10 @@
 		0B612D2D1E4D5E24000D8FE9 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
 		0B612D2E1E4D5E24000D8FE9 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		0B612D2F1E4D5E24000D8FE9 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		0B6D30561EB1FC9500E629FE /* WTQunSignChangeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTQunSignChangeController.h; sourceTree = "<group>"; };
+		0B6D30571EB1FC9500E629FE /* WTQunSignChangeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTQunSignChangeController.m; sourceTree = "<group>"; };
+		0B6D30581EB1FC9500E629FE /* WTQunSignChangeController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WTQunSignChangeController.xib; sourceTree = "<group>"; };
+		0B6D305B1EB35A7F00E629FE /* SearchFDJ@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SearchFDJ@2x.png"; sourceTree = "<group>"; };
 		0B6D74B91E5C1B18006FAF49 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0B6D74BB1E5C1B28006FAF49 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		0B6D74BD1E5C9132006FAF49 /* MessageContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageContent.h; sourceTree = "<group>"; };
@@ -4230,6 +4237,7 @@
 		0BCC39771E9C89EA00BFCF00 /* Char */ = {
 			isa = PBXGroup;
 			children = (
+				0B6D305B1EB35A7F00E629FE /* SearchFDJ@2x.png */,
 				0BEDB1D81EA8885800549B12 /* AddQunFriend_sao@2x.png */,
 				0BEDB1D91EA8885800549B12 /* AddQunFriend_search@2x.png */,
 				0BEDB1DA1EA8885800549B12 /* AddQunTo@2x.png */,
@@ -4277,6 +4285,9 @@
 				0BCC39B41E9E3BB800BFCF00 /* WTFriendDetailsController.h */,
 				0BCC39B51E9E3BB800BFCF00 /* WTFriendDetailsController.m */,
 				0BCC39B61E9E3BB800BFCF00 /* WTFriendDetailsController.xib */,
+				0B6D30561EB1FC9500E629FE /* WTQunSignChangeController.h */,
+				0B6D30571EB1FC9500E629FE /* WTQunSignChangeController.m */,
+				0B6D30581EB1FC9500E629FE /* WTQunSignChangeController.xib */,
 			);
 			name = QunDetails;
 			sourceTree = "<group>";
@@ -4500,9 +4511,9 @@
 				0B0782A81E8A327A000E0D47 /* ZhuanJi_Backgroud.png */,
 				0B0782A61E8A326E000E0D47 /* ZhuBo_Backgroud.png */,
 				0B60237E1E55749B004FCE5D /* ZhiBo.png */,
-				0B554C001E5185520030B196 /* XuanZhong.png */,
-				0B4E92761E66E41F001DE73F /* WeiXuanZhong.png */,
 				0B554BAD1E51555E0030B196 /* ChuCuoLe.png */,
+				0B0FF54D1EBC1A4F00B6E175 /* WeiXuanZhong@2x.png */,
+				0B0FF54E1EBC1A4F00B6E175 /* XuanZhong@2x.png */,
 				0B554BAE1E51555E0030B196 /* WeiDengLu.png */,
 				0B554BAF1E51555E0030B196 /* WuShuJu.png */,
 				0B554BB01E51555E0030B196 /* WuWangLuo.png */,
@@ -5162,7 +5173,6 @@
 				0B9C5FBF1E727880007D10B6 /* WTbofangK.png in Resources */,
 				0B0782A91E8A327A000E0D47 /* ZhuanJi_Backgroud.png in Resources */,
 				0B1210731E76B49B009455F2 /* icon_ZhuanJi@2x.png in Resources */,
-				0B554C011E5185520030B196 /* XuanZhong.png in Resources */,
 				0B60237B1E5573A2004FCE5D /* PaiXu_Sele.png in Resources */,
 				0B71C9461E97977C004F7566 /* GirlBtn@2x.png in Resources */,
 				0B05BDB61E03AB6600CD4BEE /* WTLikeListViewController.xib in Resources */,
@@ -5181,6 +5191,7 @@
 				0BEDB2031EAB1A9B00549B12 /* WTFriAddFCell.xib in Resources */,
 				0BCC39761E9C829900BFCF00 /* WTNewFriendController.xib in Resources */,
 				0B08D2DB1E2B486F005A2D6B /* AppIcon80.png in Resources */,
+				0B0FF54F1EBC1A4F00B6E175 /* WeiXuanZhong@2x.png in Resources */,
 				0B9C5FC21E727880007D10B6 /* WTting.png in Resources */,
 				0B08D2D91E2B44F6005A2D6B /* AppIcon60x60@2x.png in Resources */,
 				0BCC39A11E9CD1D700BFCF00 /* DuiJiang@2x.png in Resources */,
@@ -5248,6 +5259,7 @@
 				0BF2C59A1DE3019B00A42B3D /* WTDownLoad@3x.png in Resources */,
 				0B71C9651E988D73004F7566 /* SGDatePickerSheetView.xib in Resources */,
 				0B1297A81E090E89009027BC /* WTZJJMController.xib in Resources */,
+				0B0FF5501EBC1A4F00B6E175 /* XuanZhong@2x.png in Resources */,
 				0B05BDC51E03B54500CD4BEE /* ShengYinViewController.xib in Resources */,
 				0B75844B1DED76AD00E3D117 /* WTBoFangTableViewCell.xib in Resources */,
 				0B1EFEDD1DF031230047CE75 /* icon_central_station.png in Resources */,
@@ -5264,7 +5276,6 @@
 				0B71C92C1E94CDDB004F7566 /* progressbar_circularHYC@2x.png in Resources */,
 				0B9C5FC51E727880007D10B6 /* WTwode_der.png in Resources */,
 				0BC0DC261E02318600A19F64 /* WTNewsViewController.xib in Resources */,
-				0B4E92771E66E41F001DE73F /* WeiXuanZhong.png in Resources */,
 				0B0B705D1E851D9B008EB680 /* WTBegin-568.png in Resources */,
 				0B0BD44E1E0134F800C4E236 /* WTFLDetaliController.xib in Resources */,
 				0B0BD4491E00E5AC00C4E236 /* icon_like.png in Resources */,
@@ -5311,6 +5322,7 @@
 				0B554C1C1E51A5370030B196 /* play_flag_wave_8.png in Resources */,
 				0B1DF2AA1DE6942C00EE5FF2 /* mine_default avatar_female.png in Resources */,
 				0B0CCA9E1E0CD6B60044C235 /* WTXiaZaiZhongController.xib in Resources */,
+				0B6D305C1EB35A7F00E629FE /* SearchFDJ@2x.png in Resources */,
 				0BA47CB81DF519480000B322 /* WTceshi3.jpg in Resources */,
 				0B1DF2AB1DE6942C00EE5FF2 /* mine_default avatar_male.png in Resources */,
 				0BF2C59D1DE3019B00A42B3D /* WTMain@2x.png in Resources */,
@@ -5333,6 +5345,7 @@
 				0BF2C59C1DE3019B00A42B3D /* WTDownLoad_der@3x.png in Resources */,
 				0B09A8561E07B6A100D60AC8 /* PL_biaoQ.png in Resources */,
 				0BA47CBF1DF539AA0000B322 /* WTFenLeiTableViewCell.xib in Resources */,
+				0B6D305A1EB1FC9500E629FE /* WTQunSignChangeController.xib in Resources */,
 				0B554C2C1E51AF9B0030B196 /* WTJMDViewController.xib in Resources */,
 				0BA47CB91DF519480000B322 /* WTceshi2.jpg in Resources */,
 				0BFEFDA71DE44346001FFD82 /* home_btn_next@2x.png in Resources */,
@@ -5722,6 +5735,7 @@
 				0B71CBE21E98AB83004F7566 /* ZXDataMatrixReader.m in Sources */,
 				0B71CC041E98AB83004F7566 /* ZXRSSFinderPattern.m in Sources */,
 				0B71CBD41E98AB83004F7566 /* ZXDataMatrixVersion.m in Sources */,
+				0B6D30591EB1FC9500E629FE /* WTQunSignChangeController.m in Sources */,
 				0B7584341DED4B1900E3D117 /* SDImageCache.m in Sources */,
 				0B71CBB51E98AB83004F7566 /* ZXBitMatrix.m in Sources */,
 				0B71CBD11E98AB83004F7566 /* ZXDataMatrixDataBlock.m in Sources */,

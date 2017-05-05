@@ -23,6 +23,11 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *SearchBtn;
 
+@property (nonatomic, assign) NSInteger AddQunFriendType;   //好友or群样式
+/** 
+ AddQunFriendType = 0;  好友
+ AddQunFriendType = 1;  群样式
+ */
 
 - (IBAction)SearchBtnClick:(id)sender;
 

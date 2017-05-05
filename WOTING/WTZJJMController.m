@@ -15,17 +15,19 @@
 
 @interface WTZJJMController ()<UITableViewDelegate, UITableViewDataSource>{
     
-    BOOL isHeaderViewSelected;
+    BOOL isHeaderViewSelected;  //排序按钮点击状态
     
     BOOL typeDownLoad;  //判断是否是下载状态
     
     BOOL isQXuan;      //判断是否全选
-   
+    BOOL isXuanZ;      //选择了要下载节目
     NSMutableArray  *dataZJJMCellArr;   //cell的选中个数
     
     UIView          *footView;      //下载的view
+    UIButton        *XuanBtn;       //全选按钮
     
     BOOL isDownLoadOK;  //判断是否下载成功
+    NSInteger       PageZJ;     //第几页
 }
 
 @property (nonatomic, strong) JSDownLoadManager *manager;//下载器
@@ -38,10 +40,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     dataZJJMCellArr = [NSMutableArray arrayWithCapacity:0];
+    PageZJ = 2;
     
     _ZJJieMTabV.delegate = self;
     _ZJJieMTabV.dataSource = self;
     _ZJJieMTabV.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    _ZJJieMTabV.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadDataZJMove)];
     
     isHeaderViewSelected = NO;
     [self registerTableViewCell];
@@ -58,6 +63,51 @@
     }];
     
     [self createDownLoadView];
+}
+
+- (void)loadDataZJMove{
+    
+    NSString *pageStr = [NSString stringWithFormat:@"%ld",PageZJ];
+    
+    NSString *uid = [AutomatePlist readPlistForKey:@"Uid"];
+    
+    NSString *IMEI = [AutomatePlist readPlistForKey:@"IMEI"];
+    NSString *ScreenSize = [AutomatePlist readPlistForKey:@"ScreenSize"];
+    NSString *MobileClass = [AutomatePlist readPlistForKey:@"MobileClass"];
+    NSString *GPS_longitude = [AutomatePlist readPlistForKey:@"GPS-longitude"];
+    NSString *GPS_latitude = [AutomatePlist readPlistForKey:@"GPS-latitude"];
+    
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:IMEI,@"IMEI", ScreenSize,@"ScreenSize",@"1",@"PCDType", MobileClass, @"MobileClass",GPS_longitude,@"GPS-longitude", GPS_latitude,@"GPS-latitude",uid,@"UserId", @"SEQU",@"MediaType",_contentId,@"ContentId",pageStr,@"Page",nil];
+    
+    NSString *login_Str = WoTing_GetContentInfo;
+    
+    
+    [ZCBNetworking postWithUrl:login_Str refreshCache:YES params:parameters success:^(id response) {
+        
+        
+        NSDictionary *resultDict = (NSDictionary *)response;
+        
+        NSString  *ReturnType = [resultDict objectForKey:@"ReturnType"];
+        if ([ReturnType isEqualToString:@"1001"]) {
+            
+            [_dataZJArr addObjectsFromArray:resultDict[@"ResultInfo"][@"SubList"]];
+            [_ZJJieMTabV reloadData];
+        }else if ([ReturnType isEqualToString:@"T"]){
+            
+            [WKProgressHUD popMessage:@"服务器异常" inView:nil duration:0.5 animated:YES];
+        }else if ([ReturnType isEqualToString:@"1011"]){
+            
+            [WKProgressHUD popMessage:@"没有查到任何专辑" inView:nil duration:0.5 animated:YES];
+        }
+        
+    } fail:^(NSError *error) {
+        
+        
+        NSLog(@"%@", error);
+        
+    }];
+    
+    PageZJ++;
 }
 
 - (void)createDownLoadView {
@@ -90,17 +140,17 @@
         make.height.mas_equalTo(30);
     }];
     
-    UIButton *XuanBtn = [[UIButton alloc] init];
+    XuanBtn = [[UIButton alloc] init];
     [XuanBtn setImage:[UIImage imageNamed:@"WeiXuanZhong.png"] forState:UIControlStateNormal];
     [XuanBtn setImage:[UIImage imageNamed:@"XuanZhong.png"] forState:UIControlStateSelected];
     [XuanBtn addTarget:self action:@selector(QXuanBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [footView addSubview:XuanBtn];
     [XuanBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.mas_equalTo(10);
-        make.top.mas_equalTo(13);
-        make.width.mas_equalTo(18);
-        make.height.mas_equalTo(18);
+        make.left.mas_equalTo(5);
+        make.top.mas_equalTo(2);
+        make.width.mas_equalTo(45);
+        make.height.mas_equalTo(45);
     }];
     
     UIButton *QXBtn = [[UIButton alloc] init];
@@ -111,10 +161,10 @@
     [footView addSubview:QXBtn];
     [QXBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(XuanBtn.mas_right).with.offset(15);
-        make.top.mas_equalTo(13);
+        make.left.equalTo(XuanBtn.mas_right).with.offset(5);
+        make.top.mas_equalTo(14);
         make.width.mas_equalTo(50);
-        make.height.mas_equalTo(20);
+        make.height.mas_equalTo(21);
     }];
 }
 
@@ -122,12 +172,17 @@
 - (void)QXuanBtnClick:(UIButton *)btn{
     
     if (btn.selected) {
+        XuanBtn.selected = NO;
         btn.selected = NO;
         isQXuan = NO;
+        [dataZJJMCellArr removeAllObjects];
         [_ZJJieMTabV reloadData];
     }else{
+        XuanBtn.selected = YES;
         btn.selected = YES;
         isQXuan = YES;
+        [dataZJJMCellArr removeAllObjects];     //先全部删除
+        [dataZJJMCellArr addObjectsFromArray:_dataZJArr];   //在全部存入
         [_ZJJieMTabV reloadData];
     }
 }
@@ -168,9 +223,10 @@
             cell = [[WTZhuanJiDownloadCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
         }
         
-        UIButton *cellBtn = cell.XuanZeBtn;
-        cellBtn.tag = indexPath.row + 300;
-        [cellBtn addTarget:self action:@selector(XuanZhongDownLoadBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        //传值
+        objc_setAssociatedObject(cell.XuanZeBtn, @"ZJDict", _dataZJArr[indexPath.row], OBJC_ASSOCIATION_RETAIN_NONATOMIC);//实际上就是KVC
+        
+        [cell.XuanZeBtn addTarget:self action:@selector(XuanZhongDownLoadBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         
         NSDictionary *dict = _dataZJArr[indexPath.row];
         
@@ -180,6 +236,13 @@
         }else {
             
             cell.XuanZeBtn.selected = NO;
+            for (NSDictionary *Tdict in dataZJJMCellArr) {
+                
+                if ([Tdict[@"ContentName"] isEqualToString:dict[@"ContentName"]]) {
+                    
+                    cell.XuanZeBtn.selected = YES;
+                }
+            }
         }
         
         [cell setCellWithDict:dict];
@@ -212,6 +275,8 @@
 #pragma mark - 按钮选中
 - (void)XuanZhongDownLoadBtnClick:(UIButton *)btn{
     
+    NSDictionary *ZJDict = objc_getAssociatedObject(btn, @"ZJDict");
+    
     if (isQXuan) {
         
         if (btn.selected) {
@@ -221,10 +286,18 @@
         }
     }else{
         
-        [dataZJJMCellArr addObject:[NSString stringWithFormat:@"%ld",(long)btn.tag - 300]];
+        if (btn.selected) {
+            
+            btn.selected = NO;
+            [dataZJJMCellArr removeObject:ZJDict];
+            [_ZJJieMTabV reloadData];
+        }else{
         
-        btn.selected = YES;
-       
+            [dataZJJMCellArr addObject:ZJDict];
+            
+            btn.selected = YES;
+            [_ZJJieMTabV reloadData];
+        }
     }
  
 }
@@ -246,6 +319,8 @@
 //    NSDictionary *dict = [[NSDictionary alloc] initWithDictionary:mdict];
 //    //传数据
 //    [[NSNotificationCenter defaultCenter] postNotificationName:@"XIAZAIDICT" object:nil userInfo:dict];
+    
+    NSLog(@"%lu", dataZJJMCellArr.count);
     
     NSMutableArray *ljqArr;
     
@@ -512,7 +587,8 @@
 - (void)QuXiaoBtnClick{
     
     [dataZJJMCellArr removeAllObjects];
-    typeDownLoad = NO;
+    typeDownLoad = NO;                  //取消下载状态
+    isQXuan = NO;                       //取消全选状态
     [_ZJJieMTabV reloadData];
     
 }

@@ -12,6 +12,6 @@
 @property (weak, nonatomic) IBOutlet UITableView *ZJJieMTabV;
 
 @property (nonatomic, strong) NSMutableArray  *dataZJArr;
-
+@property (nonatomic, copy) NSString *contentId;
 
 @end

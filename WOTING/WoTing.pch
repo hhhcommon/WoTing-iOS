@@ -61,8 +61,8 @@
 #pragma mark - 数据请求接口
 
 /** 外网接口地址 */
-//#define SKInterFaceServer @"http://123.56.254.75:808/wt/"
-#define SKInterFaceServer @"http://182.92.175.134:808/wt/"
+#define SKInterFaceServer @"http://123.56.254.75:808/wt/"
+//#define SKInterFaceServer @"http://182.92.175.134:808/wt/"
 
 #pragma mark 各类接口
 
@@ -98,6 +98,24 @@
 
 /** 修改用户信息 */
 #define WoTing_UserInfo     (SKInterFaceServer@"passport/user/updateUserInfo.do")
+
+/** 搜索陌生人 */
+#define WoTing_SearchStranger         (SKInterFaceServer@"passport/friend/searchStranger.do")
+
+/** 添加陌生人为好友 */
+#define WoTing_FriendInvite       (SKInterFaceServer@"passport/friend/invite.do")
+
+/** 删除好友 */
+#define WoTing_DelFriend      (SKInterFaceServer@"passport/friend/delFriend.do")
+
+/** 修改好友信息 */
+#define WoTing_UpdateFriendInfo         (SKInterFaceServer@"passport/friend/updateFriendInfo.do")
+
+/** 得到邀请我为好友的列表 */
+#define WoTing_FriendInvitedList      (SKInterFaceServer@"passport/friend/getInvitedMeList.do")
+
+/** 同意或拒绝添加好友邀请 */
+#define WoTing_FriendInviteDeal      (SKInterFaceServer@"passport/friend/inviteDeal.do")
 
 /** 享听 - 播放*/
 #define WoTing_MainPage     (SKInterFaceServer@"mainPage.do")
@@ -175,7 +193,7 @@
 /** 邀请好友入组 */
 #define WoTing_GroupInvite       (SKInterFaceServer@"passport/group/groupInvite.do")
 
-/** 同意或拒绝邀请入组信息 */
+/** 同意或拒绝邀请入组信息(新的朋友) */
 #define WoTing_InviteDeal         (SKInterFaceServer@"passport/group/inviteDeal.do")
 
 /** 用户主动退出组 */
@@ -184,8 +202,14 @@
 /** 删除群成员(管理) */
 #define WoTing_KickoutGroup     (SKInterFaceServer@"passport/group/kickoutGroup.do")
 
+/** 群主设置管理员(可新增, 可删除) */
+#define WoTing_SetGroupAdmin         (SKInterFaceServer@"passport/group/setGroupAdmin.do")
+
 /** 获取群组通讯录 */
 #define WoTing_GroupsAndFriends     (SKInterFaceServer@"passport/getGroupsAndFriends.do")
+
+/** 加入群组(公开群/密码群) */
+#define WoTing_JoinInGroup         (SKInterFaceServer@"passport/group/joinInGroup.do")
 
 /** 申请入组 */
 #define WoTing_GroupApply   (SKInterFaceServer@"passport/group/groupApply.do")
@@ -199,8 +223,12 @@
 /** 得到有未处理申请人的我所管理的用户组(审核消息) */
 #define WoTing_GetExistApplyUserGroupList         (SKInterFaceServer@"passport/group/getExistApplyUserGroupList.do")
 
+/** 接受或拒绝申请组信息(加群消息) */
+#define WoTing_ApplyDeal         (SKInterFaceServer@"passport/group/applyDeal.do")
+
 /** 群组搜索 */
 #define WoTing_SearchGroup     (SKInterFaceServer@"passport/group/searchGroup.do")
+
 
 /** 修改群资料 */
 #define WoTing_UpdateGroup        (SKInterFaceServer@"passport/group/updateGroup.do")

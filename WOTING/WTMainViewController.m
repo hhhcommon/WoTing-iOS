@@ -12,6 +12,7 @@
 #import "WTSheZhiViewController.h"
 #import "WTLoginViewController.h"
 #import "WTBianJiZiLiaoController.h"    //编辑资料
+#import "WTDingYueController.h"     //订阅
 
 #import "SGGenerateQRCodeVC.h"  //二维码生成器
 
@@ -216,6 +217,14 @@
             
             [self.navigationController pushViewController:WTlikeVC animated:YES];
             
+        }
+        
+        if (indexPath.section == 0 && indexPath.row == 3) {
+            
+            WTDingYueController *WTdingYeVC = [[WTDingYueController alloc] init];
+            
+            WTdingYeVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:WTdingYeVC animated:YES];
         }
         
     }

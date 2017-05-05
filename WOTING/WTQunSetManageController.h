@@ -14,6 +14,8 @@
 - (IBAction)BianjiBtnClick:(id)sender;
 @property (weak, nonatomic) IBOutlet UITableView *SetManTabV;
 
-@property (nonatomic, strong) NSMutableArray *dataQunManageArr;
+@property (nonatomic, strong) NSMutableArray *dataQunManageArr; //群成员
+
+@property (nonatomic, strong) NSDictionary *dataQunDetilDict;    //群详情
 
 @end
